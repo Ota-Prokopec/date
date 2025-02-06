@@ -2,9 +2,8 @@ import { createEnv } from '@t3-oss/env-nextjs';
 import { getClientZodSchema } from './utils/clientZodSchema';
 import { getServerZodSchema } from './utils/serverZodSchema';
 import { z } from 'zod';
-export { getAutoEnv } from './getAutoEnv';
 
-type EnvSource = NodeJS.ProcessEnv | ImportMetaEnv;
+type EnvSource = NodeJS.ProcessEnv | ImportMetaEnv | Record<string, string>;
 type Environment = 'client' | 'server';
 
 type ZodToTypeDefinition<TZod extends Record<string, any>> = {
@@ -52,13 +51,14 @@ export const env = <TEnvType extends Environment>(
           client: getClientZodSchema(),
           runtimeEnv: {
             NEXT_PUBLIC_API_URL: envSource.NEXT_PUBLIC_API_URL,
-            NEXT_PUBLIC_MAP_API_KEY: envSource.NEXT_PUBLIC_MAP_API_KEY,
             NEXT_PUBLIC_WEB_URL: envSource.NEXT_PUBLIC_WEB_URL,
-            NEXT_PUBLIC_PICTURE_ASPECT_RATIO: parseFloat(
-              envSource.NEXT_PUBLIC_PICTURE_ASPECT_RATIO
+
+            NEXT_PUBLIC_PROFILE_PICTURE_HEIGHT: parseInt(
+              envSource.NEXT_PUBLIC_PROFILE_PICTURE_HEIGHT
             ),
-            NEXT_PUBLIC_PICTURE_WIDTH: parseInt(envSource.NEXT_PUBLIC_PICTURE_WIDTH),
-            NEXT_PUBLIC_PICTURE_HEIGHT: parseInt(envSource.NEXT_PUBLIC_PICTURE_HEIGHT),
+            NEXT_PUBLIC_PROFILE_PICTURE_WIDTH: parseInt(
+              envSource.NEXT_PUBLIC_PROFILE_PICTURE_WIDTH
+            ),
           },
           // skipValidation: !!envSource.NEXT_PUBLIC_SKIP_ENV_VALIDATION,
         })

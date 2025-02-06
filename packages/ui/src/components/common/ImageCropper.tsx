@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils';
+import { cn } from '../../lib/utils';
 import { base64ToFile, readHTMLImageInput } from '@repo/utils/common/images';
 import { FileInput, Label } from 'flowbite-react';
 import { useId, useRef, useState, type Dispatch, type RefObject, type SetStateAction } from 'react';

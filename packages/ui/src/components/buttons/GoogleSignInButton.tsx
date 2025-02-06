@@ -19,7 +19,7 @@ export const GoogleSignInButton = ({ className, onClick, disabled }: GoogleSignI
     >
       <Row className="justify-center items-center gap-3">
         <Text className="text-xl text-white/90">Sign in with Google</Text>
-        <IconGoogle className="w-10 h-10"></IconGoogle>
+        <IconGoogle className="!w-10 !h-10"></IconGoogle>
       </Row>
     </Button>
   );

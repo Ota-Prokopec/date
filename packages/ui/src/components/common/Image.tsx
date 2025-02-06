@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils';
+import { cn } from '../../lib/utils';
 import { Image, ImageProps } from '@heroui/react';
 import { useState } from 'react';
 

@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils';
+import { cn } from '../lib/utils';
 import {
   useRef,
   useState,
@@ -40,6 +40,13 @@ export class ImgInput {
   }
 
   InputReactComponent({ className }: { className?: string }) {
-    return <input type="file" className={cn(className)} onChange={this.onChange} ref={this.inputTagRef}></input>;
+    return (
+      <input
+        type="file"
+        className={cn(className)}
+        onChange={this.onChange}
+        ref={this.inputTagRef}
+      ></input>
+    );
   }
 }

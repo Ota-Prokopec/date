@@ -3,10 +3,9 @@
  */
 
 export * from './rootType';
+export * from './Date/GenderTypes';
+export * from './Date/SocialPlatforms';
 export * from './Helpers/MakeOptional';
 export * from './Internal/Cookies';
 export * from './Internal/GraphqlHealth';
-export * from './MyDate/GenderTypes';
-export * from './MyDate/MyDateCardTypes';
-export * from './MyDate/UserProfileTypes';
 export * from './maps/Coords';

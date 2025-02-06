@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils';
+import { cn } from '../../lib/utils';
 import { Button as NextUIButton } from '@heroui/react';
 import { ReactNode } from 'react';
 
@@ -16,11 +16,7 @@ export const Button = ({ children, className, onClick, disabled }: ButtonProps) 
       disabled={disabled}
       isDisabled={disabled}
       onClick={onClick}
-      className={cn(
-        'rounded-lg bg-black text-white cursor-pointer',
-        { 'cursor-not-allowed': disabled },
-        className
-      )}
+      className={cn('rounded-lg bg-black text-white cursor-pointer', { 'cursor-not-allowed': disabled }, className)}
     >
       {children}
     </NextUIButton>

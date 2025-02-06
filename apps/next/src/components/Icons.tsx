@@ -1,0 +1,14 @@
+export { FaHeart as IconHeart } from 'react-icons/fa';
+export { FaRegHeart as IconHeartFilled } from 'react-icons/fa';
+export { MdLockClock as IconLockClock } from 'react-icons/md';
+export { FaRegClock as IconClock } from 'react-icons/fa6';
+export { MdOutlineFemale as IconFemale } from 'react-icons/md';
+export { MdMale as IconMale } from 'react-icons/md';
+export { FaRegUser as IconProfile } from 'react-icons/fa';
+export { FaUser as IconProfileFilled } from 'react-icons/fa';
+export { FcPicture as IconPicture } from 'react-icons/fc';
+export { FaCheck as IconCheck } from 'react-icons/fa6';
+export { FaLink as IconLink } from 'react-icons/fa';
+export { IconInstagram } from './icons/IconInstagram';
+export { MdChangeCircle as IconChange } from 'react-icons/md';
+export { FaUser as IconUser } from 'react-icons/fa';

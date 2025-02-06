@@ -4,7 +4,8 @@
   "type": "module",
   "main": "./dist/env.js",
   "exports": {
-    ".": "./dist/env.js"
+    ".": "./dist/env.js",
+    "./clientZodSchema": "./dist/utils/clientZodSchema.js"
   },
   "scripts": {
     "build": "run-s build:tsup build:tsc",

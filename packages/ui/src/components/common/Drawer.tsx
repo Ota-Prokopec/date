@@ -1,13 +1,6 @@
 import type { ReactNode } from 'react';
-import {
-  Drawer,
-  DrawerDescription,
-  DrawerTitle,
-  DrawerTrigger,
-  DrawerContent,
-  DrawerHeader,
-} from '../shadcn/drawer';
-import { cn } from '@/lib/utils';
+import { Drawer, DrawerDescription, DrawerTitle, DrawerTrigger, DrawerContent, DrawerHeader } from '../shadcn/drawer';
+import { cn } from '../../lib/utils';
 
 type DrawerProps = {
   triggerButton: ReactNode;
@@ -18,14 +11,7 @@ type DrawerProps = {
   className?: string;
 };
 
-const MyDrawer = ({
-  triggerButton,
-  title,
-  description,
-  children,
-  closeButton,
-  className,
-}: DrawerProps) => {
+const MyDrawer = ({ triggerButton, title, description, children, closeButton, className }: DrawerProps) => {
   return (
     <Drawer {...{ shouldScaleBackground: false, autoFocus: false }}>
       <DrawerTrigger asChild>{triggerButton}</DrawerTrigger>

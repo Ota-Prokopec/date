@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils';
+import { cn } from '../../lib/utils';
 import type { HTMLInputTypeAttribute } from 'react';
 import { Input as ShadcnInput } from '../shadcn/input';
 

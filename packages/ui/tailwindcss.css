@@ -29,3 +29,14 @@ body {
 .maplibregl-ctrl-bottom-right {
   display: none;
 }
+
+input,
+textarea:focus {
+  box-shadow: none !important;
+  border: none !important;
+}
+
+input,
+textarea {
+  border: none;
+}

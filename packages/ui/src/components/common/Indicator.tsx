@@ -1,6 +1,6 @@
 import { Badge } from 'flowbite-react';
 import { Row } from './Row';
-import { cn } from '@/lib/utils';
+import { cn } from '../../lib/utils';
 import React, { CSSProperties, ReactNode } from 'react';
 
 type IndicatorProps = {

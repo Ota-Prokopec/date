@@ -5,7 +5,7 @@ import daisyui from 'daisyui';
 import { heroui } from '@heroui/react';
 
 export const tailwindConfig: Config = {
-  darkMode: ['selector'],
+  darkMode: 'class',
   content: [
     './pages/**/*.{ts,tsx}',
     './components/**/*.{ts,tsx}',
@@ -13,11 +13,8 @@ export const tailwindConfig: Config = {
     './app/**/{**,.client,.server}/**/*.{js,jsx,ts,tsx}',
     './src/**/*.{ts,tsx}',
     '../../packages/ui/src/**/*.{ts,tsx}',
-    './node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}',
-    '../../node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}',
-    './node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}',
     '../../node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}',
-
+    './node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}',
     './index.html',
     content(),
   ],

@@ -1,33 +1,37 @@
 'use client';
 
-import { useRef, useState, type ChangeEvent, type ReactNode } from 'react';
-import { Image, type ReactImageProps } from './Image';
-import { MdChangeCircle as IconChange } from 'react-icons/md';
-import { IoIosAddCircle as IconAdd } from 'react-icons/io';
-import { cn } from '@/lib/utils';
 import { fileTostring, readHTMLImageInput } from '@repo/utils/common/images';
-import { ImageCropper } from './ImageCropper';
-import { ModalSheet } from './ModalSheet';
+import { useRef, useState, type ChangeEvent } from 'react';
+import { IoIosAddCircle as IconAdd } from 'react-icons/io';
+import { MdChangeCircle as IconChange } from 'react-icons/md';
+import { cn } from '../../lib/utils';
+import { Image, type ReactImageProps } from './Image';
 
 type ImageInputProps = {
   initialSrc?: string | null | undefined;
   fallbackSrc: string;
   className?: string;
   imageFileAcceptPattern?: string;
+  sizes: {
+    height: number;
+    width: number;
+  };
   onError?: () => void;
-} & Omit<ReactImageProps, 'src' | 'fallbackSrc'>;
+} & Omit<ReactImageProps, 'src' | 'fallbackSrc' | 'sizes'>;
 
 export const ImageInput = ({
   initialSrc,
   fallbackSrc,
   className,
   onError,
+  sizes,
   imageFileAcceptPattern,
   ...props
 }: ImageInputProps) => {
   const [src, setSrc] = useState<string | null | undefined>(initialSrc);
   const inputRef = useRef<HTMLInputElement>(null);
-  const croppingModal = new ModalSheet({ detent: 'full-height', initiallyOpen: true });
+  //const cropper = new ImageCropper(src ?? '', 'image/png', sizes.height, sizes.width);
+  //  const croppingModal = new ModalSheet({ detent: 'full-height', initiallyOpen: true });
 
   const fileChange = async (event: ChangeEvent<HTMLInputElement>) => {
     const payload = await readHTMLImageInput(event);
@@ -54,7 +58,7 @@ export const ImageInput = ({
             }
             inputRef.current.click();
           }}
-          className="absolute top-0 right-0 [&>*]:w-12 [&>*]:h-12 m-2 fill-white cursor-pointer"
+          className="absolute top-0 right-0 [&>*]:w-12 [&>*]:h-12 m-2 bg-white rounded-full cursor-pointer"
         >
           {src ? <IconChange className=""></IconChange> : <IconAdd className=""></IconAdd>}
         </button>
@@ -65,7 +69,6 @@ export const ImageInput = ({
           className="w-full h-full rounded-t-xl rounded-b-none bg-gray-500 object-cover"
         ></Image>
       </div>
-      <croppingModal.Sheet>j </croppingModal.Sheet>
     </>
   );
 };
