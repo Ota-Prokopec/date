@@ -1,0 +1,16 @@
+{
+  "name": "ts-reset",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "src/reset.d.ts",
+  "exports": {
+    ".": "./src/reset.d.ts",
+    "./reset": "./src/reset.d.ts"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "@total-typescript/ts-reset": "^0.6.1"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "name": "@repo/env",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "./dist/env.js",
+  "exports": {
+    ".": "./dist/env.js"
+  },
+  "scripts": {
+    "build": "run-s build:tsup build:tsc",
+    "build:tsup": "tsup",
+    "build:tsc": "tsc --emitDeclarationOnly",
+    "dev": "run-p dev:*",
+    "dev:tsup": "tsup --watch",
+    "dev:tsc": "tsc --emitDeclarationOnly --watch"
+  },
+  "devDependencies": {
+    "@repo/tsup": "workspace: *",
+    "@repo/typescript-config": "workspace: *",
+    "@types/node": "^22.7.5",
+    "npm-run-all": "^4.1.5",
+    "tsup": "8.3.5",
+    "typescript": "^5.6.3"
+  },
+  "dependencies": {
+    "@t3-oss/env-nextjs": "^0.11.1",
+    "url": "^0.11.4",
+    "vite": "^5.1.0",
+    "zod": "^3.23.8"
+  }
+}

@@ -1,0 +1,15 @@
+import { drizzle } from 'drizzle-orm/node-postgres';
+import pg from 'pg';
+import * as schema from './schema/index';
+import { env, getAutoEnv } from '@repo/env';
+
+const databaseUrl = env(getAutoEnv(), 'server').DATABASE_URL;
+
+const client = new pg.Client({
+  connectionString: databaseUrl,
+});
+
+client.connect();
+
+export const drizzleSchema = schema;
+export const db = drizzle(client, { schema: schema });

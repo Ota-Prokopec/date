@@ -1,19 +1,28 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "./node_modules/@total-typescript/tsconfig/bundler/no-dom.json",
+  "display": "Default",
   "compilerOptions": {
     "declaration": true,
     "declarationMap": true,
     "esModuleInterop": true,
-    "incremental": false,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "sourceMap": true,
     "isolatedModules": true,
-    "lib": ["es2022", "DOM", "DOM.Iterable"],
-    "module": "NodeNext",
+    "allowJs": true,
+    "lib": ["es2022"],
+    "module": "Preserve",
+    "skipDefaultLibCheck": true,
     "moduleDetection": "force",
-    "moduleResolution": "NodeNext",
-    "noUncheckedIndexedAccess": true,
+    "moduleResolution": "Bundler",
     "resolveJsonModule": true,
     "skipLibCheck": true,
+    "target": "ESNext",
+    "noEmit": true,
+    "verbatimModuleSyntax": false,
     "strict": true,
-    "target": "ES2022"
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true
   }
 }

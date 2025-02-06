@@ -1,0 +1,23 @@
+{
+  "name": "@repo/tsup",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "exports": {
+    "./base": "./dist/index.js",
+    ".": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "run-s build:tsup build:tsc",
+    "build:tsup": "tsup",
+    "build:tsc": "tsc --emitDeclarationOnly"
+  },
+  "devDependencies": {
+    "@repo/typescript-config": "workspace:*",
+    "@types/node": "^22.5.2",
+    "npm-run-all": "^4.1.5",
+    "tsup": "8.3.5",
+    "typescript": "^5.6.3"
+  }
+}

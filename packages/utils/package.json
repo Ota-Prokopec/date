@@ -1,0 +1,39 @@
+{
+  "name": "@repo/utils",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "./dist/index.js",
+  "exports": {
+    "./react/*": "./dist/react/*.js",
+    "./common/*": "./dist/common/*.js",
+    "./prettiers/*": "./dist/prettiers/*.js",
+    "./normalizators/*": "./dist/normalizators/*.js"
+  },
+  "scripts": {
+    "build": "run-s build:tsup build:tsc",
+    "build:tsup": "tsup",
+    "dev": "run-p dev:*",
+    "dev:tsup": "tsup --watch --dts",
+    "dev:tsc": "tsc --emitDeclarationOnly --watch",
+    "build:tsc": "tsc --emitDeclarationOnly"
+  },
+  "devDependencies": {
+    "@repo/ts-types": "workspace: *",
+    "@repo/tsup": "workspace: *",
+    "@repo/typescript-config": "workspace: *",
+    "@types/node": "^22.7.5",
+    "@types/react": "^19.0.8",
+    "@types/react-dom": "^19",
+    "barrelsby": "^2.8.0",
+    "npm-run-all": "^4.1.5",
+    "tsup": "8.3.5",
+    "typescript": "^5.6.3"
+  },
+  "dependencies": {
+    "buffer": "^6.0.3",
+    "date-fns": "^4.1.0",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
+    "zod": "^3.23.8"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "name": "@repo/local-storage",
+  "version": "1.0.1",
+  "type": "module",
+  "main": "./dist/index.js",
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "run-s build:tsup build:tsc",
+    "build:tsup": "tsup",
+    "build:tsc": "tsc --emitDeclarationOnly",
+    "dev": "run-p dev:*",
+    "dev:tsup": "tsup --watch",
+    "dev:tsc": "tsc --emitDeclarationOnly --watch"
+  },
+  "devDependencies": {
+    "@repo/tsup": "workspace: *",
+    "@repo/typescript-config": "workspace: *",
+    "@rollup/plugin-typescript": "^11.1.6",
+    "@types/node": "^20.14.9",
+    "npm-run-all": "^4.1.5",
+    "ts-node": "^10.9.1",
+    "tsup": "8.3.5",
+    "typescript": "5.6.3"
+  },
+  "dependencies": {
+    "@repo/next-storage": "workspace: *",
+    "zod": "^3.22.4"
+  }
+}
