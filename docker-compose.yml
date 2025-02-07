@@ -1,0 +1,30 @@
+version: '1'
+services:
+  postgres:
+    container_name: postgres_project-date-app
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+
+    volumes:
+      - data:/var/lib/postgresql/volumes/project-date-app
+    ports:
+      - '5432:5432'
+
+  pgadmin:
+    container_name: pgadmin_container_project-date-app
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: otaprokopec@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: password
+      PGADMIN_LISTEN_PORT: 5050
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+
+volumes:
+  data:
+
+networks:
+  app_network:
+    external: true

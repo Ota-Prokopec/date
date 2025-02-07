@@ -1,9 +1,9 @@
 import { drizzle } from 'drizzle-orm/node-postgres';
 import pg from 'pg';
 import * as schema from './schema/index';
-import { env, getAutoEnv } from '@repo/env';
+import { env } from '@repo/env';
 
-const databaseUrl = env(getAutoEnv(), 'server').DATABASE_URL;
+const databaseUrl = env(process.env, 'server').DATABASE_URL;
 
 const client = new pg.Client({
   connectionString: databaseUrl,

@@ -28,7 +28,7 @@
   "dependencies": {
     "@repo/env": "workspace: *",
     "@repo/ts-types": "workspace: *",
-    "drizzle-orm": "^0.33.0",
+    "drizzle-orm": "^0.39.2",
     "next-auth": "5.0.0-beta.20",
     "pg": "^8.13.0",
     "postgres": "^3.4.5",

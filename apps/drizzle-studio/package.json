@@ -1,0 +1,17 @@
+{
+  "name": "drizzle-studio",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "studio": "dotenv -e ../../.env -- pnpm drizzle-kit studio"
+  },
+  "devDependencies": {
+    "@repo/typescript-config": "workspace: *",
+    "@types/node": "^22.13.1",
+    "typescript": "5.7.3"
+  },
+  "dependencies": {
+    "drizzle-kit": "^0.30.4",
+    "drizzle-orm": "^0.39.2"
+  }
+}
