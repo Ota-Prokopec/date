@@ -5,16 +5,16 @@ import { Card } from '@repo/ui/components/common/Card';
 import { Center } from '@repo/ui/components/common/Center';
 import { Column } from '@repo/ui/components/common/Column';
 import { Text } from '@repo/ui/components/common/Text';
-import { IconFemale, IconMale } from '../../components/Icons';
-import { SocialProfiles } from '../../components/SocialProfiles';
+import { IconFemale, IconMale } from '../components/Icons';
+import { SocialProfiles } from '../components/SocialProfiles';
 import { ProfileNameAndAge } from '@/components/Profile/ProfileNameAndAge';
 import { Image } from '@repo/ui/components/common/Image';
 
 const ProfilePage = () => {
   const GenderIcon = true ? (
-    <IconMale className="text-blue-500" />
+    <IconMale strokeWidth={3} className="text-black" />
   ) : (
-    <IconFemale className="text-red-500" />
+    <IconFemale strokeWidth={3} className="text-red-500" />
   );
 
   return (
@@ -29,7 +29,7 @@ const ProfilePage = () => {
             className="w-full h-full rounded-t-xl rounded-b-none"
           ></Image>
 
-          <div className="absolute bottom-[-20px] left-[-20px] w-20 h-20 bg-white rounded-[100px] flex items-center justify-center [&_*]:w-14 [&_*]:h-14">
+          <div className="absolute bottom-[-20px] left-[-20px] w-20 h-20 bg-white rounded-[100px] flex items-center justify-center [&_*]:w-10 [&_*]:h-10">
             {GenderIcon}
           </div>
         </Card>

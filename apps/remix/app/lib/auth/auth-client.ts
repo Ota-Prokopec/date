@@ -1,5 +1,5 @@
 import { getReactAuth } from '@repo/better-auth/client';
-import { env } from './env';
+import { env } from '../env';
 
 const authClient: ReturnType<typeof getReactAuth> = getReactAuth({
   baseUrl: env.NEXT_PUBLIC_WEB_URL,

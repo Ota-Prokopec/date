@@ -3,6 +3,7 @@ import { Links, Meta, Outlet, Scripts, ScrollRestoration } from '@remix-run/reac
 import '@repo/ui/tailwindcss';
 import { Layout as ProvidersLayout } from './components/Layout';
 import { Toaster } from '@repo/ui/components/shadcn/sonner';
+
 export const links: LinksFunction = () => [
   { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
   {

@@ -6,16 +6,16 @@ import { Center } from '@repo/ui/components/common/Center';
 import { Column } from '@repo/ui/components/common/Column';
 import { ImageInput } from '@repo/ui/components/common/ImageInput';
 import { Text } from '@repo/ui/components/common/Text';
-import { IconChange } from '../../../components/Icons';
-import { envClient } from '@/lib/envClient';
+import { env } from '@/lib/env';
 import { EditProfileBioInput } from '@/components/EditProfile/EditProfileBioInput';
 import { EditProfileItem } from '@/components/EditProfile/EditProfileItem';
 import { EditProfileGenderInput } from '@/components/EditProfile/EditProfileGenderInput';
 import { EditProfileSocialsInput } from '@/components/EditProfile/EditProfileSocialsInput';
 import { Row } from '@repo/ui/components/common/Row';
 import { ProfileNameAndAge } from '@/components/Profile/ProfileNameAndAge';
+import { IconChange } from '@/components/Icons';
 
-const ProfilePage = () => {
+const EditProfilePage = () => {
   return (
     <Center className="w-full h-full">
       <Column className="h-full p-4 gap-6 max-w-[600px] w-full items-center justify-start">
@@ -24,8 +24,8 @@ const ProfilePage = () => {
 
           <ImageInput
             sizes={{
-              height: envClient.NEXT_PUBLIC_PROFILE_PICTURE_HEIGHT,
-              width: envClient.NEXT_PUBLIC_PROFILE_PICTURE_WIDTH,
+              height: env.NEXT_PUBLIC_PROFILE_PICTURE_HEIGHT,
+              width: env.NEXT_PUBLIC_PROFILE_PICTURE_WIDTH,
             }}
             alt="profile-picture"
             initialSrc={null}
@@ -56,4 +56,4 @@ const ProfilePage = () => {
   );
 };
 
-export default ProfilePage;
+export default EditProfilePage;

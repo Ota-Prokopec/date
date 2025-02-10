@@ -1,8 +1,9 @@
 'use client';
 
+import { apolloClient } from '@/graphql/clients/apolloClient';
+import { CookieStorageContextProvider } from '@repo/cookies';
 import { Providers } from '@repo/ui/ts-react/contexts/Providers';
 import { ReactNode } from 'react';
-import { CookieStorageContextProvider } from '@repo/cookies';
 
 export type LayoutProps = {
   children: ReactNode;
@@ -19,5 +20,5 @@ export const Layout = ({ ssrCookies, children }: LayoutProps) => {
 type ProvidersLayoutProps = { children: ReactNode };
 
 const ProvidersLayout = ({ children }: ProvidersLayoutProps) => {
-  return <Providers>{children}</Providers>;
+  return <Providers apolloClient={apolloClient}>{children}</Providers>;
 };

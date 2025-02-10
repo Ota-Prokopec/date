@@ -1,26 +1,17 @@
 import '@pothos/core';
 import { getBuilder } from '@repo/graphql/server';
 import { Context } from './context';
-import type { UpdateUserProfileArgs } from './resolvers/user';
 import {
   type CoordsScalar,
   type FileScalar,
   type GenderScalar,
   type GraphqlHealthScalar,
 } from './scalars/ScalarsTypes';
-import type {
-  AccountType,
-  CoordsType,
-  UpdateUserProfileType,
-  UserProfileType,
-} from './schema/PothosSchemaTypes';
+import type { CoordsType } from './schema/PothosSchemaTypes';
 
 export const builder = getBuilder<{
   Objects: {
     Coords: CoordsType;
-    UserProfile: UserProfileType;
-    Account: AccountType;
-    UpdateUserProfile: UpdateUserProfileType;
   };
   Scalars: {
     Coords: CoordsScalar;
@@ -29,6 +20,5 @@ export const builder = getBuilder<{
     File: FileScalar;
   };
   Context: Context;
-
-  Args: { UpdateUserProfileArgs: UpdateUserProfileArgs };
+  Args: {};
 }>();

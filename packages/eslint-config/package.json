@@ -7,9 +7,11 @@
     "library.js",
     "next.js",
     "react-internal.js",
-    "remix.js"
+    "remix.js",
+    "tanstack.js"
   ],
   "devDependencies": {
+    "@tanstack/eslint-plugin-router": "^1.99.3",
     "@typescript-eslint/eslint-plugin": "^7.1.0",
     "@typescript-eslint/parser": "^7.1.0",
     "@vercel/style-guide": "^5.2.0",
