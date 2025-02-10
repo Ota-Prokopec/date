@@ -5,10 +5,10 @@ import { Card } from '@repo/ui/components/common/Card';
 import { Center } from '@repo/ui/components/common/Center';
 import { Column } from '@repo/ui/components/common/Column';
 import { Text } from '@repo/ui/components/common/Text';
-import Image from 'next/image';
 import { IconFemale, IconMale } from '../../components/Icons';
 import { SocialProfiles } from '../../components/SocialProfiles';
 import { ProfileNameAndAge } from '@/components/Profile/ProfileNameAndAge';
+import { Image } from '@repo/ui/components/common/Image';
 
 const ProfilePage = () => {
   const GenderIcon = true ? (

@@ -3,7 +3,8 @@
 import { Column } from '@repo/ui/components/common/Column';
 import { Text } from '@repo/ui/components/common/Text';
 import { normalizeTime } from '@repo/utils/normalizators/normalizeTime';
-import { CountdownCircleTimer } from 'react-countdown-circle-timer';
+import * as timer from 'react-countdown-circle-timer';
+const { CountdownCircleTimer } = timer;
 
 export type TimerProps = {
   wholeTime: number;

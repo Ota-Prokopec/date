@@ -4,9 +4,9 @@ import type { SocialProfileData, SocialProfilePlatform } from '@repo/ts-types';
 import { Column } from '@repo/ui/components/common/Column';
 import { Row } from '@repo/ui/components/common/Row';
 import { Text } from '@repo/ui/components/common/Text';
-import Link from 'next/link';
 import { type ReactNode } from 'react';
 import { IconInstagram, IconLink } from './Icons';
+import { Link } from '@remix-run/react';
 
 export type SocialProfilesProps = {
   socials: { instagram: SocialProfileData };
@@ -49,7 +49,7 @@ const Profile = ({
         {icon}
         <Text className="font-bold text-black/75 text-lg">{id}</Text>
         {!disableLink && (
-          <Link href={link}>
+          <Link to={link}>
             <IconLink></IconLink>
           </Link>
         )}
