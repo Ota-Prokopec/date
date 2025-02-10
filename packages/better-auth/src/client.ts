@@ -2,7 +2,11 @@ import { createAuthClient } from 'better-auth/react';
 
 type AuthClient = ReturnType<typeof createAuthClient>;
 
-type GetReactAuth = ({ baseUrl }: { baseUrl: string }) => Pick<AuthClient, 'signIn' | 'signOut' | 'useSession'>;
+type GetReactAuth = ({
+  baseUrl,
+}: {
+  baseUrl?: string;
+}) => Pick<AuthClient, 'signIn' | 'signOut' | 'useSession'>;
 
 export const getReactAuth: GetReactAuth = ({ baseUrl }) => {
   const authClient = createAuthClient({

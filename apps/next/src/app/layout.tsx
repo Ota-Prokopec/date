@@ -5,6 +5,7 @@ import { Center } from '@repo/ui/components/common/Center';
 import '@repo/ui/tailwindcss';
 import { cn } from '@repo/ui/ts-lib/lib/utils';
 import { headers as getHeaders, cookies as nextCookies } from 'next/headers';
+import { Toaster } from '@repo/ui/components/shadcn/sonner';
 
 type RootLayoutProps = Readonly<{
   children: React.ReactNode;
@@ -54,6 +55,11 @@ export default async function RootLayout({ children }: RootLayoutProps) {
         })}
       >
         <Layout ssrCookies={ssrCookies}>
+          <Toaster
+            style={{ margin: '10px' }}
+            className="[&>*]:flex [&>*]:flex-row"
+            richColors
+          ></Toaster>
           <Center className="w-full min-h-[100vh] h-auto">{children}</Center>
         </Layout>
       </body>

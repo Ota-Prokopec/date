@@ -4,7 +4,8 @@
   "scripts": {
     "build": "dotenv -e .env -- turbo build",
     "dev-next": "turbo dev --filter=next",
-    "dev": "dotenv -e .env -- pnpm dev-next",
+    "dev-api": "turbo dev --filter=api",
+    "dev": "dotenv -e .env -- turbo dev --filter='./apps/*'",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
@@ -18,5 +19,17 @@
   "packageManager": "pnpm@9.0.0",
   "engines": {
     "node": ">=18"
+  },
+  "overrides": {
+    "typescript": "5.7.3",
+    "tsup": "8.3.5",
+    "drizzle-orm": "0.39.2",
+    "drizzle-kit": "0.30.4",
+    "react": "19.0.0",
+    "@types/react": "19.0.8",
+    "next": "15.1.6",
+    "react-dom": "19.0.0",
+    "@types/react-dom": "^19",
+    "eslint-config-next": "15.1.6"
   }
 }

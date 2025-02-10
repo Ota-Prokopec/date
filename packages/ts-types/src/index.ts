@@ -5,6 +5,7 @@
 export * from './rootType';
 export * from './Date/GenderTypes';
 export * from './Date/SocialPlatforms';
+export * from './Date/UserProfile';
 export * from './Helpers/MakeOptional';
 export * from './Internal/Cookies';
 export * from './Internal/GraphqlHealth';

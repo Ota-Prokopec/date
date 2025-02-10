@@ -3,25 +3,46 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "drizzle-generate-schema": "drizzle-kit generate --config=src/drizzle.config.ts",
-    "drizzle-migrate-schema": "dotenv -e ../../.env -- drizzle-kit migrate --config=src/drizzle.config.ts",
-    "dg": "pnpm drizzle-generate-schema",
-    "dm": "pnpm drizzle-migrate-schema",
-    "dtdm": "pnpm deezerToDrizzleMigration",
-    "drizzle-pull": "dotenv -e ../../.env -- drizzle-kit introspect --config=src/drizzle.config.ts"
+    "d": "tsx watch src/main.ts",
+    "dev": "  dotenv -e ../../.env -- tsx watch src/main.ts",
+    "build": "tsup src/main.ts & pnpm generate:schema",
+    "generate:graphql-schema": "console-ninja dotenv -e ../../.env tsx src/cli/generate-schema.ts",
+    "drizzle:migrate": "drizzle-kit migrate",
+    "drizzle:generate": "dotenv -e ../../.env drizzle-kit generate",
+    "drizzle:studio": "dotenv -e ../../.env -- pnpm drizzle-kit studio",
+    "drizzle:update": "run-s drizzle:generate drizzle:migrate",
+    "admin": "console-ninja dotenv -e ../../.env -- tsx src/admin/createClubs.ts"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "devDependencies": {
-    "@types/node": "^22.13.1",
-    "dotenv": "^16.4.7",
-    "@repo/typescript-config": "workspace: *"
+    "@repo/tsup": "workspace: *",
+    "@repo/typescript-config": "workspace: *",
+    "@types/express": "^4.17.21",
+    "@types/graphql-upload": "^17.0.0",
+    "@types/node": "^20.14.9",
+    "dotenv-cli": "^7.4.2",
+    "npm-run-all": "^4.1.5",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.19.1",
+    "typescript": "5.6.3"
   },
   "dependencies": {
+    "@pothos/core": "^4.2.0",
+    "@pothos/plugin-dataloader": "^4.3.0",
+    "@repo/cloudinary": "workspace: *",
+    "@repo/db": "workspace: *",
+    "@repo/env": "workspace: *",
+    "@repo/graphql": "workspace: *",
+    "@repo/ts-types": "workspace: *",
+    "@whatwg-node/server-plugin-cookies": "^1.0.3",
+    "cloudinary": "^2.5.1",
+    "dataloader": "^2.2.3",
     "drizzle-kit": "^0.30.4",
-    "drizzle-orm": "^0.39.2"
+    "drizzle-orm": "^0.39.2",
+    "graphql": "^16.9.0",
+    "graphql-upload": "^17.0.0",
+    "graphql-yoga": "^5.7.0",
+    "tsup": "8.3.5"
   }
 }
