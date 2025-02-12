@@ -1,14 +1,15 @@
-export { FaHeart as IconHeart } from 'react-icons/all-files/fa/FaHeart';
-export { FaRegHeart as IconHeartFilled } from 'react-icons/all-files/fa/FaRegHeart';
-export { FaClock as IconLockClock } from 'react-icons/all-files/fa/FaClock';
-export { FaRegClock as IconClock } from 'react-icons/all-files/fa/FaRegClock';
-export { FaFemale as IconFemale } from 'react-icons/all-files/fa/FaFemale';
-export { FaMale as IconMale } from 'react-icons/all-files/fa/FaMale';
-export { FaRegUser as IconProfile } from 'react-icons/all-files/fa/FaRegUser';
-export { FaUser as IconProfileFilled } from 'react-icons/all-files/fa/FaUser';
-export { FcPicture as IconPicture } from 'react-icons/all-files/fc/FcPicture';
-export { FaCheck as IconCheck } from 'react-icons/all-files/fa/FaCheck';
-export { FaLink as IconLink } from 'react-icons/all-files/fa/FaLink';
-export { IconInstagram } from './icons/IconInstagram';
-export { MdChangeHistory as IconChange } from 'react-icons/all-files/md/MdChangeHistory';
-export { FaUser as IconUser } from 'react-icons/all-files/fa/FaUser';
+export { FaHeart as IconHeart } from 'react-icons/fa'
+export { FaRegHeart as IconHeartFilled } from 'react-icons/fa'
+export { FaClock as IconLockClock } from 'react-icons/fa'
+export { FaRegClock as IconClock } from 'react-icons/fa'
+export { FaRegUser as IconProfile } from 'react-icons/fa'
+export { FaUser as IconProfileFilled } from 'react-icons/fa'
+export { FcPicture as IconPicture } from 'react-icons/fc'
+export { FaCheck as IconCheck } from 'react-icons/fa'
+export { FaLink as IconLink } from 'react-icons/fa'
+export { IconInstagram } from './icons/IconInstagram'
+export { MdChangeHistory as IconChange } from 'react-icons/md'
+export { FaUser as IconUser } from 'react-icons/fa'
+export { Venus as IconFemale } from 'lucide-react'
+export { Mars as IconMale } from 'lucide-react'
+export { UserRoundPen as UserRoundPen } from 'lucide-react'

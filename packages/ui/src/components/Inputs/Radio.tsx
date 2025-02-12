@@ -1,20 +1,21 @@
-import { useEffect, useState, type ReactNode } from 'react';
-import { Label } from '../shadcn/label';
-import { RadioGroup, RadioGroupItem } from '../shadcn/radio-group';
-import { cn } from '../../lib/utils';
+import { type ReactNode } from 'react'
+import { cn } from '../../lib/utils'
+import { Label } from '../shadcn/label'
+import { RadioGroup, RadioGroupItem } from '../shadcn/radio-group'
 
 export type RadioItem<Key extends string, Value extends string> = {
-  key: Key;
-  value: Value;
-};
+  key: Key
+  value: Value
+}
 type RadioProps<Key extends string, Value extends string> = {
-  items: RadioItem<Key, Value>[];
-  getRadio: (key: Key) => ReactNode;
-  onChange?: (chosenKey: Key | undefined) => void;
-  defaulOption?: Key;
-  className?: string;
-  selectedOption?: Key;
-};
+  items: RadioItem<Key, Value>[]
+  getRadio: (key: Key) => ReactNode
+  onChange?: (chosenKey: Key | undefined) => void
+  defaulOption?: Key
+  className?: string
+  selectedOption?: Key
+  radioGroupName: string
+}
 
 export const Radio = <Key extends string, Value extends string>({
   items,
@@ -23,6 +24,7 @@ export const Radio = <Key extends string, Value extends string>({
   onChange,
   className,
   selectedOption,
+  radioGroupName,
 }: RadioProps<Key, Value>) => {
   return (
     <RadioGroup
@@ -33,10 +35,12 @@ export const Radio = <Key extends string, Value extends string>({
       {items.map((item) => {
         return (
           <div key={item.key} className="flex items-center w-min h-min">
-            <RadioGroupItem
+            <input
+              type="button"
+              itemID={radioGroupName}
               className="hidden"
               onClick={() => {
-                if (onChange) onChange(item.key);
+                if (onChange) onChange(item.key)
               }}
               value={item.key}
               id={item.key}
@@ -45,8 +49,8 @@ export const Radio = <Key extends string, Value extends string>({
               {getRadio(item.key)}
             </Label>
           </div>
-        );
+        )
       })}
     </RadioGroup>
-  );
-};
+  )
+}

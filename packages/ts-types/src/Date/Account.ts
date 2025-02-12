@@ -3,7 +3,7 @@ import type { Gender } from './GenderTypes';
 import type { Socials } from './SocialPlatforms';
 
 export type Account = {
-  name: string;
+  username: string;
   birthDate: Date;
   bio: string;
   socials: Socials | undefined | null;

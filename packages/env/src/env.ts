@@ -1,20 +1,20 @@
-import { createEnv } from '@t3-oss/env-nextjs';
-import { getClientZodSchema } from './utils/clientZodSchema';
-import { getServerZodSchema } from './utils/serverZodSchema';
-import { z } from 'zod';
+import { createEnv } from '@t3-oss/env-nextjs'
+import { getClientZodSchema } from './utils/clientZodSchema'
+import { getServerZodSchema } from './utils/serverZodSchema'
+import { z } from 'zod'
 
-type EnvSource = NodeJS.ProcessEnv | ImportMetaEnv | Record<string, string>;
-type Environment = 'client' | 'server';
+type EnvSource = NodeJS.ProcessEnv | ImportMetaEnv | Record<string, string>
+type Environment = 'client' | 'server'
 
 type ZodToTypeDefinition<TZod extends Record<string, any>> = {
-  [Key in keyof TZod]: z.TypeOf<TZod[Key]>;
-};
+  [Key in keyof TZod]: z.TypeOf<TZod[Key]>
+}
 
 type Output<TEnvType extends Environment> = TEnvType extends 'client'
   ? ZodToTypeDefinition<ReturnType<typeof getClientZodSchema>>
   : TEnvType extends 'server'
     ? ZodToTypeDefinition<ReturnType<typeof getServerZodSchema>>
-    : never;
+    : never
 
 export const env = <TEnvType extends Environment>(
   envSource: EnvSource,
@@ -43,7 +43,7 @@ export const env = <TEnvType extends Environment>(
           },
           //skipValidation: !!envSource.NEXT_PUBLIC_SKIP_ENV_VALIDATION,
         })
-      : null;
+      : null
   const client =
     environment === 'client'
       ? createEnv({
@@ -52,6 +52,8 @@ export const env = <TEnvType extends Environment>(
           runtimeEnv: {
             NEXT_PUBLIC_API_URL: envSource.NEXT_PUBLIC_API_URL,
             NEXT_PUBLIC_WEB_URL: envSource.NEXT_PUBLIC_WEB_URL,
+            NEXT_PUBLIC_MIN_LENGTH_OF_USERNAME: envSource.NEXT_PUBLIC_MIN_LENGTH_OF_USERNAME,
+            NEXT_PUBLIC_MAX_LENGTH_OF_USERNAME: envSource.NEXT_PUBLIC_MAX_LENGTH_OF_USERNAME,
 
             NEXT_PUBLIC_PROFILE_PICTURE_HEIGHT: parseInt(
               envSource.NEXT_PUBLIC_PROFILE_PICTURE_HEIGHT
@@ -62,6 +64,6 @@ export const env = <TEnvType extends Environment>(
           },
           // skipValidation: !!envSource.NEXT_PUBLIC_SKIP_ENV_VALIDATION,
         })
-      : null;
-  return (environment === 'client' ? client : server) as Output<TEnvType>;
-};
+      : null
+  return (environment === 'client' ? client : server) as Output<TEnvType>
+}

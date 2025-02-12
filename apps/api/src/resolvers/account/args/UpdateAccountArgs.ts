@@ -1,9 +1,11 @@
-import { builder } from '@/builder';
-import type { Account } from '@repo/ts-types';
+import { builder } from '@/builder'
+import type { Account, Nullable } from '@repo/ts-types'
 
-export type UpdateAccountArgs = Partial<
-  Pick<Account, 'bio' | 'birthDate' | 'gender' | 'lookingForGender' | 'socials'>
->;
+export type UpdateAccountArgs = Nullable<
+  Partial<
+    Pick<Account, 'bio' | 'birthDate' | 'gender' | 'lookingForGender' | 'socials' | 'username'>
+  >
+>
 
 builder.inputType('UpdateAccountArgs', {
   fields: (t) => ({
@@ -14,4 +16,4 @@ builder.inputType('UpdateAccountArgs', {
     lookingForGender: t.field({ type: 'Gender', required: false }),
     socials: t.field({ type: 'Socials', required: false }),
   }),
-});
+})
