@@ -1,4 +1,4 @@
 export * from './queries/getUserProfile';
-export * from './args/UpdateUserProfileArgs';
-export * from './mutations/updateUserProfile';
-export * from './mutations/updateUserProfilePicture';
+export * from '../account/args/UpdateAccountArgs';
+export * from '../account/mutations/updateAccount';
+export * from '../account/mutations/updateProfilePicture';

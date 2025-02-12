@@ -1,5 +1,5 @@
 import { parseCookies } from '@repo/next-storage/handlers';
-import type { IntlConfig } from 'next-intl';
+import type {IntlConfig} from 'next-intl';
 import { getRequestConfig } from 'next-intl/server';
 import { cookies as nextCookies } from 'next/headers';
 import { zodLocale } from './options';

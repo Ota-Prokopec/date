@@ -2,7 +2,6 @@ import { createYoga } from 'graphql-yoga';
 import { createServer } from 'node:http';
 import { schema } from './schema';
 import { useCookies } from '@whatwg-node/server-plugin-cookies';
-import { env } from './lib/env';
 import { createContext } from './context';
 
 // Create a Yoga instance with a GraphQL schema.

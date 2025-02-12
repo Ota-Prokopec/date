@@ -1,4 +1,5 @@
 import { boolean, date, pgEnum, pgTable, text, timestamp } from 'drizzle-orm/pg-core';
+import { createSelectSchema } from 'drizzle-zod';
 
 export const genderEnum = pgEnum('gender', ['male', 'female']);
 
@@ -13,9 +14,12 @@ export const user = pgTable('user', {
   birthDate: date('birthDate', { mode: 'date' }),
   bio: text('bio'),
   gender: genderEnum('gender'),
+  lookingForGender: genderEnum('lookingForGender'),
 });
 
+export const userSelectSchema = createSelectSchema(user);
 export type UserSelect = typeof user.$inferSelect;
+export type UserInsert = typeof user.$inferInsert;
 
 export const session = pgTable('session', {
   id: text('id').primaryKey(),

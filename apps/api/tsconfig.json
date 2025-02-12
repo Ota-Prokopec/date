@@ -8,6 +8,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["src", "../../global.d.ts", "../../packages/i18n-translations/i18n.d.ts"],
+  "include": ["src"],
   "exclude": ["dist", "node_modules"]
 }

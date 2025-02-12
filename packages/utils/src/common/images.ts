@@ -99,7 +99,10 @@ export const readHTMLImageInput = async (event: ChangeEvent<HTMLInputElement>) =
       var reader = new FileReader();
       reader.onload = function (e) {
         const image = e.target?.result;
-        if (!image) throw new Error('Event.target is null');
+        if (!image) {
+          reject('Event.target is null');
+          throw new Error('Event.target is null');
+        }
 
         if (typeof image !== 'string') resolve(base64ToFile(arrayBufferIntoBase64(image), 'image'));
         else resolve(base64ToFile(image, 'image'));

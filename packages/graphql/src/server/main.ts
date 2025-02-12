@@ -15,11 +15,11 @@ export const getBuilder = <Parameters extends getBuilderProps>() =>
     DefaultInputFieldRequiredness: true;
     Objects: Parameters['Objects'];
     Scalars: Parameters['Scalars'];
-    DefaultFieldNullability: false;
+    DefaultFieldNullability: true;
     Inputs: Parameters['Args'];
   }>({
     defaultInputFieldRequiredness: true,
-    defaultFieldNullability: false,
+
     plugins: [DataloaderPlugin],
   });
 

@@ -3,27 +3,27 @@
   "extends": "./node_modules/@total-typescript/tsconfig/bundler/no-dom.json",
   "display": "Default",
   "compilerOptions": {
-    "declaration": true,
-    "declarationMap": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "forceConsistentCasingInFileNames": true,
-    "sourceMap": true,
-    "isolatedModules": true,
-    "allowJs": true,
-    "lib": ["es2022"],
-    "module": "Preserve",
-    "skipDefaultLibCheck": true,
-    "moduleDetection": "force",
-    "moduleResolution": "Bundler",
-    "resolveJsonModule": true,
+    "target": "ES2022",
+    "lib": ["ES2023"],
+    "module": "ESNext",
     "skipLibCheck": true,
-    "target": "ESNext",
+
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "isolatedModules": true,
+    "moduleDetection": "force",
     "noEmit": true,
-    "verbatimModuleSyntax": false,
+
     "strict": true,
-    "noUncheckedIndexedAccess": true,
-    "noImplicitOverride": true
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedSideEffectImports": true,
+
+    "verbatimModuleSyntax": false,
+    "declaration": true,
+    "declarationMap": true
   },
+
   "include": ["../../tsReset.d.ts"]
 }

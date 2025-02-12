@@ -2,14 +2,14 @@ import type { Coords } from '../maps/Coords';
 import type { Gender } from './GenderTypes';
 import type { Socials } from './SocialPlatforms';
 
-export type UserProfile = {
+export type Account = {
   name: string;
-  age: number;
+  birthDate: Date;
   bio: string;
   socials: Socials | undefined | null;
   profilePictureURL: string;
   gender: Gender;
-  lookigForGender: Gender;
+  lookingForGender: Gender;
   userId: string;
   coords: Coords;
 };

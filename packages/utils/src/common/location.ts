@@ -10,7 +10,11 @@ const transformToCoords = (geolocationResult: GeolocationPosition): Coords => ({
 
 export const getGeolocation = (options: UseGeolocationProps = { enableHighAccuracy: true }) => {
   return new Promise<Coords>((res, rej) => {
-    navigator.geolocation.getCurrentPosition((position) => res(transformToCoords(position)));
+    navigator.geolocation.getCurrentPosition(
+      (position) => res(transformToCoords(position)),
+      rej,
+      options
+    );
   });
 };
 
