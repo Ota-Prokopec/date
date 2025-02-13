@@ -1,37 +1,67 @@
 'use client'
 
+import { BasicButton } from '@/components/Inputs/BasicButton'
+import { DateInput } from '@/components/Inputs/DateInput'
+import { EditProfileItem } from '@/components/Inputs/EditProfileItem'
+import { GenderInput } from '@/components/Inputs/GenderInput'
+import { UsernameInput } from '@/components/Inputs/UsernameInput'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { genderZodSchema, type Account } from '@repo/ts-types'
 import { Center } from '@repo/ui/components/common/Center'
-import { Input, DatePicker, DateValue } from '@heroui/react'
-import { UserRoundPen } from '@/components/Icons'
 import { Column } from '@repo/ui/components/common/Column'
+import { cn } from '@repo/ui/ts-lib/lib/utils'
+import { ChevronRight } from 'lucide-react'
+import { useEffect } from 'react'
 import {
   useForm,
-  type Control,
   type SubmitHandler,
   type UseFormGetValues,
   type UseFormRegister,
   type UseFormSetValue,
 } from 'react-hook-form'
-import type { Account } from '@repo/ts-types'
-import { envClient } from '@/lib/envClient'
-import { EditProfileGenderInput } from '@/components/EditProfile/EditProfileGenderInput'
-import { useEffect } from 'react'
+import { z } from 'zod'
 
-type FormData = Pick<Account, 'username' | 'gender' | 'lookingForGender'> & { birthDate: DateValue }
+const formDataZodSchema = z.object({
+  username: z.string(),
+  gender: genderZodSchema,
+  lookingForGender: genderZodSchema,
+  birthDate: z.date(),
+})
+
+type FormData = Pick<Account, 'username' | 'gender' | 'lookingForGender' | 'birthDate'>
 
 const NewUserPage = () => {
   const { register, handleSubmit, watch, formState, control, setValue, getValues } =
-    useForm<FormData>({ defaultValues: { gender: 'male', lookingForGender: 'female' } })
+    useForm<FormData>({
+      defaultValues: { gender: 'male', lookingForGender: 'female', birthDate: new Date() },
+      reValidateMode: 'onSubmit',
+      resolver: zodResolver(formDataZodSchema),
+    })
+
+  useEffect(() => {
+    console.log(formState.errors)
+  }, [formState])
 
   const onSubmit: SubmitHandler<FormData> = (data) => console.log(data)
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <Center>
-        <Forms getValues={getValues} setValue={setValue} register={register}></Forms>
-      </Center>
+    <form className="w-full" onSubmit={handleSubmit(onSubmit)}>
+      <Center className="w-full p-4 flex-col gap-10">
+        <Forms
+          className="max-w-[400px]"
+          getValues={getValues}
+          setValue={setValue}
+          register={register}
+        ></Forms>
 
-      <input type="submit" />
+        <BasicButton
+          className="gap-2"
+          icon={<ChevronRight strokeWidth={2.5} className="w-8 h-8"></ChevronRight>}
+          type="submit"
+        >
+          Continue
+        </BasicButton>
+      </Center>
     </form>
   )
 }
@@ -40,44 +70,32 @@ type FormsProps = {
   register: UseFormRegister<FormData>
   getValues: UseFormGetValues<FormData>
   setValue: UseFormSetValue<FormData>
+  className?: string
 }
 
-const Forms = ({ register, getValues, setValue }: FormsProps) => {
+const Forms = ({ register, getValues, setValue, className }: FormsProps) => {
   const values = getValues()
   return (
-    <Column className="gap-4">
-      <Input
-        {...register('username', {
-          required: true,
-          min: envClient.NEXT_PUBLIC_MIN_LENGTH_OF_USERNAME,
-          max: envClient.NEXT_PUBLIC_MAX_LENGTH_OF_USERNAME,
-        })}
-        className="outline-none !border-0"
-        style={{ border: '0 !important' }}
-        startContent={<UserRoundPen></UserRoundPen>}
-        type="text"
-        placeholder="ID"
-      />
-      <DatePicker
-        onChange={(dateValue) => {
-          if (!dateValue) return
-          setValue('birthDate', dateValue)
-        }}
-        value={values.birthDate}
-        className="max-w-[284px]"
-        label="Date (controlled)"
-      />
-      <EditProfileGenderInput
-        radioGroupName={'genderRadioInput'}
-        onChange={(gender) => {}}
-        defaultGender={'male'}
-      ></EditProfileGenderInput>
+    <Column className={cn('gap-4 w-full', className)}>
+      <EditProfileItem className="w-full" title="I am looking for:">
+        <UsernameInput
+          value={values.username}
+          onChange={(value) => setValue('username', value)}
+        ></UsernameInput>
+      </EditProfileItem>
+      <EditProfileItem title="I am looking for:">
+        <DateInput
+          value={values.birthDate}
+          onChange={(date) => setValue('birthDate', date)}
+        ></DateInput>
+      </EditProfileItem>
+      <EditProfileItem title="My gender:">
+        <GenderInput onChange={(gender) => {}} defaultGender={'male'}></GenderInput>
+      </EditProfileItem>
 
-      <EditProfileGenderInput
-        radioGroupName="lookingForGenderRadioInput"
-        onChange={(gender) => {}}
-        defaultGender="male"
-      ></EditProfileGenderInput>
+      <EditProfileItem title="I am looking for:">
+        <GenderInput onChange={(gender) => {}} defaultGender="male"></GenderInput>
+      </EditProfileItem>
     </Column>
   )
 }

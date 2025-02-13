@@ -52,8 +52,12 @@ export const env = <TEnvType extends Environment>(
           runtimeEnv: {
             NEXT_PUBLIC_API_URL: envSource.NEXT_PUBLIC_API_URL,
             NEXT_PUBLIC_WEB_URL: envSource.NEXT_PUBLIC_WEB_URL,
-            NEXT_PUBLIC_MIN_LENGTH_OF_USERNAME: envSource.NEXT_PUBLIC_MIN_LENGTH_OF_USERNAME,
-            NEXT_PUBLIC_MAX_LENGTH_OF_USERNAME: envSource.NEXT_PUBLIC_MAX_LENGTH_OF_USERNAME,
+            NEXT_PUBLIC_MIN_LENGTH_OF_USERNAME: parseInt(
+              envSource.NEXT_PUBLIC_MIN_LENGTH_OF_USERNAME
+            ),
+            NEXT_PUBLIC_MAX_LENGTH_OF_USERNAME: parseInt(
+              envSource.NEXT_PUBLIC_MAX_LENGTH_OF_USERNAME
+            ),
 
             NEXT_PUBLIC_PROFILE_PICTURE_HEIGHT: parseInt(
               envSource.NEXT_PUBLIC_PROFILE_PICTURE_HEIGHT

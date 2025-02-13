@@ -1,19 +1,19 @@
-'use client';
+'use client'
 
-import { Button } from '@repo/ui/components/common/Button';
-import { Card } from '@repo/ui/components/common/Card';
-import { Center } from '@repo/ui/components/common/Center';
-import { Column } from '@repo/ui/components/common/Column';
-import { ImageInput } from '@repo/ui/components/common/ImageInput';
-import { Text } from '@repo/ui/components/common/Text';
-import { IconChange } from '../../../components/Icons';
-import { envClient } from '@/lib/envClient';
-import { EditProfileBioInput } from '@/components/EditProfile/EditProfileBioInput';
-import { EditProfileItem } from '@/components/EditProfile/EditProfileItem';
-import { EditProfileGenderInput } from '@/components/EditProfile/EditProfileGenderInput';
-import { EditProfileSocialsInput } from '@/components/EditProfile/EditProfileSocialsInput';
-import { Row } from '@repo/ui/components/common/Row';
-import { ProfileNameAndAge } from '@/components/Profile/ProfileNameAndAge';
+import { Button } from '@repo/ui/components/common/Button'
+import { Card } from '@repo/ui/components/common/Card'
+import { Center } from '@repo/ui/components/common/Center'
+import { Column } from '@repo/ui/components/common/Column'
+import { ImageInput } from '@repo/ui/components/common/ImageInput'
+import { Text } from '@repo/ui/components/common/Text'
+import { IconChange } from '../../../components/Icons'
+import { envClient } from '@/lib/envClient'
+import { BioInput } from '@/components/Inputs/BioInput'
+import { EditProfileItem } from '@/components/Inputs/EditProfileItem'
+import { GenderInput } from '@/components/Inputs/GenderInput'
+import { SocialsInput } from '@/components/Inputs/ProfileSocialsInput'
+import { Row } from '@repo/ui/components/common/Row'
+import { ProfileNameAndAge } from '@/components/Profile/ProfileNameAndAge'
 
 const ProfilePage = () => {
   return (
@@ -38,14 +38,14 @@ const ProfilePage = () => {
 
         <Column className="w-full gap-2">
           <EditProfileItem title="About me:">
-            <EditProfileBioInput></EditProfileBioInput>
+            <BioInput></BioInput>
           </EditProfileItem>
           <Row className="gap-2">
             <EditProfileItem className="w-fit mobile:w-full" title="My gender">
-              <EditProfileGenderInput onChange={() => {}} gender="male"></EditProfileGenderInput>
+              <GenderInput onChange={() => {}} defaultGender="male"></GenderInput>
             </EditProfileItem>
             <EditProfileItem className="w-fit mobile:w-full" title="How to connect with me">
-              <EditProfileSocialsInput></EditProfileSocialsInput>
+              <SocialsInput></SocialsInput>
             </EditProfileItem>
           </Row>
         </Column>
@@ -53,7 +53,7 @@ const ProfilePage = () => {
         <Button className="bg-blue-500 text-2xl !p-8 !pl-10 !pr-10">Save changes</Button>
       </Column>
     </Center>
-  );
-};
+  )
+}
 
-export default ProfilePage;
+export default ProfilePage

@@ -5,7 +5,7 @@ export const getClientZodSchema = () => {
     NEXT_PUBLIC_WEB_URL: string().url(),
     NEXT_PUBLIC_PROFILE_PICTURE_HEIGHT: z.number(),
     NEXT_PUBLIC_PROFILE_PICTURE_WIDTH: z.number(),
-    NEXT_PUBLIC_MIN_LENGTH_OF_USERNAME: z.string(),
-    NEXT_PUBLIC_MAX_LENGTH_OF_USERNAME: z.string(),
+    NEXT_PUBLIC_MIN_LENGTH_OF_USERNAME: z.number(),
+    NEXT_PUBLIC_MAX_LENGTH_OF_USERNAME: z.number(),
   }
 }

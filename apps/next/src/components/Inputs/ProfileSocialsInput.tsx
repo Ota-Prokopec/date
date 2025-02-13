@@ -1,30 +1,30 @@
-import { Input } from '@heroui/react';
-import type { SocialProfilePlatform } from '@repo/ts-types';
-import { Center } from '@repo/ui/components/common/Center';
-import { Column } from '@repo/ui/components/common/Column';
-import { ModalSheet } from '@repo/ui/components/common/ModalSheet';
-import { Row } from '@repo/ui/components/common/Row';
-import { Text } from '@repo/ui/components/common/Text';
-import { useState } from 'react';
-import { match } from 'ts-pattern';
-import { IconInstagram, IconLink, IconUser } from '../Icons';
-import { SocialProfiles } from '../SocialProfiles';
+import { Input } from '@heroui/react'
+import type { SocialProfilePlatform } from '@repo/ts-types'
+import { Center } from '@repo/ui/components/common/Center'
+import { Column } from '@repo/ui/components/common/Column'
+import { ModalSheet } from '@repo/ui/components/common/ModalSheet'
+import { Row } from '@repo/ui/components/common/Row'
+import { Text } from '@repo/ui/components/common/Text'
+import { useState } from 'react'
+import { match } from 'ts-pattern'
+import { IconInstagram, IconLink, IconUser } from '../Icons'
+import { SocialProfiles } from '../SocialProfiles'
 
-type EditProfileBioInputProps = {};
+type SocialsInputProps = {}
 
-export const EditProfileSocialsInput = ({}: EditProfileBioInputProps) => {
-  const sheet = new ModalSheet({ initiallyOpen: false, detent: 'full-height' });
-  const [platform, setPlatform] = useState<SocialProfilePlatform | null>(null);
+export const SocialsInput = ({}: SocialsInputProps) => {
+  const sheet = new ModalSheet({ initiallyOpen: false, detent: 'full-height' })
+  const [platform, setPlatform] = useState<SocialProfilePlatform | null>(null)
 
   return (
     <>
       <SocialProfiles
         onClick={(clickedPlatform) => {
-          setPlatform(clickedPlatform);
-          sheet.setIsOpen(true);
+          setPlatform(clickedPlatform)
+          sheet.setIsOpen(true)
         }}
         disableLink
-        socials={{ instagram: { id: 'fda', link: new URL('https://j.com') } }}
+        socials={{ instagram: { profileId: 'fda', link: 'https://j.com' } }}
       ></SocialProfiles>
 
       <sheet.Sheet className="h-full w-full">
@@ -54,5 +54,5 @@ export const EditProfileSocialsInput = ({}: EditProfileBioInputProps) => {
         </Center>
       </sheet.Sheet>
     </>
-  );
-};
+  )
+}
