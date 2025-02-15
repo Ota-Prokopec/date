@@ -1,11 +1,12 @@
-'use server';
+'use server'
 
-import { AbstractIntlMessages } from 'next-intl';
-import { getMessages } from 'next-intl/server';
+import type { Locale } from '@repo/i18n-next'
+import { AbstractIntlMessages } from 'next-intl'
+import { getMessages } from 'next-intl/server'
 
-type GetMessagesAction = ({ locale }: { locale: Locale }) => Promise<AbstractIntlMessages>;
+type GetMessagesAction = ({ locale }: { locale: Locale }) => Promise<AbstractIntlMessages>
 
 export const getMessagesAction: GetMessagesAction = async ({ locale }: { locale: Locale }) => {
-  const messages = await getMessages({ locale });
-  return messages;
-};
+  const messages = await getMessages({ locale })
+  return messages
+}

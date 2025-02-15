@@ -46,6 +46,6 @@
     "graphql-scalars": "^1.24.1",
     "graphql-upload": "^17.0.0",
     "graphql-yoga": "^5.7.0",
-    "tsup": "8.3.5"
+    "tsup": "8.2.2"
   }
 }

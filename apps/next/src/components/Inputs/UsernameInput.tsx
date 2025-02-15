@@ -19,7 +19,7 @@ export const UsernameInput = ({ onChange, value }: UsernameInputProps) => {
       style={{ border: '0 !important' }}
       startContent={<UserRoundPen></UserRoundPen>}
       type="text"
-      placeholder="Username"
+      placeholder={`Username`}
     />
   )
 }

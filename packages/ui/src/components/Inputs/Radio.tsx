@@ -1,7 +1,6 @@
 import { useState, type ReactNode } from 'react'
 import { cn } from '../../lib/utils'
 import { Label } from '../shadcn/label'
-import { RadioGroup, RadioGroupItem } from '../shadcn/radio-group'
 
 export type RadioItem<Key extends string, Value extends string> = {
   key: Key

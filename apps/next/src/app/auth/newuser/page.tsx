@@ -5,8 +5,9 @@ import { DateInput } from '@/components/Inputs/DateInput'
 import { EditProfileItem } from '@/components/Inputs/EditProfileItem'
 import { GenderInput } from '@/components/Inputs/GenderInput'
 import { UsernameInput } from '@/components/Inputs/UsernameInput'
+import { getAccountZodSchemaWithErrorMessages } from '@/lib/account/accountZodSchemaWithErrorMessages'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { genderZodSchema, type Account } from '@repo/ts-types'
+import { cookieStorage } from '@repo/cookies'
 import { Center } from '@repo/ui/components/common/Center'
 import { Column } from '@repo/ui/components/common/Column'
 import { cn } from '@repo/ui/ts-lib/lib/utils'
@@ -15,22 +16,29 @@ import { useEffect } from 'react'
 import {
   useForm,
   type SubmitHandler,
-  type UseFormGetValues,
   type UseFormRegister,
   type UseFormSetValue,
+  type UseFormWatch,
 } from 'react-hook-form'
+import { toast } from 'sonner'
 import { z } from 'zod'
+import { getObjectKeys } from '@repo/utils/common/object'
 
-const formDataZodSchema = z.object({
-  username: z.string(),
-  gender: genderZodSchema,
-  lookingForGender: genderZodSchema,
-  birthDate: z.date(),
-})
-
-type FormData = Pick<Account, 'username' | 'gender' | 'lookingForGender' | 'birthDate'>
+type FormData = Pick<
+  z.TypeOf<ReturnType<typeof getAccountZodSchemaWithErrorMessages>>,
+  'username' | 'gender' | 'lookingForGender' | 'birthDate'
+>
 
 const NewUserPage = () => {
+  const [locale, setLocale] = cookieStorage.useStorageValue('locale')
+
+  const formDataZodSchema = getAccountZodSchemaWithErrorMessages(locale).pick({
+    username: true,
+    gender: true,
+    lookingForGender: true,
+    birthDate: true,
+  })
+
   const { register, handleSubmit, watch, formState, control, setValue, getValues } =
     useForm<FormData>({
       defaultValues: { gender: 'male', lookingForGender: 'female', birthDate: new Date() },
@@ -38,18 +46,23 @@ const NewUserPage = () => {
       resolver: zodResolver(formDataZodSchema),
     })
 
-  useEffect(() => {
-    console.log(formState.errors)
-  }, [formState])
-
   const onSubmit: SubmitHandler<FormData> = (data) => console.log(data)
+
+  // errors toast
+  useEffect(() => {
+    const itemsTypeErrorKeys = getObjectKeys(formState.errors)
+    itemsTypeErrorKeys.map((key) => {
+      const message = formState.errors[key]?.message
+      toast.error(message === 'Required' ? 'Please fill the required fields' : message)
+    })
+  }, [formState.errors])
 
   return (
     <form className="w-full" onSubmit={handleSubmit(onSubmit)}>
       <Center className="w-full p-4 flex-col gap-10">
         <Forms
           className="max-w-[400px]"
-          getValues={getValues}
+          watch={watch}
           setValue={setValue}
           register={register}
         ></Forms>
@@ -68,13 +81,13 @@ const NewUserPage = () => {
 
 type FormsProps = {
   register: UseFormRegister<FormData>
-  getValues: UseFormGetValues<FormData>
+  watch: UseFormWatch<FormData>
   setValue: UseFormSetValue<FormData>
   className?: string
 }
 
-const Forms = ({ register, getValues, setValue, className }: FormsProps) => {
-  const values = getValues()
+const Forms = ({ register, watch, setValue, className }: FormsProps) => {
+  const values = watch()
   return (
     <Column className={cn('gap-4 w-full', className)}>
       <EditProfileItem className="w-full" title="I am looking for:">

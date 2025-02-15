@@ -1,12 +1,11 @@
-import { cn } from '../../lib/utils';
-import { Image, ImageProps } from '@heroui/react';
-import { useState } from 'react';
+import { ImageProps } from '@heroui/react'
+import { cn } from '../../lib/utils'
 
 export type ReactImageProps = {
-  src: string | undefined | null;
-  fallbackSrc?: string;
-  className?: string;
-} & Omit<ImageProps, 'onError'> & {};
+  src: string | undefined | null
+  fallbackSrc?: string
+  className?: string
+} & Omit<ImageProps, 'onError'> & {}
 
 const ReactImage = ({ src: initialSrc, fallbackSrc, className, ...props }: ReactImageProps) => {
   return (
@@ -15,7 +14,7 @@ const ReactImage = ({ src: initialSrc, fallbackSrc, className, ...props }: React
       src={(initialSrc || fallbackSrc) ?? ''}
       {...props}
     ></img>
-  );
-};
+  )
+}
 
-export { ReactImage as Image };
+export { ReactImage as Image }

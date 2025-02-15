@@ -1,17 +1,23 @@
-import type { ReactNode } from 'react';
-import { Drawer, DrawerDescription, DrawerTitle, DrawerTrigger, DrawerContent, DrawerHeader } from '../shadcn/drawer';
-import { cn } from '../../lib/utils';
+import type { ReactNode } from 'react'
+import { cn } from '../../lib/utils'
+import {
+  Drawer,
+  DrawerContent,
+  DrawerDescription,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from '../shadcn/drawer'
 
 type DrawerProps = {
-  triggerButton: ReactNode;
-  title: string;
-  description?: string;
-  children: ReactNode;
-  closeButton?: ReactNode;
-  className?: string;
-};
+  triggerButton: ReactNode
+  title: string
+  description?: string
+  children: ReactNode
+  className?: string
+}
 
-const MyDrawer = ({ triggerButton, title, description, children, closeButton, className }: DrawerProps) => {
+const MyDrawer = ({ triggerButton, title, description, children, className }: DrawerProps) => {
   return (
     <Drawer {...{ shouldScaleBackground: false, autoFocus: false }}>
       <DrawerTrigger asChild>{triggerButton}</DrawerTrigger>
@@ -23,7 +29,7 @@ const MyDrawer = ({ triggerButton, title, description, children, closeButton, cl
         {children}
       </DrawerContent>
     </Drawer>
-  );
-};
+  )
+}
 
-export { MyDrawer as Drawer };
+export { MyDrawer as Drawer }

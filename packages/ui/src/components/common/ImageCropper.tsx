@@ -1,59 +1,60 @@
-import { cn } from '../../lib/utils';
-import { base64ToFile, readHTMLImageInput } from '@repo/utils/common/images';
-import { FileInput, Label } from 'flowbite-react';
-import { useId, useRef, useState, type Dispatch, type RefObject, type SetStateAction } from 'react';
-import AvatarEditor from 'react-avatar-editor';
-import { match } from 'ts-pattern';
-import { Text } from './Text';
+import { cn } from '../../lib/utils'
+import { base64ToFile, readHTMLImageInput } from '@repo/utils/common/images'
+import { FileInput, Label } from 'flowbite-react'
+import { useId, useRef, useState, type Dispatch, type RefObject, type SetStateAction } from 'react'
+import AvatarEditor from 'react-avatar-editor'
+import { match } from 'ts-pattern'
+import { Text } from './Text'
 
 export type ImageCropperProps = {
-  src: string;
-  className?: string;
-};
+  src: string
+  className?: string
+}
 
 export class ImageCropper {
-  public editor: RefObject<AvatarEditor | undefined>;
-  public src: string | File | undefined;
-  public setSrc: Dispatch<SetStateAction<string | File | undefined>>;
-  public pictureHeight: number;
-  public pictureWidth: number;
+  public editor: RefObject<AvatarEditor | undefined>
+  public src: string | File | undefined
+  public setSrc: Dispatch<SetStateAction<string | File | undefined>>
+  public pictureHeight: number
+  public pictureWidth: number
 
   constructor(
+    //@ts-ignore
     private initialPictureSrc: File | string | undefined,
     private imageType: 'image/jpeg' | 'image/png' = 'image/jpeg',
     pictureHeight: number,
     pictureWidth: number
   ) {
-    this.editor = useRef<AvatarEditor | undefined>(undefined);
-    const [src, setSrc] = useState<File | string | undefined>(initialPictureSrc);
-    this.src = src;
-    this.setSrc = setSrc;
-    this.setEditorRef = this.setEditorRef.bind(this);
-    this.crop = this.crop.bind(this);
-    this.render = this.render.bind(this);
-    this.pictureHeight = pictureHeight;
-    this.pictureWidth = pictureWidth;
+    this.editor = useRef<AvatarEditor | undefined>(undefined)
+    const [src, setSrc] = useState<File | string | undefined>(initialPictureSrc)
+    this.src = src
+    this.setSrc = setSrc
+    this.setEditorRef = this.setEditorRef.bind(this)
+    this.crop = this.crop.bind(this)
+    this.render = this.render.bind(this)
+    this.pictureHeight = pictureHeight
+    this.pictureWidth = pictureWidth
   }
 
   crop = () => {
-    if (!this.editor.current) throw new Error('Editor not initialized');
+    if (!this.editor.current) throw new Error('Editor not initialized')
 
-    const canvasScaled = this.editor.current.getImageScaledToCanvas();
-    return base64ToFile(canvasScaled.toDataURL(this.imageType), 'image.jpeg');
-  };
+    const canvasScaled = this.editor.current.getImageScaledToCanvas()
+    return base64ToFile(canvasScaled.toDataURL(this.imageType), 'image.jpeg')
+  }
 
-  private setEditorRef = (editor: AvatarEditor | undefined) => (this.editor.current = editor);
+  private setEditorRef = (editor: AvatarEditor | undefined) => (this.editor.current = editor)
 
   render({
     className,
     dropzoneLabel,
     disable = false,
   }: {
-    className?: string;
-    dropzoneLabel: string;
-    disable?: boolean;
+    className?: string
+    dropzoneLabel: string
+    disable?: boolean
   }) {
-    const fileInputHtmlElementId = useId();
+    const fileInputHtmlElementId = useId()
 
     return (
       <div
@@ -93,6 +94,6 @@ export class ImageCropper {
             ></AvatarEditor>
           ))}
       </div>
-    );
+    )
   }
 }

@@ -1,5 +1,0 @@
-mutation updateUserProfile($bio: String, $gender: Gender, $username: String!) {
-  updateUserProfile(userProfileData: { bio: $bio, gender: $gender, username: $username }) {
-    userId
-  }
-}

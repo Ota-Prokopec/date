@@ -1,18 +1,22 @@
-import { Layout } from '@/components/Layout';
-import { cookieStorageZodSchema } from '@repo/cookies/options';
-import { parseCookies } from '@repo/next-storage/handlers';
-import { Center } from '@repo/ui/components/common/Center';
-import '@repo/ui/tailwindcss';
-import { cn } from '@repo/ui/ts-lib/lib/utils';
-import { headers as getHeaders, cookies as nextCookies } from 'next/headers';
-import { Toaster } from '@repo/ui/components/shadcn/sonner';
+import { Layout } from '@/components/Layout'
+import { cookieStorageZodSchema } from '@repo/cookies/options'
+import { parseCookies } from '@repo/next-storage/handlers'
+import { Center } from '@repo/ui/components/common/Center'
+import { cn } from '@repo/ui/ts-lib/lib/utils'
+import { headers as getHeaders, cookies as nextCookies } from 'next/headers'
+import { Toaster } from '@repo/ui/components/shadcn/sonner'
+//@ts-expect-error
+import '@repo/ui/tailwindcss'
+import { getMessages } from 'next-intl/server'
+import type { Locale } from '@repo/i18n-next'
+import { getSession } from '@repo/better-auth/session'
 
 type RootLayoutProps = Readonly<{
-  children: React.ReactNode;
-}>;
+  children: React.ReactNode
+}>
 
 export default async function RootLayout({ children }: RootLayoutProps) {
-  const headers = getHeaders();
+  const headers = await getHeaders()
 
   //	const pageUrl = headers.get('url')?.replace(':3000', '')
 
@@ -24,15 +28,15 @@ export default async function RootLayout({ children }: RootLayoutProps) {
 
   //	if (!pathname) throw new Error(`pathname does not exist, pathname: ${pathname}`)
 
-  //const session = await auth()
+  const session = await getSession({ headers: headers })
 
   //	if (!session && !pathname.startsWith('/auth')) redirect('/auth')
 
-  const ssrCookies = cookieStorageZodSchema.parse(parseCookies((await nextCookies()).getAll()));
+  const ssrCookies = cookieStorageZodSchema.parse(parseCookies((await nextCookies()).getAll()))
 
-  const locale = ssrCookies['locale'];
+  const locale: Locale = 'en'
 
-  //	const ssrMessages = await getMessages({ locale: locale })
+  const ssrMessages = await getMessages({ locale: locale })
 
   return (
     <html>
@@ -54,7 +58,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
           //  dark: ssrCookies['colorTheme'] === 'dark' ? true : false,
         })}
       >
-        <Layout ssrCookies={ssrCookies}>
+        <Layout locale={locale} ssrMessages={ssrMessages} ssrCookies={ssrCookies}>
           <Toaster
             style={{ margin: '10px' }}
             className="[&>*]:flex [&>*]:flex-row"
@@ -64,5 +68,5 @@ export default async function RootLayout({ children }: RootLayoutProps) {
         </Layout>
       </body>
     </html>
-  );
+  )
 }

@@ -1,24 +1,23 @@
-import { useEffect, useState, type ReactNode } from 'react';
+import { DialogClose } from '@radix-ui/react-dialog'
+import { type ReactNode } from 'react'
 import {
-  Dialog as ShadcnDialog,
   DialogContent,
-  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '../shadcn/dialog';
-import { Column } from './Column';
-import { DialogClose } from '@radix-ui/react-dialog';
+  Dialog as ShadcnDialog,
+} from '../shadcn/dialog'
+import { Column } from './Column'
 
 type DialogProps = {
-  children: ReactNode;
-  className?: string;
-  title: string;
-  defaultOpen?: boolean;
-  dialogTrigger: ReactNode;
-  dialogCloseButton?: ReactNode;
-};
+  children: ReactNode
+  className?: string
+  title: string
+  defaultOpen?: boolean
+  dialogTrigger: ReactNode
+  dialogCloseButton?: ReactNode
+}
 export const Dialog = ({
   children,
   className,
@@ -40,5 +39,5 @@ export const Dialog = ({
         </DialogFooter>
       </DialogContent>
     </ShadcnDialog>
-  );
-};
+  )
+}

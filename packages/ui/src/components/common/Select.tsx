@@ -1,26 +1,27 @@
-'use client';
+'use client'
 
-import { useState } from 'react';
+import { useState } from 'react'
 import {
   SelectContentShadcn,
   SelectItemShadcn,
   SelectTriggerShadcn,
   SelectValueShadcn,
   SelectShadcn,
-} from '../shadcn/select';
+} from '../shadcn/select'
 
-export type SelectItem = { value: string; label: string };
-export type SelectItems = SelectItem[];
+export type SelectItem = { value: string; label: string }
+export type SelectItems = SelectItem[]
 
 export type SelectProps = {
-  items: SelectItems;
+  items: SelectItems
 
-  initialValue?: SelectItem['value'];
-  className?: string;
-};
+  initialValue?: SelectItem['value']
+}
 
-export const Select = ({ items, className, initialValue }: SelectProps) => {
-  const [value, setValue] = useState(initialValue);
+export const Select = ({ items, initialValue }: SelectProps) => {
+  const [value, setValue] = useState(initialValue)
+
+  console.log(value)
 
   return (
     <SelectShadcn onValueChange={(value) => setValue(value)}>
@@ -35,5 +36,5 @@ export const Select = ({ items, className, initialValue }: SelectProps) => {
         ))}
       </SelectContentShadcn>
     </SelectShadcn>
-  );
-};
+  )
+}

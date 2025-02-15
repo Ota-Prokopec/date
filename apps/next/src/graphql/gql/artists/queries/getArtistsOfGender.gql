@@ -1,0 +1,19 @@
+query getArtistsOfGender(
+	$limit: Int
+	$offset: Int
+	$omitArtistIds: [Int!]
+	$musicGendres: [String!]!
+) {
+	getArtistsOfGender(
+		limit: $limit
+		offset: $offset
+		omitArtistIds: $omitArtistIds
+		musicGendres: $musicGendres
+	) {
+		link
+		id
+		musicGendres
+		name
+		pictureUrl
+	}
+}

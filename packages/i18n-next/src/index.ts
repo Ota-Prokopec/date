@@ -1,26 +1,31 @@
-import { parseCookies } from '@repo/next-storage/handlers';
-import type {IntlConfig} from 'next-intl';
-import { getRequestConfig } from 'next-intl/server';
-import { cookies as nextCookies } from 'next/headers';
-import { zodLocale } from './options';
+import { Locale as I18nLocale } from './i18n'
+import { parseCookies } from '@repo/next-storage/handlers'
+import type { IntlConfig } from 'next-intl'
+import { getRequestConfig } from 'next-intl/server'
+import { cookies as nextCookies } from 'next/headers'
+import { zodLocale } from './options'
+
+export type Locale = I18nLocale
 
 export type RequestConfig = Omit<IntlConfig, 'locale'> & {
-  locale?: IntlConfig['locale'];
-};
+  locale?: IntlConfig['locale']
+}
 
 export type GetRequestConfigParams = {
-  locale: string;
-};
+  locale: string
+}
 
-export type GetRequestConfig = (params: GetRequestConfigParams) => RequestConfig | Promise<RequestConfig>;
+export type GetRequestConfig = (
+  params: GetRequestConfigParams
+) => RequestConfig | Promise<RequestConfig>
 
 export const getRequest = getRequestConfig(async () => {
-  const cookies = await nextCookies();
+  const cookies = await nextCookies()
 
-  const ssrCookies = parseCookies(cookies.getAll());
-  const locale = zodLocale.optional().parse(ssrCookies['locale']) || 'en';
+  const ssrCookies = parseCookies(cookies.getAll())
+  const locale = zodLocale.optional().parse(ssrCookies['locale']) || 'en'
 
-  const pages = await import(`../../i18n-translations/locales/${locale}/pages.json`);
+  const pages = await import(`../../i18n-translations/locales/${locale}/pages.json`)
 
   return {
     locale: locale,
@@ -28,7 +33,8 @@ export const getRequest = getRequestConfig(async () => {
     now: new Date(),
     messages: {
       pages: pages.default,
-      components: (await import(`../../i18n-translations/locales/${locale}/components.json`)).default,
+      components: (await import(`../../i18n-translations/locales/${locale}/components.json`))
+        .default,
     },
-  };
-});
+  }
+})

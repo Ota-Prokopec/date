@@ -1,0 +1,5 @@
+query getYoutubeTrack($artistName: String!, $trackName: String!) {
+	getYoutubeTrack(artistName: $artistName, trackName: $trackName) {
+		link
+	}
+}

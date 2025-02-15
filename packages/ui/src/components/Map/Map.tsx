@@ -1,29 +1,30 @@
-import { Coords } from '@repo/ts-types';
-import maplibregl, { Marker } from 'maplibre-gl';
-import 'maplibre-gl/dist/maplibre-gl.css';
-import { forwardRef, useEffect, useId, useRef } from 'react';
-import { cn } from '../../lib/utils';
+import { Coords } from '@repo/ts-types'
+import maplibregl, { Marker } from 'maplibre-gl'
+import { forwardRef, useEffect, useId, useRef } from 'react'
+import { cn } from '../../lib/utils'
+//@ts-ignore
+import '../../../node_modules/maplibre-gl/dist/maplibre-gl.css'
 
-export type MapType = maplibregl.Map;
+export type MapType = maplibregl.Map
 
 type MapComponentProps = {
-  className?: string;
-  zoom?: number;
-  coords?: Coords | null;
-  children?: Marker[];
-  onZoom?: (zoom: number) => void;
-  onLoad?: (map: maplibregl.Map) => void;
-  style?: string;
-};
+  className?: string
+  zoom?: number
+  coords?: Coords | null
+  children?: Marker[]
+  onZoom?: (zoom: number) => void
+  onLoad?: (map: maplibregl.Map) => void
+  style?: string
+}
 
 const MapComponent = forwardRef<MapType, MapComponentProps>(
-  ({ className, zoom = 14, coords, children: markers, onZoom, onLoad, style }, ref) => {
-    const mapRef = useRef<maplibregl.Map | null>(null);
-    const elementId = useId();
+  ({ className, zoom = 14, coords, children: markers, onZoom, onLoad, style }) => {
+    const mapRef = useRef<maplibregl.Map | null>(null)
+    const elementId = useId()
 
     useEffect(() => {
-      if (coords) mapRef.current?.setCenter(coords);
-    }, [coords]);
+      if (coords) mapRef.current?.setCenter(coords)
+    }, [coords])
 
     useEffect(() => {
       mapRef.current = new maplibregl.Map({
@@ -31,34 +32,34 @@ const MapComponent = forwardRef<MapType, MapComponentProps>(
         center: coords ?? undefined,
         zoom: zoom, // starting zoom
         style,
-      });
+      })
 
-      if (!mapRef.current) throw new Error('Map was not initialized');
+      if (!mapRef.current) throw new Error('Map was not initialized')
 
-      mapRef.current.on('zoom', (e) => {
-        if (!mapRef.current) throw new Error('Map was not initialized');
-        if (onZoom) onZoom(mapRef.current.getZoom());
-      });
+      mapRef.current.on('zoom', () => {
+        if (!mapRef.current) throw new Error('Map was not initialized')
+        if (onZoom) onZoom(mapRef.current.getZoom())
+      })
 
-      if (onLoad) onLoad(mapRef.current);
-    }, []);
+      if (onLoad) onLoad(mapRef.current)
+    }, [])
 
     useEffect(() => {
-      if (!mapRef.current) return () => {};
+      if (!mapRef.current) return () => {}
       markers?.map((marker) => {
         if (mapRef.current) {
-          marker.addTo(mapRef.current);
+          marker.addTo(mapRef.current)
         }
-      });
+      })
       return () => {
         markers?.map((marker) => {
-          marker.remove();
-        });
-      };
-    }, [markers]);
+          marker.remove()
+        })
+      }
+    }, [markers])
 
-    return <div className={cn('w-full !h-full', className)} id={elementId}></div>;
+    return <div className={cn('w-full !h-full', className)} id={elementId}></div>
   }
-);
+)
 
-export { MapComponent as Map };
+export { MapComponent as Map }

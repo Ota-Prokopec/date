@@ -1,13 +1,13 @@
-import { Badge } from 'flowbite-react';
-import { Row } from './Row';
-import { cn } from '../../lib/utils';
-import React, { CSSProperties, ReactNode } from 'react';
+import { Badge } from 'flowbite-react'
+import { CSSProperties, ReactNode } from 'react'
+import { cn } from '../../lib/utils'
+import { Row } from './Row'
 
 type IndicatorProps = {
-  color?: CSSProperties['backgroundColor'];
-  className?: string;
-  children: ReactNode;
-};
+  color?: CSSProperties['backgroundColor']
+  className?: string
+  children: ReactNode
+}
 export const Indicator = ({ color = 'green', className, children }: IndicatorProps) => {
   return (
     <Badge color="red" className={cn('w-fit', className)}>
@@ -16,5 +16,5 @@ export const Indicator = ({ color = 'green', className, children }: IndicatorPro
         {children}
       </Row>
     </Badge>
-  );
-};
+  )
+}

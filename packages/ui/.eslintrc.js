@@ -6,6 +6,7 @@ export default {
   plugins: ['import'],
   rules: {
     'import/no-cycle': ['error', { maxDepth: 1 }],
+    'no-unused-vars': ['warn', { args: 'none', vars: 'all' }],
   },
-};
-z;
+}
+z

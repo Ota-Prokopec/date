@@ -1,5 +1,4 @@
-import path from 'path';
-import type { Options } from 'tsup';
+import type { Options } from 'tsup'
 
 export const baseTsupConfig = {
   entry: ['src/**/*.{ts,tsx}', '!src/**/*.test.{ts,tsx}'],
@@ -8,4 +7,4 @@ export const baseTsupConfig = {
   clean: true,
   outDir: 'dist',
   dts: true,
-} as const satisfies Options;
+} as const satisfies Options

@@ -1,0 +1,3 @@
+mutation likeTrack($trackId: BigInt!) {
+	likeTrack(input: { trackId: $trackId })
+}

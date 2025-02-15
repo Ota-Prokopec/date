@@ -1,13 +1,12 @@
 {
-  "extends": "@repo/typescript-config/dom.json",
+  "extends": "@repo/typescript-config/base.json",
   "compilerOptions": {
     "paths": {
       "@/*": ["./src/*"]
     },
     "outDir": "dist",
     "rootDir": "src",
-    "baseUrl": ".",
-    "jsx": "react"
+    "baseUrl": "."
   },
   "include": ["src"],
   "exclude": ["node_modules"]

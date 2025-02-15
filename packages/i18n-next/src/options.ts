@@ -8,9 +8,9 @@ export const locales: Locale[] & string[] = ['en', 'cs']
 export const defaultLocale = 'en'
 
 export const i18nRouting = defineRouting({
-	// A list of all locales that are supported
-	locales: locales,
+  // A list of all locales that are supported
+  locales: locales,
 
-	// Used when no locale matches
-	defaultLocale: defaultLocale,
+  // Used when no locale matches
+  defaultLocale: defaultLocale,
 })

@@ -48,8 +48,8 @@
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-postcss": "^4.0.2",
     "rollup-plugin-terser": "^7.0.2",
-    "tsup": "8.3.5",
+    "tsup": "8.2.2",
     "use-deep-compare-effect": "^1.8.1",
-    "zod": "^3.23.8"
+    "zod": "^3.24.2"
   }
 }
