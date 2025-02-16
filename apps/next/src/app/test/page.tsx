@@ -1,19 +1,14 @@
 'use client'
 
-import { accountZodSchema, genderZodSchema, type Account } from '@repo/ts-types'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useForm } from 'react-hook-form'
-import type { z } from 'zod'
+import { Text } from '@repo/ui/components/common/Text'
 
-const formDataZodSchema = accountZodSchema.pick({
-  username: true,
-  gender: true,
-  lookingForGender: true,
-  birthDate: true,
-})
+const TestPage = () => {
+  ;(async () => {
+    const pages = await import(`@repo/i18n-translations/${'en'}-pages`)
+    console.log(pages)
+  })()
 
-type FormData = z.TypeOf<typeof formDataZodSchema>
-
-export default () => {
-  return <>"ahoj"</>
+  return <>"j"</>
 }
+
+export default TestPage

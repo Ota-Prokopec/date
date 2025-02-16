@@ -1,0 +1,19 @@
+{
+  "name": "@repo/i18n-translations",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./en-pages": "./src/locales/en/pages.json",
+    "./en-components": "./src/locales/en/components.json",
+    "./cs-pages": "./src/locales/cs/pages.json",
+    "./cs-components": "./src/locales/cs/components.json",
+    "./types": "./src/types.d.ts"
+  },
+  "devDependencies": {
+    "@repo/typescript-config": "workspace: *"
+  },
+  "dependencies": {
+    "@repo/ts-types": "workspace: *"
+  }
+}

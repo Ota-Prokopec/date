@@ -4,7 +4,7 @@
   "display": "Default",
   "compilerOptions": {
     "target": "ES2022",
-    "lib": ["ES2023"],
+    "lib": ["ES2022"],
     "module": "ESNext",
     "skipLibCheck": true,
 
@@ -12,7 +12,8 @@
     "allowImportingTsExtensions": true,
     "isolatedModules": true,
     "moduleDetection": "force",
-    "noEmit": true,
+    "noEmit": false,
+    "emitDeclarationOnly": true,
 
     "strict": true,
     "noUnusedLocals": true,
@@ -22,7 +23,8 @@
 
     "verbatimModuleSyntax": false,
     "declaration": true,
-    "declarationMap": true
+    "declarationMap": true,
+    "sourceMap": false
   },
 
   "include": ["../../tsReset.d.ts"]

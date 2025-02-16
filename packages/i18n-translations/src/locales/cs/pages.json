@@ -1,0 +1,12 @@
+{
+  "root": "kořen",
+
+  "auth-newuser": {
+    "usernameInputTitle": "Jak tě můžeme nazívat?",
+    "dateInputTitle": "Kdy jsi se narodil?",
+    "genderInputTitle": "Identifikuješ se jako?",
+    "lookingForGenderInputTitle": "Koho zde hledáš?",
+    "fillAllRequiredFields": "Prosíme vyplňte všechny požadované políčka",
+    "continueButtonLabel": "Pokračovat"
+  }
+}

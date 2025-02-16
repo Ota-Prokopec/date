@@ -34,7 +34,8 @@ export default async function RootLayout({ children }: RootLayoutProps) {
 
   const ssrCookies = cookieStorageZodSchema.parse(parseCookies((await nextCookies()).getAll()))
 
-  const locale: Locale = 'en'
+  const locale: Locale = ssrCookies['locale']
+  console.log(locale)
 
   const ssrMessages = await getMessages({ locale: locale })
 

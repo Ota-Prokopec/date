@@ -4,14 +4,14 @@
   "main": "./src/index.ts",
   "type": "module",
   "exports": {
-    "./src": "./src/index.ts",
     ".": "./src/index.ts"
   },
   "scripts": {
-    "build": "pnpm build:tsup",
+    "build": "run-s build:tsup build:tsc",
     "prebuild": "pnpm barrelsby",
     "barrelsby": "barrelsby --delete  --singleQuotes --directory ./src",
-    "build:tsup": "tsup"
+    "build:tsup": "tsup",
+    "build:tsc": "tsc --emitDeclarationOnly"
   },
   "devDependencies": {
     "@repo/tsup": "workspace: *",

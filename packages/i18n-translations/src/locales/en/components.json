@@ -1,0 +1,17 @@
+{
+  "CookieAlert": {
+    "title": "We use cookies to enhance your experience. By continuing to browse the site, you agree to our use of cookies.",
+    "iAgree": "I agree"
+  },
+  "accountZodSchemaWithErrorMessages": {
+    "username": "Username must be at least 3 characters long",
+    "birthDate": "Invalid birth date",
+    "bio": "Bio is required",
+    "socials": "Invalid social media links",
+    "profilePictureURL": "Invalid profile picture URL",
+    "gender": "Invalid gender",
+    "lookingForGender": "Invalid preferred gender",
+    "userId": "User ID is required",
+    "coords": "Invalid coordinates"
+  }
+}

@@ -7,10 +7,11 @@
   "exports": {
     ".": "./dist/index.js",
     "./options": "./dist/options.js",
-    "./routing": "./dist/i18nRouting.js"
+    "./routing": "./dist/i18nRouting.js",
+    "./i18n.d.ts": "./src/i18n.d.ts"
   },
   "scripts": {
-    "build": "run-s build:tsup",
+    "build": "run-s build:tsup build:tsc",
     "build:tsup": "tsup",
     "build:tsc": "tsc --emitDeclarationOnly",
     "dev": "run-p dev:*",
@@ -28,6 +29,7 @@
   },
   "dependencies": {
     "@repo/next-storage": "workspace: *",
+    "@repo/i18n-translations": "workspace: *",
     "next-intl": "^3.26.3",
     "zod": "^3.24.2"
   },

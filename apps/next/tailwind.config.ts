@@ -1,3 +1,3 @@
-import { tailwindConfig } from '@repo/ui/tailwindConfig';
+import { tailwindConfig } from '@repo/ui/tailwindConfig'
 
-export default tailwindConfig;
+export default tailwindConfig

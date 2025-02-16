@@ -25,7 +25,8 @@ export const getRequest = getRequestConfig(async () => {
   const ssrCookies = parseCookies(cookies.getAll())
   const locale = zodLocale.optional().parse(ssrCookies['locale']) || 'en'
 
-  const pages = await import(`../../i18n-translations/locales/${locale}/pages.json`)
+  const pages = await import(`../../i18n-translations/src/locales/${locale}/pages.json`)
+  const components = await import(`../../i18n-translations/src/locales/${locale}/components.json`)
 
   return {
     locale: locale,
@@ -33,8 +34,7 @@ export const getRequest = getRequestConfig(async () => {
     now: new Date(),
     messages: {
       pages: pages.default,
-      components: (await import(`../../i18n-translations/locales/${locale}/components.json`))
-        .default,
+      components: components.default,
     },
   }
 })

@@ -1,3 +1,0 @@
-mutation unlikeTrack($trackId: BigInt!) {
-	unlikeTrack(input: { trackId: $trackId })
-}

@@ -1,22 +1,19 @@
-'use client';
-import { usePlayerContext } from '../../contexts/PlayerContext';
-import { useLocale } from '../../hooks/useLocale';
-import { LuLanguages } from 'react-icons/lu';
-import { Row } from '../common/Row';
-import { Text } from '../common/Text';
-import { Icon } from '../Icon/Icon';
+'use client'
+import { LuLanguages } from 'react-icons/lu'
+import { useLocale } from '../../hooks/useLocale'
+import { Row } from '../common/Row'
+import { Text } from '../common/Text'
+import { Icon } from '../Icon/Icon'
 
-export type LocaleSwitchProps = {};
+export type LocaleSwitchProps = {}
 
 export const LocaleSwitch = ({}: LocaleSwitchProps) => {
-  const { locale, setLocale } = useLocale();
-  const { pause } = usePlayerContext();
+  const { locale, setLocale } = useLocale()
 
   return (
     <Icon
       onClick={() => {
-        pause();
-        setLocale((c) => (c === 'cs' ? 'en' : 'cs'));
+        setLocale((c) => (c === 'cs' ? 'en' : 'cs'))
         //router.push(pathname, { locale: locale === 'en' ? 'cs' : 'en' })
       }}
     >
@@ -25,5 +22,5 @@ export const LocaleSwitch = ({}: LocaleSwitchProps) => {
         <Text className="font-bold text-xl">{locale === 'en' ? 'cs' : 'en'}</Text>
       </Row>
     </Icon>
-  );
-};
+  )
+}

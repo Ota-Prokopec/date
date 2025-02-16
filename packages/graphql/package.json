@@ -11,7 +11,7 @@
     "./client": "./dist/client/main.js"
   },
   "scripts": {
-    "build": "run-s build:tsup",
+    "build": "run-s build:tsup build:tsc",
     "build:tsup": "tsup",
     "build:tsc": "tsc --emitDeclarationOnly",
     "dev": "run-p dev:*",

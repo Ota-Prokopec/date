@@ -9,7 +9,7 @@ import { apolloClient } from '@/graphql/apolloClient'
 
 export type LayoutProps = {
   children: ReactNode
-  ssrCookies: Record<string, any>
+  ssrCookies: Record<string, unknown>
   ssrMessages: AbstractIntlMessages
   locale: Locale
 }

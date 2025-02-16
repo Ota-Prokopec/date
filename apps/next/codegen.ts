@@ -1,35 +1,33 @@
 import type { CodegenConfig } from '@graphql-codegen/cli'
 
 const codegenConfigConfig: CodegenConfig['config'] = {
-	withHooks: true,
-	maybeValue: 'T | null | undefined',
-	scalars: {
-		BigInt: 'number',
-		f: 'string',
-	},
+  withHooks: true,
+  maybeValue: 'T | null | undefined',
+  scalars: {
+    Coords: '{lat: number, lng: number}',
+    File: 'File',
+    Gender: '"male" | "female"',
+    GraphQLHealth: '{ok: boolean}',
+  },
 }
 
 const config: CodegenConfig = {
-	schema: '../api/src/generated/schema.graphql',
-	documents: './src/graphql/gql/**/*.gql',
+  schema: '../api/src/generated/schema.graphql',
+  documents: './src/graphql/gql/**/*.graphql',
 
-	generates: {
-		'src/generated/urql.tsx': {
-			plugins: ['typescript', 'typescript-operations', 'typescript-urql'],
-			config: codegenConfigConfig,
-		},
-		'./src/generated/typescript.ts': {
-			plugins: ['typescript', 'typescript-operations', 'typescript-graphql-request'],
-			config: codegenConfigConfig,
-		},
-		'./src/generated/apollo.ts': {
-			plugins: ['typescript', 'typescript-operations', 'typescript-react-apollo'],
-			config: {
-				...codegenConfigConfig,
-				withHooks: true,
-			},
-		},
-	},
+  generates: {
+    './src/graphql/generated/typescript.ts': {
+      plugins: ['typescript', 'typescript-operations', 'typescript-graphql-request'],
+      config: codegenConfigConfig,
+    },
+    './src/graphql/generated/apollo.ts': {
+      plugins: ['typescript', 'typescript-operations', 'typescript-react-apollo'],
+      config: {
+        ...codegenConfigConfig,
+        withHooks: true,
+      },
+    },
+  },
 }
 
 export default config

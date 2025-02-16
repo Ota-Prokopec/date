@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "d": "tsx watch src/main.ts",
-    "dev": "  dotenv -e ../../.env -- tsx watch src/main.ts",
+    "dev": "  dotenv -e ../../.env -- tsx watch src/apiIndex.ts",
     "build": "tsup src/main.ts & pnpm generate:schema",
     "generate:graphql-schema": "console-ninja dotenv -e ../../.env tsx src/cli/generate-schema.ts",
     "drizzle:migrate": "drizzle-kit migrate",

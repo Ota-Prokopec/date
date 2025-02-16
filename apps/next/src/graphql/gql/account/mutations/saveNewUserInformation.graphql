@@ -1,0 +1,15 @@
+mutation saveNewUserInformation(
+  $birthDate: Date = ""
+  $gender: Gender = ""
+  $lookingForGender: Gender = ""
+  $username: String = ""
+) {
+  updateUserProfile(
+    userProfileData: {
+      birthDate: $birthDate
+      gender: $gender
+      lookingForGender: $lookingForGender
+      username: $username
+    }
+  )
+}

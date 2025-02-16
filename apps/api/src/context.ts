@@ -1,14 +1,19 @@
-import { createContext as AuthContext } from '@repo/graphql/server';
-import { createUserLoader } from './loaders/userLoader';
+import { createContext as authContext } from '@repo/graphql/server'
+import type { Loaders } from './loaders/loaders'
 
-export const createContext = async ({ request }: { request: Request }) => {
-  const auth = await AuthContext({ request });
+type AuthContext = Awaited<ReturnType<typeof authContext>>
 
-  const loaders = {
-    userLoader: createUserLoader(),
-  };
+export type Context = Awaited<ReturnType<typeof createContext>>
+type CreateContext = ({
+  request,
+}: {
+  request: Request
+}) => Promise<{ loaders: Loaders } & AuthContext>
 
-  return { ...auth, loaders };
-};
+export const createContext: CreateContext = async ({ request }: { request: Request }) => {
+  const auth = await authContext({ request })
 
-export type Context = Awaited<ReturnType<typeof createContext>>;
+  const loaders: Loaders = {}
+
+  return { ...auth, loaders }
+}
