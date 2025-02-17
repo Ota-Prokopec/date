@@ -1,15 +1,11 @@
-import type { Coords } from '../maps/Coords';
-import type { Gender } from './GenderTypes';
-import type { Socials } from './SocialPlatforms';
+import type { NonNullableObject } from '../../src/Helpers/NonNullableObject'
+import type { Account } from './Account'
 
-export type UserProfile = {
-  name: string;
-  age: number;
-  bio: string;
-  socials: Socials | undefined | null;
-  profilePictureURL: string;
-  gender: Gender;
-  lookigForGender: Gender;
-  userId: string;
-  coords: Coords;
-};
+export type UserProfile = NonNullableObject<
+  Required<
+    Pick<
+      Account,
+      'username' | 'userId' | 'socials' | 'profilePictureURL' | 'gender' | 'lookingForGender'
+    > & { age: number; bio: Account['bio'] }
+  >
+>

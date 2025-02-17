@@ -11,7 +11,7 @@ type UserProfileUpdatingData = Pick<
   'bio' | 'gender' | 'birthDate' | 'lookingForGender' | 'username'
 >
 
-builder.mutationField('updateUserProfile', (t) =>
+builder.mutationField('updateAccount', (t) =>
   t.field({
     type: 'Boolean',
     args: { userProfileData: t.arg({ type: 'UpdateAccountArgs' }) },

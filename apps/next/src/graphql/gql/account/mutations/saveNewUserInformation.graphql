@@ -1,10 +1,10 @@
 mutation saveNewUserInformation(
-  $birthDate: Date = ""
-  $gender: Gender = ""
-  $lookingForGender: Gender = ""
-  $username: String = ""
+  $birthDate: Date!
+  $gender: Gender!
+  $lookingForGender: Gender!
+  $username: String!
 ) {
-  updateUserProfile(
+  updateAccount(
     userProfileData: {
       birthDate: $birthDate
       gender: $gender

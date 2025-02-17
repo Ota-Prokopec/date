@@ -5,11 +5,13 @@ import { Center } from '@repo/ui/components/common/Center'
 import { cn } from '@repo/ui/ts-lib/lib/utils'
 import { headers as getHeaders, cookies as nextCookies } from 'next/headers'
 import { Toaster } from '@repo/ui/components/shadcn/sonner'
-//@ts-expect-error
-import '@repo/ui/tailwindcss'
 import { getMessages } from 'next-intl/server'
 import type { Locale } from '@repo/i18n-next'
 import { getSession } from '@repo/better-auth/session'
+import { getTimeZone } from 'next-intl/server'
+
+//@ts-expect-error
+import '@repo/ui/tailwindcss'
 
 type RootLayoutProps = Readonly<{
   children: React.ReactNode
@@ -38,6 +40,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
   console.log(locale)
 
   const ssrMessages = await getMessages({ locale: locale })
+  const timeZone = await getTimeZone()
 
   return (
     <html>
@@ -59,7 +62,12 @@ export default async function RootLayout({ children }: RootLayoutProps) {
           //  dark: ssrCookies['colorTheme'] === 'dark' ? true : false,
         })}
       >
-        <Layout locale={locale} ssrMessages={ssrMessages} ssrCookies={ssrCookies}>
+        <Layout
+          timeZone={timeZone}
+          locale={locale}
+          ssrMessages={ssrMessages}
+          ssrCookies={ssrCookies}
+        >
           <Toaster
             style={{ margin: '10px' }}
             className="[&>*]:flex [&>*]:flex-row"

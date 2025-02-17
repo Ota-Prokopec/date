@@ -1,4 +1,4 @@
-import { builder } from '@/builder';
-import { DateResolver } from 'graphql-scalars';
+import { builder } from '@/builder'
+import { DateTimeISOResolver } from 'graphql-scalars'
 
-builder.addScalarType('Date', DateResolver);
+builder.addScalarType('Date', DateTimeISOResolver)

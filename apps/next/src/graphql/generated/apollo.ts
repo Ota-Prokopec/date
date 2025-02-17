@@ -16,12 +16,18 @@ export type Scalars = {
   Int: { input: number; output: number; }
   Float: { input: number; output: number; }
   Coords: { input: {lat: number, lng: number}; output: {lat: number, lng: number}; }
-  /** A date string, such as 2007-12-03, compliant with the `full-date` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar. */
-  Date: { input: any; output: any; }
+  /** A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.This scalar is serialized to a string in ISO 8601 format and parsed from a string in ISO 8601 format. */
+  Date: { input: Date; output: Date; }
   File: { input: File; output: File; }
   Gender: { input: "male" | "female"; output: "male" | "female"; }
   GraphQLHealth: { input: {ok: boolean}; output: {ok: boolean}; }
-  Socials: { input: any; output: any; }
+  Socials: { input: {instagram: {
+        profileId: string;
+        link: string;
+  }}; output: {instagram: {
+        profileId: string;
+        link: string;
+  }}; }
 };
 
 export type Account = {
@@ -30,28 +36,34 @@ export type Account = {
   birthDate?: Maybe<Scalars['Date']['output']>;
   coords?: Maybe<Scalars['Coords']['output']>;
   gender?: Maybe<Scalars['Gender']['output']>;
-  lookigForGender?: Maybe<Scalars['Gender']['output']>;
-  name?: Maybe<Scalars['String']['output']>;
+  lookingForGender?: Maybe<Scalars['Gender']['output']>;
   profilePictureURL?: Maybe<Scalars['String']['output']>;
   socials?: Maybe<Scalars['Socials']['output']>;
   userId: Scalars['String']['output'];
+  username?: Maybe<Scalars['String']['output']>;
 };
 
 export type Mutation = {
   __typename?: 'Mutation';
   setHealth?: Maybe<Scalars['GraphQLHealth']['output']>;
-  updateUserProfile?: Maybe<Scalars['Boolean']['output']>;
-  updateUserProfilePicture?: Maybe<Scalars['Boolean']['output']>;
+  test?: Maybe<Scalars['Boolean']['output']>;
+  updateAccount?: Maybe<Scalars['Boolean']['output']>;
+  updateAccountPicture?: Maybe<Scalars['Boolean']['output']>;
   uploadFile?: Maybe<Scalars['Boolean']['output']>;
 };
 
 
-export type MutationUpdateUserProfileArgs = {
+export type MutationTestArgs = {
+  gender: Scalars['Gender']['input'];
+};
+
+
+export type MutationUpdateAccountArgs = {
   userProfileData: UpdateAccountArgs;
 };
 
 
-export type MutationUpdateUserProfilePictureArgs = {
+export type MutationUpdateAccountPictureArgs = {
   pictureFile: Scalars['File']['input'];
 };
 
@@ -63,7 +75,7 @@ export type MutationUploadFileArgs = {
 export type Query = {
   __typename?: 'Query';
   getHealth?: Maybe<Scalars['GraphQLHealth']['output']>;
-  getUserProfile?: Maybe<UserProfile>;
+  getUserProfile?: Maybe<User>;
 };
 
 
@@ -80,14 +92,16 @@ export type UpdateAccountArgs = {
   username?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type UserProfile = {
-  __typename?: 'UserProfile';
-  userAge?: Maybe<Scalars['Int']['output']>;
-  userBio?: Maybe<Scalars['String']['output']>;
-  userGender?: Maybe<Scalars['String']['output']>;
+export type User = {
+  __typename?: 'User';
+  age?: Maybe<Scalars['Int']['output']>;
+  bio?: Maybe<Scalars['String']['output']>;
+  gender?: Maybe<Scalars['Gender']['output']>;
+  lookingForGender?: Maybe<Scalars['Gender']['output']>;
+  profilePictureURL?: Maybe<Scalars['String']['output']>;
+  socials?: Maybe<Scalars['Socials']['output']>;
   userId: Scalars['String']['output'];
-  userName: Scalars['String']['output'];
-  userPictureUrl?: Maybe<Scalars['String']['output']>;
+  username?: Maybe<Scalars['String']['output']>;
 };
 
 export type Coords = {
@@ -97,24 +111,34 @@ export type Coords = {
 };
 
 export type SaveNewUserInformationMutationVariables = Exact<{
-  birthDate?: InputMaybe<Scalars['Date']['input']>;
-  gender?: InputMaybe<Scalars['Gender']['input']>;
-  lookingForGender?: InputMaybe<Scalars['Gender']['input']>;
-  username?: InputMaybe<Scalars['String']['input']>;
+  birthDate: Scalars['Date']['input'];
+  gender: Scalars['Gender']['input'];
+  lookingForGender: Scalars['Gender']['input'];
+  username: Scalars['String']['input'];
 }>;
 
 
-export type SaveNewUserInformationMutation = { __typename?: 'Mutation', updateUserProfile?: boolean | null | undefined };
+export type SaveNewUserInformationMutation = { __typename?: 'Mutation', updateAccount?: boolean | null | undefined };
 
 export type GetHealthStatusQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetHealthStatusQuery = { __typename?: 'Query', getHealth?: {ok: boolean} | null | undefined };
 
+export type GetUserProfileQueryVariables = Exact<{
+  userId?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type GetUserProfileQuery = { __typename?: 'Query', getUserProfile?: { __typename?: 'User', age?: number | null | undefined, bio?: string | null | undefined, gender?: "male" | "female" | null | undefined, lookingForGender?: "male" | "female" | null | undefined, profilePictureURL?: string | null | undefined, socials?: {instagram: {
+          profileId: string;
+          link: string;
+    }} | null | undefined, userId: string, username?: string | null | undefined } | null | undefined };
+
 
 export const SaveNewUserInformationDocument = gql`
-    mutation saveNewUserInformation($birthDate: Date = "", $gender: Gender = "", $lookingForGender: Gender = "", $username: String = "") {
-  updateUserProfile(
+    mutation saveNewUserInformation($birthDate: Date!, $gender: Gender!, $lookingForGender: Gender!, $username: String!) {
+  updateAccount(
     userProfileData: {birthDate: $birthDate, gender: $gender, lookingForGender: $lookingForGender, username: $username}
   )
 }
@@ -185,3 +209,50 @@ export type GetHealthStatusQueryHookResult = ReturnType<typeof useGetHealthStatu
 export type GetHealthStatusLazyQueryHookResult = ReturnType<typeof useGetHealthStatusLazyQuery>;
 export type GetHealthStatusSuspenseQueryHookResult = ReturnType<typeof useGetHealthStatusSuspenseQuery>;
 export type GetHealthStatusQueryResult = Apollo.QueryResult<GetHealthStatusQuery, GetHealthStatusQueryVariables>;
+export const GetUserProfileDocument = gql`
+    query getUserProfile($userId: String) {
+  getUserProfile(userId: $userId) {
+    age
+    bio
+    gender
+    lookingForGender
+    profilePictureURL
+    socials
+    userId
+    username
+  }
+}
+    `;
+
+/**
+ * __useGetUserProfileQuery__
+ *
+ * To run a query within a React component, call `useGetUserProfileQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetUserProfileQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetUserProfileQuery({
+ *   variables: {
+ *      userId: // value for 'userId'
+ *   },
+ * });
+ */
+export function useGetUserProfileQuery(baseOptions?: Apollo.QueryHookOptions<GetUserProfileQuery, GetUserProfileQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetUserProfileQuery, GetUserProfileQueryVariables>(GetUserProfileDocument, options);
+      }
+export function useGetUserProfileLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetUserProfileQuery, GetUserProfileQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetUserProfileQuery, GetUserProfileQueryVariables>(GetUserProfileDocument, options);
+        }
+export function useGetUserProfileSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetUserProfileQuery, GetUserProfileQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<GetUserProfileQuery, GetUserProfileQueryVariables>(GetUserProfileDocument, options);
+        }
+export type GetUserProfileQueryHookResult = ReturnType<typeof useGetUserProfileQuery>;
+export type GetUserProfileLazyQueryHookResult = ReturnType<typeof useGetUserProfileLazyQuery>;
+export type GetUserProfileSuspenseQueryHookResult = ReturnType<typeof useGetUserProfileSuspenseQuery>;
+export type GetUserProfileQueryResult = Apollo.QueryResult<GetUserProfileQuery, GetUserProfileQueryVariables>;

@@ -7,6 +7,7 @@
     "genderInputTitle": "Identifikuješ se jako?",
     "lookingForGenderInputTitle": "Koho zde hledáš?",
     "fillAllRequiredFields": "Prosíme vyplňte všechny požadované políčka",
-    "continueButtonLabel": "Pokračovat"
+    "continueButtonLabel": "Pokračovat",
+    "errorMessage": "Něco se nepovedlo, prosíme, zkuste to znovu."
   }
 }

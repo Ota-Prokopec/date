@@ -1,15 +1,24 @@
 import { Button, ButtonProps } from '@repo/ui/components/common/Button'
 import { cn } from '@repo/ui/ts-lib/lib/utils'
 import type { ReactNode } from 'react'
+import { match } from 'ts-pattern'
+import { Loading } from '@repo/ui/components/common/Loading'
 
 type BasicButtonProps = {
   children: ReactNode
   className?: string
   type: ButtonProps['type']
   icon?: ReactNode
+  isLoading?: boolean
 }
 
-export const BasicButton = ({ children, className, type, icon }: BasicButtonProps) => {
+export const BasicButton = ({
+  children,
+  className,
+  type,
+  icon,
+  isLoading = false,
+}: BasicButtonProps) => {
   return (
     <Button
       type={type}
@@ -18,8 +27,14 @@ export const BasicButton = ({ children, className, type, icon }: BasicButtonProp
         className
       )}
     >
-      <span>{children}</span>
-      {icon}
+      {match({ isLoading })
+        .with({ isLoading: true }, () => <Loading></Loading>)
+        .otherwise(() => (
+          <>
+            <span>{children}</span>
+            {icon}
+          </>
+        ))}
     </Button>
   )
 }

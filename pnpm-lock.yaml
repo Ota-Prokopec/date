@@ -11,6 +11,9 @@ importers:
       '@total-typescript/ts-reset':
         specifier: ^0.6.1
         version: 0.6.1
+      '@types/pg':
+        specifier: ^8.11.10
+        version: 8.11.11
       dotenv-cli:
         specifier: ^7.4.2
         version: 7.4.4
@@ -80,6 +83,9 @@ importers:
       tsup:
         specifier: 8.2.2
         version: 8.2.2(jiti@2.4.2)(postcss@8.5.1)(tsx@4.19.2)(typescript@5.6.3)(yaml@2.7.0)
+      zod:
+        specifier: ^3.24.2
+        version: 3.24.2
     devDependencies:
       '@repo/tsup':
         specifier: 'workspace: *'
@@ -181,12 +187,21 @@ importers:
       '@repo/utils':
         specifier: workspace:*
         version: link:../../packages/utils
+      apollo-link-scalars:
+        specifier: ^4.0.3
+        version: 4.0.3(@apollo/client@3.13.1(@types/react@19.0.8)(graphql-ws@6.0.3(graphql@16.10.0)(ws@8.18.0))(graphql@16.10.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(graphql@16.10.0)
       better-auth:
         specifier: ^1.1.16
         version: 1.1.16
+      graphql:
+        specifier: ^16.9.0
+        version: 16.10.0
       graphql-request:
         specifier: ^7.1.2
         version: 7.1.2(graphql@16.10.0)
+      graphql-scalars:
+        specifier: ^1.24.1
+        version: 1.24.1(graphql@16.10.0)
       graphql-tag:
         specifier: ^2.12.6
         version: 2.12.6(graphql@16.10.0)
@@ -200,8 +215,8 @@ importers:
         specifier: ^3.26.3
         version: 3.26.3(next@15.1.6(@babel/core@7.26.8)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react@19.0.0)
       pg:
-        specifier: 8.13.0
-        version: 8.13.0
+        specifier: 8.13.1
+        version: 8.13.1
       react:
         specifier: ^19.0.0
         version: 19.0.0
@@ -484,7 +499,7 @@ importers:
         specifier: 5.0.0-beta.20
         version: 5.0.0-beta.20(next@15.1.6(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react@19.0.0)
       pg:
-        specifier: ^8.13.0
+        specifier: ^8.13.1
         version: 8.13.1
       postgres:
         specifier: ^3.4.5
@@ -5763,6 +5778,13 @@ packages:
     resolution: {integrity: sha512-KMReFUr0B4t+D+OBkjR3KYqvocp2XaSzO55UcB6mgQMd3KbcE+mWTyvVV7D/zsdEbNnV6acZUutkiHQXvTr1Rw==}
     engines: {node: '>= 8'}
 
+  apollo-link-scalars@4.0.3:
+    resolution: {integrity: sha512-mKH/1oGLK8hUZ+VkY36OM0Ejgq25Jb+XcS3bu3OKH1416dGPlT3Jo6Oe3FtodDKjzTEda518vXF5TmaWupUNqA==}
+    engines: {node: '>=10.0'}
+    peerDependencies:
+      '@apollo/client': 3.x
+      graphql: 16.x
+
   app-module-path@2.2.0:
     resolution: {integrity: sha512-gkco+qxENJV+8vFcDiiFhuoSvRXb2a/QPqpSoWhVz829VNJfOTnELbBmPmNKFxf3xdNnw4DWCkzkDaavcX/1YQ==}
 
@@ -9075,15 +9097,6 @@ packages:
     resolution: {integrity: sha512-cRL3JpS3lKMGsKaWndugWQoLOCoP+Cic8oseVcbr0qhPzYD5DWXK+RZ9LY9wxRf7RQia4SCwQlXk0q6FCPrVng==}
     engines: {node: '>=10'}
 
-  pg@8.13.0:
-    resolution: {integrity: sha512-34wkUTh3SxTClfoHB3pQ7bIMvw9dpFU1audQQeZG837fmHfHpr14n/AELVDoOYVDW2h5RDWU78tFjkD+erSBsw==}
-    engines: {node: '>= 8.0.0'}
-    peerDependencies:
-      pg-native: '>=3.0.1'
-    peerDependenciesMeta:
-      pg-native:
-        optional: true
-
   pg@8.13.1:
     resolution: {integrity: sha512-OUir1A0rPNZlX//c7ksiu7crsGZTKSOXJPgtNiHGIlC9H0lO+NC6ZDYksSgBYY/thSWhnSRBv8w1lieNNGATNQ==}
     engines: {node: '>= 8.0.0'}
@@ -11120,9 +11133,6 @@ packages:
     peerDependencies:
       zod: '>= 3.11.0'
 
-  zod@3.24.1:
-    resolution: {integrity: sha512-muH7gBL9sI1nciMZV67X5fTKKBLtwpZ5VBp1vsOQzj1MhrBZ4wlVCm3gedKZWLp0Oyel8sIGfeiz54Su+OVT+A==}
-
   zod@3.24.2:
     resolution: {integrity: sha512-lY7CDW43ECgW9u1TcT3IoXHflywfVqDYze4waEz812jR/bZ8FHDsl7pFQoSZTz5N+2NqRXs8GBwnAwo3ZNxqhQ==}
 
@@ -11657,7 +11667,7 @@ snapshots:
       prompts: 2.4.2
       tinyexec: 0.3.2
       yocto-spinner: 0.1.2
-      zod: 3.24.1
+      zod: 3.24.2
     transitivePeerDependencies:
       - '@aws-sdk/client-rds-data'
       - '@babel/core'
@@ -16785,6 +16795,12 @@ snapshots:
       normalize-path: 3.0.0
       picomatch: 2.3.1
 
+  apollo-link-scalars@4.0.3(@apollo/client@3.13.1(@types/react@19.0.8)(graphql-ws@6.0.3(graphql@16.10.0)(ws@8.18.0))(graphql@16.10.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(graphql@16.10.0):
+    dependencies:
+      '@apollo/client': 3.13.1(@types/react@19.0.8)(graphql-ws@6.0.3(graphql@16.10.0)(ws@8.18.0))(graphql@16.10.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      graphql: 16.10.0
+      zen-observable-ts: 1.2.5
+
   app-module-path@2.2.0: {}
 
   arg@4.1.3: {}
@@ -20415,10 +20431,6 @@ snapshots:
 
   pg-numeric@1.0.2: {}
 
-  pg-pool@3.7.0(pg@8.13.0):
-    dependencies:
-      pg: 8.13.0
-
   pg-pool@3.7.0(pg@8.13.1):
     dependencies:
       pg: 8.13.1
@@ -20442,16 +20454,6 @@ snapshots:
       postgres-date: 2.1.0
       postgres-interval: 3.0.0
       postgres-range: 1.1.4
-
-  pg@8.13.0:
-    dependencies:
-      pg-connection-string: 2.7.0
-      pg-pool: 3.7.0(pg@8.13.0)
-      pg-protocol: 1.7.0
-      pg-types: 2.2.0
-      pgpass: 1.0.5
-    optionalDependencies:
-      pg-cloudflare: 1.1.1
 
   pg@8.13.1:
     dependencies:
@@ -22714,7 +22716,5 @@ snapshots:
   zod-form-data@2.0.5(zod@3.24.2):
     dependencies:
       zod: 3.24.2
-
-  zod@3.24.1: {}
 
   zod@3.24.2: {}

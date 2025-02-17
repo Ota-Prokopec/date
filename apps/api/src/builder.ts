@@ -1,6 +1,6 @@
-import '@pothos/core';
-import { getBuilder } from '@repo/graphql/server';
-import { Context } from './context';
+import '@pothos/core'
+import { getBuilder } from '@repo/graphql/server'
+import { Context } from './context'
 import {
   type CoordsScalar,
   type DateScalar,
@@ -8,23 +8,28 @@ import {
   type GenderScalar,
   type GraphqlHealthScalar,
   type SocialsScalar,
-} from './scalars/ScalarsTypes';
-import type { CoordsPothosType, AccountPothosType } from './schema/PothosSchemaTypes';
-import type { UpdateAccountArgs } from './resolvers/user';
+} from './scalars/ScalarsTypes'
+import type {
+  CoordsPothosType,
+  AccountPothosType,
+  UserPothosType,
+} from './schema/PothosSchemaTypes'
+import type { UpdateAccountArgs } from './resolvers/user'
 
 export const builder = getBuilder<{
   Objects: {
-    Coords: CoordsPothosType;
-    Account: AccountPothosType;
-  };
+    Coords: CoordsPothosType
+    Account: AccountPothosType
+    User: UserPothosType
+  }
   Scalars: {
-    Coords: CoordsScalar;
-    GraphQLHealth: GraphqlHealthScalar;
-    Gender: GenderScalar;
-    File: FileScalar;
-    Date: DateScalar;
-    Socials: SocialsScalar;
-  };
-  Context: Context;
-  Args: { UpdateAccountArgs: UpdateAccountArgs };
-}>();
+    Coords: CoordsScalar
+    GraphQLHealth: GraphqlHealthScalar
+    Gender: GenderScalar
+    File: FileScalar
+    Date: DateScalar
+    Socials: SocialsScalar
+  }
+  Context: Context
+  Args: { UpdateAccountArgs: UpdateAccountArgs }
+}>()

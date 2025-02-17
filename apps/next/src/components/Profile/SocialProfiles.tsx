@@ -1,0 +1,101 @@
+'use client'
+
+import type { SocialProfileData, SocialProfilePlatform } from '@repo/ts-types'
+import { Column } from '@repo/ui/components/common/Column'
+import { Row } from '@repo/ui/components/common/Row'
+import { Text } from '@repo/ui/components/common/Text'
+import Link from 'next/link'
+import { type ReactNode } from 'react'
+import { IconInstagram, IconLink } from '../Icons'
+import { cn } from '@repo/ui/ts-lib/lib/utils'
+import { Skeleton } from '@repo/ui/components/shadcn/skeleton'
+
+export const socialProfilesPlatformIcons: Record<SocialProfilePlatform, ReactNode> = {
+  instagram: <IconInstagram className="w-10 h-10"></IconInstagram>,
+}
+
+export type SocialProfilesProps = {
+  socials: { instagram: SocialProfileData }
+  disableLink?: boolean
+  loading?: boolean
+  onClick?: (platform: SocialProfilePlatform) => void
+}
+
+export const SocialProfiles = ({ socials, onClick, disableLink = false }: SocialProfilesProps) => {
+  return (
+    <Column>
+      {(Object.entries(socials) as [[SocialProfilePlatform, SocialProfileData]]).map(
+        ([platform, params], i) => (
+          <SocialProfileItem
+            key={i}
+            onClick={() => {
+              if (onClick) onClick(platform)
+            }}
+            disableLink={disableLink}
+            {...params}
+            icon={socialProfilesPlatformIcons[platform]}
+          ></SocialProfileItem>
+        )
+      )}
+    </Column>
+  )
+}
+
+export const SocialProfilesSkeletonLoading = () => {
+  return (
+    <Column>
+      <SocialProfileItemSkeletonLoading
+        icon={socialProfilesPlatformIcons['instagram']}
+      ></SocialProfileItemSkeletonLoading>
+    </Column>
+  )
+}
+
+type SocialProfileItemProps = SocialProfileData & {
+  icon: ReactNode
+  disableLink: boolean
+  onClick: () => void
+  className?: string
+}
+const SocialProfileItem = ({
+  profileId,
+  link,
+  icon,
+  disableLink,
+  onClick,
+  className,
+}: SocialProfileItemProps) => {
+  return (
+    <button
+      onClick={onClick}
+      className={cn('border-none shadow-none items-start [&>*]:justify-start', className)}
+    >
+      <Row className="gap-2 justify-center items-center">
+        {icon}
+        <Text className="font-bold text-black/75 text-lg">{profileId}</Text>
+        {!disableLink && (
+          <Link href={link}>
+            <IconLink></IconLink>
+          </Link>
+        )}
+      </Row>
+    </button>
+  )
+}
+
+const SocialProfileItemSkeletonLoading = ({
+  className,
+  icon,
+}: Pick<SocialProfileItemProps, 'className' | 'icon'>) => {
+  return (
+    <button className={cn('border-none shadow-none items-start [&>*]:justify-start', className)}>
+      <Row className="gap-2 justify-center items-center">
+        {icon}
+        <Text className="font-bold text-black/75 text-lg">
+          <Skeleton></Skeleton>
+        </Text>
+        <IconLink></IconLink>
+      </Row>
+    </button>
+  )
+}

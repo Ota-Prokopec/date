@@ -1,3 +1,9 @@
+import { createUserLoader } from './usersLoader'
+
 export type Loaders = {
-  //types of all loaders
+  users: ReturnType<typeof createUserLoader>
+}
+
+export const loaders: Loaders = {
+  users: createUserLoader(),
 }

@@ -6,7 +6,7 @@ import { HeroUIProvider } from '@heroui/react'
 import { useColorTheme } from '@repo/color-theme/colorThemeHook'
 import { type Locale } from '@repo/i18n-next'
 import { localStorage } from '@repo/local-storage'
-import { NextIntlClientProvider, type AbstractIntlMessages } from 'next-intl'
+import { NextIntlClientProvider, type AbstractIntlMessages, type Timezone } from 'next-intl'
 import { useEffect, type ReactElement, type ReactNode } from 'react'
 import { IntlProvider, type MessageFormatElement } from 'react-intl'
 import { useBrowser } from '../hooks/useBrowser'
@@ -18,6 +18,7 @@ export type ProvidersProps = {
     messages: AbstractIntlMessages
     locale: Locale
     type: 'next' | 'react'
+    timeZone: Timezone
   }
   apolloClient?: ApolloClient<NormalizedCacheObject>
 }
@@ -45,7 +46,11 @@ export const Providers = ({ children, intl, apolloClient }: ProvidersProps) => {
 
   if (intl?.type === 'next')
     additionalProviders.push(({ children }: { children: ReactNode }) => (
-      <NextIntlClientProvider messages={intl!?.messages} locale={intl!?.locale}>
+      <NextIntlClientProvider
+        timeZone={intl.timeZone}
+        messages={intl!?.messages}
+        locale={intl!?.locale}
+      >
         {children}
       </NextIntlClientProvider>
     ))

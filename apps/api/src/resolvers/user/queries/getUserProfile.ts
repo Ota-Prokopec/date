@@ -1,18 +1,19 @@
-import { builder } from '@/builder';
-import { db } from '@repo/db';
+import { builder } from '@/builder'
 
 builder.queryField('getUserProfile', (t) =>
   t.field({
     args: { userId: t.arg({ type: 'String', required: false }) },
-    type: 'UserProfile',
-    resolve: async (parent, args, ctx) => {
-      if (!ctx.session?.user.id) throw new Error('User is not authorizated to get user profile');
+    type: 'User',
+    resolve: async (_parent, args, ctx) => {
+      const searchingUserId = args.userId ?? ctx.session?.user.id
 
-      const userProfileData = await ctx.loaders.userLoader.load(
-        args.userId ?? ctx.session?.user.id
-      );
-      if (!userProfileData) throw new Error('User not found');
-      return userProfileData;
+      if (!ctx.session?.user.id) throw new Error('User is not authorizated to get user profile')
+      if (!searchingUserId) throw new Error('User ID is undefined')
+
+      const userProfileData = await ctx.loaders.users.load(searchingUserId)
+      if (!userProfileData) throw new Error('User not found')
+
+      return userProfileData
     },
   })
-);
+)

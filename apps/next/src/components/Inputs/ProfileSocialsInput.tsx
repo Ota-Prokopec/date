@@ -8,7 +8,7 @@ import { Text } from '@repo/ui/components/common/Text'
 import { useState } from 'react'
 import { match } from 'ts-pattern'
 import { IconInstagram, IconLink, IconUser } from '../Icons'
-import { SocialProfiles } from '../SocialProfiles'
+import { SocialProfiles } from '../Profile/SocialProfiles'
 
 type SocialsInputProps = {}
 
