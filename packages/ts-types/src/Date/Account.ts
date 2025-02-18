@@ -1,18 +1,34 @@
-import { z } from 'zod'
+import { z, TypeOf } from 'zod'
 import { coordsZodSchema } from '../maps/Coords'
 import { genderZodSchema } from './GenderTypes'
-import { socialsZodSchema } from './SocialPlatforms'
+import { socialsDataZodSchema } from './SocialPlatforms'
 
-export const accountZodSchema = z.object({
-  username: z.string().nullable().optional(),
-  birthDate: z.date().nullable().optional(),
-  bio: z.string().nullable().optional(),
-  socials: z.union([socialsZodSchema, z.undefined(), z.null()]).nullable().optional(),
-  profilePictureURL: z.string().nullable().optional(),
-  gender: genderZodSchema.nullable().optional(),
-  lookingForGender: genderZodSchema.nullable().optional(),
+export const accountDataZodSchemaAllPropsRequired = z.object({
+  username: z.string(),
+  birthDate: z.date(),
+  bio: z.string(),
+  socials: socialsDataZodSchema,
+  profilePictureURL: z.string(),
+  gender: genderZodSchema,
+  lookingForGender: genderZodSchema,
   userId: z.string(),
-  coords: coordsZodSchema.nullable().optional(),
+  coords: coordsZodSchema,
 })
 
-export type Account = z.TypeOf<typeof accountZodSchema>
+export const accountDataZodSchema = accountDataZodSchemaAllPropsRequired.extend({
+  username: accountDataZodSchemaAllPropsRequired.shape.username.nullable().optional(),
+  birthDate: accountDataZodSchemaAllPropsRequired.shape.birthDate.nullable().optional(),
+  bio: accountDataZodSchemaAllPropsRequired.shape.bio.nullable().optional(),
+  socials: accountDataZodSchemaAllPropsRequired.shape.socials.nullable().optional(),
+  profilePictureURL: accountDataZodSchemaAllPropsRequired.shape.profilePictureURL
+    .nullable()
+    .optional(),
+  gender: accountDataZodSchemaAllPropsRequired.shape.gender.nullable().optional(),
+  lookingForGender: accountDataZodSchemaAllPropsRequired.shape.lookingForGender
+    .nullable()
+    .optional(),
+  userId: accountDataZodSchemaAllPropsRequired.shape.userId,
+  coords: accountDataZodSchemaAllPropsRequired.shape.coords.nullable().optional(),
+})
+
+export type AccountData = TypeOf<typeof accountDataZodSchema>

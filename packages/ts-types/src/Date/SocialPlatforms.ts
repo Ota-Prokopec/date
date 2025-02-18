@@ -1,15 +1,15 @@
-import { z } from 'zod';
+import { z } from 'zod'
 
-export const socialProfilePlatformZodSchema = z.union([z.literal('instagram'), z.never()]);
-export type SocialProfilePlatform = z.TypeOf<typeof socialProfilePlatformZodSchema>;
+export const socialProfilePlatformZodSchema = z.union([z.literal('instagram'), z.never()])
+export type SocialProfilePlatform = z.TypeOf<typeof socialProfilePlatformZodSchema>
 
 export const socialProfileDataZodSchema = z.object({
   profileId: z.string(),
   link: z.string(),
-});
-export type SocialProfileData = z.TypeOf<typeof socialProfileDataZodSchema>;
+})
+export type SocialProfileData = z.TypeOf<typeof socialProfileDataZodSchema>
 
-export const socialsZodSchema = z.object({
+export const socialsDataZodSchema = z.object({
   instagram: socialProfileDataZodSchema,
-});
-export type Socials = z.TypeOf<typeof socialsZodSchema>;
+})
+export type SocialsData = z.TypeOf<typeof socialsDataZodSchema>

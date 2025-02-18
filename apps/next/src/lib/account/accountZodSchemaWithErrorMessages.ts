@@ -1,36 +1,42 @@
-import { accountZodSchema as accountZodSchemaTsTypes } from '@repo/ts-types'
+import { accountDataZodSchemaAllPropsRequired } from '@repo/ts-types'
 import { useTranslations } from 'next-intl'
 
-export const useAccountZodSchemaWithErrorMessages = () => {
+export const useCreateAccountZodSchemaWithErrorMessages = () => {
   const t = useTranslations('components.accountZodSchemaWithErrorMessages')
 
-  return accountZodSchemaTsTypes.extend({
-    username: accountZodSchemaTsTypes.shape.username.min(3, {
+  return accountDataZodSchemaAllPropsRequired.extend({
+    username: accountDataZodSchemaAllPropsRequired.shape.username.min(3, {
       message: t('username'),
     }),
-    birthDate: accountZodSchemaTsTypes.shape.birthDate.refine((date) => !isNaN(date.getTime()), {
-      message: t('birthDate'),
-    }),
-    bio: accountZodSchemaTsTypes.shape.bio.nonempty({
+    birthDate: accountDataZodSchemaAllPropsRequired.shape.birthDate.refine(
+      (date) => !isNaN(date.getTime()),
+      {
+        message: t('birthDate'),
+      }
+    ),
+    bio: accountDataZodSchemaAllPropsRequired.shape.bio.nonempty({
       message: t('bio'),
     }),
-    socials: accountZodSchemaTsTypes.shape.socials.refine((val) => val !== undefined, {
+    socials: accountDataZodSchemaAllPropsRequired.shape.socials.refine((val) => val !== undefined, {
       message: t('socials'),
     }),
-    profilePictureURL: accountZodSchemaTsTypes.shape.profilePictureURL.url({
+    profilePictureURL: accountDataZodSchemaAllPropsRequired.shape.profilePictureURL.url({
       message: t('profilePictureURL'),
     }),
-    gender: accountZodSchemaTsTypes.shape.gender.refine((val) => ['male', 'female'].includes(val), {
-      message: t('gender'),
-    }),
-    lookingForGender: accountZodSchemaTsTypes.shape.lookingForGender.refine(
+    gender: accountDataZodSchemaAllPropsRequired.shape.gender.refine(
+      (val) => ['male', 'female'].includes(val),
+      {
+        message: t('gender'),
+      }
+    ),
+    lookingForGender: accountDataZodSchemaAllPropsRequired.shape.lookingForGender.refine(
       (val) => ['male', 'female'].includes(val),
       { message: t('lookingForGender') }
     ),
-    userId: accountZodSchemaTsTypes.shape.userId.nonempty({
+    userId: accountDataZodSchemaAllPropsRequired.shape.userId.nonempty({
       message: t('userId'),
     }),
-    coords: accountZodSchemaTsTypes.shape.coords.refine(
+    coords: accountDataZodSchemaAllPropsRequired.shape.coords.refine(
       (val) => val.lat !== undefined && val.lng !== undefined,
       { message: t('coords') }
     ),

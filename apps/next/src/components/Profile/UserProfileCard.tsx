@@ -12,14 +12,14 @@ import Image from 'next/image'
 import { SocialProfiles, SocialProfilesSkeletonLoading } from './SocialProfiles'
 import type { ReactNode } from 'react'
 import { IconFemale, IconMale } from '../Icons'
-import type { UserProfile } from '@repo/ts-types'
+import type { UserProfileData } from '@repo/ts-types'
 import { cn } from '@repo/ui/ts-lib/lib/utils'
 import { Skeleton } from '@repo/ui/components/shadcn/skeleton'
 
 type UserProfileCardProps = {
   className?: string
   children?: ReactNode
-  data: UserProfile
+  data: UserProfileData
 }
 
 export const UserProfileCard = ({ className, children, data }: UserProfileCardProps) => {

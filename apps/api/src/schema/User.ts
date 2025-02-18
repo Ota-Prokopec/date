@@ -1,11 +1,12 @@
 import { builder } from '@/builder'
 import { type UserPothosType } from './PothosSchemaTypes'
-import type { UserProfile } from '@repo/ts-types'
+import type { UserProfileData } from '@repo/ts-types'
 
 /**
  * If the user does not have username, ...., then the user is not searchable!
  * So there will just be nonNullable values
  */
+
 export const UserRef = builder.objectRef<UserPothosType>('User').implement({
   fields: (t) =>
     ({
@@ -16,6 +17,11 @@ export const UserRef = builder.objectRef<UserPothosType>('User').implement({
       bio: t.exposeString('bio', { nullable: true }),
       username: t.exposeString('username', { nullable: false }),
       lookingForGender: t.expose('gender', { type: 'Gender', nullable: false }),
-      socials: t.expose('socials', { type: 'Socials', nullable: false }),
-    }) satisfies Record<keyof UserProfile, unknown>,
+      socials: t.field({
+        type: 'Socials',
+        resolve: async (parent, args, ctx, info) => {
+          return await ctx.loaders.socials.load(parent.userId)
+        },
+      }),
+    }) satisfies Record<keyof UserProfileData, unknown>,
 })

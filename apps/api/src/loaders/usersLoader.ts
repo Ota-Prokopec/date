@@ -1,12 +1,22 @@
-import { db } from '@repo/db'
-import type { UserProfile } from '@repo/ts-types'
+import { db, drizzleSchema } from '@repo/db'
+import type { UserProfileData } from '@repo/ts-types'
 import DataLoader from 'dataloader'
+import { isNotNull } from 'drizzle-orm'
 
 export const createUserLoader = () =>
   new DataLoader(async (userIds: readonly string[]) => {
+    const notNullableCollumns = [
+      isNotNull(drizzleSchema.user.birthDate),
+      isNotNull(drizzleSchema.user.gender),
+      isNotNull(drizzleSchema.user.image),
+      isNotNull(drizzleSchema.user.lookingForGender),
+      isNotNull(drizzleSchema.user.name),
+    ]
     const users = await db.query.user.findMany({
-      where: (userSchema, { inArray }) => inArray(userSchema.id, userIds as string[]),
+      where: (userSchema, { inArray, and }) =>
+        and(inArray(userSchema.id, userIds as string[]), ...notNullableCollumns),
     })
+
     return users.map((user) => {
       const userAge = user.birthDate
         ? Math.floor(
@@ -14,13 +24,15 @@ export const createUserLoader = () =>
           )
         : null
 
+      //! Only collumns in notNullableCollumns can have ! mark, so that i am sure, there will be valid values
       return {
-        age: userAge,
+        age: userAge!,
         bio: user.bio,
-        gender: user.gender,
+        gender: user.gender!,
         userId: user.id,
         username: user.name,
-        profilePictureURL: user.image,
-      } satisfies UserProfile
+        profilePictureURL: user.image!,
+        lookingForGender: user.lookingForGender!,
+      } satisfies Omit<UserProfileData, 'socials'>
     })
   })

@@ -1,6 +1,6 @@
 import { builder } from '@/builder'
 import { type AccountPothosType } from './PothosSchemaTypes'
-import type { Account } from '@repo/ts-types'
+import type { AccountData } from '@repo/ts-types'
 
 export const AccountRef = builder.objectRef<AccountPothosType>('Account').implement({
   fields: (t) =>
@@ -14,5 +14,5 @@ export const AccountRef = builder.objectRef<AccountPothosType>('Account').implem
       gender: t.expose('gender', { type: 'Gender' }),
       lookingForGender: t.expose('gender', { type: 'Gender' }),
       coords: t.expose('coords', { type: 'Coords' }),
-    }) satisfies Record<keyof Account, unknown>,
+    }) satisfies Record<keyof AccountData, unknown>,
 })

@@ -1,9 +1,9 @@
 import { builder } from '@/builder'
-import type { Account, Nullable } from '@repo/ts-types'
+import type { AccountData, Nullable } from '@repo/ts-types'
 
 export type UpdateAccountArgs = Nullable<
   Partial<
-    Pick<Account, 'bio' | 'birthDate' | 'gender' | 'lookingForGender' | 'socials' | 'username'>
+    Pick<AccountData, 'bio' | 'birthDate' | 'gender' | 'lookingForGender' | 'socials' | 'username'>
   >
 >
 
