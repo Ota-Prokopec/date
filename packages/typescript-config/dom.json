@@ -3,6 +3,6 @@
   "display": "Dom config",
   "extends": "./base.json",
   "compilerOptions": {
-    "lib": ["es2022", "dom", "dom.iterable"]
+    "lib": ["ES2024", "dom", "dom.iterable"]
   }
 }

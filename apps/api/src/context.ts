@@ -1,5 +1,5 @@
 import { createContext as authContext } from '@repo/graphql/server'
-import { loaders, type Loaders } from './loaders/loaders'
+import { getLoaders, type Loaders } from './loaders/loaders'
 
 type AuthContext = Awaited<ReturnType<typeof authContext>>
 
@@ -12,6 +12,7 @@ type CreateContext = ({
 
 export const createContext: CreateContext = async ({ request }: { request: Request }) => {
   const auth = await authContext({ request })
+  const loaders: Loaders = getLoaders()
 
   return { ...auth, loaders: loaders }
 }

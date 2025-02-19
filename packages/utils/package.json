@@ -21,7 +21,7 @@
     "@repo/ts-types": "workspace: *",
     "@repo/tsup": "workspace: *",
     "@repo/typescript-config": "workspace: *",
-    "@types/node": "^22.7.5",
+    "@types/node": "^22.13.4",
     "@types/react": "^19.0.8",
     "@types/react-dom": "^19",
     "barrelsby": "^2.8.0",

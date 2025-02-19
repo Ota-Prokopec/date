@@ -6,7 +6,7 @@ export type Loaders = {
   socials: ReturnType<typeof createSocialLoader>
 }
 
-export const loaders: Loaders = {
+export const getLoaders = (): Loaders => ({
   users: createUserLoader(),
   socials: createSocialLoader(),
-}
+})

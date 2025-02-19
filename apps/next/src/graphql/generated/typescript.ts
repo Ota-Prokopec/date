@@ -94,14 +94,14 @@ export type UpdateAccountArgs = {
 
 export type User = {
   __typename?: 'User';
-  age?: Maybe<Scalars['Int']['output']>;
+  age: Scalars['Int']['output'];
   bio?: Maybe<Scalars['String']['output']>;
-  gender?: Maybe<Scalars['Gender']['output']>;
-  lookingForGender?: Maybe<Scalars['Gender']['output']>;
-  profilePictureURL?: Maybe<Scalars['String']['output']>;
+  gender: Scalars['Gender']['output'];
+  lookingForGender: Scalars['Gender']['output'];
+  profilePictureURL: Scalars['String']['output'];
   socials?: Maybe<Scalars['Socials']['output']>;
   userId: Scalars['String']['output'];
-  username?: Maybe<Scalars['String']['output']>;
+  username: Scalars['String']['output'];
 };
 
 export type Coords = {
@@ -130,10 +130,10 @@ export type GetUserProfileQueryVariables = Exact<{
 }>;
 
 
-export type GetUserProfileQuery = { __typename?: 'Query', getUserProfile?: { __typename?: 'User', age?: number | null | undefined, bio?: string | null | undefined, gender?: "male" | "female" | null | undefined, lookingForGender?: "male" | "female" | null | undefined, profilePictureURL?: string | null | undefined, socials?: {instagram: {
+export type GetUserProfileQuery = { __typename?: 'Query', getUserProfile?: { __typename?: 'User', age: number, bio?: string | null | undefined, gender: "male" | "female", lookingForGender: "male" | "female", profilePictureURL: string, socials?: {instagram: {
           profileId: string;
           link: string;
-    }} | null | undefined, userId: string, username?: string | null | undefined } | null | undefined };
+    }} | null | undefined, userId: string, username: string } | null | undefined };
 
 
 export const SaveNewUserInformationDocument = gql`
