@@ -83,9 +83,10 @@ export const UserProfileCardSkeletonLoading = ({
 
         <ProfileNameAndAgeSkeletonLoading></ProfileNameAndAgeSkeletonLoading>
 
-        <UserProfileCardItem title={'Bio:'}>
+        <Column>
+          <UserProfileCardItem title={'Bio:'}>{''}</UserProfileCardItem>
           <Skeleton></Skeleton>
-        </UserProfileCardItem>
+        </Column>
 
         <SocialProfilesSkeletonLoading></SocialProfilesSkeletonLoading>
         {children}

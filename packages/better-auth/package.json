@@ -32,6 +32,6 @@
     "@repo/db": "workspace: *",
     "@repo/env": "workspace: *",
     "better-auth": "1.1.16",
-    "drizzle-orm": "^0.39.2"
+    "drizzle-orm": "^0.39.3"
   }
 }

@@ -1,6 +1,6 @@
 'use client'
 
-import type { SocialProfileData, SocialProfilePlatform } from '@repo/ts-types'
+import type { SocialProfileDataParams, SocialProfilePlatform, SocialsData } from '@repo/ts-types'
 import { Column } from '@repo/ui/components/common/Column'
 import { Row } from '@repo/ui/components/common/Row'
 import { Text } from '@repo/ui/components/common/Text'
@@ -15,7 +15,7 @@ export const socialProfilesPlatformIcons: Record<SocialProfilePlatform, ReactNod
 }
 
 export type SocialProfilesProps = {
-  socials: { instagram: SocialProfileData }
+  socials: SocialsData
   disableLink?: boolean
   loading?: boolean
   onClick?: (platform: SocialProfilePlatform) => void
@@ -24,7 +24,7 @@ export type SocialProfilesProps = {
 export const SocialProfiles = ({ socials, onClick, disableLink = false }: SocialProfilesProps) => {
   return (
     <Column>
-      {(Object.entries(socials) as [[SocialProfilePlatform, SocialProfileData]]).map(
+      {(Object.entries(socials) as [[SocialProfilePlatform, SocialProfileDataParams]]).map(
         ([platform, params], i) => (
           <SocialProfileItem
             key={i}
@@ -51,7 +51,7 @@ export const SocialProfilesSkeletonLoading = () => {
   )
 }
 
-type SocialProfileItemProps = SocialProfileData & {
+type SocialProfileItemProps = SocialProfileDataParams & {
   icon: ReactNode
   disableLink: boolean
   onClick: () => void
@@ -91,9 +91,9 @@ const SocialProfileItemSkeletonLoading = ({
     <button className={cn('border-none shadow-none items-start [&>*]:justify-start', className)}>
       <Row className="gap-2 justify-center items-center">
         {icon}
-        <Text className="font-bold text-black/75 text-lg">
+        <div className="font-bold text-black/75 text-lg">
           <Skeleton></Skeleton>
-        </Text>
+        </div>
         <IconLink></IconLink>
       </Row>
     </button>

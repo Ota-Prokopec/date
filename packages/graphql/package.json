@@ -45,7 +45,7 @@
     "cookie-es": "^1.2.2",
     "dataloader": "^2.2.3",
     "deezer-api-ts": "^1.2.4",
-    "drizzle-orm": "^0.39.2",
+    "drizzle-orm": "^0.39.3",
     "express": "^4.19.2",
     "graphql-yoga": "^5.7.0",
     "next": "^15.1.6",

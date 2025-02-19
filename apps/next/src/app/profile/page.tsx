@@ -10,19 +10,24 @@ import { Center } from '@repo/ui/components/common/Center'
 import { match } from 'ts-pattern'
 
 const ProfilePage = () => {
-  const userState = useGetUserProfileQuery({ variables: { userId: undefined } })
+  const userProfileState = useGetUserProfileQuery({ variables: { userId: undefined } })
+  const userProfileData = userProfileState.data?.getUserProfile
 
   return (
     <Center className="w-full h-full">
-      {match({ loading: userState.loading })
+      {match({ loading: userProfileState.loading })
         .with({ loading: true }, () => (
           <UserProfileCardSkeletonLoading></UserProfileCardSkeletonLoading>
         ))
-        .otherwise(() => (
-          <UserProfileCard data={userState.data?.getUserProfile}>
-            <Button>Edit profile</Button>
-          </UserProfileCard>
-        ))}
+        .otherwise(() =>
+          userProfileData ? (
+            <UserProfileCard data={userProfileData}>
+              <Button>Edit profile</Button>
+            </UserProfileCard>
+          ) : (
+            'none'
+          )
+        )}
     </Center>
   )
 }

@@ -99,7 +99,7 @@ export type User = {
   gender: Scalars['Gender']['output'];
   lookingForGender: Scalars['Gender']['output'];
   profilePictureURL: Scalars['String']['output'];
-  socials?: Maybe<Scalars['Socials']['output']>;
+  socials: Scalars['Socials']['output'];
   userId: Scalars['String']['output'];
   username: Scalars['String']['output'];
 };
@@ -130,10 +130,10 @@ export type GetUserProfileQueryVariables = Exact<{
 }>;
 
 
-export type GetUserProfileQuery = { __typename?: 'Query', getUserProfile?: { __typename?: 'User', age: number, bio?: string | null | undefined, gender: "male" | "female", lookingForGender: "male" | "female", profilePictureURL: string, socials?: {instagram: {
+export type GetUserProfileQuery = { __typename?: 'Query', getUserProfile?: { __typename?: 'User', age: number, bio?: string | null | undefined, gender: "male" | "female", lookingForGender: "male" | "female", profilePictureURL: string, socials: {instagram: {
           profileId: string;
           link: string;
-    }} | null | undefined, userId: string, username: string } | null | undefined };
+    }}, userId: string, username: string } | null | undefined };
 
 
 export const SaveNewUserInformationDocument = gql`

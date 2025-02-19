@@ -20,9 +20,10 @@ export const UserRef = builder.objectRef<UserPothosType>('User').implement({
       socials: t.field({
         type: 'Socials',
         resolve: async (parent, args, ctx, info) => {
-          const response =  await ctx.loaders.socials.load(parent.userId)
-        }
-        nullable: false,
+          const response = await ctx.loaders.socials.load(parent.userId)
+          return response
+        },
+        nullable: true,
       }),
     }) satisfies Record<keyof UserProfileData, unknown>,
 })

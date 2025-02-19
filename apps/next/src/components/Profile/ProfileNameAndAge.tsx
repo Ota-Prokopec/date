@@ -18,12 +18,12 @@ export const ProfileNameAndAge = ({ name, age }: ProfileNameAndAgeProps) => {
 export const ProfileNameAndAgeSkeletonLoading = () => {
   return (
     <Row className="w-full gap-2 items-center">
-      <Text className="font-bold text-3xl text-black/70">
+      <div className="font-bold text-3xl text-black/70">
         <Skeleton></Skeleton>
-      </Text>
-      <Text className="font-bold text-2xl  rounded-full p-1">
+      </div>
+      <div className="font-bold text-2xl  rounded-full p-1">
         <Skeleton></Skeleton>
-      </Text>
+      </div>
     </Row>
   )
 }

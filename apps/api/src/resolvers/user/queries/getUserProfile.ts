@@ -1,4 +1,5 @@
 import { builder } from '@/builder'
+import type { UserPothosType } from '@/schema/PothosSchemaTypes'
 
 builder.queryField('getUserProfile', (t) =>
   t.field({
@@ -11,9 +12,10 @@ builder.queryField('getUserProfile', (t) =>
       if (!searchingUserId) throw new Error('User ID is undefined')
 
       const userProfileData = await ctx.loaders.users.load(searchingUserId)
+
       if (!userProfileData) throw new Error('User not found')
 
-      return userProfileData
+      return userProfileData satisfies UserPothosType
     },
   })
 )
