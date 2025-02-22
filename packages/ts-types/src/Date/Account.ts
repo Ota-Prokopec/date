@@ -13,10 +13,11 @@ export const accountDataZodSchemaAllPropsRequired = z.object({
   lookingForGender: genderZodSchema,
   userId: z.string(),
   coords: coordsZodSchema,
+  age: z.number(),
 })
 
 export const accountDataZodSchema = accountDataZodSchemaAllPropsRequired.extend({
-  username: accountDataZodSchemaAllPropsRequired.shape.username.nullable().optional(),
+  username: accountDataZodSchemaAllPropsRequired.shape.username,
   birthDate: accountDataZodSchemaAllPropsRequired.shape.birthDate.nullable().optional(),
   bio: accountDataZodSchemaAllPropsRequired.shape.bio.nullable().optional(),
   socials: accountDataZodSchemaAllPropsRequired.shape.socials.nullable().optional(),
@@ -29,6 +30,7 @@ export const accountDataZodSchema = accountDataZodSchemaAllPropsRequired.extend(
     .optional(),
   userId: accountDataZodSchemaAllPropsRequired.shape.userId,
   coords: accountDataZodSchemaAllPropsRequired.shape.coords.nullable().optional(),
+  age: accountDataZodSchemaAllPropsRequired.shape.age.nullable().optional(),
 })
 
 export type AccountData = TypeOf<typeof accountDataZodSchema>

@@ -32,6 +32,7 @@ export type Scalars = {
 
 export type Account = {
   __typename?: 'Account';
+  age?: Maybe<Scalars['Int']['output']>;
   bio?: Maybe<Scalars['String']['output']>;
   birthDate?: Maybe<Scalars['Date']['output']>;
   coords?: Maybe<Scalars['Coords']['output']>;
@@ -40,7 +41,7 @@ export type Account = {
   profilePictureURL?: Maybe<Scalars['String']['output']>;
   socials?: Maybe<Scalars['Socials']['output']>;
   userId: Scalars['String']['output'];
-  username?: Maybe<Scalars['String']['output']>;
+  username: Scalars['String']['output'];
 };
 
 export type Mutation = {
@@ -74,6 +75,7 @@ export type MutationUploadFileArgs = {
 
 export type Query = {
   __typename?: 'Query';
+  getAccountProfile?: Maybe<Account>;
   getHealth?: Maybe<Scalars['GraphQLHealth']['output']>;
   getUserProfile?: Maybe<User>;
 };
@@ -99,7 +101,7 @@ export type User = {
   gender: Scalars['Gender']['output'];
   lookingForGender: Scalars['Gender']['output'];
   profilePictureURL: Scalars['String']['output'];
-  socials: Scalars['Socials']['output'];
+  socials?: Maybe<Scalars['Socials']['output']>;
   userId: Scalars['String']['output'];
   username: Scalars['String']['output'];
 };
@@ -120,20 +122,35 @@ export type SaveNewUserInformationMutationVariables = Exact<{
 
 export type SaveNewUserInformationMutation = { __typename?: 'Mutation', updateAccount?: boolean | null | undefined };
 
+export type UpdateAccountMutationVariables = Exact<{
+  userProfileData: UpdateAccountArgs;
+}>;
+
+
+export type UpdateAccountMutation = { __typename?: 'Mutation', updateAccount?: boolean | null | undefined };
+
+export type GetAccountProfileQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetAccountProfileQuery = { __typename?: 'Query', getAccountProfile?: { __typename?: 'Account', bio?: string | null | undefined, birthDate?: Date | null | undefined, coords?: {lat: number, lng: number} | null | undefined, gender?: "male" | "female" | null | undefined, lookingForGender?: "male" | "female" | null | undefined, profilePictureURL?: string | null | undefined, socials?: {instagram: {
+          profileId: string;
+          link: string;
+    }} | null | undefined, userId: string, username: string, age?: number | null | undefined } | null | undefined };
+
 export type GetHealthStatusQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetHealthStatusQuery = { __typename?: 'Query', getHealth?: {ok: boolean} | null | undefined };
 
 export type GetUserProfileQueryVariables = Exact<{
-  userId?: InputMaybe<Scalars['String']['input']>;
+  userId: Scalars['String']['input'];
 }>;
 
 
-export type GetUserProfileQuery = { __typename?: 'Query', getUserProfile?: { __typename?: 'User', age: number, bio?: string | null | undefined, gender: "male" | "female", lookingForGender: "male" | "female", profilePictureURL: string, socials: {instagram: {
+export type GetUserProfileQuery = { __typename?: 'Query', getUserProfile?: { __typename?: 'User', age: number, bio?: string | null | undefined, gender: "male" | "female", lookingForGender: "male" | "female", profilePictureURL: string, socials?: {instagram: {
           profileId: string;
           link: string;
-    }}, userId: string, username: string } | null | undefined };
+    }} | null | undefined, userId: string, username: string } | null | undefined };
 
 
 export const SaveNewUserInformationDocument = gql`
@@ -143,13 +160,34 @@ export const SaveNewUserInformationDocument = gql`
   )
 }
     `;
+export const UpdateAccountDocument = gql`
+    mutation updateAccount($userProfileData: UpdateAccountArgs!) {
+  updateAccount(userProfileData: $userProfileData)
+}
+    `;
+export const GetAccountProfileDocument = gql`
+    query getAccountProfile {
+  getAccountProfile {
+    bio
+    birthDate
+    coords
+    gender
+    lookingForGender
+    profilePictureURL
+    socials
+    userId
+    username
+    age
+  }
+}
+    `;
 export const GetHealthStatusDocument = gql`
     query getHealthStatus {
   getHealth
 }
     `;
 export const GetUserProfileDocument = gql`
-    query getUserProfile($userId: String) {
+    query getUserProfile($userId: String!) {
   getUserProfile(userId: $userId) {
     age
     bio
@@ -173,10 +211,16 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     saveNewUserInformation(variables: SaveNewUserInformationMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<SaveNewUserInformationMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<SaveNewUserInformationMutation>(SaveNewUserInformationDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'saveNewUserInformation', 'mutation', variables);
     },
+    updateAccount(variables: UpdateAccountMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<UpdateAccountMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<UpdateAccountMutation>(UpdateAccountDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'updateAccount', 'mutation', variables);
+    },
+    getAccountProfile(variables?: GetAccountProfileQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetAccountProfileQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetAccountProfileQuery>(GetAccountProfileDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getAccountProfile', 'query', variables);
+    },
     getHealthStatus(variables?: GetHealthStatusQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetHealthStatusQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetHealthStatusQuery>(GetHealthStatusDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getHealthStatus', 'query', variables);
     },
-    getUserProfile(variables?: GetUserProfileQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetUserProfileQuery> {
+    getUserProfile(variables: GetUserProfileQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetUserProfileQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetUserProfileQuery>(GetUserProfileDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getUserProfile', 'query', variables);
     }
   };

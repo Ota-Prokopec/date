@@ -1,44 +1,46 @@
-'use client';
+'use client'
 
-import { fileTostring, readHTMLImageInput } from '@repo/utils/common/images';
-import { useRef, useState, type ChangeEvent } from 'react';
-import { IoIosAddCircle as IconAdd } from 'react-icons/io';
-import { MdChangeCircle as IconChange } from 'react-icons/md';
-import { cn } from '../../lib/utils';
-import { Image, type ReactImageProps } from './Image';
+import { fileTostring, readHTMLImageInput } from '@repo/utils/common/images'
+import { useRef, useState, type ChangeEvent } from 'react'
+import { IoIosAddCircle as IconAdd } from 'react-icons/io'
+import { MdChangeCircle as IconChange } from 'react-icons/md'
+import { cn } from '../../lib/utils'
+import { Image, type ReactImageProps } from './Image'
 
 type ImageInputProps = {
-  initialSrc?: string | null | undefined;
-  fallbackSrc: string;
-  className?: string;
-  imageFileAcceptPattern?: string;
+  src?: string | null | undefined
+  fallbackSrc: string
+  className?: string
+  imageFileAcceptPattern?: string
   sizes: {
-    height: number;
-    width: number;
-  };
-  onError?: () => void;
-} & Omit<ReactImageProps, 'src' | 'fallbackSrc' | 'sizes'>;
+    height: number
+    width: number
+  }
+  onError?: () => void
+  onChange: (imageFile: File) => void
+} & Omit<ReactImageProps, 'src' | 'fallbackSrc' | 'sizes' | 'onChange'>
 
 export const ImageInput = ({
-  initialSrc,
+  src: initialSrc,
   fallbackSrc,
   className,
   onError,
   sizes,
   imageFileAcceptPattern,
+  onChange,
   ...props
 }: ImageInputProps) => {
-  const [src, setSrc] = useState<string | null | undefined>(initialSrc);
-  const inputRef = useRef<HTMLInputElement>(null);
+  const [src, setSrc] = useState<string | null | undefined>(initialSrc)
+  const inputRef = useRef<HTMLInputElement>(null)
   //const cropper = new ImageCropper(src ?? '', 'image/png', sizes.height, sizes.width);
   //  const croppingModal = new ModalSheet({ detent: 'full-height', initiallyOpen: true });
 
   const fileChange = async (event: ChangeEvent<HTMLInputElement>) => {
-    const payload = await readHTMLImageInput(event);
-    const base64 = await fileTostring(payload);
-
-    setSrc(base64);
-  };
+    const payload = await readHTMLImageInput(event)
+    const base64 = await fileTostring(payload)
+    setSrc(base64)
+    onChange(payload)
+  }
 
   return (
     <>
@@ -53,10 +55,10 @@ export const ImageInput = ({
         <button
           onClick={() => {
             if (!inputRef.current) {
-              if (onError) onError();
-              throw new Error('file input reference is not defined');
+              if (onError) onError()
+              throw new Error('file input reference is not defined')
             }
-            inputRef.current.click();
+            inputRef.current.click()
           }}
           className="absolute top-0 right-0 [&>*]:w-12 [&>*]:h-12 m-2 bg-white rounded-full cursor-pointer"
         >
@@ -70,5 +72,5 @@ export const ImageInput = ({
         ></Image>
       </div>
     </>
-  );
-};
+  )
+}

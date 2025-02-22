@@ -1,10 +1,11 @@
+import type { PothosOptional } from '@repo/ts-types'
 import { Row } from '@repo/ui/components/common/Row'
 import { Text } from '@repo/ui/components/common/Text'
 import { Skeleton } from '@repo/ui/components/shadcn/skeleton'
 
 type ProfileNameAndAgeProps = {
   name: string
-  age: number
+  age: PothosOptional<number>
 }
 export const ProfileNameAndAge = ({ name, age }: ProfileNameAndAgeProps) => {
   return (

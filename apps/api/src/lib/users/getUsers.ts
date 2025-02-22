@@ -1,8 +1,10 @@
 import { db, drizzleSchema, type UserSelect } from '@repo/db'
 import type { UserProfileData } from '@repo/ts-types'
-import { isNotNull } from 'drizzle-orm'
+import { eq, exists, isNotNull } from 'drizzle-orm'
 
-export const getUsers = async (userIds: string[]): Promise<Omit<UserProfileData, 'socials'>[]> => {
+export const getUsers = async (
+  userIds: string[]
+): Promise<(Omit<UserProfileData, 'socials'> | undefined)[]> => {
   const notNullableCollumns = [
     isNotNull(drizzleSchema.user.birthDate),
     isNotNull(drizzleSchema.user.gender),
@@ -12,17 +14,33 @@ export const getUsers = async (userIds: string[]): Promise<Omit<UserProfileData,
   ]
   const res = await db.query.user.findMany({
     where: (userSchema, { inArray, and }) =>
-      and(inArray(userSchema.id, userIds as string[]), ...notNullableCollumns),
+      and(
+        inArray(userSchema.id, userIds as string[]),
+        exists(
+          db
+            .select()
+            .from(drizzleSchema.socials)
+            .where(eq(drizzleSchema.socials.userId, drizzleSchema.user.id)) // Ensure the user has at least one social entry
+        ),
+        ...notNullableCollumns
+      ),
   })
 
-  return transformToUsersWithAge(res)
+  const users = convertToUserWithAge(res)
+  const grouped = Object.groupBy(users, (user) => user.userId)
+  //! Sorted according to userId!!!!
+  return userIds.map((userId) => grouped[userId]?.at(0))
 }
 
-const transformToUsersWithAge = (responseArray: UserSelect[]) => {
+//
+
+export const getUsersAge = (usersBirthData: Date) => {
+  return Math.floor((Date.now() - usersBirthData!?.getTime()) / 1000 / 60 / 60 / 24 / 365)
+}
+
+const convertToUserWithAge = (responseArray: UserSelect[]) => {
   return responseArray.map((user) => {
-    const userAge = Math.floor(
-      (Date.now() - user.birthDate!?.getTime()) / 1000 / 60 / 60 / 24 / 365
-    )
+    const userAge = user.birthDate ? getUsersAge(user.birthDate) : null
 
     //! Only collumns in notNullableCollumns can have ! mark, so that i am sure, there will be valid values
 

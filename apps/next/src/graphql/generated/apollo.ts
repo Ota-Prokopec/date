@@ -32,6 +32,7 @@ export type Scalars = {
 
 export type Account = {
   __typename?: 'Account';
+  age?: Maybe<Scalars['Int']['output']>;
   bio?: Maybe<Scalars['String']['output']>;
   birthDate?: Maybe<Scalars['Date']['output']>;
   coords?: Maybe<Scalars['Coords']['output']>;
@@ -40,7 +41,7 @@ export type Account = {
   profilePictureURL?: Maybe<Scalars['String']['output']>;
   socials?: Maybe<Scalars['Socials']['output']>;
   userId: Scalars['String']['output'];
-  username?: Maybe<Scalars['String']['output']>;
+  username: Scalars['String']['output'];
 };
 
 export type Mutation = {
@@ -74,6 +75,7 @@ export type MutationUploadFileArgs = {
 
 export type Query = {
   __typename?: 'Query';
+  getAccountProfile?: Maybe<Account>;
   getHealth?: Maybe<Scalars['GraphQLHealth']['output']>;
   getUserProfile?: Maybe<User>;
 };
@@ -99,7 +101,7 @@ export type User = {
   gender: Scalars['Gender']['output'];
   lookingForGender: Scalars['Gender']['output'];
   profilePictureURL: Scalars['String']['output'];
-  socials: Scalars['Socials']['output'];
+  socials?: Maybe<Scalars['Socials']['output']>;
   userId: Scalars['String']['output'];
   username: Scalars['String']['output'];
 };
@@ -120,20 +122,35 @@ export type SaveNewUserInformationMutationVariables = Exact<{
 
 export type SaveNewUserInformationMutation = { __typename?: 'Mutation', updateAccount?: boolean | null | undefined };
 
+export type UpdateAccountMutationVariables = Exact<{
+  userProfileData: UpdateAccountArgs;
+}>;
+
+
+export type UpdateAccountMutation = { __typename?: 'Mutation', updateAccount?: boolean | null | undefined };
+
+export type GetAccountProfileQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetAccountProfileQuery = { __typename?: 'Query', getAccountProfile?: { __typename?: 'Account', bio?: string | null | undefined, birthDate?: Date | null | undefined, coords?: {lat: number, lng: number} | null | undefined, gender?: "male" | "female" | null | undefined, lookingForGender?: "male" | "female" | null | undefined, profilePictureURL?: string | null | undefined, socials?: {instagram: {
+          profileId: string;
+          link: string;
+    }} | null | undefined, userId: string, username: string, age?: number | null | undefined } | null | undefined };
+
 export type GetHealthStatusQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetHealthStatusQuery = { __typename?: 'Query', getHealth?: {ok: boolean} | null | undefined };
 
 export type GetUserProfileQueryVariables = Exact<{
-  userId?: InputMaybe<Scalars['String']['input']>;
+  userId: Scalars['String']['input'];
 }>;
 
 
-export type GetUserProfileQuery = { __typename?: 'Query', getUserProfile?: { __typename?: 'User', age: number, bio?: string | null | undefined, gender: "male" | "female", lookingForGender: "male" | "female", profilePictureURL: string, socials: {instagram: {
+export type GetUserProfileQuery = { __typename?: 'Query', getUserProfile?: { __typename?: 'User', age: number, bio?: string | null | undefined, gender: "male" | "female", lookingForGender: "male" | "female", profilePictureURL: string, socials?: {instagram: {
           profileId: string;
           link: string;
-    }}, userId: string, username: string } | null | undefined };
+    }} | null | undefined, userId: string, username: string } | null | undefined };
 
 
 export const SaveNewUserInformationDocument = gql`
@@ -172,6 +189,85 @@ export function useSaveNewUserInformationMutation(baseOptions?: Apollo.MutationH
 export type SaveNewUserInformationMutationHookResult = ReturnType<typeof useSaveNewUserInformationMutation>;
 export type SaveNewUserInformationMutationResult = Apollo.MutationResult<SaveNewUserInformationMutation>;
 export type SaveNewUserInformationMutationOptions = Apollo.BaseMutationOptions<SaveNewUserInformationMutation, SaveNewUserInformationMutationVariables>;
+export const UpdateAccountDocument = gql`
+    mutation updateAccount($userProfileData: UpdateAccountArgs!) {
+  updateAccount(userProfileData: $userProfileData)
+}
+    `;
+export type UpdateAccountMutationFn = Apollo.MutationFunction<UpdateAccountMutation, UpdateAccountMutationVariables>;
+
+/**
+ * __useUpdateAccountMutation__
+ *
+ * To run a mutation, you first call `useUpdateAccountMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateAccountMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateAccountMutation, { data, loading, error }] = useUpdateAccountMutation({
+ *   variables: {
+ *      userProfileData: // value for 'userProfileData'
+ *   },
+ * });
+ */
+export function useUpdateAccountMutation(baseOptions?: Apollo.MutationHookOptions<UpdateAccountMutation, UpdateAccountMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateAccountMutation, UpdateAccountMutationVariables>(UpdateAccountDocument, options);
+      }
+export type UpdateAccountMutationHookResult = ReturnType<typeof useUpdateAccountMutation>;
+export type UpdateAccountMutationResult = Apollo.MutationResult<UpdateAccountMutation>;
+export type UpdateAccountMutationOptions = Apollo.BaseMutationOptions<UpdateAccountMutation, UpdateAccountMutationVariables>;
+export const GetAccountProfileDocument = gql`
+    query getAccountProfile {
+  getAccountProfile {
+    bio
+    birthDate
+    coords
+    gender
+    lookingForGender
+    profilePictureURL
+    socials
+    userId
+    username
+    age
+  }
+}
+    `;
+
+/**
+ * __useGetAccountProfileQuery__
+ *
+ * To run a query within a React component, call `useGetAccountProfileQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetAccountProfileQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetAccountProfileQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetAccountProfileQuery(baseOptions?: Apollo.QueryHookOptions<GetAccountProfileQuery, GetAccountProfileQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetAccountProfileQuery, GetAccountProfileQueryVariables>(GetAccountProfileDocument, options);
+      }
+export function useGetAccountProfileLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetAccountProfileQuery, GetAccountProfileQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetAccountProfileQuery, GetAccountProfileQueryVariables>(GetAccountProfileDocument, options);
+        }
+export function useGetAccountProfileSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetAccountProfileQuery, GetAccountProfileQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<GetAccountProfileQuery, GetAccountProfileQueryVariables>(GetAccountProfileDocument, options);
+        }
+export type GetAccountProfileQueryHookResult = ReturnType<typeof useGetAccountProfileQuery>;
+export type GetAccountProfileLazyQueryHookResult = ReturnType<typeof useGetAccountProfileLazyQuery>;
+export type GetAccountProfileSuspenseQueryHookResult = ReturnType<typeof useGetAccountProfileSuspenseQuery>;
+export type GetAccountProfileQueryResult = Apollo.QueryResult<GetAccountProfileQuery, GetAccountProfileQueryVariables>;
 export const GetHealthStatusDocument = gql`
     query getHealthStatus {
   getHealth
@@ -210,7 +306,7 @@ export type GetHealthStatusLazyQueryHookResult = ReturnType<typeof useGetHealthS
 export type GetHealthStatusSuspenseQueryHookResult = ReturnType<typeof useGetHealthStatusSuspenseQuery>;
 export type GetHealthStatusQueryResult = Apollo.QueryResult<GetHealthStatusQuery, GetHealthStatusQueryVariables>;
 export const GetUserProfileDocument = gql`
-    query getUserProfile($userId: String) {
+    query getUserProfile($userId: String!) {
   getUserProfile(userId: $userId) {
     age
     bio
@@ -240,7 +336,7 @@ export const GetUserProfileDocument = gql`
  *   },
  * });
  */
-export function useGetUserProfileQuery(baseOptions?: Apollo.QueryHookOptions<GetUserProfileQuery, GetUserProfileQueryVariables>) {
+export function useGetUserProfileQuery(baseOptions: Apollo.QueryHookOptions<GetUserProfileQuery, GetUserProfileQueryVariables> & ({ variables: GetUserProfileQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<GetUserProfileQuery, GetUserProfileQueryVariables>(GetUserProfileDocument, options);
       }

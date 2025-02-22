@@ -1,18 +1,20 @@
 'use client'
 
-import type { SocialProfileDataParams, SocialProfilePlatform, SocialsData } from '@repo/ts-types'
+import type {
+  PothosOptional,
+  SocialProfileDataParams,
+  SocialProfilePlatform,
+  SocialsData,
+} from '@repo/ts-types'
 import { Column } from '@repo/ui/components/common/Column'
 import { Row } from '@repo/ui/components/common/Row'
 import { Text } from '@repo/ui/components/common/Text'
 import Link from 'next/link'
 import { type ReactNode } from 'react'
-import { IconInstagram, IconLink } from '../Icons'
+import { IconInstagram, IconLink } from '@repo/ui/components/Icons/Icons'
 import { cn } from '@repo/ui/ts-lib/lib/utils'
 import { Skeleton } from '@repo/ui/components/shadcn/skeleton'
-
-export const socialProfilesPlatformIcons: Record<SocialProfilePlatform, ReactNode> = {
-  instagram: <IconInstagram className="w-10 h-10"></IconInstagram>,
-}
+import { socialProfilesPlatformIcons } from './socialProfilesPlatformIcons'
 
 export type SocialProfilesProps = {
   socials: SocialsData
@@ -24,7 +26,7 @@ export type SocialProfilesProps = {
 export const SocialProfiles = ({ socials, onClick, disableLink = false }: SocialProfilesProps) => {
   return (
     <Column>
-      {(Object.entries(socials) as [[SocialProfilePlatform, SocialProfileDataParams]]).map(
+      {(Object.entries(socials ?? []) as [[SocialProfilePlatform, SocialProfileDataParams]]).map(
         ([platform, params], i) => (
           <SocialProfileItem
             key={i}

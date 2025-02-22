@@ -1,4 +1,4 @@
-query getUserProfile($userId: String) {
+query getUserProfile($userId: String!) {
   getUserProfile(userId: $userId) {
     age
     bio

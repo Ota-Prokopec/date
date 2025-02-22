@@ -1,11 +1,11 @@
-import { doublePrecision, integer, pgTable, text } from 'drizzle-orm/pg-core';
-import { user } from './auth-schema';
+import { doublePrecision, integer, pgTable, text } from 'drizzle-orm/pg-core'
+import { user } from './auth-schema'
 
 export const coords = pgTable('coords', {
   id: integer('id').primaryKey().generatedAlwaysAsIdentity(),
   userId: text('userId')
     .notNull()
     .references(() => user.id),
-  latitude: doublePrecision(),
-  longitude: doublePrecision(),
-});
+  latitude: doublePrecision().notNull(),
+  longitude: doublePrecision().notNull(),
+})

@@ -11,15 +11,15 @@ import { Text } from '@repo/ui/components/common/Text'
 import Image from 'next/image'
 import { SocialProfiles, SocialProfilesSkeletonLoading } from './SocialProfiles'
 import type { ReactNode } from 'react'
-import { IconFemale, IconMale } from '../Icons'
-import type { UserProfileData } from '@repo/ts-types'
+import { IconFemale, IconMale } from '@repo/ui/components/Icons/Icons'
+import type { AccountData, UserProfileData } from '@repo/ts-types'
 import { cn } from '@repo/ui/ts-lib/lib/utils'
 import { Skeleton } from '@repo/ui/components/shadcn/skeleton'
 
 type UserProfileCardProps = {
   className?: string
   children?: ReactNode
-  data: UserProfileData
+  data: AccountData | UserProfileData
 }
 
 export const UserProfileCard = ({ className, children, data }: UserProfileCardProps) => {
@@ -35,7 +35,7 @@ export const UserProfileCard = ({ className, children, data }: UserProfileCardPr
         <Card className="w-[300px] h-[350px] rounded-t-xl rounded-b-none  relative">
           <Image
             alt="profile-picture"
-            src={data.profilePictureURL}
+            src={data.profilePictureURL ?? ''}
             width={300}
             height={350}
             className="w-full h-full rounded-t-xl rounded-b-none"
@@ -48,7 +48,7 @@ export const UserProfileCard = ({ className, children, data }: UserProfileCardPr
 
         <ProfileNameAndAge name={data.username} age={data.age}></ProfileNameAndAge>
 
-        <UserProfileCardItem title={'Bio:'}>{data.bio}</UserProfileCardItem>
+        {data.bio && <UserProfileCardItem title={'Bio:'}>{data.bio}</UserProfileCardItem>}
 
         <SocialProfiles socials={data.socials}></SocialProfiles>
         {children}

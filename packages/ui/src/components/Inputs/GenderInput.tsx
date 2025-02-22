@@ -1,9 +1,9 @@
 import type { Gender } from '@repo/ts-types'
 import { Card } from '@repo/ui/components/common/Card'
-import { Radio, type RadioItem } from '@repo/ui/components/Inputs/Radio'
-import { cn } from '@repo/ui/lib/utils'
+import { Radio, type RadioItem } from '../Inputs/Radio'
+import { cn } from '../../lib/utils'
 import { match } from 'ts-pattern'
-import { IconFemale, IconMale } from '../Icons'
+import { IconFemale, IconMale } from '../../components/Icons/Icons'
 
 const radioGenders: RadioItem<Gender, Gender>[] = [
   { key: 'female', value: 'female' },
@@ -12,9 +12,10 @@ const radioGenders: RadioItem<Gender, Gender>[] = [
 
 type GenderInputProps = {
   onChange: (gender: Gender) => void
-  defaultGender: Gender
+  value: Gender
 }
-export const GenderInput = ({ onChange, defaultGender }: GenderInputProps) => {
+
+export const GenderInput = ({ onChange, value: defaultGender }: GenderInputProps) => {
   return (
     <Radio<Gender, Gender>
       className="flex-row"

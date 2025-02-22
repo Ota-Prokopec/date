@@ -1,6 +1,8 @@
 import { cn } from '../../lib/utils'
 import { Button as NextUIButton } from '@heroui/react'
 import { ReactNode } from 'react'
+import { match } from 'ts-pattern'
+import { Loading } from './Loading'
 
 export type ButtonProps = {
   children: ReactNode
@@ -8,9 +10,20 @@ export type ButtonProps = {
   disabled?: boolean
   onClick?: () => void
   type?: 'button' | 'submit'
-}
+  icon?: ReactNode
+  isLoading?: boolean
+} & Parameters<typeof NextUIButton>[0]
 
-export const Button = ({ children, className, onClick, disabled, type }: ButtonProps) => {
+export const Button = ({
+  children,
+  className,
+  onClick,
+  disabled,
+  type,
+  isLoading = false,
+  icon,
+  ...props
+}: ButtonProps) => {
   return (
     <NextUIButton
       type={type}
@@ -19,12 +32,20 @@ export const Button = ({ children, className, onClick, disabled, type }: ButtonP
       isDisabled={disabled}
       onClick={onClick}
       className={cn(
-        'rounded-lg bg-black text-white cursor-pointer',
+        'rounded-lg bg-black text-white cursor-pointer text-2xl !p-8 !pl-10 !pr-10 flex flex-row gap-3 items-center justify-center',
         { 'cursor-not-allowed': disabled },
         className
       )}
+      {...props}
     >
-      {children}
+      {match({ isLoading })
+        .with({ isLoading: true }, () => <Loading></Loading>)
+        .otherwise(() => (
+          <>
+            <span>{children}</span>
+            {icon}
+          </>
+        ))}
     </NextUIButton>
   )
 }

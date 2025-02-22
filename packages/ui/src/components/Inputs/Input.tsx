@@ -1,15 +1,16 @@
-import { cn } from '../../lib/utils';
-import type { HTMLInputTypeAttribute } from 'react';
-import { Input as ShadcnInput } from '../shadcn/input';
+import { cn } from '../../lib/utils'
+import type { HTMLInputTypeAttribute } from 'react'
+import { Input as HeroUIINput } from '@heroui/react'
 
 type InputProps = {
-  className?: string;
-  defaultValue?: string;
-  placeholder?: string;
-  type: HTMLInputTypeAttribute;
-  maxLength?: number;
-  onValueChange?: (value: string) => void;
-} & Parameters<typeof ShadcnInput>[0];
+  className?: string
+  defaultValue?: string
+  placeholder?: string
+  type: HTMLInputTypeAttribute
+  maxLength?: number
+  onValueChange?: (value: string) => void
+} & Parameters<typeof HeroUIINput>[0]
+
 export const Input = ({
   className,
   defaultValue,
@@ -20,9 +21,9 @@ export const Input = ({
   ...props
 }: InputProps) => {
   return (
-    <ShadcnInput
+    <HeroUIINput
       onChange={(e) => {
-        if (onValueChange) onValueChange(e.target.value);
+        if (onValueChange) onValueChange(e.target.value)
       }}
       maxLength={maxLength}
       className={cn(
@@ -34,5 +35,5 @@ export const Input = ({
       type={type}
       {...props}
     />
-  );
-};
+  )
+}

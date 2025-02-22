@@ -1,11 +1,10 @@
 'use client'
 
 import { DateInput } from '@/components/Inputs/DateInput'
-import { EditProfileItem } from '@/components/Inputs/EditProfileItem'
+import { EditProfileItem } from '@/components/forms/EditProfileItem'
 import { GenderInput } from '@/components/Inputs/GenderInput'
 import { UsernameInput } from '@/components/Inputs/UsernameInput'
-import type { useAccountZodSchemaWithErrorMessages } from '@/lib/account/accountZodSchemaWithErrorMessages'
-import type { accountZodSchema } from '@repo/ts-types'
+import type { accountDataZodSchema, NonNullableObject } from '@repo/ts-types'
 import { Column } from '@repo/ui/components/common/Column'
 import { Left } from '@repo/ui/components/common/Left'
 import { LocaleSwitch } from '@repo/ui/components/common/LocaleSwitch'
@@ -14,9 +13,13 @@ import { useTranslations } from 'next-intl'
 import { type UseFormSetValue, type UseFormWatch } from 'react-hook-form'
 import type { z } from 'zod'
 
-export type FormData = Pick<
-  z.TypeOf<typeof accountZodSchema>,
-  'username' | 'gender' | 'lookingForGender' | 'birthDate'
+export type NewUserFormData = Required<
+  NonNullableObject<
+    Pick<
+      z.TypeOf<typeof accountDataZodSchema>,
+      'username' | 'gender' | 'lookingForGender' | 'birthDate'
+    >
+  >
 >
 
 type NewUserFormProps = {

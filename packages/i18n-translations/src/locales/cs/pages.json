@@ -9,5 +9,19 @@
     "fillAllRequiredFields": "Prosíme vyplňte všechny požadované políčka",
     "continueButtonLabel": "Pokračovat",
     "errorMessage": "Něco se nepovedlo, prosíme, zkuste to znovu."
+  },
+  "profile": {
+    "editProfileButtonLabel": "Upravit účet",
+    "somethingWentWrongErrorMessage": "Omlouváme se, ale něco se nepovedlo s načítáním uživatelského profilu. Prosíme, zkuste to znovu."
+  },
+  "profile-edit": {
+    "somethingWentWrongErrorMessage": "Omlouváme se, ale něco se nepovedlo s načítáním uživatelského profilu. Prosíme, zkuste to znovu."
+  },
+  "profile-userpage": {
+    "somethingWentWrongErrorMessage": "Omlouváme se, ale něco se nepovedlo s načítáním uživatelského profilu. Prosíme, zkuste to znovu."
+  },
+  "not-found": {
+    "title": "To co hledáte tu není",
+    "message": "To co hledáte tu není, možná jste nechtěně zadali nesprávné údaje nebo hledaný účet byl již smazán. Pokud si myslíte, že toto je chyba, prosíme kontaktujte naši online podporu."
   }
 }

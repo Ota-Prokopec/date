@@ -1,0 +1,14 @@
+query getAccountProfile {
+  getAccountProfile {
+    bio
+    birthDate
+    coords
+    gender
+    lookingForGender
+    profilePictureURL
+    socials
+    userId
+    username
+    age
+  }
+}

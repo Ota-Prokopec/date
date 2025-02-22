@@ -9,5 +9,19 @@
     "fillAllRequiredFields": "Please fill all required fields",
     "continueButtonLabel": "Continue",
     "errorMessage": "Something went wrong, please try it again."
+  },
+  "profile": {
+    "editProfileButtonLabel": "Edit profile",
+    "somethingWentWrongErrorMessage": "We are sorry, something went wrong with loading the profile page. Please try it again."
+  },
+  "profile-edit": {
+    "somethingWentWrongErrorMessage": "We are sorry, something went wrong with loading the profile page. Please try it again."
+  },
+  "profile-userpage": {
+    "somethingWentWrongErrorMessage": "We are sorry, something went wrong with loading the profile page. Please try it again."
+  },
+  "not-found": {
+    "title": "What you're looking for is not here",
+    "message": "What you're looking for is not here. You may have accidentally entered incorrect"
   }
 }

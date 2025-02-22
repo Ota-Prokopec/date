@@ -13,4 +13,5 @@ export * from './Helpers/NullableObjects';
 export * from './Helpers/zodSchemaHelpers';
 export * from './Internal/Cookies';
 export * from './Internal/GraphqlHealth';
+export * from './Internal/PothosOptional';
 export * from './maps/Coords';
