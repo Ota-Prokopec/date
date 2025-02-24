@@ -1,0 +1,14 @@
+{
+  "accountZodSchemaWithErrorMessages": {
+    "username": "Username must be at least 3 characters long",
+    "birthDate": "Invalid birth date",
+    "bio": "Bio is required",
+    "socials": "Invalid social media links",
+    "profilePictureURL": "Invalid profile picture URL",
+    "gender": "Invalid gender",
+    "lookingForGender": "Invalid preferred gender",
+    "userId": "User ID is required",
+    "coords": "Invalid coordinates",
+    "fillAllRequiredFields": "Please fill all required fields"
+  }
+}

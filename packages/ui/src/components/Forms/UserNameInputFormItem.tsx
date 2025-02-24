@@ -1,24 +1,31 @@
-import { type FieldValues } from 'react-hook-form'
+import { type FieldValues, type Path } from 'react-hook-form'
 import { UsernameInput } from '../Inputs/UsernameInput'
-import { ReactHookFormItem } from './ReactHookFormItem'
 import type { ReactHookFormExtendingFieldProps } from './ReactHookFormTypes'
+import { ReactHookFormFieldWrapper } from './ReactHookFormFieldWrapper'
 
-export type UserNameInputFormItemProps<TFieldValues extends FieldValues> =
-  ReactHookFormExtendingFieldProps<TFieldValues> & {
-    placeholder?: string
-    required?: boolean
-  }
+type UserNameInputFormItemValuetype = string
 
-export const UserNameInputFormItem = <TFieldValues extends FieldValues>({
+export type UserNameInputFormItemProps<
+  TFieldValues extends FieldValues,
+  TPath extends Path<TFieldValues>,
+> = {
+  placeholder?: string
+  required?: boolean
+} & ReactHookFormExtendingFieldProps<TFieldValues, TPath, UserNameInputFormItemValuetype>
+
+export const UserNameInputFormItem = <
+  TFieldValues extends FieldValues,
+  TPath extends Path<TFieldValues>,
+>({
   form,
   name,
   ...props
-}: UserNameInputFormItemProps<TFieldValues>) => {
+}: UserNameInputFormItemProps<TFieldValues, TPath>) => {
   return (
-    <ReactHookFormItem
+    <ReactHookFormFieldWrapper
       form={form}
       name={name}
       render={({ field }) => <UsernameInput {...field} {...props} />}
-    ></ReactHookFormItem>
+    ></ReactHookFormFieldWrapper>
   )
 }

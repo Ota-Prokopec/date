@@ -1,19 +1,33 @@
-import { ReactHookFormItem } from '@repo/ui/components/Forms/ReactHookFormItem'
+import { ReactHookFormFieldWrapper } from '@repo/ui/components/Forms/ReactHookFormFieldWrapper'
 import type { ReactHookFormExtendingFieldProps } from '@repo/ui/ts-lib/components/Forms/ReactHookFormTypes'
-import type { FieldValues } from 'react-hook-form'
+import type { FieldValues, Path } from 'react-hook-form'
+import { ProfileSocialsInput } from '../Inputs/ProfileSocialsInput'
+import type { SocialsData } from '@repo/ts-types'
 
-export type ProfileSocialsInputFormItemProps<TFieldValues extends FieldValues> =
-  ReactHookFormExtendingFieldProps<TFieldValues> & {}
+type UserNameInputFormItemValuetype = SocialsData
 
-export const ProfileSocialsInputFormItem = <TFieldValues extends FieldValues>({
+export type ProfileSocialsInputFormItemProps<
+  TFieldValues extends FieldValues,
+  TPath extends Path<TFieldValues>,
+> = {} & ReactHookFormExtendingFieldProps<TFieldValues, TPath, UserNameInputFormItemValuetype>
+
+export const ProfileSocialsInputFormItem = <
+  TFieldValues extends FieldValues,
+  TPath extends Path<TFieldValues>,
+>({
   form,
   name,
-}: ProfileSocialsInputFormItemProps<TFieldValues>) => {
+}: ProfileSocialsInputFormItemProps<TFieldValues, TPath>) => {
   return (
-    <ReactHookFormItem
+    <ReactHookFormFieldWrapper
       form={form}
       name={name}
-      render={({ field }) => <ProfileSocialsInputFormItem></ProfileSocialsInputFormItem>}
-    ></ReactHookFormItem>
+      render={({ field }) => (
+        <ProfileSocialsInput
+          value={field.value}
+          onChange={(value) => field.onChange(value)}
+        ></ProfileSocialsInput>
+      )}
+    ></ReactHookFormFieldWrapper>
   )
 }

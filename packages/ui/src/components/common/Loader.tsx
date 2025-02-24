@@ -1,22 +1,21 @@
-'use client';
-import { TailSpin } from 'react-loader-spinner';
-import { cn } from '../../lib/utils';
+'use client'
+import { TailSpin } from 'react-loader-spinner'
+import { cn } from '../../lib/utils'
 
 export type LoaderProps = {
-  className?: string;
-};
+  className?: string
+}
+
+const options: Parameters<typeof TailSpin>[0] = {
+  color: 'blue',
+  visible: true,
+  height: 40,
+  width: 40,
+  strokeWidth: 4,
+  ariaLabel: 'tail-spin-loading',
+  radius: 1,
+}
 
 export const Loader = ({ className }: LoaderProps) => {
-  return (
-    <TailSpin
-      visible={true}
-      height="80"
-      width="80"
-      color="#4fa94d"
-      ariaLabel="tail-spin-loading"
-      radius="1"
-      wrapperStyle={{}}
-      wrapperClass={cn('', className)}
-    />
-  );
-};
+  return <TailSpin {...options} wrapperStyle={{}} wrapperClass={cn('', className)} />
+}

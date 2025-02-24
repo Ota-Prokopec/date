@@ -1,10 +1,10 @@
 import type { FieldValues, SubmitHandler } from 'react-hook-form'
-import type { ReactHookFormExtendingProps } from './ReactHookFormTypes'
+import type { ReactHookFormExtendingFormProps } from './ReactHookFormTypes'
 import { Form } from '../shadcn/form'
 import type { ReactNode } from 'react'
 
 export type ReactHookFormProps<TFieldValues extends FieldValues> =
-  ReactHookFormExtendingProps<TFieldValues> & {
+  ReactHookFormExtendingFormProps<TFieldValues> & {
     children: ReactNode
     onSubmit: SubmitHandler<TFieldValues>
   }

@@ -7,6 +7,7 @@ export * from './Date/Account';
 export * from './Date/GenderTypes';
 export * from './Date/SocialPlatforms';
 export * from './Date/UserProfile';
+export * from './Helpers/ErrorMessage';
 export * from './Helpers/MakeOptional';
 export * from './Helpers/Nullable';
 export * from './Helpers/NullableObjects';

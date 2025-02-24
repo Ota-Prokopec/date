@@ -1,10 +1,10 @@
 {
-	"extends": "../typescript-config/base.json",
-	"compilerOptions": {
-		"outDir": "dist",
-		"rootDir": "src",
-		"baseUrl": "."
-	},
-	"include": ["src", "../../global.d.ts"],
-	"exclude": ["dist", "node_modules"]
+  "extends": "../typescript-config/base.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "rootDir": "src",
+    "baseUrl": "."
+  },
+  "include": ["src", "../../global.d.ts", "../../tsReset.d.ts"],
+  "exclude": ["dist", "node_modules"]
 }

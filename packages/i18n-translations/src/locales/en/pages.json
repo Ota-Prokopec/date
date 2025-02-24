@@ -2,13 +2,7 @@
   "root": "root",
 
   "auth-newuser": {
-    "usernameInputTitle": "How can we call you?",
-    "dateInputTitle": "When were you born?",
-    "genderInputTitle": "Your gender is?",
-    "lookingForGenderInputTitle": "You are looking for?",
-    "fillAllRequiredFields": "Please fill all required fields",
-    "continueButtonLabel": "Continue",
-    "errorMessage": "Something went wrong, please try it again."
+    "updateErrorMessage": "Something went wrong"
   },
   "profile": {
     "editProfileButtonLabel": "Edit profile",

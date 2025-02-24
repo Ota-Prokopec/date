@@ -1,24 +1,31 @@
-import { type FieldValues } from 'react-hook-form'
+import { type FieldValues, type Path } from 'react-hook-form'
 import { DateInput } from '../Inputs/DateInput'
-import { ReactHookFormItem } from './ReactHookFormItem'
+import { ReactHookFormFieldWrapper } from './ReactHookFormFieldWrapper'
 import type { ReactHookFormExtendingFieldProps } from './ReactHookFormTypes'
 
-export type DateInputFormItemProps<TFieldValues extends FieldValues> =
-  ReactHookFormExtendingFieldProps<TFieldValues> & {
-    placeholder?: string
-    required?: boolean
-  }
+type DateInputFormItemValuetype = Date
 
-export const DateInputFormItem = <TFieldValues extends FieldValues>({
+export type DateInputFormItemProps<
+  TFieldValues extends FieldValues,
+  TPath extends Path<TFieldValues>,
+> = {
+  placeholder?: string
+  required?: boolean
+} & ReactHookFormExtendingFieldProps<TFieldValues, TPath, DateInputFormItemValuetype>
+
+export const DateInputFormItem = <
+  TFieldValues extends FieldValues,
+  TPath extends Path<TFieldValues>,
+>({
   form,
   name,
   ...props
-}: DateInputFormItemProps<TFieldValues>) => {
+}: DateInputFormItemProps<TFieldValues, TPath>) => {
   return (
-    <ReactHookFormItem
+    <ReactHookFormFieldWrapper
       form={form}
       name={name}
       render={({ field }) => <DateInput {...field} {...props} />}
-    ></ReactHookFormItem>
+    ></ReactHookFormFieldWrapper>
   )
 }

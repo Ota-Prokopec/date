@@ -30,11 +30,11 @@ importers:
   apps/api:
     dependencies:
       '@pothos/core':
-        specifier: ^4.2.0
-        version: 4.3.0(graphql@16.10.0)
+        specifier: ^4.4.0
+        version: 4.4.0(graphql@16.10.0)
       '@pothos/plugin-dataloader':
         specifier: ^4.3.0
-        version: 4.3.0(@pothos/core@4.3.0(graphql@16.10.0))(dataloader@2.2.3)(graphql@16.10.0)
+        version: 4.3.0(@pothos/core@4.4.0(graphql@16.10.0))(dataloader@2.2.3)(graphql@16.10.0)
       '@repo/cloudinary':
         specifier: 'workspace: *'
         version: link:../../packages/cloudinary
@@ -220,6 +220,9 @@ importers:
       graphql-tag:
         specifier: ^2.12.6
         version: 2.12.6(graphql@16.10.0)
+      lodash:
+        specifier: ^4.17.21
+        version: 4.17.21
       lucide-react:
         specifier: ^0.475.0
         version: 0.475.0(react@19.0.0)
@@ -228,7 +231,7 @@ importers:
         version: 15.1.6(@babel/core@7.26.8)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       next-intl:
         specifier: ^3.26.3
-        version: 3.26.3(next@15.1.6(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react@19.0.0)
+        version: 3.26.3(next@15.1.6(@babel/core@7.26.8)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react@19.0.0)
       pg:
         specifier: 8.13.1
         version: 8.13.1
@@ -287,6 +290,9 @@ importers:
       '@repo/typescript-config':
         specifier: workspace:*
         version: link:../../packages/typescript-config
+      '@types/lodash':
+        specifier: ^4.17.10
+        version: 4.17.15
       '@types/node':
         specifier: ^22.13.4
         version: 22.13.4
@@ -323,6 +329,9 @@ importers:
       tailwindcss:
         specifier: ^3.4.17
         version: 3.4.17(ts-node@10.9.2(@types/node@22.13.4)(typescript@5.7.3))
+      type-fest:
+        specifier: ^4.34.1
+        version: 4.34.1
       typescript:
         specifier: 5.7.3
         version: 5.7.3
@@ -639,6 +648,9 @@ importers:
       '@pothos/plugin-dataloader':
         specifier: ^4.3.0
         version: 4.3.0(@pothos/core@4.3.0(graphql@16.10.0))(dataloader@2.2.3)(graphql@16.10.0)
+      '@pothos/plugin-zod':
+        specifier: ^4.1.0
+        version: 4.1.0(@pothos/core@4.3.0(graphql@16.10.0))(graphql@16.10.0)(zod@3.24.2)
       '@repo/better-auth':
         specifier: 'workspace: *'
         version: link:../better-auth
@@ -732,7 +744,7 @@ importers:
         version: 15.1.6(@babel/core@7.26.8)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       next-intl:
         specifier: ^3.26.3
-        version: 3.26.3(next@15.1.6(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react@19.0.0)
+        version: 3.26.3(next@15.1.6(@babel/core@7.26.8)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react@19.0.0)
       react:
         specifier: 19.0.0
         version: 19.0.0
@@ -1055,7 +1067,7 @@ importers:
         version: 15.1.6(@babel/core@7.26.8)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       next-intl:
         specifier: ^3.26.3
-        version: 3.26.3(next@15.1.6(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react@19.0.0)
+        version: 3.26.3(next@15.1.6(@babel/core@7.26.8)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react@19.0.0)
       next-themes:
         specifier: ^0.4.4
         version: 0.4.4(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -3748,12 +3760,24 @@ packages:
     peerDependencies:
       graphql: '>=16.6.0'
 
+  '@pothos/core@4.4.0':
+    resolution: {integrity: sha512-+xehqCaQGJ5d2fsaAoXHIpsCvVMYTKZpN1sc96LSM5gGVYKDM1cU8MhYtZ1lOQGi20YqN4MqAZSpyeRKKCK0LQ==}
+    peerDependencies:
+      graphql: '>=16.6.0'
+
   '@pothos/plugin-dataloader@4.3.0':
     resolution: {integrity: sha512-VXY4sv/iPUosUVO2W9Kmgo/F1TuvUI6vt1lc5iXZDITxNK9jU5qBZysHTjE3BiC1K7g6yMNXlb4Z65IxLgfPkA==}
     peerDependencies:
       '@pothos/core': '*'
       dataloader: '2'
       graphql: '>=16.6.0'
+
+  '@pothos/plugin-zod@4.1.0':
+    resolution: {integrity: sha512-KNAFllvYTZimY+rjELNRRUNVyN2zhZ0jIGsTDb9QVYZ8c5EBT3tHjuImu7t12GHnOAkuTimCEk/VngyMUQpEyw==}
+    peerDependencies:
+      '@pothos/core': '*'
+      graphql: '>=16.6.0'
+      zod: '*'
 
   '@prisma/client@5.22.0':
     resolution: {integrity: sha512-M0SVXfyHnQREBKxCgyo7sffrKttwE6R8PMq330MIUF0pTwjUhLbW84pFDlf06B27XyCR++VtjugEnIHdr07SVA==}
@@ -14315,11 +14339,27 @@ snapshots:
     dependencies:
       graphql: 16.10.0
 
+  '@pothos/core@4.4.0(graphql@16.10.0)':
+    dependencies:
+      graphql: 16.10.0
+
   '@pothos/plugin-dataloader@4.3.0(@pothos/core@4.3.0(graphql@16.10.0))(dataloader@2.2.3)(graphql@16.10.0)':
     dependencies:
       '@pothos/core': 4.3.0(graphql@16.10.0)
       dataloader: 2.2.3
       graphql: 16.10.0
+
+  '@pothos/plugin-dataloader@4.3.0(@pothos/core@4.4.0(graphql@16.10.0))(dataloader@2.2.3)(graphql@16.10.0)':
+    dependencies:
+      '@pothos/core': 4.4.0(graphql@16.10.0)
+      dataloader: 2.2.3
+      graphql: 16.10.0
+
+  '@pothos/plugin-zod@4.1.0(@pothos/core@4.3.0(graphql@16.10.0))(graphql@16.10.0)(zod@3.24.2)':
+    dependencies:
+      '@pothos/core': 4.3.0(graphql@16.10.0)
+      graphql: 16.10.0
+      zod: 3.24.2
 
   '@prisma/client@5.22.0(prisma@5.22.0)':
     optionalDependencies:
@@ -20025,7 +20065,7 @@ snapshots:
       next: 15.1.6(@babel/core@7.26.8)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       react: 19.0.0
 
-  next-intl@3.26.3(next@15.1.6(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react@19.0.0):
+  next-intl@3.26.3(next@15.1.6(@babel/core@7.26.8)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react@19.0.0):
     dependencies:
       '@formatjs/intl-localematcher': 0.5.10
       negotiator: 1.0.0

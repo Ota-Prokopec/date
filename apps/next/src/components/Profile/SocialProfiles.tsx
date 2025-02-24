@@ -1,23 +1,18 @@
 'use client'
 
-import type {
-  PothosOptional,
-  SocialProfileDataParams,
-  SocialProfilePlatform,
-  SocialsData,
-} from '@repo/ts-types'
+import type { SocialProfileDataParams, SocialProfilePlatform, SocialsData } from '@repo/ts-types'
 import { Column } from '@repo/ui/components/common/Column'
 import { Row } from '@repo/ui/components/common/Row'
 import { Text } from '@repo/ui/components/common/Text'
+import { IconLink } from '@repo/ui/components/Icons/Icons'
+import { Skeleton } from '@repo/ui/components/shadcn/skeleton'
+import { cn } from '@repo/ui/ts-lib/lib/utils'
 import Link from 'next/link'
 import { type ReactNode } from 'react'
-import { IconInstagram, IconLink } from '@repo/ui/components/Icons/Icons'
-import { cn } from '@repo/ui/ts-lib/lib/utils'
-import { Skeleton } from '@repo/ui/components/shadcn/skeleton'
-import { socialProfilesPlatformIcons } from './socialProfilesPlatformIcons'
+import { socialProfilesMetaData } from './socialProfilesData'
 
 export type SocialProfilesProps = {
-  socials: SocialsData
+  socials: Partial<SocialsData>
   disableLink?: boolean
   loading?: boolean
   onClick?: (platform: SocialProfilePlatform) => void
@@ -35,7 +30,7 @@ export const SocialProfiles = ({ socials, onClick, disableLink = false }: Social
             }}
             disableLink={disableLink}
             {...params}
-            icon={socialProfilesPlatformIcons[platform]}
+            icon={socialProfilesMetaData[platform].icon}
           ></SocialProfileItem>
         )
       )}
@@ -47,7 +42,7 @@ export const SocialProfilesSkeletonLoading = () => {
   return (
     <Column>
       <SocialProfileItemSkeletonLoading
-        icon={socialProfilesPlatformIcons['instagram']}
+        icon={socialProfilesMetaData['instagram'].icon}
       ></SocialProfileItemSkeletonLoading>
     </Column>
   )

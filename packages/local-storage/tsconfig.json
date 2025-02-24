@@ -9,6 +9,6 @@
     "baseUrl": ".",
     "jsx": "react"
   },
-  "include": ["src"],
+  "include": ["src", "../../global.d.ts", "../../tsReset.d.ts"],
   "exclude": ["node_modules"]
 }

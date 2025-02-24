@@ -8,6 +8,6 @@
     "rootDir": "src",
     "baseUrl": "."
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx"],
+  "include": ["src", "../../global.d.ts", "../../tsReset.d.ts"],
   "exclude": ["node_modules"]
 }

@@ -1,31 +1,33 @@
 import { type FieldValues, type Path } from 'react-hook-form'
-import { BioInput } from '../Inputs/BioInput'
+import { Input } from '../Inputs/Input'
 import { ReactHookFormFieldWrapper } from './ReactHookFormFieldWrapper'
 import type { ReactHookFormExtendingFieldProps } from './ReactHookFormTypes'
 
-type BioInputFormItemValuetype = string
+type TextInputInputFormItemValuetype = string
 
-export type BioInputFormItemProps<
+export type TextInputFormItemProps<
   TFieldValues extends FieldValues,
   TPath extends Path<TFieldValues>,
 > = {
   placeholder?: string
   required?: boolean
-} & ReactHookFormExtendingFieldProps<TFieldValues, TPath, BioInputFormItemValuetype>
+  type?: 'text' | 'email' | 'password'
+} & ReactHookFormExtendingFieldProps<TFieldValues, TPath, TextInputInputFormItemValuetype>
 
-export const BioInputFormItem = <
+export const TextInputFormItem = <
   TFieldValues extends FieldValues,
   TPath extends Path<TFieldValues>,
 >({
   form,
   name,
+  type = 'text',
   ...props
-}: BioInputFormItemProps<TFieldValues, TPath>) => {
+}: TextInputFormItemProps<TFieldValues, TPath>) => {
   return (
     <ReactHookFormFieldWrapper
       form={form}
       name={name}
-      render={({ field }) => <BioInput {...field} {...props} />}
+      render={({ field }) => <Input type={type} {...field} {...props} />}
     ></ReactHookFormFieldWrapper>
   )
 }

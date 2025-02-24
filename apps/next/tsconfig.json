@@ -32,7 +32,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "../../packages/i18n-translations/src/types.d.ts"
+    "../../packages/i18n-translations/src/types.ts"
   ],
   "exclude": ["node_modules"]
 }

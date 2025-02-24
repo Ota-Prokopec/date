@@ -3,15 +3,12 @@
     "title": "We use cookies to enhance your experience. By continuing to browse the site, you agree to our use of cookies.",
     "iAgree": "I agree"
   },
-  "accountZodSchemaWithErrorMessages": {
-    "username": "Uživatelské jméno musí mít alespoň 3 znaky",
-    "birthDate": "Neplatné datum narození",
-    "bio": "Bio je povinné",
-    "socials": "Neplatné sociální sítě",
-    "profilePictureURL": "Neplatná URL profilového obrázku",
-    "gender": "Neplatné pohlaví",
-    "lookingForGender": "Neplatné hledané pohlaví",
-    "userId": "ID uživatele je povinné",
-    "coords": "Neplatné souřadnice"
+  "NewUserForm": {
+    "usernameInputTitle": "Jak tě můžeme nazívat?",
+    "dateInputTitle": "Kdy jsi se narodil?",
+    "genderInputTitle": "Identifikuješ se jako?",
+    "lookingForGenderInputTitle": "Koho zde hledáš?",
+    "continueButtonLabel": "Pokračovat",
+    "errorMessage": "Něco se nepovedlo, prosíme, zkuste to znovu."
   }
 }

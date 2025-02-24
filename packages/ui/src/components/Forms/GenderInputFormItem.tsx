@@ -1,21 +1,29 @@
-import { type FieldValues } from 'react-hook-form'
+import { type FieldValues, type Path } from 'react-hook-form'
 import { GenderInput } from '../Inputs/GenderInput'
-import { ReactHookFormItem } from './ReactHookFormItem'
+import { ReactHookFormFieldWrapper } from './ReactHookFormFieldWrapper'
 import type { ReactHookFormExtendingFieldProps } from './ReactHookFormTypes'
+import type { Gender } from '@repo/ts-types'
 
-export type GenderInputFormItemProps<TFieldValues extends FieldValues> =
-  ReactHookFormExtendingFieldProps<TFieldValues> & {
-    placeholder?: string
-    required?: boolean
-  }
+type GenderInputFormItemValuetype = Gender
 
-export const GenderInputFormItem = <TFieldValues extends FieldValues>({
+export type GenderInputFormItemProps<
+  TFieldValues extends FieldValues,
+  TPath extends Path<TFieldValues>,
+> = {
+  placeholder?: string
+  required?: boolean
+} & ReactHookFormExtendingFieldProps<TFieldValues, TPath, GenderInputFormItemValuetype>
+
+export const GenderInputFormItem = <
+  TFieldValues extends FieldValues,
+  TPath extends Path<TFieldValues>,
+>({
   form,
   name,
   ...props
-}: GenderInputFormItemProps<TFieldValues>) => {
+}: GenderInputFormItemProps<TFieldValues, TPath>) => {
   return (
-    <ReactHookFormItem
+    <ReactHookFormFieldWrapper
       form={form}
       name={name}
       render={({ field }) => (
@@ -28,6 +36,6 @@ export const GenderInputFormItem = <TFieldValues extends FieldValues>({
           {...props}
         />
       )}
-    ></ReactHookFormItem>
+    ></ReactHookFormFieldWrapper>
   )
 }

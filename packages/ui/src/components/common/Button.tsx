@@ -32,7 +32,7 @@ export const Button = ({
       isDisabled={disabled}
       onClick={onClick}
       className={cn(
-        'rounded-lg bg-black text-white cursor-pointer text-2xl !p-8 !pl-10 !pr-10 flex flex-row gap-3 items-center justify-center',
+        'rounded-lg bg-black text-white cursor-pointer text-2xl !p-4 !pl-6 !pr-6 flex flex-row gap-3 items-center justify-center',
         { 'cursor-not-allowed': disabled },
         className
       )}

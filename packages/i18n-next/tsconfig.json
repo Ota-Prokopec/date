@@ -5,9 +5,9 @@
       "@/*": ["./src/*"]
     },
     "outDir": "dist",
-    "rootDir": "src",
-    "baseUrl": "."
+    "baseUrl": ".",
+    "rootDir": "src"
   },
-  "include": ["src"],
+  "include": ["src", "../../global.d.ts", "../../tsReset.d.ts"],
   "exclude": ["node_modules"]
 }

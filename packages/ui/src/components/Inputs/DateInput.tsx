@@ -11,23 +11,17 @@ type DateInputProps = {
 }
 
 export const DateInput = ({ value, onChange, className }: DateInputProps) => {
-  const [date, setDate] = useState(
-    parseDate(new Intl.DateTimeFormat('en-CA').format(value || Date.now()))
-  )
-
   return (
-    <DatePicker<CalendarDate>
+    <DatePicker
       inert={false}
+      aria-label="DateInput"
       showMonthAndYearPickers
       onChange={(e) => {
         if (!e) throw new Error('Calendar is not accessable')
-        setDate(() => {
-          const calendarDate = parseDate(e.toString())
-          onChange(calendarDate.toDate(getLocalTimeZone()))
-          return calendarDate
-        })
+        const calendarDate = parseDate(e.toString())
+        onChange(calendarDate.toDate(getLocalTimeZone()))
       }}
-      value={date}
+      value={parseDate(new Intl.DateTimeFormat('en-CA').format(value || Date.now()))}
       className={cn('', className)}
     />
   )

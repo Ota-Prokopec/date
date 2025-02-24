@@ -16,6 +16,57 @@ export const accountDataZodSchemaAllPropsRequired = z.object({
   age: z.number(),
 })
 
+export const getAccountDataZodSchemaWithErrorMessages = (
+  errorMessages: IntlMessages['others']['accountZodSchemaWithErrorMessages']
+) => {
+  return z.object({
+    username: accountDataZodSchemaAllPropsRequired.shape.username
+      .min(3, {
+        message: errorMessages.username,
+      })
+      .max(40, { message: errorMessages.username })
+      .nonempty({ message: errorMessages['fillAllRequiredFields'] }),
+    birthDate: accountDataZodSchemaAllPropsRequired.shape.birthDate.refine(
+      (date) => !isNaN(date.getTime()),
+      {
+        message: errorMessages.birthDate,
+      }
+    ),
+    bio: accountDataZodSchemaAllPropsRequired.shape.bio
+      .nonempty({
+        message: errorMessages.bio,
+      })
+      .nonempty({ message: errorMessages['fillAllRequiredFields'] }),
+    socials: accountDataZodSchemaAllPropsRequired.shape.socials.refine((val) => val !== undefined, {
+      message: errorMessages.socials,
+    }),
+    profilePictureURL: accountDataZodSchemaAllPropsRequired.shape.profilePictureURL
+      .url({
+        message: errorMessages.profilePictureURL,
+      })
+      .nonempty({ message: errorMessages['fillAllRequiredFields'] }),
+    gender: accountDataZodSchemaAllPropsRequired.shape.gender.refine(
+      (val) => ['male', 'female'].includes(val),
+      {
+        message: errorMessages.gender,
+      }
+    ),
+    lookingForGender: accountDataZodSchemaAllPropsRequired.shape.lookingForGender.refine(
+      (val) => ['male', 'female'].includes(val),
+      { message: errorMessages.lookingForGender }
+    ),
+    userId: accountDataZodSchemaAllPropsRequired.shape.userId
+      .min(3, {
+        message: errorMessages.userId,
+      })
+      .max(25, { message: errorMessages.userId }),
+    coords: accountDataZodSchemaAllPropsRequired.shape.coords.refine(
+      (val) => val.lat !== undefined && val.lng !== undefined,
+      { message: errorMessages.coords }
+    ),
+  })
+}
+
 export const accountDataZodSchema = accountDataZodSchemaAllPropsRequired.extend({
   username: accountDataZodSchemaAllPropsRequired.shape.username,
   birthDate: accountDataZodSchemaAllPropsRequired.shape.birthDate.nullable().optional(),

@@ -8,7 +8,7 @@
     "./en-components": "./src/locales/en/components.json",
     "./cs-pages": "./src/locales/cs/pages.json",
     "./cs-components": "./src/locales/cs/components.json",
-    "./types": "./src/types.d.ts"
+    "./types": "./src/types.ts"
   },
   "devDependencies": {
     "@repo/typescript-config": "workspace: *"

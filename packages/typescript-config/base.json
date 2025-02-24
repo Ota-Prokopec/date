@@ -25,7 +25,5 @@
     "declaration": true,
     "declarationMap": true,
     "sourceMap": false
-  },
-
-  "include": ["../../tsReset.d.ts"]
+  }
 }
