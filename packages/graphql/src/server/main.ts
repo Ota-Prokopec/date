@@ -1,7 +1,7 @@
 import SchemaBuilder from '@pothos/core'
-import { createContext } from './createContext'
 import DataloaderPlugin from '@pothos/plugin-dataloader'
 import ZodPlugin from '@pothos/plugin-zod'
+import { createContext } from './createContext'
 
 type getBuilderProps = {
   Objects: PothosSchemaTypes.UserSchemaTypes['Objects']
@@ -20,8 +20,14 @@ export const getBuilder = <Parameters extends getBuilderProps>() =>
     Inputs: Parameters['Args']
   }>({
     defaultInputFieldRequiredness: true,
-
     plugins: [DataloaderPlugin, ZodPlugin],
+    zod: {
+      // optionally customize how errors are formatted
+      validationError: (zodError) => {
+        // the default behavior is to just throw the zod error directly
+        return zodError
+      },
+    },
   })
 
 export { createContext }

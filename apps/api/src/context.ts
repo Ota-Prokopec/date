@@ -8,11 +8,12 @@ type CreateContext = ({
   request,
 }: {
   request: Request
-}) => Promise<{ loaders: Loaders } & AuthContext>
+}) => Promise<{ loaders: Loaders; isAuthenticated: boolean } & AuthContext>
 
 export const createContext: CreateContext = async ({ request }: { request: Request }) => {
   const auth = await authContext({ request })
   const loaders: Loaders = getLoaders()
+  const isAuthenticated = auth.session?.user.id ? true : false
 
-  return { ...auth, loaders: loaders }
+  return { ...auth, isAuthenticated, loaders: loaders }
 }

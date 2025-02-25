@@ -1,11 +1,14 @@
 import { builder } from '@/builder'
-import type { AccountData, Nullable } from '@repo/ts-types'
+import { type AccountData, type NullableObjectDeep } from '@repo/ts-types'
+import { PartialDeep } from 'type-fest'
 
-export type UpdateAccountArgs = Nullable<
-  Partial<
+export type UpdateAccountArgs = NullableObjectDeep<
+  PartialDeep<
     Pick<AccountData, 'bio' | 'birthDate' | 'gender' | 'lookingForGender' | 'socials' | 'username'>
   >
 >
+
+type T = UpdateAccountArgs['socials']
 
 builder.inputType('UpdateAccountArgs', {
   fields: (t) => ({

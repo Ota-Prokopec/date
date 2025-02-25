@@ -15,8 +15,9 @@ import type {
   UserPothosType,
 } from './schema/PothosSchemaTypes'
 import type { UpdateAccountArgs } from './resolvers/user'
+import type { QueryFieldBuilder } from '@pothos/core'
 
-export const builder = getBuilder<{
+export type PothosBuilderTypes = {
   Objects: {
     Coords: CoordsPothosType
     Account: AccountPothosType
@@ -32,4 +33,11 @@ export const builder = getBuilder<{
   }
   Context: Context
   Args: { UpdateAccountArgs: UpdateAccountArgs }
-}>()
+}
+
+export const builder = getBuilder<PothosBuilderTypes>()
+export type Builder = typeof builder
+
+export type PothosTValue = Parameters<Builder['queryField']>[1] extends (t: infer TType) => any
+  ? TType
+  : never

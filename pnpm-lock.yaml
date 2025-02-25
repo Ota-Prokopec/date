@@ -643,14 +643,14 @@ importers:
         specifier: ^0.6.0
         version: 0.6.1(express@4.21.2)
       '@pothos/core':
-        specifier: ^4.2.0
-        version: 4.3.0(graphql@16.10.0)
+        specifier: ^4.4.0
+        version: 4.4.0(graphql@16.10.0)
       '@pothos/plugin-dataloader':
         specifier: ^4.3.0
-        version: 4.3.0(@pothos/core@4.3.0(graphql@16.10.0))(dataloader@2.2.3)(graphql@16.10.0)
+        version: 4.3.0(@pothos/core@4.4.0(graphql@16.10.0))(dataloader@2.2.3)(graphql@16.10.0)
       '@pothos/plugin-zod':
         specifier: ^4.1.0
-        version: 4.1.0(@pothos/core@4.3.0(graphql@16.10.0))(graphql@16.10.0)(zod@3.24.2)
+        version: 4.1.0(@pothos/core@4.4.0(graphql@16.10.0))(graphql@16.10.0)(zod@3.24.2)
       '@repo/better-auth':
         specifier: 'workspace: *'
         version: link:../better-auth
@@ -945,6 +945,9 @@ importers:
       tsup:
         specifier: 8.2.2
         version: 8.2.2(jiti@2.4.2)(postcss@8.5.1)(tsx@4.19.2)(typescript@5.7.3)(yaml@2.7.0)
+      type-fest:
+        specifier: ^4.34.1
+        version: 4.34.1
       typescript:
         specifier: 5.7.3
         version: 5.7.3
@@ -3754,11 +3757,6 @@ packages:
 
   '@popperjs/core@2.11.8':
     resolution: {integrity: sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==}
-
-  '@pothos/core@4.3.0':
-    resolution: {integrity: sha512-i4nyI8wSCjxdHUomqQ2K3FH0Glklomfv4tJNifQVU9lPtQKoKaS69VxGv+fru0HAZzb1eC1XPEPN3XPCYcvZ7Q==}
-    peerDependencies:
-      graphql: '>=16.6.0'
 
   '@pothos/core@4.4.0':
     resolution: {integrity: sha512-+xehqCaQGJ5d2fsaAoXHIpsCvVMYTKZpN1sc96LSM5gGVYKDM1cU8MhYtZ1lOQGi20YqN4MqAZSpyeRKKCK0LQ==}
@@ -14335,18 +14333,8 @@ snapshots:
 
   '@popperjs/core@2.11.8': {}
 
-  '@pothos/core@4.3.0(graphql@16.10.0)':
-    dependencies:
-      graphql: 16.10.0
-
   '@pothos/core@4.4.0(graphql@16.10.0)':
     dependencies:
-      graphql: 16.10.0
-
-  '@pothos/plugin-dataloader@4.3.0(@pothos/core@4.3.0(graphql@16.10.0))(dataloader@2.2.3)(graphql@16.10.0)':
-    dependencies:
-      '@pothos/core': 4.3.0(graphql@16.10.0)
-      dataloader: 2.2.3
       graphql: 16.10.0
 
   '@pothos/plugin-dataloader@4.3.0(@pothos/core@4.4.0(graphql@16.10.0))(dataloader@2.2.3)(graphql@16.10.0)':
@@ -14355,9 +14343,9 @@ snapshots:
       dataloader: 2.2.3
       graphql: 16.10.0
 
-  '@pothos/plugin-zod@4.1.0(@pothos/core@4.3.0(graphql@16.10.0))(graphql@16.10.0)(zod@3.24.2)':
+  '@pothos/plugin-zod@4.1.0(@pothos/core@4.4.0(graphql@16.10.0))(graphql@16.10.0)(zod@3.24.2)':
     dependencies:
-      '@pothos/core': 4.3.0(graphql@16.10.0)
+      '@pothos/core': 4.4.0(graphql@16.10.0)
       graphql: 16.10.0
       zod: 3.24.2
 
