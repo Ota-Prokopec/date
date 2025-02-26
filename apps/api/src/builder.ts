@@ -15,7 +15,7 @@ import type {
   UserPothosType,
 } from './schema/PothosSchemaTypes'
 import type { UpdateAccountArgs } from './resolvers/user'
-import type { QueryFieldBuilder } from '@pothos/core'
+import type { QueryFieldBuilder, SchemaTypes } from '@pothos/core'
 
 export type PothosBuilderTypes = {
   Objects: {
@@ -30,7 +30,7 @@ export type PothosBuilderTypes = {
     File: FileScalar
     Date: DateScalar
     Socials: SocialsScalar
-  }
+  } & SchemaTypes['Scalars']
   Context: Context
   Args: { UpdateAccountArgs: UpdateAccountArgs }
 }

@@ -10,5 +10,13 @@
     "lookingForGenderInputTitle": "Koho zde hledáš?",
     "continueButtonLabel": "Pokračovat",
     "errorMessage": "Něco se nepovedlo, prosíme, zkuste to znovu."
+  },
+  "UserForm": {
+    "usernameInputTitle": "Jak tě můžeme nazívat?",
+    "dateInputTitle": "Kdy jsi se narodil?",
+    "genderInputTitle": "Identifikuješ se jako?",
+    "lookingForGenderInputTitle": "Koho zde hledáš?",
+    "continueButtonLabel": "Pokračovat",
+    "errorMessage": "Něco se nepovedlo, prosíme, zkuste to znovu."
   }
 }

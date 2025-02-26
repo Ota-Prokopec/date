@@ -1,4 +1,4 @@
-import { type FieldValues, type Path } from 'react-hook-form'
+import { useForm, type FieldValues, type Path, type UseFormReturn } from 'react-hook-form'
 import { UsernameInput } from '../Inputs/UsernameInput'
 import type { ReactHookFormExtendingFieldProps } from './ReactHookFormTypes'
 import { ReactHookFormFieldWrapper } from './ReactHookFormFieldWrapper'
@@ -15,7 +15,7 @@ export type UserNameInputFormItemProps<
 
 export const UserNameInputFormItem = <
   TFieldValues extends FieldValues,
-  TPath extends Path<TFieldValues>,
+  TPath extends Path<TFieldValues> = Path<TFieldValues>,
 >({
   form,
   name,

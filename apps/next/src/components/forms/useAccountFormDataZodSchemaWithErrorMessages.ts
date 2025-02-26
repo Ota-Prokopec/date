@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 
 type ZodSchema = ReturnType<typeof getAccountDataZodSchemaWithErrorMessages>
 
-export const useAccountDataZodSchemaWithErrorMessages = () => {
+export const useAccountFormDataZodSchemaWithErrorMessages = () => {
   const { messages } = useMessages('others.accountZodSchemaWithErrorMessages')
   const [zodSchema, setZodSchema] = useState<ZodSchema | undefined>(undefined)
 

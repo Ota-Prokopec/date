@@ -16,10 +16,11 @@ export const getBuilder = <Parameters extends getBuilderProps>() =>
     DefaultInputFieldRequiredness: true
     Objects: Parameters['Objects']
     Scalars: Parameters['Scalars']
-    DefaultFieldNullability: true
+    DefaultFieldNullability: false
     Inputs: Parameters['Args']
   }>({
     defaultInputFieldRequiredness: true,
+    defaultFieldNullability: false,
     plugins: [DataloaderPlugin, ZodPlugin],
     zod: {
       // optionally customize how errors are formatted

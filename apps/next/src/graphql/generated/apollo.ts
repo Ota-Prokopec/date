@@ -21,10 +21,10 @@ export type Scalars = {
   File: { input: File; output: File; }
   Gender: { input: "male" | "female"; output: "male" | "female"; }
   GraphQLHealth: { input: {ok: boolean}; output: {ok: boolean}; }
-  Socials: { input: {instagram: {
+  Socials: { input: {instagram?: {
         profileId: string;
         link: string;
-  }}; output: {instagram: {
+  }}; output: {instagram?: {
         profileId: string;
         link: string;
   }}; }
@@ -46,11 +46,11 @@ export type Account = {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  setHealth?: Maybe<Scalars['GraphQLHealth']['output']>;
-  test?: Maybe<Scalars['Boolean']['output']>;
-  updateAccount?: Maybe<Scalars['Boolean']['output']>;
-  updateAccountPicture?: Maybe<Scalars['Boolean']['output']>;
-  uploadFile?: Maybe<Scalars['Boolean']['output']>;
+  setHealth: Scalars['GraphQLHealth']['output'];
+  test: Scalars['Boolean']['output'];
+  updateAccount: Scalars['Boolean']['output'];
+  updateAccountPicture: Scalars['Boolean']['output'];
+  uploadFile: Scalars['Boolean']['output'];
 };
 
 
@@ -75,9 +75,9 @@ export type MutationUploadFileArgs = {
 
 export type Query = {
   __typename?: 'Query';
-  getAccountProfile?: Maybe<Account>;
-  getHealth?: Maybe<Scalars['GraphQLHealth']['output']>;
-  getUserProfile?: Maybe<User>;
+  getAccountProfile: Account;
+  getHealth: Scalars['GraphQLHealth']['output'];
+  getUserProfile: User;
 };
 
 
@@ -120,37 +120,37 @@ export type SaveNewUserInformationMutationVariables = Exact<{
 }>;
 
 
-export type SaveNewUserInformationMutation = { __typename?: 'Mutation', updateAccount?: boolean | null | undefined };
+export type SaveNewUserInformationMutation = { __typename?: 'Mutation', updateAccount: boolean };
 
 export type UpdateAccountMutationVariables = Exact<{
   userProfileData: UpdateAccountArgs;
 }>;
 
 
-export type UpdateAccountMutation = { __typename?: 'Mutation', updateAccount?: boolean | null | undefined };
+export type UpdateAccountMutation = { __typename?: 'Mutation', updateAccount: boolean };
 
 export type GetAccountProfileQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetAccountProfileQuery = { __typename?: 'Query', getAccountProfile?: { __typename?: 'Account', bio?: string | null | undefined, birthDate?: Date | null | undefined, coords?: {lat: number, lng: number} | null | undefined, gender?: "male" | "female" | null | undefined, lookingForGender?: "male" | "female" | null | undefined, profilePictureURL?: string | null | undefined, socials?: {instagram: {
+export type GetAccountProfileQuery = { __typename?: 'Query', getAccountProfile: { __typename?: 'Account', bio?: string | null | undefined, birthDate?: Date | null | undefined, coords?: {lat: number, lng: number} | null | undefined, gender?: "male" | "female" | null | undefined, lookingForGender?: "male" | "female" | null | undefined, profilePictureURL?: string | null | undefined, socials?: {instagram?: {
           profileId: string;
           link: string;
-    }} | null | undefined, userId: string, username: string, age?: number | null | undefined } | null | undefined };
+    }} | null | undefined, userId: string, username: string, age?: number | null | undefined } };
 
 export type GetHealthStatusQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetHealthStatusQuery = { __typename?: 'Query', getHealth?: {ok: boolean} | null | undefined };
+export type GetHealthStatusQuery = { __typename?: 'Query', getHealth: {ok: boolean} };
 
 export type GetUserProfileQueryVariables = Exact<{
   userId: Scalars['String']['input'];
 }>;
 
 
-export type GetUserProfileQuery = { __typename?: 'Query', getUserProfile?: { __typename?: 'User', age: number, bio?: string | null | undefined, gender: "male" | "female", lookingForGender: "male" | "female", profilePictureURL: string, socials?: {instagram: {
+export type GetUserProfileQuery = { __typename?: 'Query', getUserProfile: { __typename?: 'User', age: number, bio?: string | null | undefined, gender: "male" | "female", lookingForGender: "male" | "female", profilePictureURL: string, socials?: {instagram?: {
           profileId: string;
           link: string;
-    }} | null | undefined, userId: string, username: string } | null | undefined };
+    }} | null | undefined, userId: string, username: string } };
 
 
 export const SaveNewUserInformationDocument = gql`

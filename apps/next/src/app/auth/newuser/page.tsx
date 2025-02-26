@@ -1,11 +1,9 @@
 'use client'
 
-import { NewUserForm } from '@/components/forms/NewUserForm'
+import type { NewUserFormData } from '@/components/forms/updateNewUserForm/newUserUpdateAccountTypes'
+import { NewUserForm } from '@/components/forms/updateNewUserForm/UpdateNewUserForm'
+import { useAccountFormDataZodSchemaWithErrorMessages } from '@/components/forms/useAccountFormDataZodSchemaWithErrorMessages'
 import { useSaveNewUserInformationMutation } from '@/graphql/generated/apollo'
-import {
-  useNewuserUpdateAccountDataZodSchemaWithErrorMessages,
-  type NewUserFormData,
-} from '@/lib/account/newuserUpdateAccountTypes'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { cookieStorage } from '@repo/cookies'
 import { Center } from '@repo/ui/components/common/Center'
@@ -17,10 +15,10 @@ import { toast } from 'sonner'
 
 const NewUserPage = () => {
   const [locale, setLocale] = cookieStorage.useStorageValue('locale')
-  const translationsAccountZodSchema = useTranslations('others.accountZodSchemaWithErrorMessages')
-  const translationsAuthNewuserPage = useTranslations('pages.auth-newuser')
+
+  const t = useTranslations('pages.auth-newuser')
   const router = useRouter()
-  const formDataZodSchema = useNewuserUpdateAccountDataZodSchemaWithErrorMessages()
+  const { zodSchema: formDataZodSchema } = useAccountFormDataZodSchemaWithErrorMessages()
   const [updateInfo, updateInfoState] = useSaveNewUserInformationMutation()
 
   //* Forms
@@ -44,7 +42,7 @@ const NewUserPage = () => {
   //! update errors toast
   useSuperEffect(
     () => {
-      toast.error(translationsAuthNewuserPage('updateErrorMessage'), { dismissible: true })
+      toast.error(t('updateErrorMessage'), { dismissible: true })
     },
     [updateInfoState.error],
     { mountedOnly: true }

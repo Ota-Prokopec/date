@@ -9,7 +9,7 @@ const codegenConfigConfig: CodegenConfig['config'] = {
     Gender: '"male" | "female"',
     GraphQLHealth: '{ok: boolean}',
     Date: 'Date',
-    Socials: `{instagram: {
+    Socials: `{instagram?: {
         profileId: string;
         link: string;
   }}`,

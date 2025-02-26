@@ -1,25 +1,26 @@
 'use client'
 
-import { UpdateUserInfo } from '@/components/forms/UpdateUserInfo'
-import type { UpdateUserInfoFormData } from '@/components/forms/UpdateUserInfoForm'
-import { useGetAccountProfileQuery } from '@/graphql/generated/apollo'
-import { useCreateAccountZodSchemaWithErrorMessages } from '@/lib/account/accountZodSchemaWithErrorMessages'
-import { accountDataZodSchema, userProfileDataZodSchema, type AccountData } from '@repo/ts-types'
+import { getAccountDataAction } from '@/app/actions/getAccountData'
+import { UpdateUserForm } from '@/components/forms/updateUserForm/UpdateUserForm'
+import type { UserAccountFormData } from '@/components/forms/updateUserForm/userUpdateAccountForm'
+import { useUpdateAccountMutation } from '@/graphql/generated/apollo'
+import { accountDataZodSchemaAllPropsRequired, type AccountData } from '@repo/ts-types'
 import { Center } from '@repo/ui/components/common/Center'
-import { Loading } from '@repo/ui/components/common/Loading'
 import { useTranslations } from 'next-intl'
-import { notFound } from 'next/navigation'
-import { useEffect } from 'react'
-import { toast } from 'sonner'
-import { match } from 'ts-pattern'
+import { useRouter } from 'next/navigation'
+import { use, useEffect } from 'react'
+import type { SubmitHandler } from 'react-hook-form'
+import { useEditUserProfileReactHookForm } from './useEditUserProfileReactHookForm'
 
-const loadedAccountZodTypeCheckForEditing = userProfileDataZodSchema
+const loadedAccountZodTypeCheckForEditing = accountDataZodSchemaAllPropsRequired
   .pick({
     bio: true,
     gender: true,
     lookingForGender: true,
     socials: true,
     profilePictureURL: true,
+    username: true,
+    birthDate: true,
   })
   .partial({
     bio: true,
@@ -29,37 +30,31 @@ const loadedAccountZodTypeCheckForEditing = userProfileDataZodSchema
 
 const ProfilePage = () => {
   const t = useTranslations('pages.profile-edit')
-  const accountProfileState = useGetAccountProfileQuery()
+
+  //? loading - loading.tsx, error - error.tsx
+  const currentAccountDataForValidation: AccountData = use(getAccountDataAction())
+  const router = useRouter()
+
+  const [updateUserAccount, UpdatingUserAccountState] = useUpdateAccountMutation()
 
   const { data: accountProfileData, success: isAccountProfileDataValid } =
-    loadedAccountZodTypeCheckForEditing.safeParse(accountProfileState.data?.getAccountProfile)
+    loadedAccountZodTypeCheckForEditing.safeParse(currentAccountDataForValidation)
 
-  //* If error occures during validation of profile data with zod schema
+  //? If error occures during validation of profile data with zod schema
   useEffect(() => {
-    if (!isAccountProfileDataValid && !accountProfileState.loading && accountProfileData)
-      toast.error(t('somethingWentWrongErrorMessage'), { dismissible: true })
-  }, [isAccountProfileDataValid, t, accountProfileState.loading, accountProfileData])
+    if (!isAccountProfileDataValid) router.replace('/auth/newuser')
+  }, [isAccountProfileDataValid])
 
-  //* If error occures during loading profile data
-  useEffect(() => {
-    if (!accountProfileState.loading && accountProfileState.error) {
-      if (!accountProfileData) notFound()
-      else toast.error(t('somethingWentWrongErrorMessage'), { dismissible: true })
-    }
-  }, [accountProfileState.error, accountProfileState.loading, accountProfileData, t])
+  const form = useEditUserProfileReactHookForm(accountProfileData)
+
+  //? Submit
+  const onSubmit: SubmitHandler<UserAccountFormData> = async (data) => {
+    await updateUserAccount({ variables: { userProfileData: data } })
+  }
 
   return (
     <Center>
-      {match({ loading: accountProfileState.loading })
-        .with({ loading: true }, () => <Loading></Loading>)
-        .otherwise(() => (
-          <UpdateUserInfo
-            currentValues={{
-              ...accountProfileData!,
-              profilePictureUrl: accountProfileData?.profilePictureURL,
-            }}
-          ></UpdateUserInfo>
-        ))}
+      <UpdateUserForm form={form} onSubmit={onSubmit}></UpdateUserForm>
     </Center>
   )
 }

@@ -1,6 +1,3 @@
-import type { AccountData } from 'src/Date/Account'
-import { PartialDeep } from 'type-fest'
-
 export type NullableObject<TObject extends Record<string, unknown>> = {
   [Key in keyof TObject]: TObject[Key] | null
 }

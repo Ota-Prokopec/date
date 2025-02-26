@@ -3,8 +3,6 @@ import { getUsersAge } from '@/lib/users/getUsers'
 import type { UserPothosType } from '@/schema/PothosSchemaTypes'
 import { db, drizzleSchema } from '@repo/db'
 
-//add coords and age
-
 builder.queryField('getAccountProfile', (t) =>
   t.field({
     type: 'Account',
@@ -18,13 +16,9 @@ builder.queryField('getAccountProfile', (t) =>
 
       if (!accountData) throw new Error('User profile was not found')
 
-      const usersCoords = await ctx.loaders.coords.load(userId)
-
       return {
-        age: accountData?.birthDate ? getUsersAge(accountData?.birthDate) : null,
         bio: accountData?.bio,
         birthDate: accountData?.birthDate,
-        coords: usersCoords,
         gender: accountData?.gender,
         lookingForGender: accountData?.lookingForGender,
         profilePictureURL: accountData?.image,
