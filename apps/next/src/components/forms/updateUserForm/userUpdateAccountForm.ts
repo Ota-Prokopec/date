@@ -1,10 +1,10 @@
-import type { AccountData, NonNullableObject } from '@repo/ts-types'
+import type { FullAccountData } from '@repo/ts-types'
 import { useAccountFormDataZodSchemaWithErrorMessages } from '../useAccountFormDataZodSchemaWithErrorMessages'
 
-export type UserAccountFormData = Required<
-  NonNullableObject<Pick<AccountData, 'username' | 'gender' | 'lookingForGender' | 'birthDate'>>
-> &
-  Pick<AccountData, 'bio' | 'socials'>
+export type UserAccountFormData = Pick<
+  FullAccountData,
+  'username' | 'gender' | 'lookingForGender' | 'birthDate' | 'bio' | 'socials'
+>
 
 export const useUserAccountFormDataZodSchemaWithErrorMessages = () =>
   useAccountFormDataZodSchemaWithErrorMessages()

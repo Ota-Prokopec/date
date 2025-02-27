@@ -1,20 +1,20 @@
-import { z } from 'zod';
-import { parseDatabaseURL } from './parseDatabaseURL';
+import { z } from 'zod'
+import { parseDatabaseURL } from './parseDatabaseURL'
 export const getServerZodSchema = (NODE_ENV: 'test' | 'development') => ({
   DATABASE_URL: z
     .string()
     .url()
     .refine((databaseURL) => {
-      const parsedDatabaseURL = parseDatabaseURL(databaseURL);
+      const parsedDatabaseURL = parseDatabaseURL(databaseURL)
 
       if (
         ['test', 'development'].includes(NODE_ENV!) &&
         !parsedDatabaseURL.host?.includes('localhost')
       ) {
-        return false;
+        return false
       }
 
-      return true;
+      return true
     }),
   NODE_ENV: z.enum(['development', 'test', 'production']).default('development'),
   API_URL: z.string().url(),
@@ -29,4 +29,5 @@ export const getServerZodSchema = (NODE_ENV: 'test' | 'development') => ({
   CLODINARY_API_KEY: z.string(),
   CLOUDINARY_API_SECRET: z.string(),
   CLOUDINARY_ROOT_FOLDER_NAME: z.string(),
-});
+  BETTER_AUTH_SESSION_TOKEN_NAME: z.string(),
+})

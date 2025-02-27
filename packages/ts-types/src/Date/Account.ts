@@ -84,4 +84,22 @@ export const accountDataZodSchema = accountDataZodSchemaAllPropsRequired.extend(
   age: accountDataZodSchemaAllPropsRequired.shape.age.nullable().optional(),
 })
 
+export const fullAccountDataZodSchema = z.object({
+  username: accountDataZodSchemaAllPropsRequired.shape.username,
+  birthDate: accountDataZodSchemaAllPropsRequired.shape.birthDate,
+  bio: accountDataZodSchemaAllPropsRequired.shape.bio.nullable().optional(),
+  socials: accountDataZodSchemaAllPropsRequired.shape.socials.nullable().optional(),
+  profilePictureURL: accountDataZodSchemaAllPropsRequired.shape.profilePictureURL
+    .nullable()
+    .optional(),
+  gender: accountDataZodSchemaAllPropsRequired.shape.gender,
+  lookingForGender: accountDataZodSchemaAllPropsRequired.shape.lookingForGender
+    .nullable()
+    .optional(),
+  userId: accountDataZodSchemaAllPropsRequired.shape.userId,
+  coords: accountDataZodSchemaAllPropsRequired.shape.coords,
+  age: accountDataZodSchemaAllPropsRequired.shape.age,
+})
+
 export type AccountData = TypeOf<typeof accountDataZodSchema>
+export type FullAccountData = TypeOf<typeof fullAccountDataZodSchema>

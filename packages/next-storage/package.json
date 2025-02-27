@@ -40,6 +40,7 @@
     "@rollup/plugin-node-resolve": "^15.3.0",
     "@types/js-cookie": "^3.0.6",
     "browser-cookies": "^1.2.0",
+    "cookie": "^1.0.2",
     "dequal": "^2.0.3",
     "js-cookie": "^3.0.5",
     "nookies": "^2.5.2",

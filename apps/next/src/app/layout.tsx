@@ -18,30 +18,6 @@ type RootLayoutProps = Readonly<{
 }>
 
 export default async function RootLayout({ children }: RootLayoutProps) {
-  const headers = await getHeaders()
-
-  //	const pageUrl = headers.get('url')?.replace(':3000', '')
-
-  //if (!pageUrl) throw new Error('no page found - the url is invalid - no page in url')
-
-  //	const url = new URL(pageUrl)
-
-  //const pathname = url.pathname
-
-  //	if (!pathname) throw new Error(`pathname does not exist, pathname: ${pathname}`)
-
-  const session = await getSession({ headers: headers })
-
-  //	if (!session && !pathname.startsWith('/auth')) redirect('/auth')
-
-  const ssrCookies = cookieStorageZodSchema.parse(parseCookies((await nextCookies()).getAll()))
-
-  const locale: Locale = ssrCookies['locale']
-  console.log(locale)
-
-  const ssrMessages = await getMessages({ locale: locale })
-  const timeZone = await getTimeZone()
-
   return (
     <html>
       <title>Musify</title>
@@ -62,19 +38,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
           //  dark: ssrCookies['colorTheme'] === 'dark' ? true : false,
         })}
       >
-        <Layout
-          timeZone={timeZone}
-          locale={locale}
-          ssrMessages={ssrMessages}
-          ssrCookies={ssrCookies}
-        >
-          <Toaster
-            style={{ margin: '10px' }}
-            className="[&>*]:flex [&>*]:flex-row"
-            richColors
-          ></Toaster>
-          <Center className="w-full min-h-[100vh] h-auto">{children}</Center>
-        </Layout>
+        {children}
       </body>
     </html>
   )

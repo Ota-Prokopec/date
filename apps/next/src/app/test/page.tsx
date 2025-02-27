@@ -1,15 +1,9 @@
 'use client'
 
-import type { GetServerSideProps } from 'next'
-import { use } from 'react'
-
-const promise = new Promise((res) => {
-  setTimeout(res, 10000)
-})
+import { use, useEffect } from 'react'
 
 const TestPage = () => {
-  const res = use(promise)
-  return <>"j"</>
+  return 'ahoj'
 }
 
 export default TestPage

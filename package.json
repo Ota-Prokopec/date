@@ -28,7 +28,7 @@
     "drizzle-kit": "0.30.4",
     "react": "19.0.0",
     "@types/react": "19.0.8",
-    "next": "15.1.6",
+    "next": "15.2.0",
     "react-dom": "19.0.0",
     "@types/react-dom": "^19",
     "eslint-config-next": "15.1.6",
