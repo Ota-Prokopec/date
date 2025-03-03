@@ -1,6 +1,6 @@
 'use client'
 
-import { EditProfileItem } from '@/components/forms/EditProfileItem'
+import { EditAccountProfileItem } from '@/components/forms/EditAccountProfileItem'
 import { Button } from '@repo/ui/components/common/Button'
 import { Center } from '@repo/ui/components/common/Center'
 import { Column } from '@repo/ui/components/common/Column'
@@ -15,16 +15,16 @@ import { cn } from '@repo/ui/ts-lib/lib/utils'
 import { ChevronRight } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { type SubmitHandler, type UseFormReturn } from 'react-hook-form'
-import type { NewUserFormData } from './newUserUpdateAccountTypes'
+import type { NewAccountFormData } from './newAccountUpdateAccountTypes'
 
-type NewUserFormProps = {
+type NewAccountFormProps = {
   className?: string
-  form: UseFormReturn<NewUserFormData>
+  form: UseFormReturn<NewAccountFormData>
   isLoading?: boolean
-  onSubmit: SubmitHandler<NewUserFormData>
+  onSubmit: SubmitHandler<NewAccountFormData>
 }
 
-export const NewUserForm = ({ form, className, isLoading, onSubmit }: NewUserFormProps) => {
+export const NewAccountForm = ({ form, className, isLoading, onSubmit }: NewAccountFormProps) => {
   const t = useTranslations('components.NewUserForm')
 
   return (
@@ -41,18 +41,18 @@ export const NewUserForm = ({ form, className, isLoading, onSubmit }: NewUserFor
         <Left>
           <LocaleSwitch />
         </Left>
-        <EditProfileItem className="w-full" title={t('usernameInputTitle')}>
+        <EditAccountProfileItem className="w-full" title={t('usernameInputTitle')}>
           <UserNameInputFormItem form={form} name="username"></UserNameInputFormItem>
-        </EditProfileItem>
-        <EditProfileItem title={t('dateInputTitle')}>
+        </EditAccountProfileItem>
+        <EditAccountProfileItem title={t('dateInputTitle')}>
           <DateInputFormItem form={form} name="birthDate"></DateInputFormItem>
-        </EditProfileItem>
-        <EditProfileItem title={t('genderInputTitle')}>
+        </EditAccountProfileItem>
+        <EditAccountProfileItem title={t('genderInputTitle')}>
           <GenderInputFormItem form={form} name="gender"></GenderInputFormItem>
-        </EditProfileItem>
-        <EditProfileItem title={t('lookingForGenderInputTitle')}>
+        </EditAccountProfileItem>
+        <EditAccountProfileItem title={t('lookingForGenderInputTitle')}>
           <GenderInputFormItem form={form} name="lookingForGender"></GenderInputFormItem>
-        </EditProfileItem>
+        </EditAccountProfileItem>
         <Button
           className="gap-2 w-[250px] h-auto"
           icon={<ChevronRight strokeWidth={2.5} className="w-8 h-8"></ChevronRight>}

@@ -1,7 +1,7 @@
 'use client'
 
-import { UpdateUserForm } from '@/components/forms/updateUserForm/UpdateUserForm'
-import type { UserAccountFormData } from '@/components/forms/updateUserForm/userUpdateAccountForm'
+import { UpdateUserForm } from '@/components/forms/updateAccountForm/UpdateUserForm'
+import type { UserAccountFormData } from '@/components/forms/updateAccountForm/userUpdateAccountForm'
 import { useUpdateAccountMutation } from '@/graphql/generated/apollo'
 import { type FullAccountData } from '@repo/ts-types'
 import { Center } from '@repo/ui/components/common/Center'
@@ -9,11 +9,11 @@ import { useTranslations } from 'next-intl'
 import type { SubmitHandler } from 'react-hook-form'
 import { useEditUserProfileReactHookForm } from './useEditUserProfileReactHookForm'
 
-export type ProfilePageContentProps = {
+export type EditProfilePageContentProps = {
   currentAccountData: FullAccountData
 }
 
-export const ProfilePageContent = ({ currentAccountData }: ProfilePageContentProps) => {
+export const EditProfilePageContent = ({ currentAccountData }: EditProfilePageContentProps) => {
   const t = useTranslations('pages.profile-edit')
 
   const [updateUserAccount, UpdatingUserAccountState] = useUpdateAccountMutation()

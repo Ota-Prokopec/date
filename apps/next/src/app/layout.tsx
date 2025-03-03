@@ -1,16 +1,5 @@
-import { Layout } from '@/components/Layout'
-import { cookieStorageZodSchema } from '@repo/cookies/options'
-import { parseCookies } from '@repo/next-storage/handlers'
-import { Center } from '@repo/ui/components/common/Center'
 import { cn } from '@repo/ui/ts-lib/lib/utils'
-import { headers as getHeaders, cookies as nextCookies } from 'next/headers'
-import { Toaster } from '@repo/ui/components/shadcn/sonner'
-import { getMessages } from 'next-intl/server'
-import type { Locale } from '@repo/i18n-next'
-import { getSession } from '@repo/better-auth/session'
-import { getTimeZone } from 'next-intl/server'
 
-//@ts-expect-error
 import '@repo/ui/tailwindcss'
 
 type RootLayoutProps = Readonly<{

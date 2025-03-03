@@ -2,13 +2,10 @@
   "accountZodSchemaWithErrorMessages": {
     "username": "Uživatelské jméno musí mít alespoň 3 znaky a maximálně 40 znaků",
     "birthDate": "Neplatné datum narození",
-    "bio": "Bio je povinné",
-    "socials": "Neplatné sociální sítě",
     "profilePictureURL": "Neplatná URL profilového obrázku",
     "gender": "Neplatné pohlaví",
     "lookingForGender": "Neplatné hledané pohlaví",
     "userId": "ID uživatele musí obsahovat nejméně 3 znaky a nejvíce 25",
-    "coords": "Neplatné souřadnice",
     "fillAllRequiredFields": "Prosíme vyplňte všechny požadované políčka"
   }
 }

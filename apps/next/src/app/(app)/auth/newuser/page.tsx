@@ -1,7 +1,7 @@
 'use client'
 
-import type { NewUserFormData } from '@/components/forms/updateNewUserForm/newUserUpdateAccountTypes'
-import { NewUserForm } from '@/components/forms/updateNewUserForm/UpdateNewUserForm'
+import type { NewAccountFormData } from '@/components/forms/updateNewAccountForm/newAccountUpdateAccountTypes'
+import { NewAccountForm } from '@/components/forms/updateNewAccountForm/UpdateNewAccountForm'
 import { useAccountFormDataZodSchemaWithErrorMessages } from '@/components/forms/useAccountFormDataZodSchemaWithErrorMessages'
 import { useSaveNewUserInformationMutation } from '@/graphql/generated/apollo'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -22,7 +22,7 @@ const NewUserPage = () => {
   const [updateInfo, updateInfoState] = useSaveNewUserInformationMutation()
 
   //* Forms
-  const form = useForm<NewUserFormData>({
+  const form = useForm<NewAccountFormData>({
     defaultValues: {
       gender: 'male',
       lookingForGender: 'female',
@@ -34,7 +34,7 @@ const NewUserPage = () => {
   })
 
   //* Submit
-  const onSubmit: SubmitHandler<NewUserFormData> = async (data) => {
+  const onSubmit: SubmitHandler<NewAccountFormData> = async (data) => {
     await updateInfo({ variables: data })
     router.push('/')
   }
@@ -50,12 +50,12 @@ const NewUserPage = () => {
 
   return (
     <Center className="w-full p-4 flex-col gap-10">
-      <NewUserForm
+      <NewAccountForm
         onSubmit={onSubmit}
         isLoading={updateInfoState.loading}
         className="max-w-[400px]"
         form={form}
-      ></NewUserForm>
+      ></NewAccountForm>
     </Center>
   )
 }

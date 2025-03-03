@@ -32,7 +32,7 @@ export const AccountRef = builder.objectRef<AccountPothosType>('Account').implem
         nullable: true,
         resolve: async (parent, args, ctx, info) => {
           const response = await ctx.loaders.socials.load(parent.userId)
-          return response
+          return response || {}
         },
       }),
     }) satisfies Record<keyof AccountData, unknown>,

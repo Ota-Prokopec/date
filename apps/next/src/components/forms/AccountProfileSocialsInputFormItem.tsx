@@ -6,18 +6,18 @@ import type { SocialsData } from '@repo/ts-types'
 
 type UserNameInputFormItemValuetype = SocialsData
 
-export type ProfileSocialsInputFormItemProps<
+export type AccountProfileSocialsInputFormItemProps<
   TFieldValues extends FieldValues,
   TPath extends Path<TFieldValues>,
 > = {} & ReactHookFormExtendingFieldProps<TFieldValues, TPath, UserNameInputFormItemValuetype>
 
-export const ProfileSocialsInputFormItem = <
+export const AccountProfileSocialsInputFormItem = <
   TFieldValues extends FieldValues,
   TPath extends Path<TFieldValues>,
 >({
   form,
   name,
-}: ProfileSocialsInputFormItemProps<TFieldValues, TPath>) => {
+}: AccountProfileSocialsInputFormItemProps<TFieldValues, TPath>) => {
   return (
     <ReactHookFormFieldWrapper
       form={form}

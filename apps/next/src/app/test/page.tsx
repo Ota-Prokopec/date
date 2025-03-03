@@ -3,7 +3,7 @@
 import { use, useEffect } from 'react'
 
 const TestPage = () => {
-  return 'ahoj'
+  return
 }
 
 export default TestPage

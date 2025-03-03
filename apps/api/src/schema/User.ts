@@ -19,11 +19,12 @@ export const UserRef = builder.objectRef<UserPothosType>('User').implement({
       lookingForGender: t.expose('gender', { type: 'Gender', nullable: false }),
       socials: t.field({
         type: 'Socials',
+        nullable: true,
+
         resolve: async (parent, args, ctx, info) => {
           const response = await ctx.loaders.socials.load(parent.userId)
-          return response
+          return response || {}
         },
-        nullable: true,
       }),
     }) satisfies Record<keyof UserProfileData, unknown>,
 })

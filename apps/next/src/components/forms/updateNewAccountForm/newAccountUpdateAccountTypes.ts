@@ -2,7 +2,7 @@ import type { accountDataZodSchema, NonNullableObject } from '@repo/ts-types'
 import type { TypeOf } from 'zod'
 import { useAccountFormDataZodSchemaWithErrorMessages } from '../useAccountFormDataZodSchemaWithErrorMessages'
 
-export type NewUserAccountFormData = Required<
+export type NewAccountFormData = Required<
   NonNullableObject<
     Pick<
       TypeOf<typeof accountDataZodSchema>,
@@ -10,10 +10,10 @@ export type NewUserAccountFormData = Required<
     >
   >
 >
-export const useNewUserAccountFormDataZodSchemaWithErrorMessages = () =>
+export const useNewAccountFormDataZodSchemaWithErrorMessages = () =>
   useAccountFormDataZodSchemaWithErrorMessages().zodSchema?.pick({
     username: true,
     gender: true,
     lookingForGender: true,
     birthDate: true,
-  } satisfies Record<keyof NewUserAccountFormData, boolean>)
+  } satisfies Record<keyof NewAccountFormData, boolean>)

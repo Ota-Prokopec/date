@@ -1,12 +1,19 @@
-import { db, drizzleSchema, SocialsSelect } from '@repo/db'
+import { db, drizzleSchema } from '@repo/db'
 import type { SocialProfileDataParams, SocialsData } from '@repo/ts-types'
-import { groupBy } from '@repo/utils/common/groupBy'
 import DataLoader from 'dataloader'
 import { inArray } from 'drizzle-orm'
 import { z } from 'zod'
 
+/**
+ * 
+ * Returns  (instagram?: {
+        link: string;
+        profileId: string;
+    } | undefined)[]
+     because user profile will always have {instagram?: {...}} and it can be either filled with the real information or just empty object {} if the user did not share its socials
+ */
 export const createSocialLoader = () =>
-  new DataLoader(async (userIds: readonly string[]): Promise<(SocialsData | undefined)[]> => {
+  new DataLoader(async (userIds: readonly string[]): Promise<SocialsData[]> => {
     //* DataLoader needs to have userIds readonly and inArray needs it normal, so i add additional type checker
     const checkedListOfUserIds = z.string().array().parse(userIds)
 
@@ -17,23 +24,18 @@ export const createSocialLoader = () =>
 
     const grouped = Object.groupBy(res, (item) => item.userId)
     //! Sorted according to userId!!!!
-    const returningValue = userIds.map((userId) => grouped[userId] || undefined)
-    return returningValue.map((items) =>
-      items
-        ?.map((item) =>
-          item
-            ? {
-                [item.type]: {
-                  link: item.link,
-                  profileId: item.platformProfileId,
-                } satisfies SocialProfileDataParams,
-              }
-            : undefined
-        )
-        .reduce((acc, currentValue) => {
-          if (!acc) return currentValue
-          if (!currentValue) return acc
-          return { ...acc, ...currentValue }
-        }, {} as SocialsData)
-    )
+    const sorted = userIds.map((userId) => grouped[userId] || [])
+    return sorted.map((items) => {
+      const SocialsTypeValue = items.map((item) => ({
+        [item.type]: {
+          link: item.link,
+          profileId: item.platformProfileId,
+        } satisfies SocialProfileDataParams,
+      }))
+      return SocialsTypeValue.reduce<SocialsData>((acc, currentValue) => {
+        if (!acc) return currentValue
+        if (!currentValue) return acc
+        return { ...acc, ...currentValue }
+      }, {} as SocialsData)
+    })
   })
