@@ -1,10 +1,31 @@
 import { envClient } from '@/lib/envClient'
-import { ApolloClient, InMemoryCache } from '@apollo/client'
+import { ApolloClient, ApolloLink, HttpLink, InMemoryCache } from '@apollo/client'
+import { customScalarsLink } from './customScalarLinks'
 
 const url = `${envClient.NEXT_PUBLIC_API_URL}/graphql`
 
+const httpLink = new HttpLink({ uri: url, credentials: 'include', fetchOptions: 'cache-first' })
+
+const link = ApolloLink.from([httpLink, customScalarsLink])
+
+const cache = new InMemoryCache({
+  addTypename: true,
+
+  typePolicies: {
+    T: {
+      fields: {
+        date: {
+          read(existing: string | undefined) {
+            return existing ? new Date(existing) : null
+          },
+        },
+      },
+    },
+  },
+})
+
 export const apolloClient = new ApolloClient({
-  uri: url,
-  cache: new InMemoryCache({}),
-  credentials: 'include',
+  cache: cache,
+  link,
+  devtools: { enabled: true },
 })

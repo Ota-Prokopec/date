@@ -1,2 +1,1 @@
-import './mutations/uploadFile'
-import './mutations/test'
+import './queries/test'

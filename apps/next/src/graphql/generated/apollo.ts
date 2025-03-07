@@ -47,15 +47,8 @@ export type Account = {
 export type Mutation = {
   __typename?: 'Mutation';
   setHealth: Scalars['GraphQLHealth']['output'];
-  test: Scalars['Boolean']['output'];
   updateAccount: Scalars['Boolean']['output'];
   updateAccountPicture: Scalars['Boolean']['output'];
-  uploadFile: Scalars['Boolean']['output'];
-};
-
-
-export type MutationTestArgs = {
-  gender: Scalars['Gender']['input'];
 };
 
 
@@ -68,21 +61,28 @@ export type MutationUpdateAccountPictureArgs = {
   pictureFile: Scalars['File']['input'];
 };
 
-
-export type MutationUploadFileArgs = {
-  file: Scalars['File']['input'];
-};
-
 export type Query = {
   __typename?: 'Query';
   getAccountProfile: Account;
   getHealth: Scalars['GraphQLHealth']['output'];
   getUserProfile: User;
+  test: T;
 };
 
 
 export type QueryGetUserProfileArgs = {
   userId?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type T = {
+  __typename?: 'T';
+  date: Scalars['Date']['output'];
+};
+
+export type Test = {
+  __typename?: 'Test';
+  id: Scalars['String']['output'];
+  res: Scalars['Int']['output'];
 };
 
 export type UpdateAccountArgs = {
@@ -141,6 +141,11 @@ export type GetHealthStatusQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetHealthStatusQuery = { __typename?: 'Query', getHealth: {ok: boolean} };
+
+export type TestQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type TestQueryQuery = { __typename?: 'Query', test: { __typename?: 'T', date: Date } };
 
 export type GetUserProfileQueryVariables = Exact<{
   userId: Scalars['String']['input'];
@@ -305,6 +310,45 @@ export type GetHealthStatusQueryHookResult = ReturnType<typeof useGetHealthStatu
 export type GetHealthStatusLazyQueryHookResult = ReturnType<typeof useGetHealthStatusLazyQuery>;
 export type GetHealthStatusSuspenseQueryHookResult = ReturnType<typeof useGetHealthStatusSuspenseQuery>;
 export type GetHealthStatusQueryResult = Apollo.QueryResult<GetHealthStatusQuery, GetHealthStatusQueryVariables>;
+export const TestQueryDocument = gql`
+    query testQuery {
+  test {
+    date
+  }
+}
+    `;
+
+/**
+ * __useTestQueryQuery__
+ *
+ * To run a query within a React component, call `useTestQueryQuery` and pass it any options that fit your needs.
+ * When your component renders, `useTestQueryQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useTestQueryQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useTestQueryQuery(baseOptions?: Apollo.QueryHookOptions<TestQueryQuery, TestQueryQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<TestQueryQuery, TestQueryQueryVariables>(TestQueryDocument, options);
+      }
+export function useTestQueryLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TestQueryQuery, TestQueryQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<TestQueryQuery, TestQueryQueryVariables>(TestQueryDocument, options);
+        }
+export function useTestQuerySuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<TestQueryQuery, TestQueryQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<TestQueryQuery, TestQueryQueryVariables>(TestQueryDocument, options);
+        }
+export type TestQueryQueryHookResult = ReturnType<typeof useTestQueryQuery>;
+export type TestQueryLazyQueryHookResult = ReturnType<typeof useTestQueryLazyQuery>;
+export type TestQuerySuspenseQueryHookResult = ReturnType<typeof useTestQuerySuspenseQuery>;
+export type TestQueryQueryResult = Apollo.QueryResult<TestQueryQuery, TestQueryQueryVariables>;
 export const GetUserProfileDocument = gql`
     query getUserProfile($userId: String!) {
   getUserProfile(userId: $userId) {

@@ -11,6 +11,7 @@ import { useEffect, type ReactElement, type ReactNode } from 'react'
 import { IntlProvider, type MessageFormatElement } from 'react-intl'
 import { useBrowser } from '../hooks/useBrowser'
 import { PlayerContextProvier } from './PlayerContext'
+import { Client as UrqlClient, Provider as UrqlProvider } from 'urql'
 
 export type ProvidersProps = {
   children: ReactNode
@@ -21,9 +22,10 @@ export type ProvidersProps = {
     timeZone: Timezone
   }
   apolloClient?: ApolloClient<NormalizedCacheObject>
+  urqlClient?: UrqlClient
 }
 
-export const Providers = ({ children, intl, apolloClient }: ProvidersProps) => {
+export const Providers = ({ children, intl, apolloClient, urqlClient }: ProvidersProps) => {
   const { isBrower, setIsBrowser: _setIsBrowser } = useBrowser()
   const { colorTheme, setColorTheme: _setColorTheme } = useColorTheme()
 
@@ -58,6 +60,10 @@ export const Providers = ({ children, intl, apolloClient }: ProvidersProps) => {
   if (apolloClient)
     additionalProviders.push(({ children }: { children: ReactNode }) => (
       <ApolloProvider client={apolloClient}>{children}</ApolloProvider>
+    ))
+  if (urqlClient)
+    additionalProviders.push(({ children }: { children: ReactNode }) => (
+      <UrqlProvider value={urqlClient}>{children}</UrqlProvider>
     ))
   if (intl?.type === 'react')
     additionalProviders.push(({ children }: { children: ReactNode }) => (

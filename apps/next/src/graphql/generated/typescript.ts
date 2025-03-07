@@ -47,15 +47,8 @@ export type Account = {
 export type Mutation = {
   __typename?: 'Mutation';
   setHealth: Scalars['GraphQLHealth']['output'];
-  test: Scalars['Boolean']['output'];
   updateAccount: Scalars['Boolean']['output'];
   updateAccountPicture: Scalars['Boolean']['output'];
-  uploadFile: Scalars['Boolean']['output'];
-};
-
-
-export type MutationTestArgs = {
-  gender: Scalars['Gender']['input'];
 };
 
 
@@ -68,21 +61,28 @@ export type MutationUpdateAccountPictureArgs = {
   pictureFile: Scalars['File']['input'];
 };
 
-
-export type MutationUploadFileArgs = {
-  file: Scalars['File']['input'];
-};
-
 export type Query = {
   __typename?: 'Query';
   getAccountProfile: Account;
   getHealth: Scalars['GraphQLHealth']['output'];
   getUserProfile: User;
+  test: T;
 };
 
 
 export type QueryGetUserProfileArgs = {
   userId?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type T = {
+  __typename?: 'T';
+  date: Scalars['Date']['output'];
+};
+
+export type Test = {
+  __typename?: 'Test';
+  id: Scalars['String']['output'];
+  res: Scalars['Int']['output'];
 };
 
 export type UpdateAccountArgs = {
@@ -142,6 +142,11 @@ export type GetHealthStatusQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetHealthStatusQuery = { __typename?: 'Query', getHealth: {ok: boolean} };
 
+export type TestQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type TestQueryQuery = { __typename?: 'Query', test: { __typename?: 'T', date: Date } };
+
 export type GetUserProfileQueryVariables = Exact<{
   userId: Scalars['String']['input'];
 }>;
@@ -186,6 +191,13 @@ export const GetHealthStatusDocument = gql`
   getHealth
 }
     `;
+export const TestQueryDocument = gql`
+    query testQuery {
+  test {
+    date
+  }
+}
+    `;
 export const GetUserProfileDocument = gql`
     query getUserProfile($userId: String!) {
   getUserProfile(userId: $userId) {
@@ -219,6 +231,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     getHealthStatus(variables?: GetHealthStatusQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetHealthStatusQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetHealthStatusQuery>(GetHealthStatusDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getHealthStatus', 'query', variables);
+    },
+    testQuery(variables?: TestQueryQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<TestQueryQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<TestQueryQuery>(TestQueryDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'testQuery', 'query', variables);
     },
     getUserProfile(variables: GetUserProfileQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetUserProfileQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetUserProfileQuery>(GetUserProfileDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getUserProfile', 'query', variables);

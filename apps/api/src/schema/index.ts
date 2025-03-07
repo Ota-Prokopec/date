@@ -1,3 +1,3 @@
-import './User';
-import './Coords';
-import './Account';
+import './User'
+import './Coords'
+import './Account'

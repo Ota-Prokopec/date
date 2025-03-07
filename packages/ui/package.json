@@ -101,7 +101,7 @@
     "tailwind-merge": "^2.5.3",
     "tailwindcss-animate": "^1.0.7",
     "ts-pattern": "^5.4.0",
-    "urql": "^4.1.0",
+    "urql": "^4.2.1",
     "use-deep-compare-effect": "^1.8.1",
     "usehooks-ts": "^3.1.0",
     "vaul": "^1.1.2",

@@ -1,10 +1,10 @@
 import { builder, type Builder, type PothosBuilderTypes, type PothosTValue } from '@/builder'
-import type { FieldOptionsFromKind, GenericFieldRef, SchemaTypes } from '@pothos/core'
+import type { FieldOptionsFromKind, GenericFieldRef, SchemaTypes , InputFieldMap} from '@pothos/core'
 
 export type PothosQueryFieldGendericReturnType = GenericFieldRef<unknown>
 export type PothosTField = PothosTValue['field']
 export type PothosTFieldParams = Parameters<PothosTField>[0]
-export type PothosTFieldParamsResolver = Parameters<PothosTField>[0]['resolve']
+export type PothosTFieldParamsResolver = Parameters<PothosTField>[0][]
 export type PothosTFieldParamsResolverParametrs = PothosTFieldParamsResolver extends (
   parent: infer TParent,
   args: infer TArgs,
@@ -27,9 +27,12 @@ type GetResolver<
   args: TFieldOptions['args']
 ) => ReturnValue
 
+type T = PothosTFieldParams["args"]
+
 export const pothosQueryField = <
   TQueryType extends PothosQueryType & keyof ObjectType,
   TReturnValue extends GetReturnValue<TQueryType>,
+  TArgs extends Record<string, >
   TFieldOptions extends Omit<PothosTFieldParams, 'resolve' | 'type'>,
 >(
   builder: Builder,
@@ -37,3 +40,7 @@ export const pothosQueryField = <
   fieldOptions: TFieldOptions,
   resolve: GetResolver<TReturnValue, TFieldOptions>
 ) => {}
+
+pothosQueryField(builder, "Account", {""})
+
+builder.queryField("", (t) => t.field({"args": {item: t.arg({"type": ""})}}))

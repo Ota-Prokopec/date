@@ -6,9 +6,6 @@
     "baseUrl": ".",
     "noUnusedLocals": false,
     "noUnusedParameters": false,
-    "moduleResolution": "node16",
-    "module": "Node16",
-    "noEmit": false,
 
     "paths": {
       "@/*": ["./src/*"]
