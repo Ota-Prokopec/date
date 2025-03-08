@@ -1,12 +1,12 @@
 'use client'
 
-import { useGetAccountProfileSuspenseQuery } from '@/graphql/generated/apollo'
 import { fullAccountDataZodSchema } from '@repo/ts-types'
 import { EditProfilePageContent } from './EditProfilePageContent'
+import { useGetAccountProfileQuery } from '@/graphql/generated/urql'
 
 const EditProfilePage = () => {
   //? loading - loading.tsx, error - error.tsx (works for both errors - fetch and validation)
-  const { data } = useGetAccountProfileSuspenseQuery()
+  const [{ data }] = useGetAccountProfileQuery()
   console.log(data)
 
   return (

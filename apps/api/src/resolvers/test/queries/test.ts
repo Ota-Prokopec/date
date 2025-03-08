@@ -20,7 +20,9 @@ builder.queryField('test', (t) =>
     type: returnValue,
     args: {},
     resolve: async (parent, args, ctx) => {
-      return { date: new Date(Date.now()) }
+      return await new Promise<ReturnValue>((res) =>
+        setTimeout(() => res({ date: new Date(Date.now()) }), 1000)
+      )
     },
   })
 )

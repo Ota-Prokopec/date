@@ -10,7 +10,7 @@ export type NewAccountFormData = Required<
     >
   >
 >
-export const useNewAccountFormDataZodSchemaWithErrorMessages = () => {
+export const useUpdateNewAccountFormDataZodSchemaWithErrorMessages = () => {
   const zodSchema = useAccountFormDataZodSchemaWithErrorMessages().zodSchema?.pick({
     username: true,
     gender: true,

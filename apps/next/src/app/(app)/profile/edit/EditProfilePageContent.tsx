@@ -1,7 +1,7 @@
 'use client'
 
 import { UpdateUserForm } from '@/components/forms/updateAccountForm/UpdateUserForm'
-import type { UserAccountFormData } from '@/components/forms/updateAccountForm/userUpdateAccountForm'
+import type { UserAccountFormData } from '@/components/forms/updateAccountForm/updateUserFomr'
 import { useUpdateAccountMutation } from '@/graphql/generated/apollo'
 import { type FullAccountData } from '@repo/ts-types'
 import { Center } from '@repo/ui/components/common/Center'

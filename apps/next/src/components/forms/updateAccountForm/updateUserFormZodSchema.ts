@@ -7,7 +7,7 @@ export type UserAccountFormData = Pick<
   'username' | 'gender' | 'lookingForGender' | 'birthDate' | 'bio' | 'socials'
 >
 
-export const useUserAccountFormDataZodSchemaWithErrorMessages = () =>
+export const useUpdateAccountFormDataZodSchemaWithErrorMessages = () =>
   useAccountFormDataZodSchemaWithErrorMessages().zodSchema?.pick({
     username: true,
     gender: true,
@@ -20,5 +20,7 @@ export const useUserAccountFormDataZodSchemaWithErrorMessages = () =>
 type C = Equal<
   // ^?
   UserAccountFormData,
-  TypeOf<NonNullable<Required<ReturnType<typeof useUserAccountFormDataZodSchemaWithErrorMessages>>>>
+  TypeOf<
+    NonNullable<Required<ReturnType<typeof useUpdateAccountFormDataZodSchemaWithErrorMessages>>>
+  >
 >

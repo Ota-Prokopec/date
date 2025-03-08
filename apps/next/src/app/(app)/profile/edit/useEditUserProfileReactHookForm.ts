@@ -1,7 +1,7 @@
 import {
   useUserAccountFormDataZodSchemaWithErrorMessages,
   type UserAccountFormData,
-} from '@/components/forms/updateAccountForm/userUpdateAccountForm'
+} from '@/components/forms/updateAccountForm/updateUserFomr'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 

@@ -3,7 +3,7 @@
 import {
   useNewAccountFormDataZodSchemaWithErrorMessages,
   type NewAccountFormData,
-} from '@/components/forms/updateNewAccountForm/newAccountUpdateAccountTypes'
+} from '@/components/forms/updateNewAccountForm/updateNewAccountForm'
 import { NewAccountForm } from '@/components/forms/updateNewAccountForm/UpdateNewAccountForm'
 import { useAccountFormDataZodSchemaWithErrorMessages } from '@/components/forms/useAccountFormDataZodSchemaWithErrorMessages'
 import { useSaveNewUserInformationMutation } from '@/graphql/generated/apollo'

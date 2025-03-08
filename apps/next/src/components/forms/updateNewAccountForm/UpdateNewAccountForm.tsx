@@ -15,7 +15,7 @@ import { cn } from '@repo/ui/ts-lib/lib/utils'
 import { ChevronRight } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { type SubmitHandler, type UseFormReturn } from 'react-hook-form'
-import type { NewAccountFormData } from './newAccountUpdateAccountTypes'
+import type { NewAccountFormData } from './updateNewAccountForm'
 
 type NewAccountFormProps = {
   className?: string

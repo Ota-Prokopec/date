@@ -27,7 +27,7 @@ export const fullAccountDataZodSchema = z.object({
   gender: accountDataZodSchemaAllPropsRequired.shape.gender,
   lookingForGender: accountDataZodSchemaAllPropsRequired.shape.lookingForGender,
   userId: accountDataZodSchemaAllPropsRequired.shape.userId,
-  coords: accountDataZodSchemaAllPropsRequired.shape.coords,
+  coords: accountDataZodSchemaAllPropsRequired.shape.coords.nullable().optional(),
   age: accountDataZodSchemaAllPropsRequired.shape.age,
 })
 

@@ -11,7 +11,7 @@ import { ChevronRight } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { type SubmitHandler, type UseFormReturn } from 'react-hook-form'
 import { AccountProfileSocialsInputFormItem } from '../AccountProfileSocialsInputFormItem'
-import type { UserAccountFormData } from './userUpdateAccountForm'
+import type { UserAccountFormData } from './updateUserFomr'
 
 type UserFormProps = {
   className?: string
