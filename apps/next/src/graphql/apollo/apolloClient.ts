@@ -1,6 +1,6 @@
 import { envClient } from '@/lib/envClient'
 import { ApolloClient, ApolloLink, HttpLink, InMemoryCache } from '@apollo/client'
-import { customScalarsLink } from './customScalarLinks'
+import { customScalarsLink } from './apolloCustomScalars'
 
 const url = `${envClient.NEXT_PUBLIC_API_URL}/graphql`
 

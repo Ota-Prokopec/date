@@ -3,9 +3,10 @@
 import { useTestQueryQuery } from '@/graphql/generated/urql'
 import { Column } from '@repo/ui/components/common/Column'
 import { Suspense, useState } from 'react'
+import { useQuery } from 'urql'
 
 const Page = () => {
-  const { data, refetch } = useTe
+  const [{ data }] = useTestQueryQuery()
 
   console.log(data?.test)
 

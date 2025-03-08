@@ -34,18 +34,14 @@ const urqlConfig = {
     ...codegenConfigConfig,
     withHooks: true,
     strictScalars: true,
+    urqlImportFrom: 'urql',
+    suspense: true, // Enable Suspense mode for generated hooks
   },
 }
 const jsonConfig = {
   plugins: ['introspection'],
   config: {
-    minify: false,
-    descriptions: true,
-    schemaDescription: true,
-  },
-  hooks: {
-    onWatchTriggered: 'tsx optimize-client-schema.mts',
-    afterAllFileWrite: 'tsx optimize-client-schema.mts',
+    minify: true,
   },
 }
 

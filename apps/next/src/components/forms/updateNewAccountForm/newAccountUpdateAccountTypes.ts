@@ -10,10 +10,12 @@ export type NewAccountFormData = Required<
     >
   >
 >
-export const useNewAccountFormDataZodSchemaWithErrorMessages = () =>
-  useAccountFormDataZodSchemaWithErrorMessages().zodSchema?.pick({
+export const useNewAccountFormDataZodSchemaWithErrorMessages = () => {
+  const zodSchema = useAccountFormDataZodSchemaWithErrorMessages().zodSchema?.pick({
     username: true,
     gender: true,
     lookingForGender: true,
     birthDate: true,
   } satisfies Record<keyof NewAccountFormData, boolean>)
+  return { zodSchema }
+}

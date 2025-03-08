@@ -217,6 +217,12 @@ importers:
       '@repo/utils':
         specifier: workspace:*
         version: link:../../packages/utils
+      '@urql/exchange-graphcache':
+        specifier: ^7.2.3
+        version: 7.2.3(graphql@16.10.0)
+      '@urql/introspection':
+        specifier: ^1.2.1
+        version: 1.2.1(graphql@16.10.0)
       apollo-link-scalars:
         specifier: ^4.0.3
         version: 4.0.3(@apollo/client@3.13.1(@types/react@19.0.10)(graphql-ws@6.0.4(graphql@16.10.0)(ws@8.18.1))(graphql@16.10.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(graphql@16.10.0)
@@ -247,6 +253,9 @@ importers:
       next-intl:
         specifier: ^3.26.3
         version: 3.26.5(next@15.2.0(@babel/core@7.26.9)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react@19.0.0)
+      node-fetch:
+        specifier: ^3.3.2
+        version: 3.3.2
       pg:
         specifier: 8.13.1
         version: 8.13.1
@@ -277,9 +286,18 @@ importers:
       ts-pattern:
         specifier: ^5.4.0
         version: 5.6.2
+      tsx:
+        specifier: ^4.19.1
+        version: 4.19.3
       urql:
         specifier: ^4.1.0
         version: 4.2.1(@urql/core@5.1.0(graphql@16.10.0))(react@19.0.0)
+      urql-custom-scalars-exchange:
+        specifier: ^1.0.1
+        version: 1.0.1(graphql@16.10.0)(wonka@6.3.4)
+      urql-serialize-scalars-exchange:
+        specifier: ^1.0.8
+        version: 1.0.8(graphql@16.10.0)
       vite:
         specifier: ^5.1.0
         version: 5.4.14(@types/node@22.13.8)(lightningcss@1.29.1)(terser@5.39.0)
@@ -5842,8 +5860,23 @@ packages:
     resolution: {integrity: sha512-2z8JQJWAzPdDd51dRQ/oqIJxe99/hoLIqmf8RMCAJQtYDc535W/Jt2+RTP4bP0aKeBG1F65yjIZuczOXCmbWwg==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
+  '@urql/core@2.6.1':
+    resolution: {integrity: sha512-gYrEHy3tViJhwIhauK6MIf2Qp09QTsgNHZRd0n71rS+hF6gdwjspf1oKljl4m25+272cJF7fPjBUGmjaiEr7Kg==}
+    peerDependencies:
+      graphql: ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
+
   '@urql/core@5.1.0':
     resolution: {integrity: sha512-yC3sw8yqjbX45GbXxfiBY8GLYCiyW/hLBbQF9l3TJrv4ro00Y0ChkKaD9I2KntRxAVm9IYBqh0awX8fwWAe/Yw==}
+
+  '@urql/exchange-graphcache@7.2.3':
+    resolution: {integrity: sha512-ClxbxlONfcGZOgZQxUIJ2hvy82mwuljQLVd957TgpSDzSCMLWCklWFubnSC5YFvQLR1kZJW+sbhWKd4ZpndF9w==}
+    peerDependencies:
+      '@urql/core': ^5.0.0
+
+  '@urql/introspection@1.2.1':
+    resolution: {integrity: sha512-U9FTSISz69EEK3bHWDsqux9JqOeiLzr3eDFBQ5DmHuTLaBsd5mjPdtLRzzzmb9nW1Ygd6IR8YcuM7zeNqQ5lCQ==}
+    peerDependencies:
+      graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
 
   '@vercel/style-guide@5.2.0':
     resolution: {integrity: sha512-fNSKEaZvSkiBoF6XEefs8CcgAV9K9e+MbcsDZjUsktHycKdA0jvjAzQi1W/FzLS+Nr5zZ6oejCwq/97dHUKe0g==}
@@ -11144,6 +11177,18 @@ packages:
   urlpattern-polyfill@10.0.0:
     resolution: {integrity: sha512-H/A06tKD7sS1O1X2SshBVeA5FLycRpjqiBeqGKmBwBDBy28EnRjORxTNe269KSSr5un5qyWi1iL61wLxpd+ZOg==}
 
+  urql-custom-scalars-exchange@1.0.1:
+    resolution: {integrity: sha512-NSxUaw1ZWu72iJ/t4qy6hbm33HKthIglLl8JzHEtEQgE1ICxl5kXmzmZWL5ycxlNRgCOvU2nqzrplIhBo7q3UQ==}
+    engines: {node: '>=16.0.0'}
+    peerDependencies:
+      '@urql/core': ^1.12.3 || ^2.0.0 || ^3.0.0
+      graphql: ^15.3.0 || ^16.0.0
+      wonka: ^4.0.14 || ^6.0.0
+
+  urql-serialize-scalars-exchange@1.0.8:
+    resolution: {integrity: sha512-srGQuP2bpALVHb86l7/HMBzWbfu10p1hyBEeEhWfPX9/N9rjT4VzxkrOg1Dhy9TlLzckpcWVcLVaVtMPLpc9Cw==}
+    engines: {node: '>=10'}
+
   urql@4.2.1:
     resolution: {integrity: sha512-Y/cVi1rsR96kbF3VX6YgfHw1V3kJ287nR1TqpjGzVPyAmXuwRvBvABI+sHY2WOquWCNh+kvFapM/LLYeiC3wig==}
     peerDependencies:
@@ -11352,6 +11397,9 @@ packages:
     resolution: {integrity: sha512-GlaYyEb07DPxYCKhKzplCWBJtvxZcZMrL+4UkrTSJHHPyZU4mYYTv3qaOe77H7EODLSSopAUFAc6W8U4yqvscg==}
     engines: {node: ^16.13.0 || >=18.0.0}
     hasBin: true
+
+  wonka@4.0.15:
+    resolution: {integrity: sha512-U0IUQHKXXn6PFo9nqsHphVCE5m3IntqZNB9Jjn7EB1lrR7YTDY3YWgFvEvwniTzXSvOH/XMzAZaIfJF/LvHYXg==}
 
   wonka@6.3.4:
     resolution: {integrity: sha512-CjpbqNtBGNAeyNS/9W6q3kSkKE52+FjIj7AkFlLr11s/VWGUu6a2CdYSdGxocIhIVjaW/zchesBQUKPVU69Cqg==}
@@ -17045,12 +17093,29 @@ snapshots:
       '@typescript-eslint/types': 8.26.0
       eslint-visitor-keys: 4.2.0
 
+  '@urql/core@2.6.1(graphql@16.10.0)':
+    dependencies:
+      '@graphql-typed-document-node/core': 3.2.0(graphql@16.10.0)
+      graphql: 16.10.0
+      wonka: 4.0.15
+
   '@urql/core@5.1.0(graphql@16.10.0)':
     dependencies:
       '@0no-co/graphql.web': 1.1.1(graphql@16.10.0)
       wonka: 6.3.4
     transitivePeerDependencies:
       - graphql
+
+  '@urql/exchange-graphcache@7.2.3(graphql@16.10.0)':
+    dependencies:
+      '@0no-co/graphql.web': 1.1.1(graphql@16.10.0)
+      wonka: 6.3.4
+    transitivePeerDependencies:
+      - graphql
+
+  '@urql/introspection@1.2.1(graphql@16.10.0)':
+    dependencies:
+      graphql: 16.10.0
 
   '@vercel/style-guide@5.2.0(@next/eslint-plugin-next@15.2.0)(eslint@9.21.0(jiti@2.4.2))(prettier@3.5.3)(typescript@5.7.3)':
     dependencies:
@@ -17063,7 +17128,7 @@ snapshots:
       eslint-import-resolver-alias: 1.1.2(eslint-plugin-import@2.31.0(@typescript-eslint/parser@6.21.0(eslint@9.21.0(jiti@2.4.2))(typescript@5.7.3))(eslint-import-resolver-typescript@3.8.3)(eslint@9.21.0(jiti@2.4.2)))
       eslint-import-resolver-typescript: 3.8.3(eslint-plugin-import@2.31.0)(eslint@9.21.0(jiti@2.4.2))
       eslint-plugin-eslint-comments: 3.2.0(eslint@9.21.0(jiti@2.4.2))
-      eslint-plugin-import: 2.31.0(@typescript-eslint/parser@7.18.0(eslint@9.21.0(jiti@2.4.2))(typescript@5.7.3))(eslint-import-resolver-typescript@3.8.3)(eslint@9.21.0(jiti@2.4.2))
+      eslint-plugin-import: 2.31.0(@typescript-eslint/parser@7.18.0(eslint@9.21.0(jiti@2.4.2))(typescript@5.7.3))(eslint@9.21.0(jiti@2.4.2))
       eslint-plugin-jest: 27.9.0(@typescript-eslint/eslint-plugin@7.18.0(@typescript-eslint/parser@7.18.0(eslint@9.21.0(jiti@2.4.2))(typescript@5.7.3))(eslint@9.21.0(jiti@2.4.2))(typescript@5.7.3))(eslint@9.21.0(jiti@2.4.2))(typescript@5.7.3)
       eslint-plugin-jsx-a11y: 6.10.2(eslint@9.21.0(jiti@2.4.2))
       eslint-plugin-playwright: 0.16.0(eslint-plugin-jest@27.9.0(@typescript-eslint/eslint-plugin@6.21.0(@typescript-eslint/parser@6.21.0(eslint@9.21.0(jiti@2.4.2))(typescript@5.7.3))(eslint@9.21.0(jiti@2.4.2))(typescript@5.7.3))(eslint@9.21.0(jiti@2.4.2))(typescript@5.7.3))(eslint@9.21.0(jiti@2.4.2))
@@ -18712,7 +18777,7 @@ snapshots:
       eslint: 9.21.0(jiti@2.4.2)
       eslint-import-resolver-node: 0.3.9
       eslint-import-resolver-typescript: 3.8.3(eslint-plugin-import@2.31.0)(eslint@9.21.0(jiti@2.4.2))
-      eslint-plugin-import: 2.31.0(@typescript-eslint/parser@7.18.0(eslint@9.21.0(jiti@2.4.2))(typescript@5.7.3))(eslint-import-resolver-typescript@3.8.3)(eslint@9.21.0(jiti@2.4.2))
+      eslint-plugin-import: 2.31.0(@typescript-eslint/parser@8.26.0(eslint@9.21.0(jiti@2.4.2))(typescript@5.7.3))(eslint@9.21.0(jiti@2.4.2))
       eslint-plugin-jsx-a11y: 6.10.2(eslint@9.21.0(jiti@2.4.2))
       eslint-plugin-react: 7.37.4(eslint@9.21.0(jiti@2.4.2))
       eslint-plugin-react-hooks: 5.2.0(eslint@9.21.0(jiti@2.4.2))
@@ -18735,7 +18800,7 @@ snapshots:
 
   eslint-import-resolver-alias@1.1.2(eslint-plugin-import@2.31.0(@typescript-eslint/parser@6.21.0(eslint@9.21.0(jiti@2.4.2))(typescript@5.7.3))(eslint-import-resolver-typescript@3.8.3)(eslint@9.21.0(jiti@2.4.2))):
     dependencies:
-      eslint-plugin-import: 2.31.0(@typescript-eslint/parser@7.18.0(eslint@9.21.0(jiti@2.4.2))(typescript@5.7.3))(eslint-import-resolver-typescript@3.8.3)(eslint@9.21.0(jiti@2.4.2))
+      eslint-plugin-import: 2.31.0(@typescript-eslint/parser@7.18.0(eslint@9.21.0(jiti@2.4.2))(typescript@5.7.3))(eslint@9.21.0(jiti@2.4.2))
 
   eslint-import-resolver-node@0.3.9:
     dependencies:
@@ -18756,7 +18821,7 @@ snapshots:
       stable-hash: 0.0.4
       tinyglobby: 0.2.12
     optionalDependencies:
-      eslint-plugin-import: 2.31.0(@typescript-eslint/parser@7.18.0(eslint@9.21.0(jiti@2.4.2))(typescript@5.7.3))(eslint-import-resolver-typescript@3.8.3)(eslint@9.21.0(jiti@2.4.2))
+      eslint-plugin-import: 2.31.0(@typescript-eslint/parser@8.26.0(eslint@9.21.0(jiti@2.4.2))(typescript@5.7.3))(eslint@9.21.0(jiti@2.4.2))
     transitivePeerDependencies:
       - supports-color
 
@@ -18771,13 +18836,23 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  eslint-module-utils@2.12.0(@typescript-eslint/parser@8.26.0(eslint@9.21.0(jiti@2.4.2))(typescript@5.7.3))(eslint-import-resolver-node@0.3.9)(eslint@9.21.0(jiti@2.4.2)):
+    dependencies:
+      debug: 3.2.7
+    optionalDependencies:
+      '@typescript-eslint/parser': 8.26.0(eslint@9.21.0(jiti@2.4.2))(typescript@5.7.3)
+      eslint: 9.21.0(jiti@2.4.2)
+      eslint-import-resolver-node: 0.3.9
+    transitivePeerDependencies:
+      - supports-color
+
   eslint-plugin-eslint-comments@3.2.0(eslint@9.21.0(jiti@2.4.2)):
     dependencies:
       escape-string-regexp: 1.0.5
       eslint: 9.21.0(jiti@2.4.2)
       ignore: 5.3.2
 
-  eslint-plugin-import@2.31.0(@typescript-eslint/parser@7.18.0(eslint@9.21.0(jiti@2.4.2))(typescript@5.7.3))(eslint-import-resolver-typescript@3.8.3)(eslint@9.21.0(jiti@2.4.2)):
+  eslint-plugin-import@2.31.0(@typescript-eslint/parser@7.18.0(eslint@9.21.0(jiti@2.4.2))(typescript@5.7.3))(eslint@9.21.0(jiti@2.4.2)):
     dependencies:
       '@rtsao/scc': 1.1.0
       array-includes: 3.1.8
@@ -18801,6 +18876,35 @@ snapshots:
       tsconfig-paths: 3.15.0
     optionalDependencies:
       '@typescript-eslint/parser': 7.18.0(eslint@9.21.0(jiti@2.4.2))(typescript@5.7.3)
+    transitivePeerDependencies:
+      - eslint-import-resolver-typescript
+      - eslint-import-resolver-webpack
+      - supports-color
+
+  eslint-plugin-import@2.31.0(@typescript-eslint/parser@8.26.0(eslint@9.21.0(jiti@2.4.2))(typescript@5.7.3))(eslint@9.21.0(jiti@2.4.2)):
+    dependencies:
+      '@rtsao/scc': 1.1.0
+      array-includes: 3.1.8
+      array.prototype.findlastindex: 1.2.5
+      array.prototype.flat: 1.3.3
+      array.prototype.flatmap: 1.3.3
+      debug: 3.2.7
+      doctrine: 2.1.0
+      eslint: 9.21.0(jiti@2.4.2)
+      eslint-import-resolver-node: 0.3.9
+      eslint-module-utils: 2.12.0(@typescript-eslint/parser@8.26.0(eslint@9.21.0(jiti@2.4.2))(typescript@5.7.3))(eslint-import-resolver-node@0.3.9)(eslint@9.21.0(jiti@2.4.2))
+      hasown: 2.0.2
+      is-core-module: 2.16.1
+      is-glob: 4.0.3
+      minimatch: 3.1.2
+      object.fromentries: 2.0.8
+      object.groupby: 1.0.3
+      object.values: 1.2.1
+      semver: 6.3.1
+      string.prototype.trimend: 1.0.9
+      tsconfig-paths: 3.15.0
+    optionalDependencies:
+      '@typescript-eslint/parser': 8.26.0(eslint@9.21.0(jiti@2.4.2))(typescript@5.7.3)
     transitivePeerDependencies:
       - eslint-import-resolver-typescript
       - eslint-import-resolver-webpack
@@ -23022,6 +23126,17 @@ snapshots:
 
   urlpattern-polyfill@10.0.0: {}
 
+  urql-custom-scalars-exchange@1.0.1(graphql@16.10.0)(wonka@6.3.4):
+    dependencies:
+      graphql: 16.10.0
+      wonka: 6.3.4
+
+  urql-serialize-scalars-exchange@1.0.8(graphql@16.10.0):
+    dependencies:
+      '@urql/core': 2.6.1(graphql@16.10.0)
+    transitivePeerDependencies:
+      - graphql
+
   urql@4.2.1(@urql/core@5.1.0(graphql@16.10.0))(react@19.0.0):
     dependencies:
       '@urql/core': 5.1.0(graphql@16.10.0)
@@ -23220,6 +23335,8 @@ snapshots:
   which@4.0.0:
     dependencies:
       isexe: 3.1.1
+
+  wonka@4.0.15: {}
 
   wonka@6.3.4: {}
 

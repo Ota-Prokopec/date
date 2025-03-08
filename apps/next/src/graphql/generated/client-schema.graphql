@@ -1,0 +1,79 @@
+schema {
+  query: Query
+  mutation: Mutation
+}
+
+type Account {
+  age: Int
+  bio: String
+  birthDate: Date
+  coords: Coords
+  gender: Gender
+  lookingForGender: Gender
+  profilePictureURL: String
+  socials: Socials
+  userId: String!
+  username: String!
+}
+
+scalar Coords
+
+"""
+A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.This scalar is serialized to a string in ISO 8601 format and parsed from a string in ISO 8601 format.
+"""
+scalar Date
+
+scalar File
+
+scalar Gender
+
+scalar GraphQLHealth
+
+type Mutation {
+  setHealth: GraphQLHealth!
+  updateAccount(userProfileData: UpdateAccountArgs!): Boolean!
+  updateAccountPicture(pictureFile: File!): Boolean!
+}
+
+type Query {
+  getAccountProfile: Account!
+  getHealth: GraphQLHealth!
+  getUserProfile(userId: String): User!
+  test: T!
+}
+
+scalar Socials
+
+type T {
+  date: Date!
+}
+
+type Test {
+  id: String!
+  res: Int!
+}
+
+input UpdateAccountArgs {
+  bio: String
+  birthDate: Date
+  gender: Gender
+  lookingForGender: Gender
+  socials: Socials
+  username: String
+}
+
+type User {
+  age: Int!
+  bio: String
+  gender: Gender!
+  lookingForGender: Gender!
+  profilePictureURL: String!
+  socials: Socials
+  userId: String!
+  username: String!
+}
+
+type coords {
+  lat: Float!
+  lng: Float!
+}

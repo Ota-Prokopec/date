@@ -1,6 +1,9 @@
 'use client'
 
-import type { NewAccountFormData } from '@/components/forms/updateNewAccountForm/newAccountUpdateAccountTypes'
+import {
+  useNewAccountFormDataZodSchemaWithErrorMessages,
+  type NewAccountFormData,
+} from '@/components/forms/updateNewAccountForm/newAccountUpdateAccountTypes'
 import { NewAccountForm } from '@/components/forms/updateNewAccountForm/UpdateNewAccountForm'
 import { useAccountFormDataZodSchemaWithErrorMessages } from '@/components/forms/useAccountFormDataZodSchemaWithErrorMessages'
 import { useSaveNewUserInformationMutation } from '@/graphql/generated/apollo'
@@ -18,7 +21,7 @@ const NewUserPage = () => {
 
   const t = useTranslations('pages.auth-newuser')
   const router = useRouter()
-  const { zodSchema: formDataZodSchema } = useAccountFormDataZodSchemaWithErrorMessages()
+  const { zodSchema: formDataZodSchema } = useNewAccountFormDataZodSchemaWithErrorMessages()
   const [updateInfo, updateInfoState] = useSaveNewUserInformationMutation()
 
   //* Forms

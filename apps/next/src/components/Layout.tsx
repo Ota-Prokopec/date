@@ -5,8 +5,8 @@ import { ReactNode } from 'react'
 import { CookieStorageContextProvider } from '@repo/cookies'
 import type { AbstractIntlMessages, Timezone } from 'next-intl'
 import type { Locale } from '@repo/i18n-next'
-import { apolloClient } from '@/graphql/apolloClient'
-import { urqlClient } from '@/graphql/urqlClient'
+import { apolloClient } from '@graphql/apollo/apolloClient'
+import { urqlClient } from '@graphql/urql/urqlClient'
 
 export type LayoutProps = {
   children: ReactNode
