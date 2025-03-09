@@ -1,14 +1,12 @@
 import { Layout } from '@/components/Layout'
+import { getSession } from '@repo/better-auth/session'
 import { cookieStorageZodSchema } from '@repo/cookies/options'
+import type { Locale } from '@repo/i18n-next'
 import { parseCookies } from '@repo/next-storage/handlers'
 import { Center } from '@repo/ui/components/common/Center'
-import { cn } from '@repo/ui/ts-lib/lib/utils'
-import { headers as getHeaders, cookies as nextCookies } from 'next/headers'
 import { Toaster } from '@repo/ui/components/shadcn/sonner'
-import { getMessages } from 'next-intl/server'
-import type { Locale } from '@repo/i18n-next'
-import { getSession } from '@repo/better-auth/session'
-import { getTimeZone } from 'next-intl/server'
+import { getMessages, getTimeZone } from 'next-intl/server'
+import { headers as getHeaders, cookies as nextCookies } from 'next/headers'
 
 //@ts-expect-error
 import '@repo/ui/tailwindcss'
@@ -33,8 +31,11 @@ export default async function RootLayout({ children }: RootLayoutProps) {
   const session = await getSession({ headers: headers })
 
   //	if (!session && !pathname.startsWith('/auth')) redirect('/auth')
+  const cookies = parseCookies((await nextCookies()).getAll())
 
-  const ssrCookies = cookieStorageZodSchema.parse(parseCookies((await nextCookies()).getAll()))
+  const ssrCookies = cookieStorageZodSchema.parse({
+    ...cookies,
+  })
 
   const locale: Locale = ssrCookies['locale']
   console.log(locale)

@@ -1,15 +1,15 @@
 'use client'
-import { useColorTheme } from '@repo/color-theme/colorThemeHook'
-import type { ColorTheme } from '@repo/color-theme/options'
 import { type ReactNode } from 'react'
 import { FaMoon } from 'react-icons/fa'
 import { MdSunny } from 'react-icons/md'
 import { MultipleIcons } from '../Icon/MultipleIcons'
+import type { ColorTheme } from '@repo/ts-types'
+import { cookieStorage } from '@repo/cookies'
 
 export type ThemeColorModeSwitchProps = {}
 
 export const ThemeColorModeSwitch = () => {
-  const { colorTheme, setColorTheme } = useColorTheme()
+  const [colorTheme, setColorTheme] = cookieStorage.useStorageValue('colorTheme')
 
   const icons: { icon: ReactNode; key: NonNullable<ColorTheme> }[] = [
     { icon: <MdSunny className="w-full h-full"></MdSunny>, key: 'light' },

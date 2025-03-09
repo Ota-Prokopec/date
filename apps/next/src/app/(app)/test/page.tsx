@@ -1,12 +1,12 @@
 'use client'
 
-import { useTestQueryQuery } from '@/graphql/generated/urql'
+import { Loadable } from '@/components/Loadable/Loadable'
+import { useTestQueryQuery, useTestQuerySuspenseQuery } from '@/graphql/generated/apollo'
 import { Column } from '@repo/ui/components/common/Column'
-import { Suspense, useState } from 'react'
-import { useQuery } from 'urql'
+import dynamic from 'next/dynamic'
 
 const Page = () => {
-  const [{ data }] = useTestQueryQuery()
+  const { data } = useTestQuerySuspenseQuery()
 
   console.log(data?.test)
 

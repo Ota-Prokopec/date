@@ -1,17 +1,14 @@
 {
   "name": "@repo/next-storage",
   "version": "0.0.10",
-  "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "type": "module",
   "exports": {
     ".": {
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
+      "import": "./dist/index.js"
     },
     "./handlers": {
-      "import": "./dist/cookieStorageHandler.js",
-      "require": "./dist/cookieStorageHandler.cjs"
+      "import": "./dist/cookieStorageHandler.js"
     }
   },
   "scripts": {

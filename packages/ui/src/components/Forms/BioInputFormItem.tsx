@@ -1,4 +1,4 @@
-import { type FieldValues, type Path } from 'react-hook-form'
+import { useForm, type FieldValues, type Path } from 'react-hook-form'
 import { BioInput } from '../Inputs/BioInput'
 import { ReactHookFormFieldWrapper } from './ReactHookFormFieldWrapper'
 import type { ReactHookFormExtendingFieldProps } from './ReactHookFormTypes'

@@ -1,17 +1,17 @@
 'use client'
 
-import type { ApolloClient, NormalizedCacheObject } from '@apollo/client'
-import { ApolloProvider } from '@apollo/client/react/context/ApolloProvider'
+import { ApolloClient, ApolloProvider } from '@apollo/client'
 import { HeroUIProvider } from '@heroui/react'
-import { useColorTheme } from '@repo/color-theme/colorThemeHook'
 import { type Locale } from '@repo/i18n-next'
 import { localStorage } from '@repo/local-storage'
 import { NextIntlClientProvider, type AbstractIntlMessages, type Timezone } from 'next-intl'
 import { useEffect, type ReactElement, type ReactNode } from 'react'
 import { IntlProvider, type MessageFormatElement } from 'react-intl'
+import { Client as UrqlClient, Provider as UrqlProvider } from 'urql'
 import { useBrowser } from '../hooks/useBrowser'
 import { PlayerContextProvier } from './PlayerContext'
-import { Client as UrqlClient, Provider as UrqlProvider } from 'urql'
+import type { NormalizedCacheObject } from '@apollo/client'
+import { cookieStorage } from '@repo/cookies'
 
 export type ProvidersProps = {
   children: ReactNode
@@ -27,7 +27,7 @@ export type ProvidersProps = {
 
 export const Providers = ({ children, intl, apolloClient, urqlClient }: ProvidersProps) => {
   const { isBrower, setIsBrowser: _setIsBrowser } = useBrowser()
-  const { colorTheme, setColorTheme: _setColorTheme } = useColorTheme()
+  const [colorTheme, setColorTheme] = cookieStorage.useStorageValue('colorTheme')
 
   useEffect(() => {
     if (isBrower) {
@@ -46,6 +46,7 @@ export const Providers = ({ children, intl, apolloClient, urqlClient }: Provider
 
   const additionalProviders: (({ children }: { children: ReactElement }) => ReactElement)[] = []
 
+  //? - i18n-next
   if (intl?.type === 'next')
     additionalProviders.push(({ children }: { children: ReactNode }) => (
       <NextIntlClientProvider
@@ -57,14 +58,19 @@ export const Providers = ({ children, intl, apolloClient, urqlClient }: Provider
       </NextIntlClientProvider>
     ))
 
+  //? - Apollo Client
   if (apolloClient)
     additionalProviders.push(({ children }: { children: ReactNode }) => (
       <ApolloProvider client={apolloClient}>{children}</ApolloProvider>
     ))
+
+  //? - Urql Client
   if (urqlClient)
     additionalProviders.push(({ children }: { children: ReactNode }) => (
       <UrqlProvider value={urqlClient}>{children}</UrqlProvider>
     ))
+
+  //? - i18n-react
   if (intl?.type === 'react')
     additionalProviders.push(({ children }: { children: ReactNode }) => (
       <IntlProvider

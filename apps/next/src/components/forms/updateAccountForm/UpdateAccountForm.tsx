@@ -11,12 +11,12 @@ import { ChevronRight } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { type SubmitHandler, type UseFormReturn } from 'react-hook-form'
 import { AccountProfileSocialsInputFormItem } from '../AccountProfileSocialsInputFormItem'
-import type { UserAccountFormData } from './updateUserFomr'
+import type { UpdateAccountFormData } from './updateAccountFormZodSchema'
 
 type UserFormProps = {
   className?: string
-  form: UseFormReturn<UserAccountFormData>
-  onSubmit: SubmitHandler<UserAccountFormData>
+  form: UseFormReturn<UpdateAccountFormData>
+  onSubmit: SubmitHandler<UpdateAccountFormData>
 }
 
 export const UpdateUserForm = ({ form, className, onSubmit }: UserFormProps) => {

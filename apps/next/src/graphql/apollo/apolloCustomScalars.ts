@@ -5,7 +5,7 @@ import { DateTimeISOResolver } from 'graphql-scalars'
 
 const schema = buildClientSchema(introspectionResult as unknown as IntrospectionQuery)
 
-export const customScalarsLink = withScalars({
+export const apolloCustomScalarsLink = withScalars({
   schema,
   typesMap: {
     Date: DateTimeISOResolver,

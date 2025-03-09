@@ -1,4 +1,5 @@
 import { builder } from '@/builder.ts'
+import { PothosError } from '@pothos/core'
 
 export const TestRef = builder.objectRef<{ id: string; res: number }>('Test').implement({
   fields: (t) => ({
@@ -20,6 +21,9 @@ builder.queryField('test', (t) =>
     type: returnValue,
     args: {},
     resolve: async (parent, args, ctx) => {
+      if (!ctx.session?.user) throw new PothosError('User is not authorizated')
+      console.log(ctx.session?.user)
+
       return await new Promise<ReturnValue>((res) =>
         setTimeout(() => res({ date: new Date(Date.now()) }), 1000)
       )

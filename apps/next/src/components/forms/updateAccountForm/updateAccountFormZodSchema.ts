@@ -2,7 +2,7 @@ import type { Equal, FullAccountData } from '@repo/ts-types'
 import { useAccountFormDataZodSchemaWithErrorMessages } from '../useAccountFormDataZodSchemaWithErrorMessages'
 import type { TypeOf } from 'zod'
 
-export type UserAccountFormData = Pick<
+export type UpdateAccountFormData = Pick<
   FullAccountData,
   'username' | 'gender' | 'lookingForGender' | 'birthDate' | 'bio' | 'socials'
 >
@@ -15,11 +15,11 @@ export const useUpdateAccountFormDataZodSchemaWithErrorMessages = () =>
     birthDate: true,
     bio: true,
     socials: true,
-  } satisfies Record<keyof UserAccountFormData, boolean>)
+  } satisfies Record<keyof UpdateAccountFormData, boolean>)
 
 type C = Equal<
   // ^?
-  UserAccountFormData,
+  UpdateAccountFormData,
   TypeOf<
     NonNullable<Required<ReturnType<typeof useUpdateAccountFormDataZodSchemaWithErrorMessages>>>
   >

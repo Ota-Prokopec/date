@@ -8,6 +8,7 @@ export const BioInput = ({ ...props }: BioInputProps) => {
       className=" outline-none !border-0 w-full"
       style={{ border: '0 !important' }}
       {...props}
+      value={props.value ?? ''}
     />
   )
 }

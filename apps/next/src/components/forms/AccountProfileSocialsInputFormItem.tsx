@@ -1,7 +1,7 @@
 import { ReactHookFormFieldWrapper } from '@repo/ui/components/Forms/ReactHookFormFieldWrapper'
 import type { ReactHookFormExtendingFieldProps } from '@repo/ui/ts-lib/components/Forms/ReactHookFormTypes'
 import type { FieldValues, Path } from 'react-hook-form'
-import { ProfileSocialsInput } from '../Inputs/ProfileSocialsInput'
+import { ProfileSocialsInput } from '../Inputs/ProfileSocialsInput/ProfileSocialsInput'
 import type { SocialsData } from '@repo/ts-types'
 
 type UserNameInputFormItemValuetype = SocialsData
@@ -24,7 +24,7 @@ export const AccountProfileSocialsInputFormItem = <
       name={name}
       render={({ field }) => (
         <ProfileSocialsInput
-          value={field.value}
+          currentSocialsData={field.value}
           onChange={(value) => field.onChange(value)}
         ></ProfileSocialsInput>
       )}

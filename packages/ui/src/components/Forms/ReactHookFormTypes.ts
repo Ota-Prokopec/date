@@ -14,10 +14,8 @@ export type ReactHookFormExtendingFieldProps<
   TPath extends Path<TFieldValues>,
   TFieldType extends unknown,
 > = {
-  form: PathValue<TFieldValues, TPath> extends TFieldType
-    ? TFieldType extends PathValue<TFieldValues, TPath>
-      ? UseFormReturn<TFieldValues, unknown, undefined>
-      : never
+  form: TFieldType extends PathValue<TFieldValues, TPath>
+    ? UseFormReturn<TFieldValues, unknown, undefined>
     : never
   name: TPath
 }

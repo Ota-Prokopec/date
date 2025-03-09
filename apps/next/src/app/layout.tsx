@@ -1,12 +1,12 @@
 import { cn } from '@repo/ui/ts-lib/lib/utils'
 
 import '@repo/ui/tailwindcss'
+import dynamic from 'next/dynamic'
 
 type RootLayoutProps = Readonly<{
   children: React.ReactNode
 }>
-
-export default async function RootLayout({ children }: RootLayoutProps) {
+const rootLayout = async function RootLayout({ children }: RootLayoutProps) {
   return (
     <html>
       <title>Musify</title>
@@ -32,3 +32,5 @@ export default async function RootLayout({ children }: RootLayoutProps) {
     </html>
   )
 }
+
+export default rootLayout

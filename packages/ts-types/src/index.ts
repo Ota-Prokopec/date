@@ -4,6 +4,7 @@
 
 export * from './rootType';
 export * from './Date/Account';
+export * from './Date/ColorTheme';
 export * from './Date/GenderTypes';
 export * from './Date/SocialPlatforms';
 export * from './Date/UserProfile';
