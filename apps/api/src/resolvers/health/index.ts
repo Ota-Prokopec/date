@@ -1,2 +1,2 @@
-export * from './mutations/setGraphqlHealth';
-export * from './queries/getGraphqlHealth';
+export * from './mutations/setGraphqlHealthMutation'
+export * from './queries/getGraphqlHealthQuery'

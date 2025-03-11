@@ -10,6 +10,6 @@ const socialProfileDataZodSchema = z.object({
 export type SocialProfileDataParams = z.TypeOf<typeof socialProfileDataZodSchema>
 
 export const socialsDataZodSchema = z.object({
-  instagram: socialProfileDataZodSchema.optional(),
+  instagram: socialProfileDataZodSchema.optional().nullable(),
 })
 export type SocialsData = z.TypeOf<typeof socialsDataZodSchema>

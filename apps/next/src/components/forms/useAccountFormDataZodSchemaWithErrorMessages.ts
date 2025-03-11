@@ -6,7 +6,7 @@ type ZodSchema = ReturnType<typeof getEditAccountDataZodSchemaWithErrorMessages>
 
 export const useAccountFormDataZodSchemaWithErrorMessages = () => {
   const { messages } = useMessages('others.accountZodSchemaWithErrorMessages')
-  const [zodSchema, setZodSchema] = useState<ZodSchema | null>(null)
+  const [zodSchema, setZodSchema] = useState<ZodSchema | undefined>(undefined)
 
   useEffect(() => {
     if (messages) setZodSchema(getEditAccountDataZodSchemaWithErrorMessages(messages))

@@ -17,5 +17,5 @@ export const useUpdateNewAccountFormDataZodSchemaWithErrorMessages = () => {
     lookingForGender: true,
     birthDate: true,
   } satisfies Record<keyof NewAccountFormData, boolean>)
-  return { zodSchema }
+  return zodSchema
 }

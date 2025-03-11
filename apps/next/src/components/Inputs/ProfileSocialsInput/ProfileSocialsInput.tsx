@@ -1,20 +1,9 @@
 import type { SocialProfilePlatform, SocialsData } from '@repo/ts-types'
-import { IconInstagram, IconLink, IconUser } from '@repo/ui/components/Icons/Icons'
-import { Input } from '@repo/ui/components/Inputs/Input'
-import { Button } from '@repo/ui/components/common/Button'
-import { Center } from '@repo/ui/components/common/Center'
-import { Column } from '@repo/ui/components/common/Column'
 import { ModalSheet } from '@repo/ui/components/common/ModalSheet'
-import { Row } from '@repo/ui/components/common/Row'
-import { Text } from '@repo/ui/components/common/Text'
 import { merge } from 'lodash'
-import { useEffect, useState, type Dispatch, type SetStateAction } from 'react'
-import { match } from 'ts-pattern'
+import { useEffect, useState } from 'react'
 import { SocialProfiles } from '../../Profile/SocialProfiles'
-import {
-  socialProfilesMetaData,
-  socialProfilesPlaceholderData,
-} from '../../Profile/socialProfilesData'
+import { socialProfilesPlaceholderData } from '../../Profile/socialProfilesData'
 import { ProfileSocialsInputSheetInput } from './ProfileSocialsInputSheetInput'
 
 type SocialsInputProps = {
@@ -52,6 +41,8 @@ export const ProfileSocialsInput = ({ onChange, currentSocialsData = {} }: Socia
         currentChosenPlatform={currentChosenPlatform}
         onChange={(newPlatformData) => {
           setSocialsData((current) => {
+            console.log('change', currentChosenPlatform)
+
             if (!currentChosenPlatform) return current
             return merge(current, {
               [currentChosenPlatform]: newPlatformData,

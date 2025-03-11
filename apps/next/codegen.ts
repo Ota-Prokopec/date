@@ -6,13 +6,10 @@ const codegenConfigConfig: CodegenConfig['config'] = {
   scalars: {
     Coords: '{lat: number, lng: number}',
     File: 'File',
-    Gender: '"male" | "female"',
+    Gender: '@repo/ts-types#Gender',
     GraphQLHealth: '{ok: boolean}',
     Date: 'Date',
-    Socials: `{instagram?: {
-        profileId: string;
-        link: string;
-  }}`,
+    Socials: `@repo/ts-types#SocialsData`,
   },
 }
 

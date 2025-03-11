@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "  dotenv -e ../../.env -- tsx watch src/apiIndex.ts",
+    "dev": "dotenv -e ../../.env -- tsx watch src/apiIndex.ts",
     "build": "pnpm build:app & pnpm generate:graphql-schema",
     "build:app": "tsc  src/apiIndex.ts",
     "generate:graphql-schema": "dotenv -e ../../.env tsx src/cli/generate-schema.ts",

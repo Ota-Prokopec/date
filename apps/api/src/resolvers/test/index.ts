@@ -1,1 +1,1 @@
-import './queries/test'
+import './queries/testQuery'

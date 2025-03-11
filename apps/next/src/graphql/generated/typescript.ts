@@ -1,3 +1,5 @@
+import { Gender } from '@repo/ts-types';
+import { SocialsData } from '@repo/ts-types';
 import { GraphQLClient, RequestOptions } from 'graphql-request';
 import gql from 'graphql-tag';
 export type Maybe<T> = T | null | undefined;
@@ -19,15 +21,9 @@ export type Scalars = {
   /** A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.This scalar is serialized to a string in ISO 8601 format and parsed from a string in ISO 8601 format. */
   Date: { input: Date; output: Date; }
   File: { input: File; output: File; }
-  Gender: { input: "male" | "female"; output: "male" | "female"; }
+  Gender: { input: Gender; output: Gender; }
   GraphQLHealth: { input: {ok: boolean}; output: {ok: boolean}; }
-  Socials: { input: {instagram?: {
-        profileId: string;
-        link: string;
-  }}; output: {instagram?: {
-        profileId: string;
-        link: string;
-  }}; }
+  Socials: { input: SocialsData; output: SocialsData; }
 };
 
 export type Account = {
@@ -132,10 +128,7 @@ export type UpdateAccountMutation = { __typename?: 'Mutation', updateAccount: bo
 export type GetAccountProfileQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetAccountProfileQuery = { __typename?: 'Query', getAccountProfile: { __typename?: 'Account', bio?: string | null | undefined, birthDate?: Date | null | undefined, coords?: {lat: number, lng: number} | null | undefined, gender?: "male" | "female" | null | undefined, lookingForGender?: "male" | "female" | null | undefined, profilePictureURL?: string | null | undefined, socials?: {instagram?: {
-          profileId: string;
-          link: string;
-    }} | null | undefined, userId: string, username: string, age?: number | null | undefined } };
+export type GetAccountProfileQuery = { __typename?: 'Query', getAccountProfile: { __typename?: 'Account', bio?: string | null | undefined, birthDate?: Date | null | undefined, coords?: {lat: number, lng: number} | null | undefined, gender?: Gender | null | undefined, lookingForGender?: Gender | null | undefined, profilePictureURL?: string | null | undefined, socials?: SocialsData | null | undefined, userId: string, username: string, age?: number | null | undefined } };
 
 export type GetHealthStatusQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -152,10 +145,7 @@ export type GetUserProfileQueryVariables = Exact<{
 }>;
 
 
-export type GetUserProfileQuery = { __typename?: 'Query', getUserProfile: { __typename?: 'User', age: number, bio?: string | null | undefined, gender: "male" | "female", lookingForGender: "male" | "female", profilePictureURL: string, socials?: {instagram?: {
-          profileId: string;
-          link: string;
-    }} | null | undefined, userId: string, username: string } };
+export type GetUserProfileQuery = { __typename?: 'Query', getUserProfile: { __typename?: 'User', age: number, bio?: string | null | undefined, gender: Gender, lookingForGender: Gender, profilePictureURL: string, socials?: SocialsData | null | undefined, userId: string, username: string } };
 
 
 export const SaveNewUserInformationDocument = gql`

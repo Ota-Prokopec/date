@@ -1,39 +1,25 @@
 'use client'
 
-import {
-  useNewAccountFormDataZodSchemaWithErrorMessages,
-  type NewAccountFormData,
-} from '@/components/forms/updateNewAccountForm/updateNewAccountForm'
 import { NewAccountForm } from '@/components/forms/updateNewAccountForm/UpdateNewAccountForm'
+import { type NewAccountFormData } from '@/components/forms/updateNewAccountForm/updateNewAccountFormZodSchema'
 import { useSaveNewUserInformationMutation } from '@/graphql/generated/apollo'
-import { zodResolver } from '@hookform/resolvers/zod'
 import { cookieStorage } from '@repo/cookies'
 import { Center } from '@repo/ui/components/common/Center'
 import { useSuperEffect } from '@repo/ui/ts-lib/hooks/useSuperEffect'
 import { useTranslations } from 'next-intl'
 import { useRouter } from 'next/navigation'
-import { useForm, type SubmitHandler } from 'react-hook-form'
+import { type SubmitHandler } from 'react-hook-form'
 import { toast } from 'sonner'
+import { useUpdateNewAccountReactHookForm } from './useUpdateNewAccountReactHookForm'
 
 const NewUserPage = () => {
   const [locale, setLocale] = cookieStorage.useStorageValue('locale')
 
   const t = useTranslations('pages.auth-newuser')
   const router = useRouter()
-  const { zodSchema: formDataZodSchema } = useNewAccountFormDataZodSchemaWithErrorMessages()
   const [updateInfo, updateInfoState] = useSaveNewUserInformationMutation()
 
-  //* Forms
-  const form = useForm<NewAccountFormData>({
-    defaultValues: {
-      gender: 'male',
-      lookingForGender: 'female',
-      birthDate: new Date(),
-      username: '',
-    },
-    reValidateMode: 'onSubmit',
-    resolver: formDataZodSchema ? zodResolver(formDataZodSchema) : undefined,
-  })
+  const form = useUpdateNewAccountReactHookForm()
 
   //* Submit
   const onSubmit: SubmitHandler<NewAccountFormData> = async (data) => {
