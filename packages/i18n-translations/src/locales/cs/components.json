@@ -3,7 +3,7 @@
     "title": "We use cookies to enhance your experience. By continuing to browse the site, you agree to our use of cookies.",
     "iAgree": "I agree"
   },
-  "NewUserForm": {
+  "UpdateNewAccountForm": {
     "usernameInputTitle": "Jak tě můžeme nazívat?",
     "dateInputTitle": "Kdy jsi se narodil?",
     "genderInputTitle": "Identifikuješ se jako?",
@@ -11,12 +11,15 @@
     "continueButtonLabel": "Pokračovat",
     "errorMessage": "Něco se nepovedlo, prosíme, zkuste to znovu."
   },
-  "UserForm": {
+  "UpdateAccountForm": {
     "usernameInputTitle": "Jak tě můžeme nazívat?",
     "dateInputTitle": "Kdy jsi se narodil?",
     "genderInputTitle": "Identifikuješ se jako?",
     "lookingForGenderInputTitle": "Koho zde hledáš?",
-    "continueButtonLabel": "Pokračovat",
+    "continueButtonLabel": "Uložit",
     "errorMessage": "Něco se nepovedlo, prosíme, zkuste to znovu."
+  },
+  "ProfileSocialsInputSheetInput": {
+    "submitButtonLabel": "Uložit"
   }
 }

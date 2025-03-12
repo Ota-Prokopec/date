@@ -1,6 +1,6 @@
 import type { SocialProfilePlatform, SocialsData } from '@repo/ts-types'
 import { ModalSheet } from '@repo/ui/components/common/ModalSheet'
-import { merge } from 'lodash'
+import { merge, omit } from 'lodash'
 import { useEffect, useState } from 'react'
 import { SocialProfiles } from '../../Profile/SocialProfiles'
 import { socialProfilesPlaceholderData } from '../../Profile/socialProfilesData'
@@ -46,12 +46,14 @@ export const ProfileSocialsInput = ({ onChange, currentSocialsData = {} }: Socia
         currentChosenPlatform={currentChosenPlatform}
         onChange={(newPlatformData) => {
           setSocialsData((current) => {
-            console.log('change', currentChosenPlatform)
-
+            sheet.setIsOpen(false)
             if (!currentChosenPlatform) return current
-            return merge(current, {
-              [currentChosenPlatform]: newPlatformData,
-            })
+            return newPlatformData
+              ? //? If newPlatformData exists, merge it with the current data, otherwise omit the current platform to remove it
+                merge(current, {
+                  [currentChosenPlatform]: newPlatformData,
+                })
+              : omit(current, currentChosenPlatform)
           })
         }}
       ></ProfileSocialsInputSheetInput>

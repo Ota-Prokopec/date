@@ -1,7 +1,7 @@
+import { cn } from '@/lib/utils'
 import { DatePicker, DateValue, type CalendarDate } from '@heroui/react'
 import { getLocalTimeZone, parseDate } from '@internationalized/date'
 import type { PothosOptional } from '@repo/ts-types'
-import { cn } from '@repo/ui/ts-lib/lib/utils'
 import { useState } from 'react'
 
 type DateInputProps = {

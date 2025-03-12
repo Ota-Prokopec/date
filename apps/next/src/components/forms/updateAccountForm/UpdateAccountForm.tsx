@@ -13,14 +13,14 @@ import { type SubmitHandler, type UseFormReturn } from 'react-hook-form'
 import { AccountProfileSocialsInputFormItem } from '../AccountProfileSocialsInputFormItem'
 import type { UpdateAccountFormData } from './updateAccountFormZodSchema'
 
-type UserFormProps = {
+type UpdateAccountFormProps = {
   className?: string
   form: UseFormReturn<UpdateAccountFormData>
   onSubmit: SubmitHandler<UpdateAccountFormData>
 }
 
-export const UpdateUserForm = ({ form, className, onSubmit }: UserFormProps) => {
-  const t = useTranslations('components.UserForm')
+export const UpdateAccountForm = ({ form, className, onSubmit }: UpdateAccountFormProps) => {
+  const t = useTranslations('components.UpdateAccountForm')
 
   return (
     <ReactHookForm onSubmit={onSubmit} form={form}>
@@ -42,6 +42,7 @@ export const UpdateUserForm = ({ form, className, onSubmit }: UserFormProps) => 
         </EditAccountProfileItem>
 
         <Button
+          isLoading={form.formState.isSubmitting}
           className="gap-2 w-[250px] h-auto"
           icon={<ChevronRight strokeWidth={2.5} className="w-8 h-8"></ChevronRight>}
           type="submit"

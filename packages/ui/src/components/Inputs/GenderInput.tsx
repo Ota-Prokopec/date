@@ -1,10 +1,10 @@
 import type { Gender } from '@repo/ts-types'
-import { Card } from '@repo/ui/components/common/Card'
 import { Radio, type RadioItem } from '../Inputs/Radio'
 import { cn } from '../../lib/utils'
 import { match } from 'ts-pattern'
 import { IconFemale, IconMale } from '../../components/Icons/Icons'
 import { memo } from 'react'
+import { Card } from '../common/Card'
 
 const radioGenders: RadioItem<Gender, Gender>[] = [
   { key: 'female', value: 'female' },

@@ -10,6 +10,7 @@ export * from './Date/SocialPlatforms';
 export * from './Date/UserProfile';
 export * from './Helpers/Check';
 export * from './Helpers/ErrorMessage';
+export * from './Helpers/GenericZodObject';
 export * from './Helpers/MakeOptional';
 export * from './Helpers/NonNullableObjects';
 export * from './Helpers/NullableObject';

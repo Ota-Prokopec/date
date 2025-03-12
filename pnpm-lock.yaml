@@ -35,6 +35,9 @@ importers:
       '@pothos/plugin-dataloader':
         specifier: ^4.3.0
         version: 4.3.0(@pothos/core@4.5.0(graphql@16.10.0))(dataloader@2.2.3)(graphql@16.10.0)
+      '@repo/better-auth':
+        specifier: 'workspace: *'
+        version: link:../../packages/better-auth
       '@repo/cloudinary':
         specifier: 'workspace: *'
         version: link:../../packages/cloudinary

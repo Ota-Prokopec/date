@@ -64,6 +64,7 @@ const SocialProfileItem = ({
 }: SocialProfileItemProps) => {
   return (
     <button
+      type="button"
       onClick={onClick}
       className={cn('border-none shadow-none items-start [&>*]:justify-start', className)}
     >

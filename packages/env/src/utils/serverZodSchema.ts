@@ -30,4 +30,5 @@ export const getServerZodSchema = (NODE_ENV: 'test' | 'development') => ({
   CLOUDINARY_API_SECRET: z.string(),
   CLOUDINARY_ROOT_FOLDER_NAME: z.string(),
   BETTER_AUTH_SESSION_TOKEN_NAME: z.string(),
+  IMAGE_CDN_PROVIDER_BASE_URL: z.string(),
 })

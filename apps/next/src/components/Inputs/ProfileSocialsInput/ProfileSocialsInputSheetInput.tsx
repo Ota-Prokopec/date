@@ -11,6 +11,8 @@ import { merge } from 'lodash'
 import { useEffect, useState, type Dispatch, type SetStateAction } from 'react'
 import { match } from 'ts-pattern'
 import { socialProfilesMetaData } from '../../Profile/socialProfilesData'
+import { useSuperEffect } from '@repo/ui/ts-lib/hooks/useSuperEffect'
+import { useTranslations } from 'next-intl'
 
 type SheetInputProps = {
   sheet: ModalSheet
@@ -25,6 +27,7 @@ export const ProfileSocialsInputSheetInput = ({
   socialsData,
   onChange,
 }: SheetInputProps) => {
+  const t = useTranslations('components.ProfileSocialsInputSheetInput')
   const [profileIdValue, setProfileIdValue] = useState<string>(
     currentChosenPlatform && socialsData && socialsData[currentChosenPlatform]
       ? socialsData[currentChosenPlatform]?.profileId
@@ -37,7 +40,7 @@ export const ProfileSocialsInputSheetInput = ({
       : ''
   )
 
-  useEffect(() => {
+  const submit = () => {
     if (currentChosenPlatform) {
       //? if ProfileIdValue is blank or the link is blank then the value passed to onChange(undefined) will be undefined => that means that it will be removed from the FORM HOOK => it will be removed from database
       const newValue =
@@ -50,7 +53,7 @@ export const ProfileSocialsInputSheetInput = ({
 
       onChange(newValue)
     }
-  }, [linkValue, profileIdValue, onChange, currentChosenPlatform])
+  }
 
   return (
     <sheet.Sheet className="h-full w-full">
@@ -65,7 +68,7 @@ export const ProfileSocialsInputSheetInput = ({
             </Text>
           </Row>
           <Input
-            className="outline-none !border-0"
+            className=""
             style={{ border: '0 !important' }}
             startContent={<IconUser></IconUser>}
             type="text"
@@ -74,7 +77,7 @@ export const ProfileSocialsInputSheetInput = ({
             onValueChange={setProfileIdValue}
           />
           <Input
-            className="outline-none !border-0"
+            className=""
             style={{ border: '0 !important' }}
             startContent={<IconLink></IconLink>}
             type="text"
@@ -82,6 +85,9 @@ export const ProfileSocialsInputSheetInput = ({
             placeholder="URL"
             onValueChange={setLinkValue}
           />
+          <Button disabled={!currentChosenPlatform} onClick={submit}>
+            {t('submitButtonLabel')}
+          </Button>
         </Column>
       </Center>
     </sheet.Sheet>

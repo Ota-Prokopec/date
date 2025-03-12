@@ -17,15 +17,20 @@ import { useTranslations } from 'next-intl'
 import { type SubmitHandler, type UseFormReturn } from 'react-hook-form'
 import type { NewAccountFormData } from './updateNewAccountFormZodSchema'
 
-type NewAccountFormProps = {
+type UpdateNewAccountFormProps = {
   className?: string
   form: UseFormReturn<NewAccountFormData>
   isLoading?: boolean
   onSubmit: SubmitHandler<NewAccountFormData>
 }
 
-export const NewAccountForm = ({ form, className, isLoading, onSubmit }: NewAccountFormProps) => {
-  const t = useTranslations('components.NewUserForm')
+export const UpdateNewAccountForm = ({
+  form,
+  className,
+  isLoading,
+  onSubmit,
+}: UpdateNewAccountFormProps) => {
+  const t = useTranslations('components.UpdateNewAccountForm')
 
   return (
     <ReactHookForm onSubmit={onSubmit} form={form}>

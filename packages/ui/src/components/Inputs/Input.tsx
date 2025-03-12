@@ -27,7 +27,7 @@ export const Input = ({
       }}
       maxLength={maxLength}
       className={cn(
-        'w-auto input input-bordered input-lg rounded-xl text-black/90 font-semibold bg-white dark:bg-black',
+        'w-auto input input-bordered input-lg rounded-xl text-black/90 font-semibold bg-white dark:bg-black !outline-none !border-none',
         className
       )}
       defaultValue={defaultValue}

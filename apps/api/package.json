@@ -45,6 +45,7 @@
     "@repo/graphql": "workspace: *",
     "@repo/ts-types": "workspace: *",
     "@repo/utils": "workspace: *",
+    "@repo/better-auth": "workspace: *",
     "@whatwg-node/server-plugin-cookies": "^1.0.3",
     "cloudinary": "^2.5.1",
     "dataloader": "^2.2.3",

@@ -41,6 +41,7 @@ export const env = <TEnvType extends Environment>(
             CLOUDINARY_API_SECRET: envSource.CLOUDINARY_API_SECRET,
             CLOUDINARY_ROOT_FOLDER_NAME: envSource.CLOUDINARY_ROOT_FOLDER_NAME,
             BETTER_AUTH_SESSION_TOKEN_NAME: envSource.BETTER_AUTH_SESSION_TOKEN_NAME,
+            IMAGE_CDN_PROVIDER_BASE_URL: envSource.IMAGE_CDN_PROVIDER_BASE_URL,
           },
           //skipValidation: !!envSource.NEXT_PUBLIC_SKIP_ENV_VALIDATION,
         })

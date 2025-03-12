@@ -1,9 +1,9 @@
-import type { Equal, FullAccountData } from '@repo/ts-types'
+import type { FullAccountData, TypeCheck } from '@repo/ts-types'
+import type { TypeOf } from 'zod'
 import {
   getAccountFormDataZodSchemaWithErrorMessages,
   useAccountFormDataZodSchemaWithErrorMessages,
 } from '../useAccountFormDataZodSchemaWithErrorMessages'
-import type { TypeOf } from 'zod'
 
 export type UpdateAccountFormData = Pick<
   FullAccountData,
@@ -25,7 +25,7 @@ export const useUpdateAccountFormDataZodSchemaWithErrorMessages = () =>
 export const getUpdateAccountFormDataZodSchemaWithErrorMessages = async () =>
   (await getAccountFormDataZodSchemaWithErrorMessages()).pick(pick)
 
-type C = Equal<
+type C = TypeCheck<
   // ^?
   UpdateAccountFormData,
   TypeOf<

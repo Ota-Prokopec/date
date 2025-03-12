@@ -75,6 +75,7 @@ export const accountDataZodSchema = fullAccountDataZodSchema.extend({
     .optional(),
   coords: accountDataZodSchemaAllPropsRequired.shape.coords.nullable().optional(),
   age: accountDataZodSchemaAllPropsRequired.shape.age.nullable().optional(),
+  birthDate: accountDataZodSchemaAllPropsRequired.shape.birthDate.nullable().optional(),
 })
 
 export type AccountData = TypeOf<typeof accountDataZodSchema>

@@ -3,7 +3,7 @@
     "title": "We use cookies to enhance your experience. By continuing to browse the site, you agree to our use of cookies.",
     "iAgree": "I agree"
   },
-  "NewUserForm": {
+  "UpdateNewAccountForm": {
     "usernameInputTitle": "How can we call you?",
     "dateInputTitle": "When were you born?",
     "genderInputTitle": "Your gender is?",
@@ -11,12 +11,15 @@
     "continueButtonLabel": "Continue",
     "errorMessage": "Something went wrong, please try it again."
   },
-  "UserForm": {
+  "UpdateAccountForm": {
     "usernameInputTitle": "How can we call you?",
     "dateInputTitle": "When were you born?",
     "genderInputTitle": "Your gender is?",
     "lookingForGenderInputTitle": "You are looking for?",
-    "continueButtonLabel": "Continue",
+    "continueButtonLabel": "Save",
     "errorMessage": "Something went wrong, please try it again."
+  },
+  "ProfileSocialsInputSheetInput": {
+    "submitButtonLabel": "Save"
   }
 }

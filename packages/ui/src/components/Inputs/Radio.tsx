@@ -28,6 +28,7 @@ export const Radio = <Key extends string, Value extends string>({
       {items.map((item) => {
         return (
           <button
+            type="button"
             onClick={() => {
               setSelected(item.key)
               if (onChange) onChange(item.key)

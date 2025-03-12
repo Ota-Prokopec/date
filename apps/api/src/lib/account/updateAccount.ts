@@ -25,17 +25,23 @@ export const updateAccountInformation = async (
 
   //updating user's socials
   if (socials) {
-    const socialsTypes: SocialProfilePlatform[] = getObjectKeys(socials)
-    const usersSocialsUpdatePromise = socialsTypes.map((socialType) =>
+    const socialPlatforms: SocialProfilePlatform[] = getObjectKeys(socials)
+    const usersSocialsUpdatePromise = socialPlatforms.map((socialPlatform) =>
       db
-        .update(drizzleSchema.socials)
-        .set({
-          link: socials[socialType]?.link,
-          platformProfileId: socials[socialType]?.profileId,
+        .insert(drizzleSchema.socials)
+        .values({
+          link: socials[socialPlatform]!.link,
+          platformProfileId: socials[socialPlatform]!.profileId,
+          userId: userId,
+          type: socialPlatform,
         })
-        .where(
-          and(eq(drizzleSchema.socials.userId, userId), eq(drizzleSchema.socials.type, socialType))
-        )
+        .onConflictDoUpdate({
+          target: [drizzleSchema.socials.userId, drizzleSchema.socials.type],
+          set: {
+            link: socials[socialPlatform]!.link,
+            platformProfileId: socials[socialPlatform]!.profileId,
+          },
+        })
     )
 
     awaiting.push(...usersSocialsUpdatePromise)

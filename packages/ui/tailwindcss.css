@@ -34,6 +34,8 @@ input,
 textarea:focus {
   box-shadow: none !important;
   border: none !important;
+  outline: none !important;
+  outline-color: unset !important;
 }
 
 input,
