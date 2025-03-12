@@ -14,18 +14,20 @@ import { useUpdateAccountReactHookForm } from './useUpdateAccountReactHookForm'
 const EditProfilePage = () => {
   //? loading - loading.tsx, error - error.tsx (works for both errors - fetch and validation)
   const { data } = useGetAccountProfileSuspenseQuery()
-  const t = useTranslations('pages.profile-edit')
-
-  const [updateUserAccount, UpdatingUserAccountState] = useUpdateAccountMutation()
-
   const form = useUpdateAccountReactHookForm(
     fullAccountDataZodSchema.parse(data?.getAccountProfile)
   )
+
+  const t = useTranslations('pages.profile-edit')
+
+  const [updateUserAccount, UpdatingUserAccountState] = useUpdateAccountMutation()
 
   //? Submit
   const onSubmit: SubmitHandler<UpdateAccountFormData> = async (data) => {
     await updateUserAccount({ variables: { userProfileData: data } })
   }
+
+  console.log('render')
 
   return <UpdateUserForm form={form} onSubmit={onSubmit}></UpdateUserForm>
 }

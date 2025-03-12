@@ -1,5 +1,8 @@
 import type { Equal, FullAccountData } from '@repo/ts-types'
-import { useAccountFormDataZodSchemaWithErrorMessages } from '../useAccountFormDataZodSchemaWithErrorMessages'
+import {
+  getAccountFormDataZodSchemaWithErrorMessages,
+  useAccountFormDataZodSchemaWithErrorMessages,
+} from '../useAccountFormDataZodSchemaWithErrorMessages'
 import type { TypeOf } from 'zod'
 
 export type UpdateAccountFormData = Pick<
@@ -7,15 +10,20 @@ export type UpdateAccountFormData = Pick<
   'username' | 'gender' | 'lookingForGender' | 'birthDate' | 'bio' | 'socials'
 >
 
+const pick = {
+  username: true,
+  gender: true,
+  lookingForGender: true,
+  birthDate: true,
+  bio: true,
+  socials: true,
+} satisfies Record<keyof UpdateAccountFormData, boolean>
+
 export const useUpdateAccountFormDataZodSchemaWithErrorMessages = () =>
-  useAccountFormDataZodSchemaWithErrorMessages().zodSchema?.pick({
-    username: true,
-    gender: true,
-    lookingForGender: true,
-    birthDate: true,
-    bio: true,
-    socials: true,
-  } satisfies Record<keyof UpdateAccountFormData, boolean>)
+  useAccountFormDataZodSchemaWithErrorMessages()?.pick(pick)
+
+export const getUpdateAccountFormDataZodSchemaWithErrorMessages = async () =>
+  (await getAccountFormDataZodSchemaWithErrorMessages()).pick(pick)
 
 type C = Equal<
   // ^?

@@ -3,8 +3,9 @@ import { type ReactNode } from 'react'
 import type { FieldValues, SubmitHandler } from 'react-hook-form'
 import { Center } from '../common/Center'
 import { Loader } from '../common/Loader'
-import { Form } from '../shadcn/form'
+import { Form, FormControl } from '../shadcn/form'
 import type { ReactHookFormExtendingFormProps } from './ReactHookFormTypes'
+import { ReactHookFormFieldErrorMessage } from './ReactHookFormFieldErrorMessage'
 
 export type ReactHookFormProps<TFieldValues extends FieldValues> =
   ReactHookFormExtendingFormProps<TFieldValues> & {
@@ -28,7 +29,10 @@ export const ReactHookForm = <TFieldValues extends FieldValues>({
             'opacity-25': isLoading,
           })}
         >
-          {children}
+          <>
+            <ReactHookFormFieldErrorMessage form={form} />
+            {children}
+          </>
         </form>
       </Form>
       {isLoading && (

@@ -63,7 +63,6 @@
     "@radix-ui/react-select": "^2.1.2",
     "@radix-ui/react-slot": "^1.1.2",
     "@remix-run/node": "^2.15.0",
-    "@repo/color-theme": "workspace: *",
     "@repo/cookies": "workspace: *",
     "@repo/env": "workspace: *",
     "@repo/i18n-next": "workspace: *",

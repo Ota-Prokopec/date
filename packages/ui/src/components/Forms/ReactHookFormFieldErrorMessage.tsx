@@ -7,19 +7,20 @@ import type { ReactHookFormExtendingFieldWrapperProps } from './ReactHookFormTyp
 export type ReactHookFormFieldErrorMessageProps<
   TFieldValues extends FieldValues,
   TPath extends Path<TFieldValues>,
-> = ReactHookFormExtendingFieldWrapperProps<TFieldValues, TPath> & { options?: ExternalToast }
+> = Pick<ReactHookFormExtendingFieldWrapperProps<TFieldValues, TPath>, 'form'> & {
+  options?: ExternalToast
+}
 
 export const ReactHookFormFieldErrorMessage = <
   TFieldValues extends FieldValues,
   TPath extends Path<TFieldValues>,
 >({
   options,
-  name,
   form,
 }: ReactHookFormFieldErrorMessageProps<TFieldValues, TPath>) => {
   const { error } = useFormField()
 
-  const onClose = () => form.clearErrors(name)
+  const onClose = () => form.clearErrors()
 
   useEffect(() => {
     console.log({ error })

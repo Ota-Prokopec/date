@@ -3,6 +3,7 @@ import { GenderInput } from '../Inputs/GenderInput'
 import { ReactHookFormFieldWrapper } from './ReactHookFormFieldWrapper'
 import type { ReactHookFormExtendingFieldProps } from './ReactHookFormTypes'
 import type { Gender } from '@repo/ts-types'
+import { memo } from 'react'
 
 type GenderInputFormItemValuetype = Gender
 
@@ -27,14 +28,7 @@ export const GenderInputFormItem = <
       form={form}
       name={name}
       render={({ field }) => (
-        <GenderInput
-          value={field.value}
-          onChange={
-            (gender) => field.onChange(gender)
-            //form.setValue(name, gender as PathValue<TFieldValues, Path<TFieldValues>>)
-          }
-          {...props}
-        />
+        <GenderInput value={field.value} onChange={(gender) => field.onChange(gender)} {...props} />
       )}
     ></ReactHookFormFieldWrapper>
   )

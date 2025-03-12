@@ -4,6 +4,7 @@ import { Radio, type RadioItem } from '../Inputs/Radio'
 import { cn } from '../../lib/utils'
 import { match } from 'ts-pattern'
 import { IconFemale, IconMale } from '../../components/Icons/Icons'
+import { memo } from 'react'
 
 const radioGenders: RadioItem<Gender, Gender>[] = [
   { key: 'female', value: 'female' },
@@ -15,7 +16,7 @@ type GenderInputProps = {
   value: Gender
 }
 
-export const GenderInput = ({ onChange, value: defaultGender }: GenderInputProps) => {
+export const GenderInput = memo(({ onChange, value: defaultGender }: GenderInputProps) => {
   return (
     <Radio<Gender, Gender>
       className="flex-row"
@@ -27,7 +28,7 @@ export const GenderInput = ({ onChange, value: defaultGender }: GenderInputProps
       items={radioGenders}
     ></Radio>
   )
-}
+})
 
 const GenderRadioButton = (gender: Gender, active: boolean) => {
   return (

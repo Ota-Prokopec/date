@@ -18,8 +18,6 @@ export const AccountProfileSocialsInputFormItem = <
   form,
   name,
 }: AccountProfileSocialsInputFormItemProps<TFieldValues, TPath>) => {
-  console.log('render')
-
   return (
     <ReactHookFormFieldWrapper
       form={form}

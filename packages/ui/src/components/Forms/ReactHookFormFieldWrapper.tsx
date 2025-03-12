@@ -28,7 +28,6 @@ export const ReactHookFormFieldWrapper = <
       render={(renderProps) => (
         <FormItem>
           <FormControl>{render(renderProps)}</FormControl>
-          <ReactHookFormFieldErrorMessage form={form} name={name} />
         </FormItem>
       )}
     />
