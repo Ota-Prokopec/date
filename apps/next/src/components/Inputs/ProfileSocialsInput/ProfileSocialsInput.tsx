@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 import { SocialProfiles } from '../../Profile/SocialProfiles'
 import { socialProfilesPlaceholderData } from '../../Profile/socialProfilesData'
 import { ProfileSocialsInputSheetInput } from './ProfileSocialsInputSheetInput'
+import { useSuperEffect } from '../../../../../../packages/ui/src/hooks/useSuperEffect'
 
 type SocialsInputProps = {
   currentSocialsData?: SocialsData
@@ -20,9 +21,13 @@ export const ProfileSocialsInput = ({ onChange, currentSocialsData = {} }: Socia
   )
   const [socialsData, setSocialsData] = useState<SocialsData>(currentSocialsData)
 
-  useEffect(() => {
-    onChange(socialsData)
-  }, [socialsData])
+  useSuperEffect(
+    () => {
+      onChange(socialsData)
+    },
+    [socialsData],
+    { mountedOnly: true, deepCompare: true }
+  )
 
   return (
     <>
