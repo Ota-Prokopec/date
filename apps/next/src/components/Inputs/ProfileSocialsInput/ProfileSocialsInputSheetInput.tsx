@@ -7,12 +7,10 @@ import { Column } from '@repo/ui/components/common/Column'
 import { ModalSheet } from '@repo/ui/components/common/ModalSheet'
 import { Row } from '@repo/ui/components/common/Row'
 import { Text } from '@repo/ui/components/common/Text'
-import { merge } from 'lodash'
-import { useEffect, useState, type Dispatch, type SetStateAction } from 'react'
+import { useTranslations } from 'next-intl'
+import { useEffect, useState } from 'react'
 import { match } from 'ts-pattern'
 import { socialProfilesMetaData } from '../../Profile/socialProfilesData'
-import { useSuperEffect } from '@repo/ui/ts-lib/hooks/useSuperEffect'
-import { useTranslations } from 'next-intl'
 
 type SheetInputProps = {
   sheet: ModalSheet
@@ -28,6 +26,7 @@ export const ProfileSocialsInputSheetInput = ({
   onChange,
 }: SheetInputProps) => {
   const t = useTranslations('components.ProfileSocialsInputSheetInput')
+
   const [profileIdValue, setProfileIdValue] = useState<string>(
     currentChosenPlatform && socialsData && socialsData[currentChosenPlatform]
       ? socialsData[currentChosenPlatform]?.profileId
@@ -36,7 +35,7 @@ export const ProfileSocialsInputSheetInput = ({
 
   const [linkValue, setLinkValue] = useState<string>(
     currentChosenPlatform && socialsData && socialsData[currentChosenPlatform]
-      ? socialsData[currentChosenPlatform]?.profileId
+      ? socialsData[currentChosenPlatform]?.link
       : ''
   )
 

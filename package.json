@@ -10,19 +10,22 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "devDependencies": {
+    "@eslint/js": "^9.20.0",
     "@total-typescript/ts-reset": "^0.6.1",
     "@types/pg": "^8.11.10",
     "dotenv-cli": "^7.4.2",
+    "globals": "^15.15.0",
     "prettier": "^3.4.2",
     "turbo": "^2.4.0",
-    "typescript": "5.7.3"
+    "typescript": "5.8.2",
+    "typescript-eslint": "^8.24.0"
   },
   "packageManager": "pnpm@9.0.0",
   "engines": {
     "node": ">=20"
   },
   "overrides": {
-    "typescript": "5.7.3",
+    "typescript": "5.8.2",
     "tsup": "8.2.2",
     "drizzle-orm": "0.39.3",
     "drizzle-kit": "0.30.4",

@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from 'react'
+import { useState, type Dispatch, type ReactNode, type SetStateAction } from 'react'
 import { Sheet } from 'react-modal-sheet'
 
 type SheetDetent = `${'content' | 'full'}-height`
@@ -9,14 +9,17 @@ type SheetProps = {
   detent?: SheetDetent
 }
 
-export class ModalSheet {
-  public isOpen: boolean
-  public setIsOpen: (setOpenTo: boolean) => void
+type ConstructorProps = {
+  initiallyOpen: boolean
+  stateHook: typeof useState
+}
 
-  constructor({ initiallyOpen = false }: { initiallyOpen: boolean; detent?: SheetDetent }) {
-    const [isOpen, setIsOpen] = useState<boolean>(initiallyOpen)
-    this.isOpen = isOpen
-    this.setIsOpen = setIsOpen
+export class ModalSheet {
+  private state: { isOpen: boolean; setIsOpen: Dispatch<SetStateAction<boolean>> }
+
+  constructor({ initiallyOpen = false, stateHook }: ConstructorProps) {
+    const state = stateHook<boolean>(initiallyOpen)
+    this.state = { isOpen: state[0], setIsOpen: state[1] }
 
     this.Sheet = this.Sheet.bind(this)
     this.TriggerButton = this.TriggerButton.bind(this)
@@ -24,12 +27,12 @@ export class ModalSheet {
   }
 
   Sheet({ children, header, className, detent = 'content-height' }: SheetProps) {
-    return (
+    return this.state.isOpen ? (
       <Sheet
         detent={detent}
         className={className}
-        isOpen={this.isOpen}
-        onClose={() => this.setIsOpen(false)}
+        isOpen={true}
+        onClose={() => this.state.setIsOpen(false)}
       >
         <Sheet.Container>
           <Sheet.Header>{header}</Sheet.Header>
@@ -38,14 +41,14 @@ export class ModalSheet {
           </Sheet.Content>
         </Sheet.Container>
       </Sheet>
-    )
+    ) : undefined
   }
 
   TriggerButton({ children }: { children: ReactNode }) {
-    return <button onClick={() => this.setIsOpen(true)}>{children}</button>
+    return <button onClick={() => this.state.setIsOpen(true)}>{children}</button>
   }
 
   useState() {
-    return { isOpen: this.isOpen, setIsOpen: this.setIsOpen }
+    return this.state
   }
 }

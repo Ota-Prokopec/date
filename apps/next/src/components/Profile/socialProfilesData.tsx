@@ -9,4 +9,6 @@ export const socialProfilesMetaData: Record<
   instagram: { icon: <IconInstagram className="w-10 h-10"></IconInstagram>, title: 'Instagram' },
 }
 
-export const socialProfilesPlaceholderData: SocialsData = { instagram: { link: '', profileId: '' } }
+export const socialProfilesPlaceholderData = {
+  instagram: { link: '', profileId: '' },
+} as const satisfies SocialsData
