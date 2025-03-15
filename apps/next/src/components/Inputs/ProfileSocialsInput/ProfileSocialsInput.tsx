@@ -1,11 +1,12 @@
 import type { SocialProfilePlatform, SocialsData } from '@repo/ts-types'
 import { ModalSheet } from '@repo/ui/components/common/ModalSheet'
-import { merge, omit } from 'lodash'
-import { useState } from 'react'
-import { useSuperEffect } from '../../../../../../packages/ui/src/hooks/useSuperEffect'
+import { omit } from 'lodash'
+import { useEffect, useState } from 'react'
 import { SocialProfiles } from '../../Profile/SocialProfiles'
 import { socialProfilesPlaceholderData } from '../../Profile/socialProfilesData'
 import { ProfileSocialsInputSheetInput } from './ProfileSocialsInputSheetInput'
+import { useSuperEffect } from '@repo/ui/dist/hooks/useSuperEffect'
+import { useDrawer } from '@repo/ui/components/common/Drawer'
 
 type SocialsInputProps = {
   currentSocialsData?: SocialsData
@@ -15,19 +16,19 @@ type SocialsInputProps = {
 }
 
 export const ProfileSocialsInput = ({ onChange, currentSocialsData = {} }: SocialsInputProps) => {
-  const sheet = new ModalSheet({ initiallyOpen: false, stateHook: useState })
-  const sheetState = sheet.useState()
   const [currentChosenPlatform, setCurrentChosenPlatform] = useState<SocialProfilePlatform | null>(
     null
   )
   const [socialsData, setSocialsData] = useState<SocialsData>(currentSocialsData)
+  const drawerControl = useDrawer()
 
   useSuperEffect(
     () => {
       onChange(socialsData)
+      drawerControl.setOpen(false)
     },
     [socialsData],
-    { mountedOnly: true, deepCompare: true }
+    { mountedOnly: true }
   )
 
   return (
@@ -35,31 +36,29 @@ export const ProfileSocialsInput = ({ onChange, currentSocialsData = {} }: Socia
       <SocialProfiles
         onClick={(clickedPlatform) => {
           setCurrentChosenPlatform(clickedPlatform)
-          sheetState.setIsOpen(true)
+          drawerControl.setOpen(true)
         }}
         disableLink
-        socials={Object.keys(socialsData).length ? socialsData : socialProfilesPlaceholderData}
+        socials={{ ...socialProfilesPlaceholderData, ...socialsData }}
       ></SocialProfiles>
 
-      {sheetState.isOpen && (
-        <ProfileSocialsInputSheetInput
-          sheet={sheet}
-          socialsData={socialsData}
-          currentChosenPlatform={currentChosenPlatform}
-          onChange={(newPlatformData) => {
-            setSocialsData((current) => {
-              sheetState.setIsOpen(false)
-              if (!currentChosenPlatform) return current
-              return newPlatformData
-                ? //? If newPlatformData exists, merge it with the current data, otherwise omit the current platform to remove it
-                  merge(current, {
-                    [currentChosenPlatform]: newPlatformData,
-                  })
-                : omit(current, currentChosenPlatform)
-            })
-          }}
-        ></ProfileSocialsInputSheetInput>
-      )}
+      <ProfileSocialsInputSheetInput
+        drawerControl={drawerControl}
+        socialsData={socialsData}
+        currentChosenPlatform={currentChosenPlatform}
+        onChange={(newPlatformData) => {
+          setSocialsData((current) => {
+            console.log({ currentChosenPlatform })
+
+            if (!currentChosenPlatform) return current
+
+            return newPlatformData
+              ? //? If newPlatformData exists, merge it with the current data, otherwise omit the current platform to remove it
+                { ...current, ...{ [currentChosenPlatform]: newPlatformData } }
+              : omit(current, [currentChosenPlatform])
+          })
+        }}
+      ></ProfileSocialsInputSheetInput>
     </>
   )
 }

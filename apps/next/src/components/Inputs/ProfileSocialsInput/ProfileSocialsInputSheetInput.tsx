@@ -1,29 +1,29 @@
 import type { SocialProfilePlatform, SocialsData } from '@repo/ts-types'
-import { IconInstagram, IconLink, IconUser } from '@repo/ui/components/Icons/Icons'
+import { IconFacebook, IconInstagram, IconLink, IconUser } from '@repo/ui/components/Icons/Icons'
 import { Input } from '@repo/ui/components/Inputs/Input'
 import { Button } from '@repo/ui/components/common/Button'
 import { Center } from '@repo/ui/components/common/Center'
 import { Column } from '@repo/ui/components/common/Column'
-import { ModalSheet } from '@repo/ui/components/common/ModalSheet'
+import { Drawer, DrawerControl } from '@repo/ui/components/common/Drawer'
 import { Row } from '@repo/ui/components/common/Row'
 import { Text } from '@repo/ui/components/common/Text'
 import { useTranslations } from 'next-intl'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { match } from 'ts-pattern'
 import { socialProfilesMetaData } from '../../Profile/socialProfilesData'
 
 type SheetInputProps = {
-  sheet: ModalSheet
   socialsData: SocialsData | undefined
   currentChosenPlatform: SocialProfilePlatform | null
   onChange: (newPlatformData: SocialsData[keyof SocialsData] | undefined) => void
+  drawerControl: DrawerControl
 }
 
 export const ProfileSocialsInputSheetInput = ({
-  sheet,
   currentChosenPlatform,
   socialsData,
   onChange,
+  drawerControl,
 }: SheetInputProps) => {
   const t = useTranslations('components.ProfileSocialsInputSheetInput')
 
@@ -55,18 +55,21 @@ export const ProfileSocialsInputSheetInput = ({
   }
 
   return (
-    <sheet.Sheet className="h-full w-full">
+    <Drawer control={drawerControl} placement="bottom" className="h-full w-full">
       <Center className="p-4 w-full">
         <Column className="max-w-[600px] gap-2 w-full">
           <Row className="items-center justify-center gap-2">
             {match(currentChosenPlatform)
               .with('instagram', () => <IconInstagram className="w-12 h-12"></IconInstagram>)
-              .otherwise(() => 'Something went wrong')}
+              .otherwise(() => (
+                <IconFacebook className="w-12 h-12 fill-blue-500"></IconFacebook>
+              ))}
             <Text className="font-bold text-xl">
               {currentChosenPlatform ? socialProfilesMetaData[currentChosenPlatform].title : null}
             </Text>
           </Row>
           <Input
+          {...}
             className=""
             style={{ border: '0 !important' }}
             startContent={<IconUser></IconUser>}
@@ -89,6 +92,6 @@ export const ProfileSocialsInputSheetInput = ({
           </Button>
         </Column>
       </Center>
-    </sheet.Sheet>
+    </Drawer>
   )
 }

@@ -22,6 +22,7 @@
     "@repo/cookies": "workspace:*",
     "@repo/env": "workspace:*",
     "@repo/i18n-next": "workspace:*",
+    "@repo/forms": "workspace:*",
     "@repo/i18n-translations": "workspace: *",
     "@repo/next-storage": "workspace: *",
     "@repo/ts-types": "workspace: *",

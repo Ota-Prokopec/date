@@ -46,6 +46,8 @@
     "@repo/ts-types": "workspace: *",
     "@repo/utils": "workspace: *",
     "@repo/better-auth": "workspace: *",
+    "@repo/i18n-next": "workspace: *",
+    "@repo/forms": "workspace: *",
     "@whatwg-node/server-plugin-cookies": "^1.0.3",
     "cloudinary": "^2.5.1",
     "dataloader": "^2.2.3",

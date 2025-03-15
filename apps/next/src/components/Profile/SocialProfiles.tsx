@@ -1,5 +1,3 @@
-'use client'
-
 import type { SocialProfileDataParams, SocialProfilePlatform, SocialsData } from '@repo/ts-types'
 import { Column } from '@repo/ui/components/common/Column'
 import { Row } from '@repo/ui/components/common/Row'
@@ -8,19 +6,21 @@ import { IconLink } from '@repo/ui/components/Icons/Icons'
 import { Skeleton } from '@repo/ui/components/shadcn/skeleton'
 import { cn } from '@repo/ui/ts-lib/lib/utils'
 import Link from 'next/link'
-import { type ReactNode } from 'react'
-import { socialProfilesMetaData } from './socialProfilesData'
+import { createElement, type ReactNode } from 'react'
+import { socialProfilesMetaData, type SocialsDataToSocialsProfiles } from './socialProfilesData'
 
 export type SocialProfilesProps = {
-  socials: Partial<SocialsData>
+  socials: Partial<SocialsDataToSocialsProfiles>
   disableLink?: boolean
   loading?: boolean
   onClick?: (platform: SocialProfilePlatform) => void
 }
 
 export const SocialProfiles = ({ socials, onClick, disableLink = false }: SocialProfilesProps) => {
+  console.log({ socials })
+
   return (
-    <Column>
+    <Column className="gap-2">
       {(Object.entries(socials ?? []) as [[SocialProfilePlatform, SocialProfileDataParams]]).map(
         ([platform, params], i) => (
           <SocialProfileItem
@@ -40,9 +40,12 @@ export const SocialProfiles = ({ socials, onClick, disableLink = false }: Social
 
 export const SocialProfilesSkeletonLoading = () => {
   return (
-    <Column>
+    <Column className="gap-2">
       <SocialProfileItemSkeletonLoading
         icon={socialProfilesMetaData['instagram'].icon}
+      ></SocialProfileItemSkeletonLoading>
+      <SocialProfileItemSkeletonLoading
+        icon={socialProfilesMetaData['facebook'].icon}
       ></SocialProfileItemSkeletonLoading>
     </Column>
   )
@@ -70,7 +73,10 @@ const SocialProfileItem = ({
     >
       <Row className="gap-2 justify-center items-center">
         {icon}
-        <Text className="font-bold text-black/75 text-lg">{profileId}</Text>
+        {createElement(typeof profileId == 'string' ? Text : 'div', {
+          className: 'font-bold text-black/75 text-lg',
+          children: profileId,
+        })}
         {!disableLink && (
           <Link href={link}>
             <IconLink></IconLink>

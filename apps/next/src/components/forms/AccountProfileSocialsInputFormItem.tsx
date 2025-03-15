@@ -25,7 +25,9 @@ export const AccountProfileSocialsInputFormItem = <
       render={({ field }) => (
         <ProfileSocialsInput
           currentSocialsData={field.value}
-          onChange={(value) => field.onChange(value)}
+          onChange={(value) => {
+            field.onChange(value)
+          }}
         ></ProfileSocialsInput>
       )}
     ></ReactHookFormFieldWrapper>

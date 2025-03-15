@@ -1,35 +1,50 @@
-import type { ReactNode } from 'react'
-import { cn } from '../../lib/utils'
 import {
-  Drawer,
+  DrawerBody,
   DrawerContent,
-  DrawerDescription,
+  DrawerFooter,
   DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger,
-} from '../shadcn/drawer'
+  Drawer as DrawerHeroUi,
+  DrawerProps as DrawerHeroUiProps,
+} from '@heroui/react'
+import { useState, type ReactNode } from 'react'
+import { cn } from '../../lib/utils'
 
-type DrawerProps = {
-  triggerButton: ReactNode
-  title: string
-  description?: string
-  children: ReactNode
-  className?: string
+export type DrawerControl = {
+  isOpen: boolean
+  setOpen: (isOpen: boolean) => void
 }
 
-const MyDrawer = ({ triggerButton, title, description, children, className }: DrawerProps) => {
+type DrawerProps = {
+  title?: ReactNode
+  children: ReactNode
+  className?: string
+  control: DrawerControl
+  footer?: ReactNode
+} & DrawerHeroUiProps
+
+export const Drawer = ({ title, children, className, control, footer, ...props }: DrawerProps) => {
   return (
-    <Drawer {...{ shouldScaleBackground: false, autoFocus: false }}>
-      <DrawerTrigger asChild>{triggerButton}</DrawerTrigger>
-      <DrawerContent className={cn('!z-[400]', className)}>
-        <DrawerHeader>
-          <DrawerTitle>{title}</DrawerTitle>
-          {description && <DrawerDescription>{description}</DrawerDescription>}
-        </DrawerHeader>
-        {children}
+    <DrawerHeroUi
+      className={cn('', className)}
+      {...props}
+      isOpen={control.isOpen}
+      onOpenChange={control.setOpen}
+    >
+      <DrawerContent>
+        {(onClose) => (
+          <>
+            {title && <DrawerHeader className="flex flex-col gap-1">{title}</DrawerHeader>}
+            <DrawerBody>{children}</DrawerBody>
+            {footer && <DrawerFooter>{footer}</DrawerFooter>}
+          </>
+        )}
       </DrawerContent>
-    </Drawer>
+    </DrawerHeroUi>
   )
 }
 
-export { MyDrawer as Drawer }
+export const useDrawer = (initialOpen: boolean = false) => {
+  const [isOpen, setOpen] = useState<boolean>(initialOpen)
+
+  return { setOpen, isOpen }
+}

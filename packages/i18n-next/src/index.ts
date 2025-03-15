@@ -3,7 +3,7 @@ import { parseCookies } from '@repo/next-storage/handlers'
 import type { IntlConfig } from 'next-intl'
 import { getRequestConfig } from 'next-intl/server'
 import { cookies as nextCookies } from 'next/headers'
-import { zodLocale } from './options'
+import { localeCookieName, zodLocale } from './options'
 import { loadMessages } from './loadMessages'
 
 export type Locale = I18nLocale
@@ -24,7 +24,7 @@ export const getRequest = getRequestConfig(async () => {
   const cookies = await nextCookies()
 
   const ssrCookies = parseCookies(cookies.getAll())
-  const locale: Locale = zodLocale.optional().parse(ssrCookies['locale']) || 'en'
+  const locale: Locale = zodLocale.optional().parse(ssrCookies[localeCookieName]) || 'en'
 
   const messages = await loadMessages({ locale })
 
@@ -35,3 +35,5 @@ export const getRequest = getRequestConfig(async () => {
     messages: messages,
   }
 })
+
+export { loadMessages, localeCookieName }

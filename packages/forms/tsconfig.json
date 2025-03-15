@@ -3,12 +3,7 @@
   "compilerOptions": {
     "outDir": "dist",
     "rootDir": "src",
-    "baseUrl": ".",
-    "noEmit": false,
-    "allowImportingTsExtensions": false,
-    "emitDeclarationOnly": false,
-    "moduleResolution": "node10",
-    "module": "ES2022"
+    "baseUrl": "."
   },
   "include": ["src", "../../global.d.ts", "../../tsReset.d.ts"],
   "exclude": ["node_modules"]

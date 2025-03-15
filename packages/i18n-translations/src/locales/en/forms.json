@@ -1,0 +1,17 @@
+{
+  "accountFormErrorMessages": {
+    "username": "Username must be at least 3 characters long",
+    "birthDate": "Invalid birth date",
+    "profilePictureURL": "Invalid profile picture URL",
+    "gender": "Invalid gender",
+    "lookingForGender": "Invalid preferred gender",
+    "userId": "User ID is required",
+    "fillAllRequiredFields": "Please fill all required fields",
+    "socials": {
+      "invalidLink": {
+        "facebook": "Invalid Facebook link",
+        "instagram": "Invalid Instagram link"
+      }
+    }
+  }
+}

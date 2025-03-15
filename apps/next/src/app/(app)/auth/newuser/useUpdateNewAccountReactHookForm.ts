@@ -1,12 +1,14 @@
-import type { NewAccountFormData } from '@/components/forms/updateNewAccountForm/updateNewAccountFormZodSchema'
-import { zodSchemas } from '@/components/forms/zodSchemas'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
+import {
+  useUpdateNewAccountFormZodSchemaWithErrorMessages,
+  UpdateNewAccountFormData,
+} from '@repo/forms/account-updateNewAccountFormZodSchema'
 
 export const useUpdateNewAccountReactHookForm = () => {
-  const zodSchema = zodSchemas.updatingNewAccountForm.withErrorMessages.useZodSchema()
+  const zodSchema = useUpdateNewAccountFormZodSchemaWithErrorMessages()
 
-  return useForm<NewAccountFormData>({
+  return useForm<UpdateNewAccountFormData>({
     defaultValues: {
       gender: 'male',
       lookingForGender: 'female',

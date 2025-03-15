@@ -1,10 +1,12 @@
-import { type UpdateAccountFormData } from '@/components/forms/updateAccountForm/updateAccountFormZodSchema'
-import { zodSchemas } from '@/components/forms/zodSchemas'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
+import {
+  UpdateAccountFormData,
+  useUpdateAccountFormZodSchemaWithErrorMessages,
+} from '@repo/forms/account-updateAccountFormZodSchema'
 
 export const useUpdateAccountReactHookForm = (currentAccountData?: UpdateAccountFormData) => {
-  const zodSchema = zodSchemas.updatingAccountForm.withErrorMessages.useZodSchema()
+  const zodSchema = useUpdateAccountFormZodSchemaWithErrorMessages()
 
   return useForm<UpdateAccountFormData>({
     defaultValues: currentAccountData,

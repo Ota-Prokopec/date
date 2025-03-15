@@ -1,11 +1,11 @@
-import type { Locale } from './i18n'
+import type { Locale } from './options'
 
 type Path = keyof IntlMessages
 
-const defaultPaths: Path[] = ['components', 'others', 'pages']
+const defaultPaths: Path[] = ['components', 'others', 'pages', 'forms']
 
 type LoadMessagesProps<TPaths extends Path[]> = {
-  locale: Locale
+  locale?: Locale
   paths?: TPaths
 }
 type LoadMessagesReturnType<TPaths extends Path[]> = Promise<Pick<IntlMessages, TPaths[number]>>
@@ -14,7 +14,7 @@ type ImportType = IntlMessages[Path]
 type MessagesPromiseType = Promise<{ path: Path; import: ImportType }>
 
 export const loadMessages = async <TPaths extends Path[]>({
-  locale,
+  locale = 'en',
   paths,
 }: LoadMessagesProps<TPaths>): LoadMessagesReturnType<TPaths> => {
   const messagesPromise = (paths || defaultPaths).map(

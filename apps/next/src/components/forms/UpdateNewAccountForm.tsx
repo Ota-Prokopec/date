@@ -15,13 +15,13 @@ import { cn } from '@repo/ui/ts-lib/lib/utils'
 import { ChevronRight } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { type SubmitHandler, type UseFormReturn } from 'react-hook-form'
-import type { NewAccountFormData } from './updateNewAccountFormZodSchema'
+import type { UpdateNewAccountFormData } from '@repo/forms/account-updateNewAccountFormZodSchema'
 
 type UpdateNewAccountFormProps = {
   className?: string
-  form: UseFormReturn<NewAccountFormData>
+  form: UseFormReturn<UpdateNewAccountFormData>
   isLoading?: boolean
-  onSubmit: SubmitHandler<NewAccountFormData>
+  onSubmit: SubmitHandler<UpdateNewAccountFormData>
 }
 
 export const UpdateNewAccountForm = ({

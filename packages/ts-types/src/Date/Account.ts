@@ -16,7 +16,7 @@ export const accountDataZodSchemaAllPropsRequired = z.object({
   age: z.number(),
 })
 
-export const fullAccountDataZodSchema = z.object({
+export const accountDataZodSchema = z.object({
   username: accountDataZodSchemaAllPropsRequired.shape.username,
   birthDate: accountDataZodSchemaAllPropsRequired.shape.birthDate,
   bio: accountDataZodSchemaAllPropsRequired.shape.bio.nullable().optional(),
@@ -31,43 +31,7 @@ export const fullAccountDataZodSchema = z.object({
   age: accountDataZodSchemaAllPropsRequired.shape.age,
 })
 
-export const getEditAccountDataZodSchemaWithErrorMessages = (
-  errorMessages: IntlMessages['others']['accountZodSchemaWithErrorMessages']
-) => {
-  return z.object({
-    username: fullAccountDataZodSchema.shape.username
-      .min(3, {
-        message: errorMessages.username,
-      })
-      .max(40, { message: errorMessages.username })
-      .nonempty({ message: errorMessages['fillAllRequiredFields'] }),
-    birthDate: accountDataZodSchemaAllPropsRequired.shape.birthDate.refine(
-      (date) => !isNaN(date.getTime()),
-      {
-        message: errorMessages.birthDate,
-      }
-    ),
-    bio: fullAccountDataZodSchema.shape.bio,
-    socials: fullAccountDataZodSchema.shape.socials,
-    gender: fullAccountDataZodSchema.shape.gender.refine(
-      (val) => ['male', 'female'].includes(val),
-      {
-        message: errorMessages.gender,
-      }
-    ),
-    lookingForGender: fullAccountDataZodSchema.shape.lookingForGender.refine(
-      (val) => ['male', 'female'].includes(val),
-      { message: errorMessages.lookingForGender }
-    ),
-    userId: fullAccountDataZodSchema.shape.userId
-      .min(3, {
-        message: errorMessages.userId,
-      })
-      .max(25, { message: errorMessages.userId }),
-  })
-}
-
-export const accountDataZodSchema = fullAccountDataZodSchema.extend({
+export const incompleteAccountDataZodSchema = accountDataZodSchema.extend({
   socials: accountDataZodSchemaAllPropsRequired.shape.socials,
   gender: accountDataZodSchemaAllPropsRequired.shape.gender.nullable().optional(),
   lookingForGender: accountDataZodSchemaAllPropsRequired.shape.lookingForGender
@@ -78,5 +42,5 @@ export const accountDataZodSchema = fullAccountDataZodSchema.extend({
   birthDate: accountDataZodSchemaAllPropsRequired.shape.birthDate.nullable().optional(),
 })
 
+export type IncompleteAccountData = TypeOf<typeof incompleteAccountDataZodSchema>
 export type AccountData = TypeOf<typeof accountDataZodSchema>
-export type FullAccountData = TypeOf<typeof fullAccountDataZodSchema>

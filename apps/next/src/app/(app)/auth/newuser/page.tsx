@@ -1,9 +1,9 @@
 'use client'
 
-import { NewAccountForm } from '@/components/forms/updateNewAccountForm/UpdateNewAccountForm'
-import { type NewAccountFormData } from '@/components/forms/updateNewAccountForm/updateNewAccountFormZodSchema'
+import { UpdateNewAccountForm } from '@/components/forms/UpdateNewAccountForm'
 import { useSaveNewUserInformationMutation } from '@/graphql/generated/apollo'
 import { cookieStorage } from '@repo/cookies'
+import type { UpdateNewAccountFormData } from '@repo/forms/account-updateNewAccountFormZodSchema'
 import { Center } from '@repo/ui/components/common/Center'
 import { useSuperEffect } from '@repo/ui/ts-lib/hooks/useSuperEffect'
 import { useTranslations } from 'next-intl'
@@ -13,8 +13,6 @@ import { toast } from 'sonner'
 import { useUpdateNewAccountReactHookForm } from './useUpdateNewAccountReactHookForm'
 
 const NewUserPage = () => {
-  const [locale, setLocale] = cookieStorage.useStorageValue('locale')
-
   const t = useTranslations('pages.auth-newuser')
   const router = useRouter()
   const [updateInfo, updateInfoState] = useSaveNewUserInformationMutation()
@@ -22,7 +20,7 @@ const NewUserPage = () => {
   const form = useUpdateNewAccountReactHookForm()
 
   //* Submit
-  const onSubmit: SubmitHandler<NewAccountFormData> = async (data) => {
+  const onSubmit: SubmitHandler<UpdateNewAccountFormData> = async (data) => {
     await updateInfo({ variables: data })
     router.push('/')
   }
@@ -38,12 +36,12 @@ const NewUserPage = () => {
 
   return (
     <Center className="w-full p-4 flex-col gap-10">
-      <NewAccountForm
+      <UpdateNewAccountForm
         onSubmit={onSubmit}
         isLoading={updateInfoState.loading}
         className="max-w-[400px]"
         form={form}
-      ></NewAccountForm>
+      ></UpdateNewAccountForm>
     </Center>
   )
 }

@@ -5,5 +5,5 @@ export const baseTsupConfig = {
   format: ['esm'],
   clean: true,
   outDir: 'dist',
-  dts: true,
+  dts: false,
 } as const satisfies Options

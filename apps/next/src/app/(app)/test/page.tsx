@@ -5,7 +5,7 @@ import { Column } from '@repo/ui/components/common/Column'
 import { merge, omit } from 'lodash'
 
 const Page = () => {
-  console.log(omit({ a: 1 }, 'b'))
+  console.log(merge({ lo: 1, ol: { j: 1, b: 4 } }, { ol: { j: 2 } }))
 
   return <Column className="justify-center items-center">j</Column>
 }

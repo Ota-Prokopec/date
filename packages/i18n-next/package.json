@@ -9,7 +9,8 @@
     "./options": "./dist/options.js",
     "./routing": "./dist/i18nRouting.js",
     "./i18n.d.ts": "./src/i18n.d.ts",
-    "./react/*": "./dist/hooks/*.js"
+    "./react/*": "./dist/hooks/*.js",
+    "./loadMessages": "./dist/loadMessages.js"
   },
   "scripts": {
     "build": "run-s build:tsup build:tsc",

@@ -14,10 +14,12 @@ export type PothosTFieldParamsResolverParametrs = PothosTFieldParamsResolver ext
   ? { Parent: TParent; Args: TArgs; Ctx: TCtx; Info: TInfo }
   : never
 
-type PothosQueryType = PothosTFieldParams['type']
+export type PothosQueryType = PothosTFieldParams['type']
 
-type ObjectType = PothosBuilderTypes['Objects'] & PothosBuilderTypes['Scalars']
-type GetReturnValue<TQueryType extends keyof ObjectType> = ObjectType[TQueryType]
+export type ReturnValueObjectType = PothosBuilderTypes['Objects'] & PothosBuilderTypes['Scalars']
+export type GetReturnValue<TQueryType extends keyof ReturnValueObjectType> = Omit<ReturnValueObjectType[TQueryType], "Input"|"Ouput">
+type T = GetReturnValue<"Account">
+
 
 type GetResolver<
   ReturnValue extends GetReturnValue<PothosQueryType & keyof ObjectType>,
@@ -27,7 +29,6 @@ type GetResolver<
   args: TFieldOptions['args']
 ) => ReturnValue
 
-type T = PothosTFieldParams["args"]
 
 export const pothosQueryField = <
   TQueryType extends PothosQueryType & keyof ObjectType,

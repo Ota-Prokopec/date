@@ -7,6 +7,8 @@ export type Locale = z.TypeOf<typeof zodLocale>
 export const locales: Locale[] & string[] = ['en', 'cs']
 export const defaultLocale = 'en'
 
+export const localeCookieName = 'locale'
+
 export const i18nRouting = defineRouting({
   // A list of all locales that are supported
   locales: locales,

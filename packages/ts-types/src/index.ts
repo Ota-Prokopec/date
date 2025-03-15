@@ -14,6 +14,7 @@ export * from './Helpers/GenericZodObject';
 export * from './Helpers/MakeOptional';
 export * from './Helpers/NonNullableObjects';
 export * from './Helpers/NullableObject';
+export * from './Helpers/ZodMakeNullishProperties';
 export * from './Helpers/zodSchemaHelpers';
 export * from './Internal/Cookies';
 export * from './Internal/GraphqlHealth';

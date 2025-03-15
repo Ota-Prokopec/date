@@ -18,7 +18,7 @@ export const ReactHookForm = <TFieldValues extends FieldValues>({
   children,
   onSubmit,
 }: ReactHookFormProps<TFieldValues>) => {
-  const { isLoading } = form.formState
+  const { isLoading, errors } = form.formState
 
   return (
     <>
@@ -29,10 +29,7 @@ export const ReactHookForm = <TFieldValues extends FieldValues>({
             'opacity-25': isLoading,
           })}
         >
-          <>
-            <ReactHookFormFieldErrorMessage form={form} />
-            {children}
-          </>
+          {children}
         </form>
       </Form>
       {isLoading && (

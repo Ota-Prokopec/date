@@ -4,10 +4,10 @@
   "main": "./src/index.ts",
   "type": "module",
   "exports": {
-    ".": "./src/index.ts"
+    ".": "./dist/index.js"
   },
   "scripts": {
-    "build": "run-s build:tsup build:tsc",
+    "build": "run-s build:tsc",
     "prebuild": "pnpm barrelsby",
     "barrelsby": "barrelsby --delete  --singleQuotes --directory ./src/",
     "build:tsup": "tsup",

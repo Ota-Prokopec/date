@@ -6,7 +6,7 @@ export const IconInstagram = ({ className }: { className?: string }) => {
       width="102"
       height="102"
       viewBox="0 0 102 102"
-      id="instagram"
+      id="instagram-svg-icon"
     >
       <defs>
         <radialGradient id="a" cx="6.601" cy="99.766" r="129.502" gradientUnits="userSpaceOnUse">
@@ -32,5 +32,5 @@ export const IconInstagram = ({ className }: { className?: string }) => {
         transform="translate(-422.637 -426.196)"
       ></path>
     </svg>
-  );
-};
+  )
+}
