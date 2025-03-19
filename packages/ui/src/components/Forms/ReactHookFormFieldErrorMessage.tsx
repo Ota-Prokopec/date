@@ -18,7 +18,7 @@ export const ReactHookFormFieldErrorMessage = <
   options,
   form,
 }: ReactHookFormFieldErrorMessageProps<TFieldValues, TPath>) => {
-  const { error } = useFormField()
+  const { error, name } = useFormField()
 
   const onClose = () => form.clearErrors()
 
@@ -35,9 +35,9 @@ export const ReactHookFormFieldErrorMessage = <
         onDismiss: onClose,
       })
     return () => {
-      toastMessageId ? toast.dismiss(toastMessageId) : null
+      if (toastMessageId) toast.dismiss(toastMessageId)
     }
-  }, [error?.message])
+  }, [error, error?.message])
 
   return null
 }

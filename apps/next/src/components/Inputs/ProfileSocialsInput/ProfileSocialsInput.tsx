@@ -10,9 +10,7 @@ import { useDrawer } from '@repo/ui/components/common/Drawer'
 
 type SocialsInputProps = {
   currentSocialsData?: SocialsData
-
-  // - undefined for if the user decides to delete it
-  onChange: (value: SocialsData | undefined) => void
+  onChange: (value: SocialsData) => void
 }
 
 export const ProfileSocialsInput = ({ onChange, currentSocialsData = {} }: SocialsInputProps) => {

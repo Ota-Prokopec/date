@@ -2,7 +2,7 @@ import { integer, pgEnum, pgTable, text, unique } from 'drizzle-orm/pg-core'
 import { user } from './auth-schema'
 import { createSelectSchema } from 'drizzle-zod'
 
-export const socialsTypeEnum = pgEnum('socialsType', ['instagram'])
+export const socialsTypeEnum = pgEnum('socialsType', ['instagram', 'facebook'])
 
 export const socials = pgTable(
   'socials',

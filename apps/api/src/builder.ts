@@ -16,6 +16,7 @@ import type {
 } from './schema/PothosSchemaTypes'
 import type { UpdateAccountArgs } from './resolvers/user'
 import type { QueryFieldBuilder, SchemaTypes } from '@pothos/core'
+import type { GetUsersProfilesArgs } from './resolvers/user/args/getUsersProfilesArgs'
 
 export type PothosBuilderTypes = {
   Objects: {
@@ -32,7 +33,7 @@ export type PothosBuilderTypes = {
     Socials: SocialsScalar
   } & SchemaTypes['Scalars']
   Context: Context
-  Args: { UpdateAccountArgs: UpdateAccountArgs }
+  Args: { UpdateAccountArgs: UpdateAccountArgs; GetUsersProfilesArgs: GetUsersProfilesArgs }
 }
 
 export const builder = getBuilder<PothosBuilderTypes>()

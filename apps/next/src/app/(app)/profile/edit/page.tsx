@@ -3,30 +3,28 @@
 import { UpdateAccountForm } from '@/components/forms/UpdateAccountForm'
 
 import {
+  GetAccountProfileDocument,
   useGetAccountProfileSuspenseQuery,
   useUpdateAccountMutation,
 } from '@/graphql/generated/apollo'
 import type { UpdateAccountFormData } from '@repo/forms/account-updateAccountFormZodSchema'
 import { accountDataZodSchema } from '@repo/ts-types'
-import { useTranslations } from 'next-intl'
 import type { SubmitHandler } from 'react-hook-form'
 import { useUpdateAccountReactHookForm } from './useUpdateAccountReactHookForm'
-import { useEffect } from 'react'
 
 const EditProfilePage = () => {
   //? loading - loading.tsx, error - error.tsx (works for both errors - fetch and validation)
-  const { data } = useGetAccountProfileSuspenseQuery()
+  const { data } = useGetAccountProfileSuspenseQuery({ fetchPolicy: 'network-only' })
   const form = useUpdateAccountReactHookForm(accountDataZodSchema.parse(data?.getAccountProfile))
 
-  const t = useTranslations('pages.profile-edit')
-
-  const [updateUserAccount, UpdatingUserAccountState] = useUpdateAccountMutation()
-
-  const values = form.watch()
+  const [updateUserAccount] = useUpdateAccountMutation()
 
   //? Submit
   const onSubmit: SubmitHandler<UpdateAccountFormData> = async (data) => {
-    await updateUserAccount({ variables: { userProfileData: data } })
+    await updateUserAccount({
+      variables: { userProfileData: data },
+      refetchQueries: [GetAccountProfileDocument],
+    })
   }
 
   return <UpdateAccountForm form={form} onSubmit={onSubmit}></UpdateAccountForm>

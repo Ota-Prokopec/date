@@ -5,7 +5,7 @@ import { ReactNode } from 'react'
 import { CookieStorageContextProvider } from '@repo/cookies'
 import type { AbstractIntlMessages, Timezone } from 'next-intl'
 import type { Locale } from '@repo/i18n-next'
-import { apolloClient } from '@graphql/apollo/apolloClient'
+import { getApolloClient } from '@graphql/apollo/apolloClient'
 import { urqlClient } from '@graphql/urql/urqlClient'
 
 export type LayoutProps = {
@@ -33,6 +33,8 @@ type ProvidersLayoutProps = {
 }
 
 const ProvidersLayout = ({ children, ssrMessages, locale, timeZone }: ProvidersLayoutProps) => {
+  const apolloClient = getApolloClient()
+
   return (
     <Providers
       apolloClient={apolloClient}

@@ -12,6 +12,6 @@
     }
   },
 
-  "include": ["src", "../../global.d.ts", "../../tsReset.d.ts", "@pothos/core"],
+  "include": ["src", "../../global.d.ts", "../../tsReset.d.ts", "@pothos/core", "./pothos.d.ts"],
   "exclude": ["dist", "node_modules"]
 }

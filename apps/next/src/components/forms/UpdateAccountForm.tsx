@@ -25,13 +25,13 @@ export const UpdateAccountForm = ({ form, className, onSubmit }: UpdateAccountFo
   return (
     <ReactHookForm onSubmit={onSubmit} form={form}>
       <Column className={cn('gap-4 w-full', className)}>
-        <EditAccountProfileItem className="w-full" title={t('usernameInputTitle')}>
+        <EditAccountProfileItem className="w-full" title={t('bioInputTitle')}>
           <BioInputFormItem form={form} name="bio"></BioInputFormItem>
         </EditAccountProfileItem>
-        <EditAccountProfileItem title={t('dateInputTitle')}>
+        <EditAccountProfileItem title={t('genderInputTitle')}>
           <GenderInputFormItem form={form} name="gender"></GenderInputFormItem>
         </EditAccountProfileItem>
-        <EditAccountProfileItem title={t('dateInputTitle')}>
+        <EditAccountProfileItem title={t('lookingForGenderInputTitle')}>
           <GenderInputFormItem form={form} name="lookingForGender"></GenderInputFormItem>
         </EditAccountProfileItem>
         <EditAccountProfileItem title={t('genderInputTitle')}>

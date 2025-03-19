@@ -1,10 +1,13 @@
 import { cookieStorage } from '@repo/cookies'
 import { loadMessages } from '@repo/i18n-next/loadMessages'
 import { useMessages } from '@repo/i18n-next/react/useMessages'
-import { accountDataZodSchema } from '@repo/ts-types'
+import { accountDataZodSchema, type SocialProfilePlatform } from '@repo/ts-types'
 import { useEffect, useState } from 'react'
 import { z } from 'zod'
+import { getSocialsFormZodSchema } from './socialsFormZodSchema'
 
+//!! Pozor - toto neznamená, že by to byl plný (vyplněný) účet, toto znamená, že je to celé schéma, se vším, je tu každé property, které u account form může být
+//!! Attention - this does not mean that the account if full (fully filled up) account, this means that the schema is full, all the properties associated with account form are there
 export const getFullAccountFormZodSchema = (
   errorMessages: IntlMessages['forms']['accountFormErrorMessages']
 ) => {
@@ -19,13 +22,8 @@ export const getFullAccountFormZodSchema = (
       message: errorMessages.birthDate,
     }),
     bio: accountDataZodSchema.shape.bio,
-    socials: accountDataZodSchema.shape.socials
-      .refine((arg) => z.string().url().safeParse(arg.facebook?.link).success, {
-        message: errorMessages.socials.invalidLink.facebook,
-      })
-      .refine((arg) => z.string().url().safeParse(arg.instagram?.link).success, {
-        message: errorMessages.socials.invalidLink.instagram,
-      }),
+    socials: getSocialsFormZodSchema(errorMessages['socials']),
+
     gender: accountDataZodSchema.shape.gender.refine((val) => ['male', 'female'].includes(val), {
       message: errorMessages.gender,
     }),

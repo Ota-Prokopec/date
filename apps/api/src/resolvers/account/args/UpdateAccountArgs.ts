@@ -1,6 +1,12 @@
 import { builder } from '@/builder'
-import { type AccountData, type NullableObject, type NullableObjectDeep } from '@repo/ts-types'
-import { PartialDeep } from 'type-fest'
+import { validator } from '@/lib/validation/pothosValidator'
+import {
+  accountDataZodSchema,
+  zodNullishProperties,
+  type AccountData,
+  type NullableObject,
+} from '@repo/ts-types'
+import { z } from 'zod'
 
 export type UpdateAccountArgs = NullableObject<
   Partial<
@@ -8,6 +14,21 @@ export type UpdateAccountArgs = NullableObject<
       NullableObject<Pick<AccountData, 'socials'>>
   >
 >
+
+const zodSchemaPick = {
+  bio: true,
+  birthDate: true,
+  gender: true,
+  lookingForGender: true,
+  socials: true,
+  username: true,
+} satisfies Record<keyof UpdateAccountArgs, true>
+
+export const updateAccountArgsZodSchemaValidator = validator(
+  z.object({
+    userProfileData: zodNullishProperties(accountDataZodSchema.pick(zodSchemaPick), zodSchemaPick),
+  })
+)
 
 builder.inputType('UpdateAccountArgs', {
   fields: (t) => ({

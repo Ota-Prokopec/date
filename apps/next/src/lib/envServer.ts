@@ -1,3 +1,3 @@
-import { env as environment } from '@repo/env';
+import { env as environment } from '@repo/env'
 
-export const envServer = environment(process.env, 'server');
+export const envServer = environment(process.env, 'server')

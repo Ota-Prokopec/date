@@ -17,8 +17,6 @@ export type SocialProfilesProps = {
 }
 
 export const SocialProfiles = ({ socials, onClick, disableLink = false }: SocialProfilesProps) => {
-  console.log({ socials })
-
   return (
     <Column className="gap-2">
       {(Object.entries(socials ?? []) as [[SocialProfilePlatform, SocialProfileDataParams]]).map(

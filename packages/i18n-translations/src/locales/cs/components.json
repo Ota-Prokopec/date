@@ -4,19 +4,28 @@
     "iAgree": "I agree"
   },
   "UpdateNewAccountForm": {
-    "usernameInputTitle": "Jak tě můžeme nazívat?",
-    "dateInputTitle": "Kdy jsi se narodil?",
-    "genderInputTitle": "Identifikuješ se jako?",
-    "lookingForGenderInputTitle": "Koho zde hledáš?",
-    "continueButtonLabel": "Pokračovat",
+    "titles": {
+      "usernameInputTitle": "Jak tě můžeme nazívat?",
+      "dateInputTitle": "Kdy jsi se narodil?",
+      "genderInputTitle": "Identifikuješ se jako?",
+      "lookingForGenderInputTitle": "Koho zde hledáš?"
+    },
+    "descriptions": {
+      "usernameInputTitle": "Toto je tvůj první dojem — vyber si jméno, které ukáže tvou osobnost. Půjdeš do vtipného, tajemného, nebo rovnou ikonického?",
+      "dateInputTitle": "Tvůj datum narození nám pomůže najít lidi v podobném věku a možná i odhalit tvé znamení zvěrokruhu (jestli tě to zajímá)!",
+      "genderInputTitle": "Dej nám vědět, jak se identifikuješ. Pomůže nám to spojit tě s těmi správnými lidmi!",
+      "lookingForGenderInputTitle": "Jaký je tvůj typ? Řekni nám, jaké spojení hledáš, a my ti pomůžeme najít tu pravou shodu."
+    },
+    "saveButtonLabel": "Uložit",
+    "nextButtonLabel": "Další",
     "errorMessage": "Něco se nepovedlo, prosíme, zkuste to znovu."
   },
   "UpdateAccountForm": {
-    "usernameInputTitle": "Jak tě můžeme nazívat?",
-    "dateInputTitle": "Kdy jsi se narodil?",
+    "bioInputTitle": "Jak by ses nejlépe poplal/a?",
     "genderInputTitle": "Identifikuješ se jako?",
     "lookingForGenderInputTitle": "Koho zde hledáš?",
-    "continueButtonLabel": "Uložit",
+    "socialsInputTitle": "Jak tě mohou ostatní kontaktovat?",
+    "saveButtonLabel": "Uložit",
     "errorMessage": "Něco se nepovedlo, prosíme, zkuste to znovu."
   },
   "ProfileSocialsInputSheetInput": {

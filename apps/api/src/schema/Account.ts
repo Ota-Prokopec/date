@@ -29,7 +29,7 @@ export const AccountRef = builder.objectRef<AccountPothosType>('Account').implem
       }),
       socials: t.field({
         type: 'Socials',
-        nullable: true,
+        nullable: false,
         resolve: async (parent, args, ctx, info) => {
           const response = await ctx.loaders.socials.load(parent.userId)
           return response || {}

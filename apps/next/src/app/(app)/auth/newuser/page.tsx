@@ -11,6 +11,7 @@ import { useRouter } from 'next/navigation'
 import { type SubmitHandler } from 'react-hook-form'
 import { toast } from 'sonner'
 import { useUpdateNewAccountReactHookForm } from './useUpdateNewAccountReactHookForm'
+import { GetAccountProfileDocument } from '@/graphql/generated/typescript'
 
 const NewUserPage = () => {
   const t = useTranslations('pages.auth-newuser')
@@ -21,7 +22,7 @@ const NewUserPage = () => {
 
   //* Submit
   const onSubmit: SubmitHandler<UpdateNewAccountFormData> = async (data) => {
-    await updateInfo({ variables: data })
+    await updateInfo({ variables: data, refetchQueries: [GetAccountProfileDocument] })
     router.push('/')
   }
 

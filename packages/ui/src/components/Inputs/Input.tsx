@@ -1,10 +1,9 @@
 import { cn } from '../../lib/utils'
-import type { HTMLInputTypeAttribute } from 'react'
+import { useEffect, useState, type HTMLInputTypeAttribute } from 'react'
 import { Input as HeroUIINput } from '@heroui/react'
 
 type InputProps = {
   className?: string
-  defaultValue?: string
   placeholder?: string
   type: HTMLInputTypeAttribute
   maxLength?: number
@@ -13,7 +12,7 @@ type InputProps = {
 
 export const Input = ({
   className,
-  defaultValue,
+  value: defaultValue,
   placeholder,
   type,
   maxLength,

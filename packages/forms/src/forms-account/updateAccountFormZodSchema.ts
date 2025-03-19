@@ -3,7 +3,7 @@ import {
   getFullAccountFormZodSchema,
   getFullAccountFormZodSchemaWithErrorMessages,
   useFullAccountFormZodSchemaWithErrorMessages,
-} from './fullAccountFormZodSchema'
+} from './accountFormZodSchema'
 
 export type UpdateAccountFormData = Pick<
   AccountData,

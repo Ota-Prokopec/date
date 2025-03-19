@@ -2,6 +2,7 @@ import SchemaBuilder from '@pothos/core'
 import DataloaderPlugin from '@pothos/plugin-dataloader'
 import ZodPlugin from '@pothos/plugin-zod'
 import { createContext } from './createContext'
+import AddGraphQLPlugin from '@pothos/plugin-add-graphql'
 
 type getBuilderProps = {
   Objects: PothosSchemaTypes.UserSchemaTypes['Objects']
@@ -21,10 +22,10 @@ export const getBuilder = <Parameters extends getBuilderProps>() =>
   }>({
     defaultInputFieldRequiredness: true,
     defaultFieldNullability: false,
-    plugins: [DataloaderPlugin, ZodPlugin],
+    plugins: [AddGraphQLPlugin, DataloaderPlugin, ZodPlugin],
     zod: {
       // optionally customize how errors are formatted
-      validationError: (zodError) => {
+      validationError: (zodError, args, context, info) => {
         // the default behavior is to just throw the zod error directly
         return zodError
       },

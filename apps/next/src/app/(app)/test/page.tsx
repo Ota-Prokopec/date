@@ -1,13 +1,41 @@
 'use client'
 
-import { useTestQuerySuspenseQuery } from '@/graphql/generated/apollo'
+import {
+  GetAccountProfileDocument,
+  useGetAccountProfileQuery,
+  useTestQuerySuspenseQuery,
+  useUpdateAccountMutation,
+} from '@/graphql/generated/apollo'
 import { Column } from '@repo/ui/components/common/Column'
 import { merge, omit } from 'lodash'
+import { useEffect, useState } from 'react'
+import { Textarea } from '@repo/ui/components/common/Textarea'
 
 const Page = () => {
-  console.log(merge({ lo: 1, ol: { j: 1, b: 4 } }, { ol: { j: 2 } }))
+  const { data } = useGetAccountProfileQuery({})
+  const [value, setValue] = useState<string>('')
 
-  return <Column className="justify-center items-center">j</Column>
+  const [updateUserAccount] = useUpdateAccountMutation()
+
+  useEffect(() => {
+    console.log(data?.getAccountProfile)
+  }, [data])
+
+  const onSubmit = async () => {
+    await updateUserAccount({
+      variables: { userProfileData: { bio: value } },
+      refetchQueries: [GetAccountProfileDocument],
+    })
+  }
+
+  return (
+    <Column className="justify-center items-center">
+      <Textarea onValueChange={setValue}></Textarea>
+      <button onClick={onSubmit}></button>
+
+      <div></div>
+    </Column>
+  )
 }
 
 export default Page

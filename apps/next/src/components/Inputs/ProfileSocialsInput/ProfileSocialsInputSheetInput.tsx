@@ -8,12 +8,12 @@ import { Drawer, DrawerControl } from '@repo/ui/components/common/Drawer'
 import { Row } from '@repo/ui/components/common/Row'
 import { Text } from '@repo/ui/components/common/Text'
 import { useTranslations } from 'next-intl'
-import { useState } from 'react'
+import { useRef } from 'react'
 import { match } from 'ts-pattern'
 import { socialProfilesMetaData } from '../../Profile/socialProfilesData'
 
 type SheetInputProps = {
-  socialsData: SocialsData | undefined
+  socialsData: SocialsData
   currentChosenPlatform: SocialProfilePlatform | null
   onChange: (newPlatformData: SocialsData[keyof SocialsData] | undefined) => void
   drawerControl: DrawerControl
@@ -27,26 +27,21 @@ export const ProfileSocialsInputSheetInput = ({
 }: SheetInputProps) => {
   const t = useTranslations('components.ProfileSocialsInputSheetInput')
 
-  const [profileIdValue, setProfileIdValue] = useState<string>(
-    currentChosenPlatform && socialsData && socialsData[currentChosenPlatform]
-      ? socialsData[currentChosenPlatform]?.profileId
-      : ''
-  )
-
-  const [linkValue, setLinkValue] = useState<string>(
-    currentChosenPlatform && socialsData && socialsData[currentChosenPlatform]
-      ? socialsData[currentChosenPlatform]?.link
-      : ''
-  )
+  const linkValue = currentChosenPlatform ? socialsData[currentChosenPlatform]?.link : ''
+  const profileIdValue = currentChosenPlatform ? socialsData[currentChosenPlatform]?.profileId : ''
+  const profileIdInputElement = useRef<HTMLInputElement | null>(null)
+  const linkInputElement = useRef<HTMLInputElement | null>(null)
 
   const submit = () => {
     if (currentChosenPlatform) {
+      const profileIdInputValue = profileIdInputElement.current?.value
+      const linkInputValue = linkInputElement.current?.value
       //? if ProfileIdValue is blank or the link is blank then the value passed to onChange(undefined) will be undefined => that means that it will be removed from the FORM HOOK => it will be removed from database
       const newValue =
-        linkValue.length && profileIdValue.length
+        linkInputValue?.length && profileIdInputValue?.length
           ? {
-              profileId: profileIdValue,
-              link: linkValue,
+              profileId: profileIdInputValue,
+              link: linkInputValue,
             }
           : undefined
 
@@ -55,7 +50,7 @@ export const ProfileSocialsInputSheetInput = ({
   }
 
   return (
-    <Drawer control={drawerControl} placement="bottom" className="h-full w-full">
+    <Drawer control={drawerControl} backdrop="opaque" placement="bottom" className="h-full w-full">
       <Center className="p-4 w-full">
         <Column className="max-w-[600px] gap-2 w-full">
           <Row className="items-center justify-center gap-2">
@@ -69,23 +64,22 @@ export const ProfileSocialsInputSheetInput = ({
             </Text>
           </Row>
           <Input
-          {...}
+            ref={profileIdInputElement}
             className=""
             style={{ border: '0 !important' }}
             startContent={<IconUser></IconUser>}
             type="text"
-            value={profileIdValue}
+            defaultValue={profileIdValue}
             placeholder="profileID (make translation)"
-            onValueChange={setProfileIdValue}
           />
           <Input
+            ref={linkInputElement}
             className=""
             style={{ border: '0 !important' }}
             startContent={<IconLink></IconLink>}
             type="text"
-            value={linkValue}
+            defaultValue={linkValue}
             placeholder="URL"
-            onValueChange={setLinkValue}
           />
           <Button disabled={!currentChosenPlatform} onClick={submit}>
             {t('submitButtonLabel')}

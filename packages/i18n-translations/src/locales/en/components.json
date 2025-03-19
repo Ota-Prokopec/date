@@ -4,20 +4,30 @@
     "iAgree": "I agree"
   },
   "UpdateNewAccountForm": {
-    "usernameInputTitle": "How can we call you?",
-    "dateInputTitle": "When were you born?",
-    "genderInputTitle": "Your gender is?",
-    "lookingForGenderInputTitle": "You are looking for?",
-    "continueButtonLabel": "Continue",
+    "titles": {
+      "usernameInputTitle": "How can we call you?",
+      "dateInputTitle": "When were you born?",
+      "genderInputTitle": "Your gender is?",
+      "lookingForGenderInputTitle": "You are looking for?"
+    },
+    "descriptions": {
+      "usernameInputTitle": "his is your first impression — pick a name that shows off your personality. Will you go witty, mysterious, or straight-up iconic?",
+      "dateInputTitle": "Your birthday helps us find people around your age and maybe even guess your zodiac sign (if you’re into that)!",
+      "genderInputTitle": "Let us know how you identify. It helps us match you with the right people!",
+      "lookingForGenderInputTitle": "Who’s your type? Share what kind of connection you’re looking for, and we’ll help you find your match."
+    },
+
+    "saveButtonLabel": "Save",
+    "nextButtonLabel": "Next",
     "errorMessage": "Something went wrong, please try it again."
   },
   "UpdateAccountForm": {
-    "usernameInputTitle": "How can we call you?",
-    "dateInputTitle": "When were you born?",
-    "genderInputTitle": "Your gender is?",
-    "lookingForGenderInputTitle": "You are looking for?",
-    "continueButtonLabel": "Save",
-    "errorMessage": "Something went wrong, please try it again."
+    "bioInputTitle": "How would you best describe yourself?",
+    "genderInputTitle": "How do you identify?",
+    "lookingForGenderInputTitle": "Who are you looking for here?",
+    "socialsInputTitle": "How can others contact you?",
+    "saveButtonLabel": "Save",
+    "errorMessage": "Something went wrong, please try again."
   },
   "ProfileSocialsInputSheetInput": {
     "submitButtonLabel": "Save"

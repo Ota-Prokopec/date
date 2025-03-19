@@ -1,21 +1,24 @@
 'use client'
 
-import { EditAccountProfileItem } from '@/components/forms/EditAccountProfileItem'
-import { Button } from '@repo/ui/components/common/Button'
+import type { UpdateNewAccountFormData } from '@repo/forms/account-updateNewAccountFormZodSchema'
 import { Center } from '@repo/ui/components/common/Center'
 import { Column } from '@repo/ui/components/common/Column'
 import { Left } from '@repo/ui/components/common/Left'
 import { Loader } from '@repo/ui/components/common/Loader'
 import { LocaleSwitch } from '@repo/ui/components/common/LocaleSwitch'
+import { Right } from '@repo/ui/components/common/Right'
 import { DateInputFormItem } from '@repo/ui/components/Forms/DateInputFormItem'
 import { ReactHookForm } from '@repo/ui/components/Forms/Form'
 import { GenderInputFormItem } from '@repo/ui/components/Forms/GenderInputFormItem'
 import { UserNameInputFormItem } from '@repo/ui/components/Forms/UserNameInputFormItem'
 import { cn } from '@repo/ui/ts-lib/lib/utils'
-import { ChevronRight } from 'lucide-react'
 import { useTranslations } from 'next-intl'
+import { useState } from 'react'
 import { type SubmitHandler, type UseFormReturn } from 'react-hook-form'
-import type { UpdateNewAccountFormData } from '@repo/forms/account-updateNewAccountFormZodSchema'
+import { match } from 'ts-pattern'
+import { NextDownButton } from '../Buttons/NextDownButton'
+import { SaveButton } from '../Buttons/SaveButton'
+import { FormPaginatorDown, type FormPaginatorDownItems } from '../common/FormPaginatorDown'
 
 type UpdateNewAccountFormProps = {
   className?: string
@@ -24,12 +27,42 @@ type UpdateNewAccountFormProps = {
   onSubmit: SubmitHandler<UpdateNewAccountFormData>
 }
 
+const useUpdateNewAccountFormFields = (form: UseFormReturn<UpdateNewAccountFormData>) => {
+  const titles = useTranslations('components.UpdateNewAccountForm.titles')
+  const descriptions = useTranslations('components.UpdateNewAccountForm.descriptions')
+
+  return [
+    {
+      title: titles('usernameInputTitle'),
+      description: descriptions('usernameInputTitle'),
+      formField: <UserNameInputFormItem form={form} name="username"></UserNameInputFormItem>,
+    },
+    {
+      title: titles('dateInputTitle'),
+      description: descriptions('dateInputTitle'),
+      formField: <DateInputFormItem form={form} name="birthDate"></DateInputFormItem>,
+    },
+    {
+      title: titles('genderInputTitle'),
+      description: descriptions('genderInputTitle'),
+      formField: <GenderInputFormItem form={form} name="gender"></GenderInputFormItem>,
+    },
+    {
+      title: titles('lookingForGenderInputTitle'),
+      description: descriptions('lookingForGenderInputTitle'),
+      formField: <GenderInputFormItem form={form} name="lookingForGender"></GenderInputFormItem>,
+    },
+  ] as const satisfies FormPaginatorDownItems
+}
+
 export const UpdateNewAccountForm = ({
   form,
   className,
   isLoading,
   onSubmit,
 }: UpdateNewAccountFormProps) => {
+  const [currentFieldIndex, setCurrentFieldIndex] = useState<number>(1)
+  const formFields = useUpdateNewAccountFormFields(form)
   const t = useTranslations('components.UpdateNewAccountForm')
 
   return (
@@ -46,25 +79,21 @@ export const UpdateNewAccountForm = ({
         <Left>
           <LocaleSwitch />
         </Left>
-        <EditAccountProfileItem className="w-full" title={t('usernameInputTitle')}>
-          <UserNameInputFormItem form={form} name="username"></UserNameInputFormItem>
-        </EditAccountProfileItem>
-        <EditAccountProfileItem title={t('dateInputTitle')}>
-          <DateInputFormItem form={form} name="birthDate"></DateInputFormItem>
-        </EditAccountProfileItem>
-        <EditAccountProfileItem title={t('genderInputTitle')}>
-          <GenderInputFormItem form={form} name="gender"></GenderInputFormItem>
-        </EditAccountProfileItem>
-        <EditAccountProfileItem title={t('lookingForGenderInputTitle')}>
-          <GenderInputFormItem form={form} name="lookingForGender"></GenderInputFormItem>
-        </EditAccountProfileItem>
-        <Button
-          className="gap-2 w-[250px] h-auto"
-          icon={<ChevronRight strokeWidth={2.5} className="w-8 h-8"></ChevronRight>}
-          type="submit"
-        >
-          {t('continueButtonLabel')}
-        </Button>
+
+        <FormPaginatorDown items={formFields} index={currentFieldIndex} />
+
+        <Right>
+          {match({
+            isItAll: currentFieldIndex === formFields.length,
+          })
+            .with({ isItAll: true }, () => <SaveButton label={t('saveButtonLabel')} />)
+            .otherwise(() => (
+              <NextDownButton
+                label={t('nextButtonLabel')}
+                onNext={() => setCurrentFieldIndex((c) => c + 1)}
+              />
+            ))}
+        </Right>
       </Column>
       {isLoading && (
         <Center className="absolute top-0 left-0 h-full w-full">
