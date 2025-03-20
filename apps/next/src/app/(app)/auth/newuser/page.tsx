@@ -1,6 +1,6 @@
 'use client'
 
-import { UpdateNewAccountForm } from '@/components/forms/UpdateNewAccountForm'
+import { UpdateNewAccountForm } from '@/components/date-forms/UpdateNewAccountForm'
 import { useSaveNewUserInformationMutation } from '@/graphql/generated/apollo'
 import { cookieStorage } from '@repo/cookies'
 import type { UpdateNewAccountFormData } from '@repo/forms/account-updateNewAccountFormZodSchema'
@@ -12,6 +12,8 @@ import { type SubmitHandler } from 'react-hook-form'
 import { toast } from 'sonner'
 import { useUpdateNewAccountReactHookForm } from './useUpdateNewAccountReactHookForm'
 import { GetAccountProfileDocument } from '@/graphql/generated/typescript'
+import { Left } from '@repo/ui/components/common/Left'
+import { LocaleSwitch } from '@repo/ui/components/common/LocaleSwitch'
 
 const NewUserPage = () => {
   const t = useTranslations('pages.auth-newuser')
@@ -37,6 +39,9 @@ const NewUserPage = () => {
 
   return (
     <Center className="w-full p-4 flex-col gap-10">
+      <Left>
+        <LocaleSwitch />
+      </Left>
       <UpdateNewAccountForm
         onSubmit={onSubmit}
         isLoading={updateInfoState.loading}

@@ -1,6 +1,6 @@
 'use client'
 
-import { UpdateAccountForm } from '@/components/forms/UpdateAccountForm'
+import { UpdateAccountForm } from '@/components/date-forms/UpdateAccountForm'
 
 import {
   GetAccountProfileDocument,

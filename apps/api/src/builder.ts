@@ -31,7 +31,7 @@ export type PothosBuilderTypes = {
     File: FileScalar
     Date: DateScalar
     Socials: SocialsScalar
-  } & SchemaTypes['Scalars']
+  }
   Context: Context
   Args: { UpdateAccountArgs: UpdateAccountArgs; GetUsersProfilesArgs: GetUsersProfilesArgs }
 }

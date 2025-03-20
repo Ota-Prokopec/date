@@ -2,13 +2,9 @@
 
 import type { UpdateNewAccountFormData } from '@repo/forms/account-updateNewAccountFormZodSchema'
 import { Center } from '@repo/ui/components/common/Center'
-import { Column } from '@repo/ui/components/common/Column'
-import { Left } from '@repo/ui/components/common/Left'
 import { Loader } from '@repo/ui/components/common/Loader'
-import { LocaleSwitch } from '@repo/ui/components/common/LocaleSwitch'
 import { Right } from '@repo/ui/components/common/Right'
 import { DateInputFormItem } from '@repo/ui/components/Forms/DateInputFormItem'
-import { ReactHookForm } from '@repo/ui/components/Forms/Form'
 import { GenderInputFormItem } from '@repo/ui/components/Forms/GenderInputFormItem'
 import { UserNameInputFormItem } from '@repo/ui/components/Forms/UserNameInputFormItem'
 import { cn } from '@repo/ui/ts-lib/lib/utils'
@@ -18,7 +14,8 @@ import { type SubmitHandler, type UseFormReturn } from 'react-hook-form'
 import { match } from 'ts-pattern'
 import { NextDownButton } from '../Buttons/NextDownButton'
 import { SaveButton } from '../Buttons/SaveButton'
-import { FormPaginatorDown, type FormPaginatorDownItems } from '../common/FormPaginatorDown'
+import { FormPaginatorDown } from '../forms/FormPaginatorDown'
+import type { FormItems, FormItemsTypeSafe } from '../forms/FormTypes'
 
 type UpdateNewAccountFormProps = {
   className?: string
@@ -31,28 +28,34 @@ const useUpdateNewAccountFormFields = (form: UseFormReturn<UpdateNewAccountFormD
   const titles = useTranslations('components.UpdateNewAccountForm.titles')
   const descriptions = useTranslations('components.UpdateNewAccountForm.descriptions')
 
-  return [
+  const formItems = [
     {
       title: titles('usernameInputTitle'),
       description: descriptions('usernameInputTitle'),
       formField: <UserNameInputFormItem form={form} name="username"></UserNameInputFormItem>,
+      key: 'username-input-form-item',
     },
     {
       title: titles('dateInputTitle'),
       description: descriptions('dateInputTitle'),
       formField: <DateInputFormItem form={form} name="birthDate"></DateInputFormItem>,
+      key: 'date-input-form-item',
     },
     {
       title: titles('genderInputTitle'),
       description: descriptions('genderInputTitle'),
       formField: <GenderInputFormItem form={form} name="gender"></GenderInputFormItem>,
+      key: 'gender-input-form-item',
     },
     {
       title: titles('lookingForGenderInputTitle'),
       description: descriptions('lookingForGenderInputTitle'),
       formField: <GenderInputFormItem form={form} name="lookingForGender"></GenderInputFormItem>,
+      key: 'looking-for-gender-input-form-item',
     },
-  ] as const satisfies FormPaginatorDownItems
+  ] as const satisfies FormItems
+
+  return formItems
 }
 
 export const UpdateNewAccountForm = ({
@@ -66,22 +69,19 @@ export const UpdateNewAccountForm = ({
   const t = useTranslations('components.UpdateNewAccountForm')
 
   return (
-    <ReactHookForm onSubmit={onSubmit} form={form}>
-      <Column
+    <>
+      <FormPaginatorDown
+        form={form}
+        onSubmit={onSubmit}
         className={cn(
-          'gap-4 w-full',
           {
             'opacity-25': isLoading,
           },
           className
         )}
+        items={formFields}
+        index={currentFieldIndex}
       >
-        <Left>
-          <LocaleSwitch />
-        </Left>
-
-        <FormPaginatorDown items={formFields} index={currentFieldIndex} />
-
         <Right>
           {match({
             isItAll: currentFieldIndex === formFields.length,
@@ -94,12 +94,12 @@ export const UpdateNewAccountForm = ({
               />
             ))}
         </Right>
-      </Column>
+      </FormPaginatorDown>
       {isLoading && (
         <Center className="absolute top-0 left-0 h-full w-full">
           <Loader></Loader>
         </Center>
       )}
-    </ReactHookForm>
+    </>
   )
 }

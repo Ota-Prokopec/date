@@ -10,7 +10,7 @@ builder.mutationField('updateAccount', (t) =>
   t.field({
     type: 'Boolean',
     args: { userProfileData: t.arg({ type: 'UpdateAccountArgs' }) },
-    resolve: async (_parent, args, ctx) => {
+    resolve: async (_parent, { userProfileData: args }, ctx) => {
       // * Type-check
       type Check = TypeCheck<typeof args, UpdateAccountArgs>
       //   ^?

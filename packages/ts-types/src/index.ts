@@ -9,6 +9,7 @@ export * from './Date/GenderTypes';
 export * from './Date/SocialPlatforms';
 export * from './Date/UserProfile';
 export * from './Helpers/Check';
+export * from './Helpers/Duplicates';
 export * from './Helpers/ErrorMessage';
 export * from './Helpers/GenericZodObject';
 export * from './Helpers/MakeOptional';
