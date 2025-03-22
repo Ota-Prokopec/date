@@ -10,6 +10,7 @@ const link = ApolloLink.from([apolloCustomScalarsLink, httpLink])
 
 const cache = new InMemoryCache({
   addTypename: true,
+  resultCaching: false,
 })
 
 export const getApolloClient = () =>

@@ -1,9 +1,8 @@
 import type { Session } from '@repo/better-auth/types'
-import { env } from '../env'
-import { buckets } from '../pictureBuckets'
-import type { UploadApiResponse } from 'cloudinary'
 import { db } from '@repo/db'
 import * as schema from '@repo/db/schema'
+import type { UploadApiResponse } from 'cloudinary'
+import { buckets } from '../pictureBuckets'
 
 const profilePicturesCDNBaseUrl = buckets.profilePictures.getBucketsBaseUrl()
 

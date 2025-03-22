@@ -30,5 +30,14 @@
   },
   "ProfileSocialsInputSheetInput": {
     "submitButtonLabel": "Uložit"
+  },
+  "UserProfileCardBioItem": {
+    "title": "O mně"
+  },
+  "UserProfileCardSocialsItem": {
+    "title": "Sociální sítě"
+  },
+  "ProfilePictureInput": {
+    "errorMessage": "Něco se nepovedlo, prosíme, zkuste to znovu."
   }
 }

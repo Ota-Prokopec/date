@@ -1,44 +1,26 @@
 'use client'
 
-import {
-  UserProfileCard,
-  UserProfileCardSkeletonLoading,
-} from '@/components/Profile/UserProfileCard'
-import { useGetAccountProfileQuery } from '@/graphql/generated/apollo'
+import { UserProfileCard } from '@/components/Profile/userProfileCard/UserProfileCard'
+import { useGetAccountProfileSuspenseQuery } from '@/graphql/generated/apollo'
 import { Button } from '@repo/ui/components/common/Button'
 import { Center } from '@repo/ui/components/common/Center'
 import { useTranslations } from 'next-intl'
-import { notFound } from 'next/navigation'
-import { useEffect } from 'react'
-import { toast } from 'sonner'
-import { match } from 'ts-pattern'
+import { notFound, useRouter } from 'next/navigation'
 
 const ProfilePage = () => {
   const t = useTranslations('pages.profile')
-  const accountProfileState = useGetAccountProfileQuery()
+  const router = useRouter()
+  const accountProfileState = useGetAccountProfileSuspenseQuery()
   const accountProfileData = accountProfileState.data?.getAccountProfile
 
-  useEffect(() => {
-    if (!accountProfileState.loading && accountProfileState.error) {
-      if (!accountProfileData) notFound()
-      else toast.error(t('somethingWentWrongErrorMessage'), { dismissible: true })
-    }
-  }, [accountProfileState.error, accountProfileState.loading, accountProfileData, t])
+  if (!accountProfileData) notFound()
 
   return (
-    <Center className="w-full h-full">
-      {match({ loading: accountProfileState.loading })
-        .with({ loading: true }, () => (
-          <UserProfileCardSkeletonLoading></UserProfileCardSkeletonLoading>
-        ))
-        .otherwise(
-          () =>
-            accountProfileData && (
-              <UserProfileCard data={accountProfileData}>
-                <Button>{t('editProfileButtonLabel')}</Button>
-              </UserProfileCard>
-            )
-        )}
+    <Center className="w-auto h-full flex flex-wrap flex-col gap-4">
+      <UserProfileCard data={accountProfileData}></UserProfileCard>
+      <Button onClick={() => router.push('/profile/edit')} className="w-full">
+        {t('editProfileButtonLabel')}
+      </Button>
     </Center>
   )
 }

@@ -1,19 +1,18 @@
 'use client'
 
 import { EditAccountProfileItem } from '@/components/date-forms/EditAccountProfileItem'
+import type { UpdateAccountFormData } from '@repo/forms/account-updateAccountFormZodSchema'
 import { Button } from '@repo/ui/components/common/Button'
 import { Column } from '@repo/ui/components/common/Column'
 import { BioInputFormItem } from '@repo/ui/components/Forms/BioInputFormItem'
-import { ReactHookForm } from '@repo/ui/components/Forms/Form'
 import { GenderInputFormItem } from '@repo/ui/components/Forms/GenderInputFormItem'
 import { cn } from '@repo/ui/ts-lib/lib/utils'
 import { ChevronRight } from 'lucide-react'
 import { useTranslations } from 'next-intl'
-import { type SubmitHandler, type UseFormReturn } from 'react-hook-form'
-import { AccountProfileSocialsInputFormItem } from './AccountProfileSocialsInputFormItem'
-import type { UpdateAccountFormData } from '@repo/forms/account-updateAccountFormZodSchema'
-import type { FormItems, FormWrapperProperties } from '../forms/FormTypes'
+import { type UseFormReturn } from 'react-hook-form'
 import { Form } from '../forms/Form'
+import type { FormItems, FormWrapperProperties } from '../forms/FormTypes'
+import { AccountProfileSocialsInputFormItem } from './AccountProfileSocialsInputFormItem'
 
 type UpdateAccountFormProps = {
   className?: string

@@ -3,7 +3,7 @@
 import {
   UserProfileCard,
   UserProfileCardSkeletonLoading,
-} from '@/components/Profile/UserProfileCard'
+} from '@/components/Profile/userProfileCard/UserProfileCard'
 import { useGetUserProfileQuery } from '@/graphql/generated/apollo'
 import { Center } from '@repo/ui/components/common/Center'
 import type { InferGetServerSidePropsType } from 'next'

@@ -2,20 +2,16 @@
 
 import { fileTostring, readHTMLImageInput } from '@repo/utils/common/images'
 import { useRef, useState, type ChangeEvent } from 'react'
-import { IoIosAddCircle as IconAdd } from 'react-icons/io'
-import { MdChangeCircle as IconChange } from 'react-icons/md'
 import { cn } from '../../lib/utils'
-import { Image, type ReactImageProps } from './Image'
+import { Image } from '@heroui/react'
+
+export type ImageFileType = ('jpg' | 'png' | 'jpeg')[]
 
 type ImageInputProps = {
   src?: string | null | undefined
   fallbackSrc: string
   className?: string
-  imageFileAcceptPattern?: string
-  sizes: {
-    height: number
-    width: number
-  }
+  imageFileType?: ImageFileType
   onError?: () => void
   onChange: (imageFile: File) => void
 } & Omit<ReactImageProps, 'src' | 'fallbackSrc' | 'sizes' | 'onChange'>
@@ -25,12 +21,12 @@ export const ImageInput = ({
   fallbackSrc,
   className,
   onError,
-  sizes,
-  imageFileAcceptPattern,
+  imageFileType,
   onChange,
   ...props
 }: ImageInputProps) => {
   const [src, setSrc] = useState<string | null | undefined>(initialSrc)
+
   const inputRef = useRef<HTMLInputElement>(null)
   //const cropper = new ImageCropper(src ?? '', 'image/png', sizes.height, sizes.width);
   //  const croppingModal = new ModalSheet({ detent: 'full-height', initiallyOpen: true });
@@ -49,7 +45,7 @@ export const ImageInput = ({
         onChange={fileChange}
         type="file"
         className="hidden"
-        accept={imageFileAcceptPattern}
+        accept={imageFileType?.map((fileType) => `.${fileType}`).join(', ')}
       />
       <div className={cn('relative', className)}>
         <button
@@ -60,15 +56,13 @@ export const ImageInput = ({
             }
             inputRef.current.click()
           }}
-          className="absolute top-0 right-0 [&>*]:w-12 [&>*]:h-12 m-2 bg-white rounded-full cursor-pointer"
-        >
-          {src ? <IconChange className=""></IconChange> : <IconAdd className=""></IconAdd>}
-        </button>
+          className="absolute top-0 left-0 w-full h-full cursor-pointer"
+        ></button>
         <Image
           fallbackSrc={fallbackSrc}
-          src={src ?? ''}
+          src={src ?? undefined}
           {...props}
-          className="w-full h-full rounded-t-xl rounded-b-none bg-gray-500 object-cover"
+          className="!w-full !h-full rounded-xl object-cover !max-w-none"
         ></Image>
       </div>
     </>

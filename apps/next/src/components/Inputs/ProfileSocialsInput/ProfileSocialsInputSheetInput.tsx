@@ -10,7 +10,7 @@ import { Text } from '@repo/ui/components/common/Text'
 import { useTranslations } from 'next-intl'
 import { useRef } from 'react'
 import { match } from 'ts-pattern'
-import { socialProfilesMetaData } from '../../Profile/socialProfilesData'
+import { socialProfilesMetaData } from '../../Profile/SocialProfiles/socialProfilesData'
 
 type SheetInputProps = {
   socialsData: SocialsData

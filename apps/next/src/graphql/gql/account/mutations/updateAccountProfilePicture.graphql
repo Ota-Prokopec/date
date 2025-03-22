@@ -1,0 +1,3 @@
+mutation updateAccountProfilePicture($pictureFile: File!) {
+  updateAccountPicture(pictureFile: $pictureFile)
+}

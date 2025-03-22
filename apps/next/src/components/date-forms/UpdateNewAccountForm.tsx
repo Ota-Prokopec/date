@@ -15,7 +15,7 @@ import { match } from 'ts-pattern'
 import { NextDownButton } from '../Buttons/NextDownButton'
 import { SaveButton } from '../Buttons/SaveButton'
 import { FormPaginatorDown } from '../forms/FormPaginatorDown'
-import type { FormItems, FormItemsTypeSafe } from '../forms/FormTypes'
+import type { FormItems } from '../forms/FormTypes'
 
 type UpdateNewAccountFormProps = {
   className?: string

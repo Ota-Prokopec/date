@@ -5,6 +5,7 @@
   "type": "module",
   "sideEffects": false,
   "exports": {
+    "./tsx/*": "./src/*.tsx",
     ".": "./dist/*.js",
     "./actions/*": "./dist/actions/*.js",
     "./components/*": "./dist/components/*.js",

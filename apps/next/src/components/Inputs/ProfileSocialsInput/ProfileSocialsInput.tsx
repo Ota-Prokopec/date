@@ -2,11 +2,11 @@ import type { SocialProfilePlatform, SocialsData } from '@repo/ts-types'
 import { ModalSheet } from '@repo/ui/components/common/ModalSheet'
 import { omit } from 'lodash'
 import { useEffect, useState } from 'react'
-import { SocialProfiles } from '../../Profile/SocialProfiles'
-import { socialProfilesPlaceholderData } from '../../Profile/socialProfilesData'
+import { socialProfilesPlaceholderData } from '../../Profile/SocialProfiles/socialProfilesData'
 import { ProfileSocialsInputSheetInput } from './ProfileSocialsInputSheetInput'
 import { useSuperEffect } from '@repo/ui/dist/hooks/useSuperEffect'
 import { useDrawer } from '@repo/ui/components/common/Drawer'
+import { SocialProfiles } from '@/components/Profile/SocialProfiles/SocialProfiles'
 
 type SocialsInputProps = {
   currentSocialsData?: SocialsData

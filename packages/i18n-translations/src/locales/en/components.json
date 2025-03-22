@@ -31,5 +31,14 @@
   },
   "ProfileSocialsInputSheetInput": {
     "submitButtonLabel": "Save"
+  },
+  "UserProfileCardBioItem": {
+    "title": "About me"
+  },
+  "UserProfileCardSocialsItem": {
+    "title": "Social networks"
+  },
+  "ProfilePictureInput": {
+    "errorMessage": "Something went wrong, please try again."
   }
 }
