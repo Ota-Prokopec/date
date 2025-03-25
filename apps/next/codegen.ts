@@ -4,8 +4,8 @@ const codegenConfigConfig: CodegenConfig['config'] = {
   withHooks: true,
   maybeValue: 'T | null | undefined',
   scalars: {
-    Coords: '{lat: number, lng: number}',
-    File: 'File',
+    Coords: `@repo/ts-types#Coords`,
+    Upload: 'File',
     Gender: '@repo/ts-types#Gender',
     GraphQLHealth: '{ok: boolean}',
     Date: 'Date',

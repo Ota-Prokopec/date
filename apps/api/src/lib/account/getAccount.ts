@@ -1,8 +1,10 @@
 import type { Session } from '@repo/better-auth/types'
 import { db } from '@repo/db'
-import type { AccountData } from '@repo/ts-types'
+import type { AccountData, IncompleteAccountData } from '@repo/ts-types'
 
-export const getAccount = async (session: Session): Promise<Omit<AccountData, 'socials'>> => {
+export const getAccount = async (
+  session: Session
+): Promise<Omit<IncompleteAccountData | AccountData, 'socials' | 'isAccountCompleted'>> => {
   const accountData = await db.query.user.findFirst({
     where: (userReference, { eq }) => eq(userReference.id, session.user.id),
   })

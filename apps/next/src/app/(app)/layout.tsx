@@ -10,6 +10,7 @@ import { headers as getHeaders, cookies as nextCookies } from 'next/headers'
 
 //@ts-expect-error
 import '@repo/ui/tailwindcss'
+import { localeZodSchema } from '@repo/i18n-next/options'
 
 type RootLayoutProps = Readonly<{
   children: React.ReactNode
@@ -37,8 +38,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
     ...cookies,
   })
 
-  const locale: Locale = ssrCookies['locale']
-  console.log(locale)
+  const locale: Locale = cookieStorageZodSchema.shape.locale.parse(ssrCookies['locale'])
 
   const ssrMessages = await getMessages({ locale: locale })
   const timeZone = await getTimeZone()
@@ -50,7 +50,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
         className="[&>*]:flex [&>*]:flex-row"
         richColors
       ></Toaster>
-      <Center className="w-full min-h-[100vh] h-auto">{children}</Center>
+      <Center className="w-full h-[100vh]">{children}</Center>
     </Layout>
   )
 }

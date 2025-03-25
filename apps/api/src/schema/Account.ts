@@ -1,8 +1,9 @@
 import { builder } from '@/builder'
 import { type AccountPothosType } from './PothosSchemaTypes'
-import type { AccountData } from '@repo/ts-types'
+import { accountDataZodSchema, type AccountData } from '@repo/ts-types'
 import { getUsersAge } from '@/lib/users/getUsers'
 import { getCoordsForUser } from '@/lib/coords/getCoordsForUser'
+import { accountActions } from '@/lib/account/accountActions'
 
 export const AccountRef = builder.objectRef<AccountPothosType>('Account').implement({
   fields: (t) =>
@@ -14,14 +15,14 @@ export const AccountRef = builder.objectRef<AccountPothosType>('Account').implem
       profilePictureURL: t.exposeString('profilePictureURL', { nullable: true }),
       gender: t.expose('gender', { type: 'Gender', nullable: true }),
       lookingForGender: t.expose('gender', { type: 'Gender', nullable: true }),
-      coords: t.field({
-        type: 'Coords',
-        nullable: true,
-        resolve: async (parent) => {
-          const coords = (await getCoordsForUser([parent.userId])).at(0)
-          return coords
-        },
-      }),
+      // coords: t.field({
+      //   type: 'Coords',
+      //   nullable: true,
+      //   resolve: async (parent) => {
+      //     const coords = (await getCoordsForUser([parent.userId])).at(0)
+      //     return coords
+      //   },
+      // }),
       age: t.field({
         type: 'Int',
         nullable: true,
@@ -32,7 +33,15 @@ export const AccountRef = builder.objectRef<AccountPothosType>('Account').implem
         nullable: false,
         resolve: async (parent, args, ctx, info) => {
           const response = await ctx.loaders.socials.load(parent.userId)
-          return response || {}
+          return response ?? {}
+        },
+      }),
+      isAccountCompleted: t.field({
+        nullable: false,
+        type: 'Boolean',
+        resolve: (parent) => {
+          //? Omit isAccountCompleted property - because there will never be isAccountCompleted in parent
+          return accountActions.isAccountCompleted(parent)
         },
       }),
     }) satisfies Record<keyof AccountData, unknown>,

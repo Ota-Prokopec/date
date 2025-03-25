@@ -10,7 +10,7 @@ export type ReactImageProps = {
 const ReactImage = ({ src: initialSrc, fallbackSrc, className, ...props }: ReactImageProps) => {
   return (
     <img
-      className={cn('object-cover w-full h-full', className)}
+      className={cn('object-cover', className)}
       src={(initialSrc || fallbackSrc) ?? ''}
       {...props}
     ></img>

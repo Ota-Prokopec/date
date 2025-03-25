@@ -1,6 +1,6 @@
 import './CoordsScalar'
 import './GraphqlHealthScalar'
-import './FileScalar'
+import './UploadScalar'
 import './GenderScalar'
 import './DateScalar'
 import './SocialsScalar'

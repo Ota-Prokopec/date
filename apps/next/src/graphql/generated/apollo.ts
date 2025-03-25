@@ -1,3 +1,4 @@
+import { Coords } from '@repo/ts-types';
 import { Gender } from '@repo/ts-types';
 import { SocialsData } from '@repo/ts-types';
 import { gql } from '@apollo/client';
@@ -17,13 +18,13 @@ export type Scalars = {
   Boolean: { input: boolean; output: boolean; }
   Int: { input: number; output: number; }
   Float: { input: number; output: number; }
-  Coords: { input: {lat: number, lng: number}; output: {lat: number, lng: number}; }
+  Coords: { input: Coords; output: Coords; }
   /** A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.This scalar is serialized to a string in ISO 8601 format and parsed from a string in ISO 8601 format. */
   Date: { input: Date; output: Date; }
-  File: { input: File; output: File; }
   Gender: { input: Gender; output: Gender; }
   GraphQLHealth: { input: {ok: boolean}; output: {ok: boolean}; }
   Socials: { input: SocialsData; output: SocialsData; }
+  Upload: { input: File; output: File; }
 };
 
 export type Account = {
@@ -31,8 +32,8 @@ export type Account = {
   age?: Maybe<Scalars['Int']['output']>;
   bio?: Maybe<Scalars['String']['output']>;
   birthDate?: Maybe<Scalars['Date']['output']>;
-  coords?: Maybe<Scalars['Coords']['output']>;
   gender?: Maybe<Scalars['Gender']['output']>;
+  isAccountCompleted: Scalars['Boolean']['output'];
   lookingForGender?: Maybe<Scalars['Gender']['output']>;
   profilePictureURL?: Maybe<Scalars['String']['output']>;
   socials: Scalars['Socials']['output'];
@@ -50,7 +51,7 @@ export type Mutation = {
 
 
 export type MutationTestArgs = {
-  id: Scalars['Int']['input'];
+  file: Scalars['Upload']['input'];
 };
 
 
@@ -60,7 +61,7 @@ export type MutationUpdateAccountArgs = {
 
 
 export type MutationUpdateAccountPictureArgs = {
-  pictureFile: Scalars['File']['input'];
+  pictureFile: Scalars['Upload']['input'];
 };
 
 export type Query = {
@@ -132,7 +133,7 @@ export type UpdateAccountMutationVariables = Exact<{
 export type UpdateAccountMutation = { __typename?: 'Mutation', updateAccount: boolean };
 
 export type UpdateAccountProfilePictureMutationVariables = Exact<{
-  pictureFile: Scalars['File']['input'];
+  pictureFile: Scalars['Upload']['input'];
 }>;
 
 
@@ -141,17 +142,19 @@ export type UpdateAccountProfilePictureMutation = { __typename?: 'Mutation', upd
 export type GetAccountProfileQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetAccountProfileQuery = { __typename?: 'Query', getAccountProfile: { __typename?: 'Account', bio?: string | null | undefined, birthDate?: Date | null | undefined, coords?: {lat: number, lng: number} | null | undefined, gender?: Gender | null | undefined, lookingForGender?: Gender | null | undefined, profilePictureURL?: string | null | undefined, socials: SocialsData, userId: string, username: string, age?: number | null | undefined } };
+export type GetAccountProfileQuery = { __typename?: 'Query', getAccountProfile: { __typename?: 'Account', bio?: string | null | undefined, birthDate?: Date | null | undefined, gender?: Gender | null | undefined, lookingForGender?: Gender | null | undefined, profilePictureURL?: string | null | undefined, socials: SocialsData, userId: string, username: string, age?: number | null | undefined, isAccountCompleted: boolean } };
 
 export type GetHealthStatusQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetHealthStatusQuery = { __typename?: 'Query', getHealth: {ok: boolean} };
 
-export type TestQueryQueryVariables = Exact<{ [key: string]: never; }>;
+export type TestMutationMutationVariables = Exact<{
+  file: Scalars['Upload']['input'];
+}>;
 
 
-export type TestQueryQuery = { __typename?: 'Query', test: { __typename?: 'T', date: Date } };
+export type TestMutationMutation = { __typename?: 'Mutation', test: string };
 
 export type GetUserProfileQueryVariables = Exact<{
   userId: Scalars['String']['input'];
@@ -229,7 +232,7 @@ export type UpdateAccountMutationHookResult = ReturnType<typeof useUpdateAccount
 export type UpdateAccountMutationResult = Apollo.MutationResult<UpdateAccountMutation>;
 export type UpdateAccountMutationOptions = Apollo.BaseMutationOptions<UpdateAccountMutation, UpdateAccountMutationVariables>;
 export const UpdateAccountProfilePictureDocument = gql`
-    mutation updateAccountProfilePicture($pictureFile: File!) {
+    mutation updateAccountProfilePicture($pictureFile: Upload!) {
   updateAccountPicture(pictureFile: $pictureFile)
 }
     `;
@@ -264,7 +267,6 @@ export const GetAccountProfileDocument = gql`
   getAccountProfile {
     bio
     birthDate
-    coords
     gender
     lookingForGender
     profilePictureURL
@@ -272,6 +274,7 @@ export const GetAccountProfileDocument = gql`
     userId
     username
     age
+    isAccountCompleted
   }
 }
     `;
@@ -344,45 +347,37 @@ export type GetHealthStatusQueryHookResult = ReturnType<typeof useGetHealthStatu
 export type GetHealthStatusLazyQueryHookResult = ReturnType<typeof useGetHealthStatusLazyQuery>;
 export type GetHealthStatusSuspenseQueryHookResult = ReturnType<typeof useGetHealthStatusSuspenseQuery>;
 export type GetHealthStatusQueryResult = Apollo.QueryResult<GetHealthStatusQuery, GetHealthStatusQueryVariables>;
-export const TestQueryDocument = gql`
-    query testQuery {
-  test {
-    date
-  }
+export const TestMutationDocument = gql`
+    mutation testMutation($file: Upload!) {
+  test(file: $file)
 }
     `;
+export type TestMutationMutationFn = Apollo.MutationFunction<TestMutationMutation, TestMutationMutationVariables>;
 
 /**
- * __useTestQueryQuery__
+ * __useTestMutationMutation__
  *
- * To run a query within a React component, call `useTestQueryQuery` and pass it any options that fit your needs.
- * When your component renders, `useTestQueryQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
+ * To run a mutation, you first call `useTestMutationMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useTestMutationMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
  *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
  *
  * @example
- * const { data, loading, error } = useTestQueryQuery({
+ * const [testMutationMutation, { data, loading, error }] = useTestMutationMutation({
  *   variables: {
+ *      file: // value for 'file'
  *   },
  * });
  */
-export function useTestQueryQuery(baseOptions?: Apollo.QueryHookOptions<TestQueryQuery, TestQueryQueryVariables>) {
+export function useTestMutationMutation(baseOptions?: Apollo.MutationHookOptions<TestMutationMutation, TestMutationMutationVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<TestQueryQuery, TestQueryQueryVariables>(TestQueryDocument, options);
+        return Apollo.useMutation<TestMutationMutation, TestMutationMutationVariables>(TestMutationDocument, options);
       }
-export function useTestQueryLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TestQueryQuery, TestQueryQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<TestQueryQuery, TestQueryQueryVariables>(TestQueryDocument, options);
-        }
-export function useTestQuerySuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<TestQueryQuery, TestQueryQueryVariables>) {
-          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
-          return Apollo.useSuspenseQuery<TestQueryQuery, TestQueryQueryVariables>(TestQueryDocument, options);
-        }
-export type TestQueryQueryHookResult = ReturnType<typeof useTestQueryQuery>;
-export type TestQueryLazyQueryHookResult = ReturnType<typeof useTestQueryLazyQuery>;
-export type TestQuerySuspenseQueryHookResult = ReturnType<typeof useTestQuerySuspenseQuery>;
-export type TestQueryQueryResult = Apollo.QueryResult<TestQueryQuery, TestQueryQueryVariables>;
+export type TestMutationMutationHookResult = ReturnType<typeof useTestMutationMutation>;
+export type TestMutationMutationResult = Apollo.MutationResult<TestMutationMutation>;
+export type TestMutationMutationOptions = Apollo.BaseMutationOptions<TestMutationMutation, TestMutationMutationVariables>;
 export const GetUserProfileDocument = gql`
     query getUserProfile($userId: String!) {
   getUserProfile(userId: $userId) {

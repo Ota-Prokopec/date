@@ -12,8 +12,8 @@ export const accountDataZodSchemaAllPropsRequired = z.object({
   gender: genderZodSchema,
   lookingForGender: genderZodSchema,
   userId: z.string(),
-  coords: coordsZodSchema,
   age: z.number(),
+  isAccountCompleted: z.boolean(),
 })
 
 export const accountDataZodSchema = z.object({
@@ -27,8 +27,11 @@ export const accountDataZodSchema = z.object({
   gender: accountDataZodSchemaAllPropsRequired.shape.gender,
   lookingForGender: accountDataZodSchemaAllPropsRequired.shape.lookingForGender,
   userId: accountDataZodSchemaAllPropsRequired.shape.userId,
-  coords: accountDataZodSchemaAllPropsRequired.shape.coords.nullable().optional(),
   age: accountDataZodSchemaAllPropsRequired.shape.age,
+  //? Only shape of it is used - not literal value true, because
+  isAccountCompleted: accountDataZodSchemaAllPropsRequired.shape.isAccountCompleted.refine(
+    (arg) => arg
+  ),
 })
 
 export const incompleteAccountDataZodSchema = accountDataZodSchema.extend({
@@ -37,9 +40,9 @@ export const incompleteAccountDataZodSchema = accountDataZodSchema.extend({
   lookingForGender: accountDataZodSchemaAllPropsRequired.shape.lookingForGender
     .nullable()
     .optional(),
-  coords: accountDataZodSchemaAllPropsRequired.shape.coords.nullable().optional(),
   age: accountDataZodSchemaAllPropsRequired.shape.age.nullable().optional(),
   birthDate: accountDataZodSchemaAllPropsRequired.shape.birthDate.nullable().optional(),
+  isAccountCompleted: accountDataZodSchemaAllPropsRequired.shape.isAccountCompleted,
 })
 
 export type IncompleteAccountData = TypeOf<typeof incompleteAccountDataZodSchema>

@@ -1,5 +1,8 @@
-import type { AccountData, Coords, UserProfileData } from '@repo/ts-types'
+import type { AccountData, Coords, IncompleteAccountData, UserProfileData } from '@repo/ts-types'
 
 export type CoordsPothosType = Coords
-export type AccountPothosType = Omit<AccountData, 'socials'>
-export type UserPothosType = Omit<UserProfileData, 'socials'>
+export type AccountPothosType = Omit<
+  IncompleteAccountData | AccountData,
+  'socials' | 'isAccountCompleted'
+>
+export type UserPothosType = Omit<UserProfileData, 'socials' | 'isAccountCompleted'>

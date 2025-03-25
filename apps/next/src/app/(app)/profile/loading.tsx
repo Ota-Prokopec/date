@@ -1,6 +1,6 @@
 import { UserProfileCardSkeletonLoading } from '@components/Profile/userProfileCard/UserProfileCardSkeletonLoading'
 
-const LoadingPage = () => {
+const ProfileLoadingPage = () => {
   return <UserProfileCardSkeletonLoading></UserProfileCardSkeletonLoading>
 }
-export default LoadingPage
+export default ProfileLoadingPage

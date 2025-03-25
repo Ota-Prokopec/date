@@ -1,5 +1,5 @@
-const LoadingPage = () => {
+const TestLoadingPage = () => {
   return 'loading....'
 }
 
-export default LoadingPage
+export default TestLoadingPage

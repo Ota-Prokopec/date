@@ -12,6 +12,7 @@ const profilePicturesCDNBaseUrl = buckets.profilePictures.getBucketsBaseUrl()
  * */
 export const updateAccountProfilePicture = async (session: Session, newPictureFile: File) => {
   const currentPicture = session.user.image
+
   const alreadyHasPictureOnCdn = currentPicture
     ? currentPicture?.includes(profilePicturesCDNBaseUrl)
     : false

@@ -5,6 +5,6 @@ type ChooseMathProps = {
   className?: string
 }
 
-export const ChooseMath = ({ className }: ChooseMathProps) => {
+export const ChooseMatch = ({ className }: ChooseMathProps) => {
   return <Column></Column>
 }

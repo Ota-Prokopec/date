@@ -1,8 +1,8 @@
 import { defineRouting } from 'next-intl/routing'
 import { z } from 'zod'
 
-export const zodLocale = z.union([z.literal('en'), z.literal('cs')])
-export type Locale = z.TypeOf<typeof zodLocale>
+export const localeZodSchema = z.union([z.literal('en'), z.literal('cs')])
+export type Locale = z.TypeOf<typeof localeZodSchema>
 
 export const locales: Locale[] & string[] = ['en', 'cs']
 export const defaultLocale = 'en'

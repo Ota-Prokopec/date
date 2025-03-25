@@ -4,6 +4,7 @@ import { fileTostring, readHTMLImageInput } from '@repo/utils/common/images'
 import { useRef, useState, type ChangeEvent } from 'react'
 import { cn } from '../../lib/utils'
 import { Image } from '@heroui/react'
+import type { ReactImageProps } from './Image'
 
 export type ImageFileType = ('jpg' | 'png' | 'jpeg')[]
 
@@ -47,7 +48,7 @@ export const ImageInput = ({
         className="hidden"
         accept={imageFileType?.map((fileType) => `.${fileType}`).join(', ')}
       />
-      <div className={cn('relative', className)}>
+      <div className={cn('relative h-full w-full', className)}>
         <button
           onClick={() => {
             if (!inputRef.current) {
@@ -58,12 +59,11 @@ export const ImageInput = ({
           }}
           className="absolute top-0 left-0 w-full h-full cursor-pointer"
         ></button>
-        <Image
-          fallbackSrc={fallbackSrc}
-          src={src ?? undefined}
+        <img
+          src={src ?? fallbackSrc}
           {...props}
           className="!w-full !h-full rounded-xl object-cover !max-w-none"
-        ></Image>
+        ></img>
       </div>
     </>
   )

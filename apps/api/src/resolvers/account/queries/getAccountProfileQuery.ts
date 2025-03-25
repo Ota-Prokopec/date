@@ -1,5 +1,5 @@
 import { builder } from '@/builder'
-import { databaseAccountActions } from '@/lib/account/databaseAccountActions'
+import { accountActions } from '@/lib/account/accountActions'
 
 builder.queryField('getAccountProfile', (t) =>
   t.field({
@@ -9,7 +9,7 @@ builder.queryField('getAccountProfile', (t) =>
 
       if (!userId || !ctx.session) throw new Error('User is not authorizated to get user profile')
 
-      const res = await databaseAccountActions.getAccount(ctx.session)
+      const res = await accountActions.getAccount(ctx.session)
 
       return res
     },

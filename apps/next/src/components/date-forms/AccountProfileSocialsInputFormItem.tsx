@@ -1,9 +1,8 @@
+import type { SocialsData } from '@repo/ts-types'
 import { ReactHookFormFieldWrapper } from '@repo/ui/components/Forms/ReactHookFormFieldWrapper'
 import type { ReactHookFormExtendingFieldProps } from '@repo/ui/ts-lib/components/Forms/ReactHookFormTypes'
 import type { FieldValues, Path } from 'react-hook-form'
 import { ProfileSocialsInput } from '../Inputs/ProfileSocialsInput/ProfileSocialsInput'
-import type { SocialsData } from '@repo/ts-types'
-import { useEffect } from 'react'
 
 type UserNameInputFormItemValuetype = SocialsData
 
@@ -19,11 +18,6 @@ export const AccountProfileSocialsInputFormItem = <
   form,
   name,
 }: AccountProfileSocialsInputFormItemProps<TFieldValues, TPath>) => {
-  const values = form.watch()
-  useEffect(() => {
-    console.log({ values })
-  }, [values])
-
   return (
     <ReactHookFormFieldWrapper
       form={form}

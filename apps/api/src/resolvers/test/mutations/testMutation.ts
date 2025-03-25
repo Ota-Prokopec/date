@@ -1,20 +1,13 @@
-import { builder, type Builder, type PothosBuilderTypes } from '@/builder'
-import type SchemaBuilder from '@pothos/core'
-import type { FieldRef, MaybePromise, SchemaTypes, TypeParam } from '@pothos/core'
-import type { GraphQLResolveInfo } from 'graphql'
-import { z } from 'zod'
-
-const zodSchema = z.object({
-  id: z.number().min(1).max(5),
-})
+import { builder } from '@/builder'
 
 builder.mutationField('test', (t) =>
   t.field({
-    args: { id: t.arg.int() },
+    args: { file: t.arg({ type: 'Upload' }) },
     type: 'String',
     resolve: (parent, args) => {
-      return `${args.id}`
+      console.log(args.file.type)
+
+      return 'fad'
     },
-    validate: { schema: zodSchema },
   })
 )

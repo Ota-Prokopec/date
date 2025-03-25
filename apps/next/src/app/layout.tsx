@@ -1,7 +1,6 @@
 import { cn } from '@repo/ui/ts-lib/lib/utils'
-
 import '@repo/ui/tailwindcss'
-import dynamic from 'next/dynamic'
+import { ReactScan } from '@/components/common/ReactScan'
 
 type RootLayoutProps = Readonly<{
   children: React.ReactNode
@@ -23,10 +22,11 @@ const rootLayout = async function RootLayout({ children }: RootLayoutProps) {
       </head>
 
       <body
-        className={cn('w-[100vw] min-h-[100vh] h-auto dark:bg-darkModeBackgroundColor', {
+        className={cn('dark:bg-darkModeBackgroundColor', {
           //  dark: ssrCookies['colorTheme'] === 'dark' ? true : false,
         })}
       >
+        <ReactScan />
         {children}
       </body>
     </html>

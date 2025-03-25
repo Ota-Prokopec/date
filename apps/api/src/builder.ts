@@ -1,22 +1,20 @@
-import '@pothos/core'
 import { getBuilder } from '@repo/graphql/server'
 import { Context } from './context'
+import type { UpdateAccountArgs } from './resolvers/user'
+import type { GetUsersProfilesArgs } from './resolvers/user/args/getUsersProfilesArgs'
 import {
   type CoordsScalar,
   type DateScalar,
-  type FileScalar,
   type GenderScalar,
   type GraphqlHealthScalar,
   type SocialsScalar,
+  type UploadScalar,
 } from './scalars/ScalarsTypes'
 import type {
-  CoordsPothosType,
   AccountPothosType,
+  CoordsPothosType,
   UserPothosType,
 } from './schema/PothosSchemaTypes'
-import type { UpdateAccountArgs } from './resolvers/user'
-import type { QueryFieldBuilder, SchemaTypes } from '@pothos/core'
-import type { GetUsersProfilesArgs } from './resolvers/user/args/getUsersProfilesArgs'
 
 export type PothosBuilderTypes = {
   Objects: {
@@ -28,7 +26,7 @@ export type PothosBuilderTypes = {
     Coords: CoordsScalar
     GraphQLHealth: GraphqlHealthScalar
     Gender: GenderScalar
-    File: FileScalar
+    Upload: UploadScalar
     Date: DateScalar
     Socials: SocialsScalar
   }

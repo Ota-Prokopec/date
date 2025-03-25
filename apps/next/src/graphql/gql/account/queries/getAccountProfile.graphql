@@ -2,7 +2,6 @@ query getAccountProfile {
   getAccountProfile {
     bio
     birthDate
-    coords
     gender
     lookingForGender
     profilePictureURL
@@ -10,5 +9,6 @@ query getAccountProfile {
     userId
     username
     age
+    isAccountCompleted
   }
 }

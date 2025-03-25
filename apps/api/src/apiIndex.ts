@@ -17,7 +17,6 @@ export const yoga: ReturnType<typeof createYoga<Context, Context>> = createYoga<
     origin: [env.WEB_URL],
   },
   multipart: true,
-  maskedErrors: false,
 })
 
 // Pass it into a server to hook into request handlers.

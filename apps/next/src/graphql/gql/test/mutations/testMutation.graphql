@@ -1,5 +1,3 @@
-query testQuery {
-  test {
-    date
-  }
+mutation testMutation($file: Upload!) {
+  test(file: $file)
 }

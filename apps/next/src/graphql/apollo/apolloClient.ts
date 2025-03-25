@@ -1,12 +1,17 @@
-import { ApolloClient, ApolloLink, HttpLink, InMemoryCache } from '@apollo/client'
-import { apolloCustomScalarsLink } from './apolloCustomScalars'
+import { ApolloClient, ApolloLink, InMemoryCache } from '@apollo/client'
+import createUploadLink from 'apollo-upload-client/createUploadLink.mjs'
 import { apolloAuthLink } from './apolloAuthLink'
+import { apolloCustomScalarsLink } from './apolloCustomScalars'
 
 const url = `${process.env.NEXT_PUBLIC_API_URL}/graphql`
 
-const httpLink = new HttpLink({ uri: url, credentials: 'include', fetchOptions: 'no-cache' })
+const uploadLink = createUploadLink({
+  uri: url,
+  credentials: 'include',
+  fetchOptions: { cache: 'force-cache' },
+})
 
-const link = ApolloLink.from([apolloCustomScalarsLink, httpLink])
+const link = ApolloLink.from([apolloCustomScalarsLink, uploadLink])
 
 const cache = new InMemoryCache({
   addTypename: true,
@@ -18,4 +23,6 @@ export const getApolloClient = () =>
     cache: cache,
     link: apolloAuthLink.concat(link),
     ssrMode: true,
+    uri: url,
+    credentials: 'include',
   })

@@ -23,10 +23,6 @@ export const ReactHookFormFieldErrorMessage = <
   const onClose = () => form.clearErrors()
 
   useEffect(() => {
-    console.log({ error })
-  }, [error])
-
-  useEffect(() => {
     let toastMessageId: null | string | number = null
     if (error?.message)
       toastMessageId = toast.error(error?.message.toString(), {

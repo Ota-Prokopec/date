@@ -1,7 +1,7 @@
 import { createContext as authContext } from '@repo/graphql/server'
 import { getLoaders, type Loaders } from './loaders/loaders'
 import type { Locale } from '@repo/i18n-next'
-import { localeCookieName, zodLocale } from '@repo/i18n-next/options'
+import { localeCookieName, localeZodSchema } from '@repo/i18n-next/options'
 import lodash from 'lodash'
 
 type AuthContext = Awaited<ReturnType<typeof authContext>>
@@ -18,7 +18,7 @@ export const createContext: CreateContext = async ({ request }: { request: Reque
 
   const loaders: Loaders = getLoaders()
   const isAuthenticated = auth.session?.user.id ? true : false
-  const locale: Locale | undefined = zodLocale
+  const locale: Locale | undefined = localeZodSchema
     .optional()
     .parse(auth.cookies.filter(({ name }) => name === localeCookieName).at(0)?.value)
 

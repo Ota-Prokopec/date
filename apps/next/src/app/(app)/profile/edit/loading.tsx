@@ -1,4 +1,4 @@
-const LoadingPage = () => {
+const EditProfileLoadingPage = () => {
   return 'Loading...'
 }
-export default LoadingPage
+export default EditProfileLoadingPage

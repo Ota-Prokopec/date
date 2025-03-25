@@ -1,3 +1,4 @@
+import { Coords } from '@repo/ts-types';
 import { Gender } from '@repo/ts-types';
 import { SocialsData } from '@repo/ts-types';
 import { GraphQLClient, RequestOptions } from 'graphql-request';
@@ -17,13 +18,13 @@ export type Scalars = {
   Boolean: { input: boolean; output: boolean; }
   Int: { input: number; output: number; }
   Float: { input: number; output: number; }
-  Coords: { input: {lat: number, lng: number}; output: {lat: number, lng: number}; }
+  Coords: { input: Coords; output: Coords; }
   /** A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.This scalar is serialized to a string in ISO 8601 format and parsed from a string in ISO 8601 format. */
   Date: { input: Date; output: Date; }
-  File: { input: File; output: File; }
   Gender: { input: Gender; output: Gender; }
   GraphQLHealth: { input: {ok: boolean}; output: {ok: boolean}; }
   Socials: { input: SocialsData; output: SocialsData; }
+  Upload: { input: File; output: File; }
 };
 
 export type Account = {
@@ -31,8 +32,8 @@ export type Account = {
   age?: Maybe<Scalars['Int']['output']>;
   bio?: Maybe<Scalars['String']['output']>;
   birthDate?: Maybe<Scalars['Date']['output']>;
-  coords?: Maybe<Scalars['Coords']['output']>;
   gender?: Maybe<Scalars['Gender']['output']>;
+  isAccountCompleted: Scalars['Boolean']['output'];
   lookingForGender?: Maybe<Scalars['Gender']['output']>;
   profilePictureURL?: Maybe<Scalars['String']['output']>;
   socials: Scalars['Socials']['output'];
@@ -50,7 +51,7 @@ export type Mutation = {
 
 
 export type MutationTestArgs = {
-  id: Scalars['Int']['input'];
+  file: Scalars['Upload']['input'];
 };
 
 
@@ -60,7 +61,7 @@ export type MutationUpdateAccountArgs = {
 
 
 export type MutationUpdateAccountPictureArgs = {
-  pictureFile: Scalars['File']['input'];
+  pictureFile: Scalars['Upload']['input'];
 };
 
 export type Query = {
@@ -132,7 +133,7 @@ export type UpdateAccountMutationVariables = Exact<{
 export type UpdateAccountMutation = { __typename?: 'Mutation', updateAccount: boolean };
 
 export type UpdateAccountProfilePictureMutationVariables = Exact<{
-  pictureFile: Scalars['File']['input'];
+  pictureFile: Scalars['Upload']['input'];
 }>;
 
 
@@ -141,17 +142,19 @@ export type UpdateAccountProfilePictureMutation = { __typename?: 'Mutation', upd
 export type GetAccountProfileQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetAccountProfileQuery = { __typename?: 'Query', getAccountProfile: { __typename?: 'Account', bio?: string | null | undefined, birthDate?: Date | null | undefined, coords?: {lat: number, lng: number} | null | undefined, gender?: Gender | null | undefined, lookingForGender?: Gender | null | undefined, profilePictureURL?: string | null | undefined, socials: SocialsData, userId: string, username: string, age?: number | null | undefined } };
+export type GetAccountProfileQuery = { __typename?: 'Query', getAccountProfile: { __typename?: 'Account', bio?: string | null | undefined, birthDate?: Date | null | undefined, gender?: Gender | null | undefined, lookingForGender?: Gender | null | undefined, profilePictureURL?: string | null | undefined, socials: SocialsData, userId: string, username: string, age?: number | null | undefined, isAccountCompleted: boolean } };
 
 export type GetHealthStatusQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetHealthStatusQuery = { __typename?: 'Query', getHealth: {ok: boolean} };
 
-export type TestQueryQueryVariables = Exact<{ [key: string]: never; }>;
+export type TestMutationMutationVariables = Exact<{
+  file: Scalars['Upload']['input'];
+}>;
 
 
-export type TestQueryQuery = { __typename?: 'Query', test: { __typename?: 'T', date: Date } };
+export type TestMutationMutation = { __typename?: 'Mutation', test: string };
 
 export type GetUserProfileQueryVariables = Exact<{
   userId: Scalars['String']['input'];
@@ -174,7 +177,7 @@ export const UpdateAccountDocument = gql`
 }
     `;
 export const UpdateAccountProfilePictureDocument = gql`
-    mutation updateAccountProfilePicture($pictureFile: File!) {
+    mutation updateAccountProfilePicture($pictureFile: Upload!) {
   updateAccountPicture(pictureFile: $pictureFile)
 }
     `;
@@ -183,7 +186,6 @@ export const GetAccountProfileDocument = gql`
   getAccountProfile {
     bio
     birthDate
-    coords
     gender
     lookingForGender
     profilePictureURL
@@ -191,6 +193,7 @@ export const GetAccountProfileDocument = gql`
     userId
     username
     age
+    isAccountCompleted
   }
 }
     `;
@@ -199,11 +202,9 @@ export const GetHealthStatusDocument = gql`
   getHealth
 }
     `;
-export const TestQueryDocument = gql`
-    query testQuery {
-  test {
-    date
-  }
+export const TestMutationDocument = gql`
+    mutation testMutation($file: Upload!) {
+  test(file: $file)
 }
     `;
 export const GetUserProfileDocument = gql`
@@ -243,8 +244,8 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     getHealthStatus(variables?: GetHealthStatusQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetHealthStatusQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetHealthStatusQuery>(GetHealthStatusDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getHealthStatus', 'query', variables);
     },
-    testQuery(variables?: TestQueryQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<TestQueryQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<TestQueryQuery>(TestQueryDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'testQuery', 'query', variables);
+    testMutation(variables: TestMutationMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<TestMutationMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<TestMutationMutation>(TestMutationDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'testMutation', 'mutation', variables);
     },
     getUserProfile(variables: GetUserProfileQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetUserProfileQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetUserProfileQuery>(GetUserProfileDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getUserProfile', 'query', variables);

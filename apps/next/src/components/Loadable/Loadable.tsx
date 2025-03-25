@@ -1,6 +1,6 @@
 import { Center } from '@repo/ui/components/common/Center'
 import { Loading } from '@repo/ui/components/common/Loading'
-import { Suspense, type JSX, type ReactNode } from 'react'
+import { Suspense, type ReactNode } from 'react'
 
 const LoadingPage = () => {
   return (
