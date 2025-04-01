@@ -1,0 +1,9 @@
+query getListOfRandomUsers($limit: Int = 4) {
+  getListOfRandomUsers(limit: $limit) {
+    age
+    gender
+    profilePictureURL
+    userId
+    username
+  }
+}

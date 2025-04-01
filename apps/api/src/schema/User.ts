@@ -1,6 +1,6 @@
 import { builder } from '@/builder'
+import { getUsersAge } from '@/lib/users/getUsersAge'
 import { type UserPothosType } from './PothosSchemaTypes'
-import type { UserProfileData } from '@repo/ts-types'
 
 /**
  * If the user does not have username, ...., then the user is not searchable!
@@ -12,19 +12,22 @@ export const UserRef = builder.objectRef<UserPothosType>('User').implement({
     ({
       userId: t.exposeString('userId', { nullable: false }),
       profilePictureURL: t.exposeString('profilePictureURL', { nullable: false }),
-      age: t.exposeInt('age', { nullable: false }),
       gender: t.expose('gender', { type: 'Gender', nullable: false }),
-      bio: t.exposeString('bio', { nullable: true }),
       username: t.exposeString('username', { nullable: false }),
       lookingForGender: t.expose('gender', { type: 'Gender', nullable: false }),
+      bio: t.exposeString('bio', { nullable: true }),
       socials: t.field({
         type: 'Socials',
-        nullable: true,
-
+        nullable: false,
         resolve: async (parent, args, ctx, info) => {
           const response = await ctx.loaders.socials.load(parent.userId)
           return response || {}
         },
       }),
-    }) satisfies Record<keyof UserProfileData, unknown>,
+      age: t.field({
+        type: 'Int',
+        nullable: false,
+        resolve: (parent) => getUsersAge(parent.birthDate),
+      }),
+    }) satisfies Omit<Record<keyof UserPothosType | 'socials' | 'age', unknown>, 'birthDate'>,
 })

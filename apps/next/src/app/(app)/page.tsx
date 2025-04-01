@@ -1,12 +1,12 @@
 'use client'
 
-import { CountdownCircleTimer } from 'react-countdown-circle-timer'
-import { normalizeTime } from '@repo/utils/normalizators/normalizeTime'
-import { Column } from '@repo/ui/components/common/Column'
-import { Timer } from '../../components/Timer'
+import { LikingPeopleGrid } from '@/components/common/LikingPeopleGrid'
+import { useGetListOfRandomUsersSuspenseQuery } from '@/graphql/generated/apollo'
 
 const MainPage = () => {
-  return <Timer timeLeft={30} wholeTime={60}></Timer>
+  const { data } = useGetListOfRandomUsersSuspenseQuery({ variables: { limit: 4 } })
+
+  return data && <LikingPeopleGrid userProfiles={data.getListOfRandomUsers}></LikingPeopleGrid>
 }
 
 export default MainPage

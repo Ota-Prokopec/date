@@ -68,8 +68,14 @@ export type Query = {
   __typename?: 'Query';
   getAccountProfile: Account;
   getHealth: Scalars['GraphQLHealth']['output'];
+  getListOfRandomUsers: Array<User>;
   getUserProfile: User;
   test: T;
+};
+
+
+export type QueryGetListOfRandomUsersArgs = {
+  limit: Scalars['Int']['input'];
 };
 
 
@@ -104,7 +110,7 @@ export type User = {
   gender: Scalars['Gender']['output'];
   lookingForGender: Scalars['Gender']['output'];
   profilePictureURL: Scalars['String']['output'];
-  socials?: Maybe<Scalars['Socials']['output']>;
+  socials: Scalars['Socials']['output'];
   userId: Scalars['String']['output'];
   username: Scalars['String']['output'];
 };
@@ -156,12 +162,19 @@ export type TestMutationMutationVariables = Exact<{
 
 export type TestMutationMutation = { __typename?: 'Mutation', test: string };
 
+export type GetListOfRandomUsersQueryVariables = Exact<{
+  limit?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+
+export type GetListOfRandomUsersQuery = { __typename?: 'Query', getListOfRandomUsers: Array<{ __typename?: 'User', age: number, gender: Gender, profilePictureURL: string, userId: string, username: string }> };
+
 export type GetUserProfileQueryVariables = Exact<{
   userId: Scalars['String']['input'];
 }>;
 
 
-export type GetUserProfileQuery = { __typename?: 'Query', getUserProfile: { __typename?: 'User', age: number, bio?: string | null | undefined, gender: Gender, lookingForGender: Gender, profilePictureURL: string, socials?: SocialsData | null | undefined, userId: string, username: string } };
+export type GetUserProfileQuery = { __typename?: 'Query', getUserProfile: { __typename?: 'User', age: number, bio?: string | null | undefined, gender: Gender, lookingForGender: Gender, profilePictureURL: string, socials: SocialsData, userId: string, username: string } };
 
 
 export const SaveNewUserInformationDocument = gql`
@@ -230,6 +243,21 @@ export const TestMutationDocument = gql`
 
 export function useTestMutationMutation() {
   return Urql.useMutation<TestMutationMutation, TestMutationMutationVariables>(TestMutationDocument);
+};
+export const GetListOfRandomUsersDocument = gql`
+    query getListOfRandomUsers($limit: Int = 4) {
+  getListOfRandomUsers(limit: $limit) {
+    age
+    gender
+    profilePictureURL
+    userId
+    username
+  }
+}
+    `;
+
+export function useGetListOfRandomUsersQuery(options?: Omit<Urql.UseQueryArgs<GetListOfRandomUsersQueryVariables>, 'query'>) {
+  return Urql.useQuery<GetListOfRandomUsersQuery, GetListOfRandomUsersQueryVariables>({ query: GetListOfRandomUsersDocument, ...options });
 };
 export const GetUserProfileDocument = gql`
     query getUserProfile($userId: String!) {

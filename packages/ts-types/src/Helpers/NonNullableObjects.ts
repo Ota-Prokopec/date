@@ -11,3 +11,10 @@ export type NonNullishItemsOnly<TObject extends Record<string, unknown>> = {
 export type NonOptionalItemsOnly<T extends Record<string, unknown>> = {
   [K in keyof T as T[K] extends Exclude<Required<Pick<T, K>>[K], undefined> ? K : never]: T[K]
 }
+
+export type NonNullableObjectByKeys<
+  TObject extends Record<string, unknown>,
+  TKeys extends keyof TObject,
+> = {
+  [Key in keyof TObject]: Key extends TKeys ? NonNullable<TObject[Key]> : TObject[Key]
+}

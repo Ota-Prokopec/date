@@ -8,7 +8,7 @@ type LayoutProps = {
 }
 const Layout = ({ children }: LayoutProps) => {
   return (
-    <LoadingPageProvider className="items-center justify-center flex p-20">
+    <LoadingPageProvider className="items-center justify-center flex p-20 h-[100vh]">
       {children}
     </LoadingPageProvider>
   )

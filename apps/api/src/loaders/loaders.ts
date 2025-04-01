@@ -1,15 +1,15 @@
 import { createCoordsLoader } from './coordsLoader'
 import { createSocialLoader } from './socialsLoader'
-import { createUserLoader } from './usersLoader'
+import { createUsersLoader } from './usersLoader'
 
 export type Loaders = {
-  users: ReturnType<typeof createUserLoader>
+  users: ReturnType<typeof createUsersLoader>
   socials: ReturnType<typeof createSocialLoader>
   coords: ReturnType<typeof createCoordsLoader>
 }
 
 export const getLoaders = (): Loaders => ({
-  users: createUserLoader(),
+  users: createUsersLoader(),
   socials: createSocialLoader(),
   coords: createCoordsLoader(),
 })

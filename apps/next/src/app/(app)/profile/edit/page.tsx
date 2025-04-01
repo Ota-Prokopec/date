@@ -44,7 +44,7 @@ const EditProfilePage = disableSSR(() => {
   }
 
   return (
-    <Column className="justify-center items-center gap-4 m-4">
+    <Column className="justify-center items-center gap-4 m-4 h-auto">
       <ProfilePictureInput
         onChange={() => {}}
         currentPictureSrc={accountProfileData?.profilePictureURL}

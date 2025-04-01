@@ -39,5 +39,8 @@
   },
   "ProfilePictureInput": {
     "errorMessage": "Něco se nepovedlo, prosíme, zkuste to znovu."
+  },
+  "LikingPeopleGrid": {
+    "loadingUsers": { "errorMessage": "Něco se nepovedlo, prosíme, zkuste to znovu." }
   }
 }

@@ -1,10 +1,9 @@
-import { getUsers } from '@/lib/users/getUsers'
-import { groupBy } from '@repo/utils/common/groupBy'
+import { getUsersByIds } from '@/lib/users/getUsersByIds'
 import DataLoader from 'dataloader'
 
-export const createUserLoader = () =>
+export const createUsersLoader = () =>
   new DataLoader(async (userIds: readonly string[]) => {
-    const users = await getUsers(userIds as string[])
+    const users = await getUsersByIds(userIds as string[])
 
     return users
   })

@@ -1,5 +1,4 @@
 import { v2 as cloudinary, ConfigOptions, UploadApiResponse, type UploadStream } from 'cloudinary'
-import { Readable } from 'stream'
 
 export class Cloudinary {
   constructor(
@@ -8,6 +7,7 @@ export class Cloudinary {
   ) {
     this.options = options
     this.folder = folder
+    cloudinary.config(this.options)
   }
 
   uploadFile = async (file: File) => {
@@ -24,7 +24,6 @@ export class Cloudinary {
     return uploadResult
   }
   async deleteFiles(...fileNames: string[]): Promise<'deleted'> {
-    cloudinary.config(this.options)
     await cloudinary.api.delete_resources(fileNames.map((fileName) => `${this.folder}/${fileName}`))
     return 'deleted'
   }

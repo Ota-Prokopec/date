@@ -50,7 +50,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
         className="[&>*]:flex [&>*]:flex-row"
         richColors
       ></Toaster>
-      <Center className="w-full h-[100vh]">{children}</Center>
+      <Center className="w-full h-auto">{children}</Center>
     </Layout>
   )
 }

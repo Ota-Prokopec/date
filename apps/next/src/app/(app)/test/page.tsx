@@ -1,10 +1,10 @@
 'use client'
 
-import { useTestMutationMutation } from '@/graphql/generated/apollo'
-import { ImageInput } from '@repo/ui/tsx/components/common/ImageInput'
-import { variable } from './import'
+import { time } from '@repo/utils/common/time'
 
 const Page = () => {
+  console.log(time.convertTime(1, 'years', 'days'))
+
   return ''
 }
 

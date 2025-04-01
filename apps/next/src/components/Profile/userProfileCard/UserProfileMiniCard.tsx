@@ -2,20 +2,16 @@ import { ProfileNameAndAge } from '@/components/Profile/nameAndAge/UserProfileNa
 import { Card } from '@repo/ui/components/common/Card'
 import { Column } from '@repo/ui/components/common/Column'
 import { cn } from '@repo/ui/ts-lib/lib/utils'
-import type { ReactNode } from 'react'
-import { UserProfileCardBioItem } from './UserProfileCardBioItem'
-import type { UserProfileCardData } from './UserProfileCardDataTypes'
+import type { UserProfileMiniCardData } from './UserProfileCardDataTypes'
 import { UserProfileCardProfilePicture } from './UserProfileCardProfilePicture'
-import { UserProfileCardSocialsItem } from './UserProfileCardSocialsItem'
 
-type UserProfileCardProps = {
+type UserProfileMiniCardProps = {
   className?: string
-  children?: ReactNode
-  data: UserProfileCardData
+  data: UserProfileMiniCardData
 }
 
-export const UserProfileCard = ({ className, children, data }: UserProfileCardProps) => {
-  const { gender, profilePictureURL, bio } = data
+export const UserProfileMiniCard = ({ className, data }: UserProfileMiniCardProps) => {
+  const { gender, profilePictureURL } = data
 
   return (
     <Card className={cn('', className)}>
@@ -25,11 +21,6 @@ export const UserProfileCard = ({ className, children, data }: UserProfileCardPr
         ></UserProfileCardProfilePicture>
 
         <ProfileNameAndAge name={data.username} age={data.age}></ProfileNameAndAge>
-
-        {bio && <UserProfileCardBioItem bio={bio}></UserProfileCardBioItem>}
-
-        <UserProfileCardSocialsItem socials={data.socials}></UserProfileCardSocialsItem>
-        {children}
       </Column>
     </Card>
   )

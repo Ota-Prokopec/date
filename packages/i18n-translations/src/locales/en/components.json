@@ -40,5 +40,8 @@
   },
   "ProfilePictureInput": {
     "errorMessage": "Something went wrong, please try again."
+  },
+  "LikingPeopleGrid": {
+    "loadingUsers": { "errorMessage": "Something went wrong, please try it again." }
   }
 }

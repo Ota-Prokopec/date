@@ -1,9 +1,9 @@
 import { builder } from '@/builder'
 import { type AccountPothosType } from './PothosSchemaTypes'
 import { accountDataZodSchema, type AccountData } from '@repo/ts-types'
-import { getUsersAge } from '@/lib/users/getUsers'
 import { getCoordsForUser } from '@/lib/coords/getCoordsForUser'
 import { accountActions } from '@/lib/account/accountActions'
+import { getUsersAge } from '@/lib/users/getUsersAge'
 
 export const AccountRef = builder.objectRef<AccountPothosType>('Account').implement({
   fields: (t) =>

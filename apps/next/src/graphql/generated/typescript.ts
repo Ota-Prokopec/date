@@ -68,8 +68,14 @@ export type Query = {
   __typename?: 'Query';
   getAccountProfile: Account;
   getHealth: Scalars['GraphQLHealth']['output'];
+  getListOfRandomUsers: Array<User>;
   getUserProfile: User;
   test: T;
+};
+
+
+export type QueryGetListOfRandomUsersArgs = {
+  limit: Scalars['Int']['input'];
 };
 
 
@@ -104,7 +110,7 @@ export type User = {
   gender: Scalars['Gender']['output'];
   lookingForGender: Scalars['Gender']['output'];
   profilePictureURL: Scalars['String']['output'];
-  socials?: Maybe<Scalars['Socials']['output']>;
+  socials: Scalars['Socials']['output'];
   userId: Scalars['String']['output'];
   username: Scalars['String']['output'];
 };
@@ -156,12 +162,19 @@ export type TestMutationMutationVariables = Exact<{
 
 export type TestMutationMutation = { __typename?: 'Mutation', test: string };
 
+export type GetListOfRandomUsersQueryVariables = Exact<{
+  limit?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+
+export type GetListOfRandomUsersQuery = { __typename?: 'Query', getListOfRandomUsers: Array<{ __typename?: 'User', age: number, gender: Gender, profilePictureURL: string, userId: string, username: string }> };
+
 export type GetUserProfileQueryVariables = Exact<{
   userId: Scalars['String']['input'];
 }>;
 
 
-export type GetUserProfileQuery = { __typename?: 'Query', getUserProfile: { __typename?: 'User', age: number, bio?: string | null | undefined, gender: Gender, lookingForGender: Gender, profilePictureURL: string, socials?: SocialsData | null | undefined, userId: string, username: string } };
+export type GetUserProfileQuery = { __typename?: 'Query', getUserProfile: { __typename?: 'User', age: number, bio?: string | null | undefined, gender: Gender, lookingForGender: Gender, profilePictureURL: string, socials: SocialsData, userId: string, username: string } };
 
 
 export const SaveNewUserInformationDocument = gql`
@@ -207,6 +220,17 @@ export const TestMutationDocument = gql`
   test(file: $file)
 }
     `;
+export const GetListOfRandomUsersDocument = gql`
+    query getListOfRandomUsers($limit: Int = 4) {
+  getListOfRandomUsers(limit: $limit) {
+    age
+    gender
+    profilePictureURL
+    userId
+    username
+  }
+}
+    `;
 export const GetUserProfileDocument = gql`
     query getUserProfile($userId: String!) {
   getUserProfile(userId: $userId) {
@@ -246,6 +270,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     testMutation(variables: TestMutationMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<TestMutationMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<TestMutationMutation>(TestMutationDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'testMutation', 'mutation', variables);
+    },
+    getListOfRandomUsers(variables?: GetListOfRandomUsersQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetListOfRandomUsersQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetListOfRandomUsersQuery>(GetListOfRandomUsersDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getListOfRandomUsers', 'query', variables);
     },
     getUserProfile(variables: GetUserProfileQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetUserProfileQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetUserProfileQuery>(GetUserProfileDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getUserProfile', 'query', variables);

@@ -9,6 +9,14 @@ type Types = {
   success: typeof toast.success
 }
 
+type MessageFn = (
+  message: string | ReactNode,
+  condition: boolean,
+  options?: ExternalToast
+) => () => void
+
+type MessageFnParams = Parameters<MessageFn>
+
 const types = {
   error: toast.error,
   warning: toast.warning,
@@ -16,18 +24,24 @@ const types = {
   message: toast.message,
   success: toast.success,
 } as unknown as {
-  [Key in keyof Types]: (
-    message: string | ReactNode,
-    options?: ExternalToast
-  ) => () => string | number
+  [Key in keyof Types]: MessageFn
 }
 
 type TypeKeys = keyof typeof types
 
 export const messages = new Proxy(types, {
   get: (target, prop, receiver) => {
-    return (message: string | ReactNode, options?: ExternalToast) => {
-      const id = (target as unknown as Types)[prop as TypeKeys](message, options)
+    return (
+      message: MessageFnParams[0],
+      condition: MessageFnParams[1],
+      options?: MessageFnParams[2]
+    ) => {
+      let id: string | number | undefined = undefined
+      if (condition)
+        id = (target as unknown as Types)[prop as TypeKeys](message, {
+          dismissible: true,
+          ...options,
+        })
       return () => toast.dismiss(id)
     }
   },

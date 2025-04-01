@@ -68,8 +68,14 @@ export type Query = {
   __typename?: 'Query';
   getAccountProfile: Account;
   getHealth: Scalars['GraphQLHealth']['output'];
+  getListOfRandomUsers: Array<User>;
   getUserProfile: User;
   test: T;
+};
+
+
+export type QueryGetListOfRandomUsersArgs = {
+  limit: Scalars['Int']['input'];
 };
 
 
@@ -104,7 +110,7 @@ export type User = {
   gender: Scalars['Gender']['output'];
   lookingForGender: Scalars['Gender']['output'];
   profilePictureURL: Scalars['String']['output'];
-  socials?: Maybe<Scalars['Socials']['output']>;
+  socials: Scalars['Socials']['output'];
   userId: Scalars['String']['output'];
   username: Scalars['String']['output'];
 };
@@ -156,12 +162,19 @@ export type TestMutationMutationVariables = Exact<{
 
 export type TestMutationMutation = { __typename?: 'Mutation', test: string };
 
+export type GetListOfRandomUsersQueryVariables = Exact<{
+  limit?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+
+export type GetListOfRandomUsersQuery = { __typename?: 'Query', getListOfRandomUsers: Array<{ __typename?: 'User', age: number, gender: Gender, profilePictureURL: string, userId: string, username: string }> };
+
 export type GetUserProfileQueryVariables = Exact<{
   userId: Scalars['String']['input'];
 }>;
 
 
-export type GetUserProfileQuery = { __typename?: 'Query', getUserProfile: { __typename?: 'User', age: number, bio?: string | null | undefined, gender: Gender, lookingForGender: Gender, profilePictureURL: string, socials?: SocialsData | null | undefined, userId: string, username: string } };
+export type GetUserProfileQuery = { __typename?: 'Query', getUserProfile: { __typename?: 'User', age: number, bio?: string | null | undefined, gender: Gender, lookingForGender: Gender, profilePictureURL: string, socials: SocialsData, userId: string, username: string } };
 
 
 export const SaveNewUserInformationDocument = gql`
@@ -378,6 +391,50 @@ export function useTestMutationMutation(baseOptions?: Apollo.MutationHookOptions
 export type TestMutationMutationHookResult = ReturnType<typeof useTestMutationMutation>;
 export type TestMutationMutationResult = Apollo.MutationResult<TestMutationMutation>;
 export type TestMutationMutationOptions = Apollo.BaseMutationOptions<TestMutationMutation, TestMutationMutationVariables>;
+export const GetListOfRandomUsersDocument = gql`
+    query getListOfRandomUsers($limit: Int = 4) {
+  getListOfRandomUsers(limit: $limit) {
+    age
+    gender
+    profilePictureURL
+    userId
+    username
+  }
+}
+    `;
+
+/**
+ * __useGetListOfRandomUsersQuery__
+ *
+ * To run a query within a React component, call `useGetListOfRandomUsersQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetListOfRandomUsersQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetListOfRandomUsersQuery({
+ *   variables: {
+ *      limit: // value for 'limit'
+ *   },
+ * });
+ */
+export function useGetListOfRandomUsersQuery(baseOptions?: Apollo.QueryHookOptions<GetListOfRandomUsersQuery, GetListOfRandomUsersQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetListOfRandomUsersQuery, GetListOfRandomUsersQueryVariables>(GetListOfRandomUsersDocument, options);
+      }
+export function useGetListOfRandomUsersLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetListOfRandomUsersQuery, GetListOfRandomUsersQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetListOfRandomUsersQuery, GetListOfRandomUsersQueryVariables>(GetListOfRandomUsersDocument, options);
+        }
+export function useGetListOfRandomUsersSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetListOfRandomUsersQuery, GetListOfRandomUsersQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<GetListOfRandomUsersQuery, GetListOfRandomUsersQueryVariables>(GetListOfRandomUsersDocument, options);
+        }
+export type GetListOfRandomUsersQueryHookResult = ReturnType<typeof useGetListOfRandomUsersQuery>;
+export type GetListOfRandomUsersLazyQueryHookResult = ReturnType<typeof useGetListOfRandomUsersLazyQuery>;
+export type GetListOfRandomUsersSuspenseQueryHookResult = ReturnType<typeof useGetListOfRandomUsersSuspenseQuery>;
+export type GetListOfRandomUsersQueryResult = Apollo.QueryResult<GetListOfRandomUsersQuery, GetListOfRandomUsersQueryVariables>;
 export const GetUserProfileDocument = gql`
     query getUserProfile($userId: String!) {
   getUserProfile(userId: $userId) {

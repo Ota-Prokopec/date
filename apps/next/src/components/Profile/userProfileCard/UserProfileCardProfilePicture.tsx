@@ -23,7 +23,7 @@ export const UserProfileCardProfilePicture = ({
         src={profilePictureURL ?? ''}
         width={350}
         height={350}
-        className="w-[350px] h-[350px] rounded-xl object-cover"
+        className="w-[350px] h-[350px] rounded-xl object-contain"
       ></Image>
 
       <div className="absolute bottom-[-10px] left-[-10px] w-20 h-20 bg-white rounded-[100px] flex items-center justify-center [&_*]:w-14 [&_*]:h-14">
