@@ -1,34 +1,43 @@
 import { Gender } from '@/components/common/Gender'
+import { IconBorder } from '@/components/common/IconBorder'
 import type {
   AccountData,
   UserProfileData,
   Gender as GenderType,
   PothosOptional,
 } from '@repo/ts-types'
+import { cn } from '@repo/ui/dist/lib/utils'
 import Image from 'next/image'
 
 type UserProfileCardProfilePictureProps = {
   gender?: PothosOptional<GenderType>
   profilePictureURL?: PothosOptional<(AccountData | UserProfileData)['profilePictureURL']>
+  className?: string
 }
 
 export const UserProfileCardProfilePicture = ({
   gender,
+  className,
   profilePictureURL,
 }: UserProfileCardProfilePictureProps) => {
   return (
-    <div className="w-auto h-auto rounded-t-xl rounded-b-none  relative overflow-hidden">
+    <div
+      className={cn(
+        'w-full h-full rounded-t-xl rounded-b-none  relative overflow-hidden !aspect-square',
+        className
+      )}
+    >
       <Image
         alt="profile-picture"
         src={profilePictureURL ?? ''}
         width={350}
         height={350}
-        className="w-[350px] h-[350px] rounded-xl object-contain"
+        className="w-full h-full rounded-xl object-cover"
       ></Image>
 
-      <div className="absolute bottom-[-10px] left-[-10px] w-20 h-20 bg-white rounded-[100px] flex items-center justify-center [&_*]:w-14 [&_*]:h-14">
-        <Gender gender={gender}></Gender>
-      </div>
+      <IconBorder className="absolute bottom-[-10px] left-[-10px] p-3">
+        <Gender className="w-14 h-14" gender={gender}></Gender>
+      </IconBorder>
     </div>
   )
 }

@@ -8,6 +8,7 @@ import {
   type GenderScalar,
   type GraphqlHealthScalar,
   type SocialsScalar,
+  type SwipeScalar,
   type UploadScalar,
 } from './scalars/ScalarsTypes'
 import type {
@@ -29,6 +30,7 @@ export type PothosBuilderTypes = {
     Upload: UploadScalar
     Date: DateScalar
     Socials: SocialsScalar
+    Swipe: SwipeScalar
   }
   Context: Context
   Args: { UpdateAccountArgs: UpdateAccountArgs; GetUsersProfilesArgs: GetUsersProfilesArgs }

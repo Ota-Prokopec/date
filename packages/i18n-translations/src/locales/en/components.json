@@ -43,5 +43,9 @@
   },
   "LikingPeopleGrid": {
     "loadingUsers": { "errorMessage": "Something went wrong, please try it again." }
+  },
+  "NoMoreProfiles": {
+    "title": "No more profiles for you",
+    "description": "You have already reached the limit of profiles you can like. Please come back later."
   }
 }

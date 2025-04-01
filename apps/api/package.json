@@ -13,7 +13,7 @@
     "drizzle:generate": "dotenv -e ../../.env drizzle-kit generate",
     "drizzle:studio": "dotenv -e ../../.env -- pnpm drizzle-kit studio",
     "drizzle:update": "run-s drizzle:generate drizzle:migrate",
-    "admin": "console-ninja dotenv -e ../../.env -- tsx src/admin/createClubs.ts",
+    "admin": "dotenv -e ../../.env -- tsx ./databaseAdmin.ts",
     "lint": "pnpm eslint ."
   },
   "devDependencies": {

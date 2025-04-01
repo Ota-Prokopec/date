@@ -7,14 +7,14 @@ export class Cloudinary {
   ) {
     this.options = options
     this.folder = folder
-    cloudinary.config(this.options)
+    cloudinary.config(this)
   }
 
   uploadFile = async (file: File) => {
     const buffer = await file.arrayBuffer()
     const uploadResult = await new Promise<UploadApiResponse | undefined>((resolve) => {
       cloudinary.uploader
-        .upload_stream((error, uploadResult) => {
+        .upload_stream({ folder: this.folder }, (error, uploadResult) => {
           return resolve(uploadResult)
         })
         .end(buffer)

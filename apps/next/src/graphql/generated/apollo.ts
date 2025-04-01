@@ -167,7 +167,7 @@ export type GetListOfRandomUsersQueryVariables = Exact<{
 }>;
 
 
-export type GetListOfRandomUsersQuery = { __typename?: 'Query', getListOfRandomUsers: Array<{ __typename?: 'User', age: number, gender: Gender, profilePictureURL: string, userId: string, username: string }> };
+export type GetListOfRandomUsersQuery = { __typename?: 'Query', getListOfRandomUsers: Array<{ __typename?: 'User', age: number, gender: Gender, profilePictureURL: string, userId: string, username: string, bio?: string | null | undefined, lookingForGender: Gender, socials: SocialsData }> };
 
 export type GetUserProfileQueryVariables = Exact<{
   userId: Scalars['String']['input'];
@@ -399,6 +399,9 @@ export const GetListOfRandomUsersDocument = gql`
     profilePictureURL
     userId
     username
+    bio
+    lookingForGender
+    socials
   }
 }
     `;

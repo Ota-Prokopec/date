@@ -5,5 +5,8 @@ query getListOfRandomUsers($limit: Int = 4) {
     profilePictureURL
     userId
     username
+    bio
+    lookingForGender
+    socials
   }
 }

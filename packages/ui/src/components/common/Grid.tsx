@@ -28,7 +28,10 @@ export const Grid = <TGridString extends `${number}x${number}`>({
   const gridLayout = getGridLayout(params)
   return (
     <div
-      className={cn('grid', className)}
+      className={cn(
+        'grid items-center justify-center justify-items-center content-center',
+        className
+      )}
       style={{
         gridTemplateColumns: `repeat(${gridLayout[1]}, 1fr)`,
         gridTemplateRows: `repeat(${gridLayout[0]}, 1fr)`,

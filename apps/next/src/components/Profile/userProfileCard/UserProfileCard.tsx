@@ -18,9 +18,10 @@ export const UserProfileCard = ({ className, children, data }: UserProfileCardPr
   const { gender, profilePictureURL, bio } = data
 
   return (
-    <Card className={cn('', className)}>
-      <Column className=" h-full p-4 gap-6">
+    <Card className={cn('w-[400px] h-auto bg-white', className)}>
+      <Column className=" h-auto w-full p-4 gap-6 relative">
         <UserProfileCardProfilePicture
+          className="w-full h-auto"
           {...{ profilePictureURL, gender }}
         ></UserProfileCardProfilePicture>
 

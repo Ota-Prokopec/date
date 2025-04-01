@@ -1,8 +1,8 @@
-import type { Config } from 'tailwindcss';
-import twAnimate from 'tailwindcss-animate';
-import { content, plugin } from 'flowbite-react/tailwind';
-import daisyui from 'daisyui';
-import { heroui } from '@heroui/react';
+import type { Config } from 'tailwindcss'
+import twAnimate from 'tailwindcss-animate'
+import { content, plugin } from 'flowbite-react/tailwind'
+import daisyui from 'daisyui'
+import { heroui } from '@heroui/react'
 
 export const tailwindConfig: Config = {
   darkMode: 'class',
@@ -33,6 +33,7 @@ export const tailwindConfig: Config = {
       'max-400': { max: '400px' },
       'max-500': { max: '500px' },
       mobile: { max: '640px' },
+      pc: { min: '641px' },
       sm: '640px',
       // => @media (min-width: 640px) { ... }
 
@@ -78,6 +79,6 @@ export const tailwindConfig: Config = {
   },
 
   plugins: [twAnimate, plugin(), daisyui, heroui()],
-};
+}
 
-export default tailwindConfig;
+export default tailwindConfig

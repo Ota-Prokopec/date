@@ -42,5 +42,9 @@
   },
   "LikingPeopleGrid": {
     "loadingUsers": { "errorMessage": "Něco se nepovedlo, prosíme, zkuste to znovu." }
+  },
+  "NoMoreProfiles": {
+    "title": "Žádné další profily pro tebe",
+    "description": "Už jsi dosáhl limitu profilů, které můžeš mít rád. Prosím, vrať se později."
   }
 }
