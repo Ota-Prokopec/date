@@ -7,11 +7,12 @@ import { UserProfileCardBioItem } from './UserProfileCardBioItem'
 import type { UserProfileCardData } from './UserProfileCardDataTypes'
 import { UserProfileCardProfilePicture } from './UserProfileCardProfilePicture'
 import { UserProfileCardSocialsItem } from './UserProfileCardSocialsItem'
+import type { NullableObjectByKeys } from '@repo/ts-types'
 
 type UserProfileCardProps = {
   className?: string
   children?: ReactNode
-  data: UserProfileCardData
+  data: NullableObjectByKeys<UserProfileCardData, 'socials'>
 }
 
 export const UserProfileCard = ({ className, children, data }: UserProfileCardProps) => {
@@ -29,7 +30,9 @@ export const UserProfileCard = ({ className, children, data }: UserProfileCardPr
 
         {bio && <UserProfileCardBioItem bio={bio}></UserProfileCardBioItem>}
 
-        <UserProfileCardSocialsItem socials={data.socials}></UserProfileCardSocialsItem>
+        {data.socials && (
+          <UserProfileCardSocialsItem socials={data.socials}></UserProfileCardSocialsItem>
+        )}
         {children}
       </Column>
     </Card>

@@ -10,7 +10,7 @@ export const socials = pgTable(
     id: integer('id').primaryKey().generatedAlwaysAsIdentity(),
     userId: text('userId')
       .notNull()
-      .references(() => user.id),
+      .references(() => user.id, { onDelete: 'cascade' }),
     type: socialsTypeEnum('type').notNull(),
     link: text('link').notNull(),
     platformProfileId: text('platformProfileId').notNull(),

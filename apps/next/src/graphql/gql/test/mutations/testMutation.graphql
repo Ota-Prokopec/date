@@ -1,3 +1,0 @@
-mutation testMutation($file: Upload!) {
-  test(file: $file)
-}

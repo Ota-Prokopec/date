@@ -10,6 +10,7 @@ const codegenConfigConfig: CodegenConfig['config'] = {
     GraphQLHealth: '{ok: boolean}',
     Date: 'Date',
     Socials: `@repo/ts-types#SocialsData`,
+    SwipeType: `@repo/ts-types#SwipeType`,
   },
 }
 

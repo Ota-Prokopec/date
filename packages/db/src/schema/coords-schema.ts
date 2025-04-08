@@ -7,7 +7,7 @@ export const coords = pgTable(
     id: integer('id').primaryKey().generatedAlwaysAsIdentity(),
     userId: text('userId')
       .notNull()
-      .references(() => user.id),
+      .references(() => user.id, { onDelete: 'cascade' }),
     latitude: doublePrecision().notNull(),
     longitude: doublePrecision().notNull(),
   },

@@ -1,6 +1,7 @@
 import { builder } from '@/builder'
 import { getUsersAge } from '@/lib/users/getUsersAge'
 import { type UserPothosType } from './PothosSchemaTypes'
+import { areUsersMatched } from '@/lib/likes/areUsersMatched'
 
 /**
  * If the user does not have username, ...., then the user is not searchable!
@@ -16,10 +17,15 @@ export const UserRef = builder.objectRef<UserPothosType>('User').implement({
       username: t.exposeString('username', { nullable: false }),
       lookingForGender: t.expose('gender', { type: 'Gender', nullable: false }),
       bio: t.exposeString('bio', { nullable: true }),
-      socials: t.field({
+      socials: t.withAuth({ authenticated: true }).field({
         type: 'Socials',
-        nullable: false,
+        nullable: true,
         resolve: async (parent, args, ctx, info) => {
+          const userId = ctx.session.user.id
+          const isMatch = await areUsersMatched(userId, parent.userId)
+
+          if (!isMatch) return null
+
           const response = await ctx.loaders.socials.load(parent.userId)
           return response || {}
         },

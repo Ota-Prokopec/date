@@ -1,0 +1,5 @@
+mutation SwipeUser($likedUserId: String = "") {
+  swipe(likedUserId: $likedUserId) {
+    isMatch
+  }
+}

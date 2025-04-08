@@ -4,7 +4,7 @@ import { accountDataZodSchemaAllPropsRequired } from './Account'
 export const userProfileDataZodSchema = z.object({
   username: accountDataZodSchemaAllPropsRequired.shape.username,
   userId: accountDataZodSchemaAllPropsRequired.shape.userId,
-  socials: accountDataZodSchemaAllPropsRequired.shape.socials,
+  socials: accountDataZodSchemaAllPropsRequired.shape.socials.nullish(),
   profilePictureURL: accountDataZodSchemaAllPropsRequired.shape.profilePictureURL,
   gender: accountDataZodSchemaAllPropsRequired.shape.gender,
   lookingForGender: accountDataZodSchemaAllPropsRequired.shape.lookingForGender,

@@ -33,7 +33,9 @@
     "submitButtonLabel": "Save"
   },
   "UserProfileCardBioItem": {
-    "title": "About me"
+    "title": "About me",
+    "showLess": "Show less",
+    "showMore": "Show more"
   },
   "UserProfileCardSocialsItem": {
     "title": "Social networks"

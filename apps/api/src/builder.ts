@@ -1,19 +1,19 @@
 import { getBuilder } from '@repo/graphql/server'
 import { Context } from './context'
-import type { UpdateAccountArgs } from './resolvers/user'
-import type { GetUsersProfilesArgs } from './resolvers/user/args/getUsersProfilesArgs'
+import type { UpdateAccountArgs } from './resolvers/account'
 import {
   type CoordsScalar,
   type DateScalar,
   type GenderScalar,
   type GraphqlHealthScalar,
   type SocialsScalar,
-  type SwipeScalar,
+  type SwipeTypeScalar,
   type UploadScalar,
 } from './scalars/ScalarsTypes'
 import type {
   AccountPothosType,
   CoordsPothosType,
+  SwipePothosType,
   UserPothosType,
 } from './schema/PothosSchemaTypes'
 
@@ -22,6 +22,7 @@ export type PothosBuilderTypes = {
     Coords: CoordsPothosType
     Account: AccountPothosType
     User: UserPothosType
+    Swipe: SwipePothosType
   }
   Scalars: {
     Coords: CoordsScalar
@@ -30,10 +31,10 @@ export type PothosBuilderTypes = {
     Upload: UploadScalar
     Date: DateScalar
     Socials: SocialsScalar
-    Swipe: SwipeScalar
+    SwipeType: SwipeTypeScalar
   }
   Context: Context
-  Args: { UpdateAccountArgs: UpdateAccountArgs; GetUsersProfilesArgs: GetUsersProfilesArgs }
+  Args: { UpdateAccountArgs: UpdateAccountArgs }
 }
 
 export const builder = getBuilder<PothosBuilderTypes>()

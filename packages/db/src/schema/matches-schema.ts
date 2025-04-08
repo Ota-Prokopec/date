@@ -2,21 +2,21 @@ import { integer, pgTable, text, timestamp, unique } from 'drizzle-orm/pg-core'
 import { createSelectSchema } from 'drizzle-zod'
 import { user } from './auth-schema'
 
-export const likes = pgTable(
-  'likes',
+export const matches = pgTable(
+  'matches',
   {
     id: integer('id').primaryKey().generatedAlwaysAsIdentity(),
     userId: text('userId')
       .notNull()
       .references(() => user.id, { onDelete: 'cascade' }),
-    likedUserId: text('likedUserId')
+    matchedUserId: text('likedUserId')
       .notNull()
       .references(() => user.id, { onDelete: 'cascade' }),
-    likedAt: timestamp('createdAt').notNull(),
+    matchedAt: timestamp('createdAt').notNull(),
   },
-  (t) => [unique().on(t.userId, t.likedUserId)]
+  (t) => [unique().on(t.userId, t.matchedUserId)]
 )
 
-export const likesSelectSchema = createSelectSchema(likes)
-export type LikesSelect = typeof likes.$inferSelect
-export type LikesInsert = typeof likes.$inferInsert
+export const matchesSelectSchema = createSelectSchema(matches)
+export type MatchesSelect = typeof matches.$inferSelect
+export type MatchesInsert = typeof matches.$inferInsert

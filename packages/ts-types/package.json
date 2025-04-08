@@ -1,13 +1,13 @@
 {
   "name": "@repo/ts-types",
   "version": "1.0.1",
-  "main": "./src/index.ts",
   "type": "module",
   "exports": {
-    ".": "./dist/index.js"
+    ".": "./dist/index.js",
+    "./*": "./dist/*.js"
   },
   "scripts": {
-    "build": "run-s build:tsc",
+    "build": "run-s build:tsup build:tsc",
     "prebuild": "pnpm barrelsby",
     "barrelsby": "barrelsby --delete  --singleQuotes --directory ./src/",
     "build:tsup": "tsup",

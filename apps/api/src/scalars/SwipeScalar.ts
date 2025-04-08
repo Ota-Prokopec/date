@@ -1,7 +1,7 @@
 import { builder } from '@/builder'
 import { swipeTypeZodSchema } from '@repo/ts-types'
 
-builder.scalarType('Swipe', {
+builder.scalarType('SwipeType', {
   serialize: (value: unknown) => {
     return swipeTypeZodSchema.parse(value)
   },

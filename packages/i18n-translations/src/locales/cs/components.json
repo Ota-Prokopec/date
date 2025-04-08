@@ -32,7 +32,9 @@
     "submitButtonLabel": "Uložit"
   },
   "UserProfileCardBioItem": {
-    "title": "O mně"
+    "title": "O mně",
+    "showLess": "Méně",
+    "showMore": "Více"
   },
   "UserProfileCardSocialsItem": {
     "title": "Sociální sítě"

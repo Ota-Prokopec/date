@@ -1,11 +1,17 @@
 import { builder } from '@/builder'
-import { updateAccountInformation } from '@/lib/account/updateAccount'
-import { type TypeCheck } from '@repo/ts-types'
+import { likeUser } from '@/lib/likes/likeUser'
 
 builder.mutationField('swipe', (t) =>
-  t.field({
-    type: 'Boolean',
-    args: { userId: t.arg.string(), state: t.arg({ type: 'Swipe' }) },
-    resolve: async (_parent, args, ctx) => {},
+  t.withAuth({ authenticated: true }).field({
+    type: 'Swipe',
+    args: {
+      likedUserId: t.arg.string(),
+      state: t.arg({ type: 'SwipeType', required: false, defaultValue: 'like' }),
+    },
+    resolve: async (_parent, args, ctx) => {
+      const myUserId = ctx.session.user.id
+
+      return await likeUser({ userId: myUserId, likedUserId: args.likedUserId })
+    },
   })
 )

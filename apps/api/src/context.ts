@@ -6,12 +6,11 @@ import lodash from 'lodash'
 
 type AuthContext = Awaited<ReturnType<typeof authContext>>
 
-export type Context = Awaited<ReturnType<typeof createContext>>
-type CreateContext = ({ request }: { request: Request }) => Promise<
-  { loaders: Loaders; isAuthenticated: boolean } & AuthContext & {
-      session: { user: { locale: Locale | undefined } }
-    }
->
+export type Context = { loaders: Loaders; isAuthenticated: boolean } & AuthContext & {
+    session: { user: { locale: Locale | undefined } } | null
+  }
+
+type CreateContext = ({ request }: { request: Request }) => Promise<Context>
 
 export const createContext: CreateContext = async ({ request }: { request: Request }) => {
   const auth = await authContext({ request })

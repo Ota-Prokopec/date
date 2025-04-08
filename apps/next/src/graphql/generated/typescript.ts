@@ -1,6 +1,7 @@
 import { Coords } from '@repo/ts-types';
 import { Gender } from '@repo/ts-types';
 import { SocialsData } from '@repo/ts-types';
+import { SwipeType } from '@repo/ts-types';
 import { GraphQLClient, RequestOptions } from 'graphql-request';
 import gql from 'graphql-tag';
 export type Maybe<T> = T | null | undefined;
@@ -24,6 +25,7 @@ export type Scalars = {
   Gender: { input: Gender; output: Gender; }
   GraphQLHealth: { input: {ok: boolean}; output: {ok: boolean}; }
   Socials: { input: SocialsData; output: SocialsData; }
+  SwipeType: { input: SwipeType; output: SwipeType; }
   Upload: { input: File; output: File; }
 };
 
@@ -44,14 +46,16 @@ export type Account = {
 export type Mutation = {
   __typename?: 'Mutation';
   setHealth: Scalars['GraphQLHealth']['output'];
+  swipe: Swipe;
   test: Scalars['String']['output'];
   updateAccount: Scalars['Boolean']['output'];
   updateAccountPicture: Scalars['Boolean']['output'];
 };
 
 
-export type MutationTestArgs = {
-  file: Scalars['Upload']['input'];
+export type MutationSwipeArgs = {
+  likedUserId: Scalars['String']['input'];
+  state?: InputMaybe<Scalars['SwipeType']['input']>;
 };
 
 
@@ -83,6 +87,11 @@ export type QueryGetUserProfileArgs = {
   userId?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type Swipe = {
+  __typename?: 'Swipe';
+  isMatch: Scalars['Boolean']['output'];
+};
+
 export type T = {
   __typename?: 'T';
   date: Scalars['Date']['output'];
@@ -110,7 +119,7 @@ export type User = {
   gender: Scalars['Gender']['output'];
   lookingForGender: Scalars['Gender']['output'];
   profilePictureURL: Scalars['String']['output'];
-  socials: Scalars['Socials']['output'];
+  socials?: Maybe<Scalars['Socials']['output']>;
   userId: Scalars['String']['output'];
   username: Scalars['String']['output'];
 };
@@ -155,26 +164,26 @@ export type GetHealthStatusQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetHealthStatusQuery = { __typename?: 'Query', getHealth: {ok: boolean} };
 
-export type TestMutationMutationVariables = Exact<{
-  file: Scalars['Upload']['input'];
+export type SwipeUserMutationVariables = Exact<{
+  likedUserId?: InputMaybe<Scalars['String']['input']>;
 }>;
 
 
-export type TestMutationMutation = { __typename?: 'Mutation', test: string };
+export type SwipeUserMutation = { __typename?: 'Mutation', swipe: { __typename?: 'Swipe', isMatch: boolean } };
 
 export type GetListOfRandomUsersQueryVariables = Exact<{
   limit?: InputMaybe<Scalars['Int']['input']>;
 }>;
 
 
-export type GetListOfRandomUsersQuery = { __typename?: 'Query', getListOfRandomUsers: Array<{ __typename?: 'User', age: number, gender: Gender, profilePictureURL: string, userId: string, username: string, bio?: string | null | undefined, lookingForGender: Gender, socials: SocialsData }> };
+export type GetListOfRandomUsersQuery = { __typename?: 'Query', getListOfRandomUsers: Array<{ __typename?: 'User', age: number, gender: Gender, profilePictureURL: string, userId: string, username: string, bio?: string | null | undefined, lookingForGender: Gender, socials?: SocialsData | null | undefined }> };
 
 export type GetUserProfileQueryVariables = Exact<{
   userId: Scalars['String']['input'];
 }>;
 
 
-export type GetUserProfileQuery = { __typename?: 'Query', getUserProfile: { __typename?: 'User', age: number, bio?: string | null | undefined, gender: Gender, lookingForGender: Gender, profilePictureURL: string, socials: SocialsData, userId: string, username: string } };
+export type GetUserProfileQuery = { __typename?: 'Query', getUserProfile: { __typename?: 'User', age: number, bio?: string | null | undefined, gender: Gender, lookingForGender: Gender, profilePictureURL: string, socials?: SocialsData | null | undefined, userId: string, username: string } };
 
 
 export const SaveNewUserInformationDocument = gql`
@@ -215,9 +224,11 @@ export const GetHealthStatusDocument = gql`
   getHealth
 }
     `;
-export const TestMutationDocument = gql`
-    mutation testMutation($file: Upload!) {
-  test(file: $file)
+export const SwipeUserDocument = gql`
+    mutation SwipeUser($likedUserId: String = "") {
+  swipe(likedUserId: $likedUserId) {
+    isMatch
+  }
 }
     `;
 export const GetListOfRandomUsersDocument = gql`
@@ -271,8 +282,8 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     getHealthStatus(variables?: GetHealthStatusQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetHealthStatusQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetHealthStatusQuery>(GetHealthStatusDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getHealthStatus', 'query', variables);
     },
-    testMutation(variables: TestMutationMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<TestMutationMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<TestMutationMutation>(TestMutationDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'testMutation', 'mutation', variables);
+    SwipeUser(variables?: SwipeUserMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<SwipeUserMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<SwipeUserMutation>(SwipeUserDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'SwipeUser', 'mutation', variables);
     },
     getListOfRandomUsers(variables?: GetListOfRandomUsersQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetListOfRandomUsersQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetListOfRandomUsersQuery>(GetListOfRandomUsersDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getListOfRandomUsers', 'query', variables);

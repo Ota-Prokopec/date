@@ -17,4 +17,4 @@ export type GenderScalar = ScalarSkeleton<Gender, Gender>
 export type UploadScalar = ScalarSkeleton<File, never>
 export type DateScalar = ScalarSkeleton<Date, Date>
 export type SocialsScalar = ScalarSkeleton<SocialsData, SocialsData>
-export type SwipeScalar = ScalarSkeleton<SwipeType, SwipeType>
+export type SwipeTypeScalar = ScalarSkeleton<SwipeType, SwipeType>

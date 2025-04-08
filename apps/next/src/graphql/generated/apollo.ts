@@ -1,6 +1,7 @@
 import { Coords } from '@repo/ts-types';
 import { Gender } from '@repo/ts-types';
 import { SocialsData } from '@repo/ts-types';
+import { SwipeType } from '@repo/ts-types';
 import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
 export type Maybe<T> = T | null | undefined;
@@ -24,6 +25,7 @@ export type Scalars = {
   Gender: { input: Gender; output: Gender; }
   GraphQLHealth: { input: {ok: boolean}; output: {ok: boolean}; }
   Socials: { input: SocialsData; output: SocialsData; }
+  SwipeType: { input: SwipeType; output: SwipeType; }
   Upload: { input: File; output: File; }
 };
 
@@ -44,14 +46,16 @@ export type Account = {
 export type Mutation = {
   __typename?: 'Mutation';
   setHealth: Scalars['GraphQLHealth']['output'];
+  swipe: Swipe;
   test: Scalars['String']['output'];
   updateAccount: Scalars['Boolean']['output'];
   updateAccountPicture: Scalars['Boolean']['output'];
 };
 
 
-export type MutationTestArgs = {
-  file: Scalars['Upload']['input'];
+export type MutationSwipeArgs = {
+  likedUserId: Scalars['String']['input'];
+  state?: InputMaybe<Scalars['SwipeType']['input']>;
 };
 
 
@@ -83,6 +87,11 @@ export type QueryGetUserProfileArgs = {
   userId?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type Swipe = {
+  __typename?: 'Swipe';
+  isMatch: Scalars['Boolean']['output'];
+};
+
 export type T = {
   __typename?: 'T';
   date: Scalars['Date']['output'];
@@ -110,7 +119,7 @@ export type User = {
   gender: Scalars['Gender']['output'];
   lookingForGender: Scalars['Gender']['output'];
   profilePictureURL: Scalars['String']['output'];
-  socials: Scalars['Socials']['output'];
+  socials?: Maybe<Scalars['Socials']['output']>;
   userId: Scalars['String']['output'];
   username: Scalars['String']['output'];
 };
@@ -155,26 +164,26 @@ export type GetHealthStatusQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetHealthStatusQuery = { __typename?: 'Query', getHealth: {ok: boolean} };
 
-export type TestMutationMutationVariables = Exact<{
-  file: Scalars['Upload']['input'];
+export type SwipeUserMutationVariables = Exact<{
+  likedUserId?: InputMaybe<Scalars['String']['input']>;
 }>;
 
 
-export type TestMutationMutation = { __typename?: 'Mutation', test: string };
+export type SwipeUserMutation = { __typename?: 'Mutation', swipe: { __typename?: 'Swipe', isMatch: boolean } };
 
 export type GetListOfRandomUsersQueryVariables = Exact<{
   limit?: InputMaybe<Scalars['Int']['input']>;
 }>;
 
 
-export type GetListOfRandomUsersQuery = { __typename?: 'Query', getListOfRandomUsers: Array<{ __typename?: 'User', age: number, gender: Gender, profilePictureURL: string, userId: string, username: string, bio?: string | null | undefined, lookingForGender: Gender, socials: SocialsData }> };
+export type GetListOfRandomUsersQuery = { __typename?: 'Query', getListOfRandomUsers: Array<{ __typename?: 'User', age: number, gender: Gender, profilePictureURL: string, userId: string, username: string, bio?: string | null | undefined, lookingForGender: Gender, socials?: SocialsData | null | undefined }> };
 
 export type GetUserProfileQueryVariables = Exact<{
   userId: Scalars['String']['input'];
 }>;
 
 
-export type GetUserProfileQuery = { __typename?: 'Query', getUserProfile: { __typename?: 'User', age: number, bio?: string | null | undefined, gender: Gender, lookingForGender: Gender, profilePictureURL: string, socials: SocialsData, userId: string, username: string } };
+export type GetUserProfileQuery = { __typename?: 'Query', getUserProfile: { __typename?: 'User', age: number, bio?: string | null | undefined, gender: Gender, lookingForGender: Gender, profilePictureURL: string, socials?: SocialsData | null | undefined, userId: string, username: string } };
 
 
 export const SaveNewUserInformationDocument = gql`
@@ -360,37 +369,39 @@ export type GetHealthStatusQueryHookResult = ReturnType<typeof useGetHealthStatu
 export type GetHealthStatusLazyQueryHookResult = ReturnType<typeof useGetHealthStatusLazyQuery>;
 export type GetHealthStatusSuspenseQueryHookResult = ReturnType<typeof useGetHealthStatusSuspenseQuery>;
 export type GetHealthStatusQueryResult = Apollo.QueryResult<GetHealthStatusQuery, GetHealthStatusQueryVariables>;
-export const TestMutationDocument = gql`
-    mutation testMutation($file: Upload!) {
-  test(file: $file)
+export const SwipeUserDocument = gql`
+    mutation SwipeUser($likedUserId: String = "") {
+  swipe(likedUserId: $likedUserId) {
+    isMatch
+  }
 }
     `;
-export type TestMutationMutationFn = Apollo.MutationFunction<TestMutationMutation, TestMutationMutationVariables>;
+export type SwipeUserMutationFn = Apollo.MutationFunction<SwipeUserMutation, SwipeUserMutationVariables>;
 
 /**
- * __useTestMutationMutation__
+ * __useSwipeUserMutation__
  *
- * To run a mutation, you first call `useTestMutationMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useTestMutationMutation` returns a tuple that includes:
+ * To run a mutation, you first call `useSwipeUserMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useSwipeUserMutation` returns a tuple that includes:
  * - A mutate function that you can call at any time to execute the mutation
  * - An object with fields that represent the current status of the mutation's execution
  *
  * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
  *
  * @example
- * const [testMutationMutation, { data, loading, error }] = useTestMutationMutation({
+ * const [swipeUserMutation, { data, loading, error }] = useSwipeUserMutation({
  *   variables: {
- *      file: // value for 'file'
+ *      likedUserId: // value for 'likedUserId'
  *   },
  * });
  */
-export function useTestMutationMutation(baseOptions?: Apollo.MutationHookOptions<TestMutationMutation, TestMutationMutationVariables>) {
+export function useSwipeUserMutation(baseOptions?: Apollo.MutationHookOptions<SwipeUserMutation, SwipeUserMutationVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<TestMutationMutation, TestMutationMutationVariables>(TestMutationDocument, options);
+        return Apollo.useMutation<SwipeUserMutation, SwipeUserMutationVariables>(SwipeUserDocument, options);
       }
-export type TestMutationMutationHookResult = ReturnType<typeof useTestMutationMutation>;
-export type TestMutationMutationResult = Apollo.MutationResult<TestMutationMutation>;
-export type TestMutationMutationOptions = Apollo.BaseMutationOptions<TestMutationMutation, TestMutationMutationVariables>;
+export type SwipeUserMutationHookResult = ReturnType<typeof useSwipeUserMutation>;
+export type SwipeUserMutationResult = Apollo.MutationResult<SwipeUserMutation>;
+export type SwipeUserMutationOptions = Apollo.BaseMutationOptions<SwipeUserMutation, SwipeUserMutationVariables>;
 export const GetListOfRandomUsersDocument = gql`
     query getListOfRandomUsers($limit: Int = 4) {
   getListOfRandomUsers(limit: $limit) {

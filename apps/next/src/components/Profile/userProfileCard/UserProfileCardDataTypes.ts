@@ -1,6 +1,14 @@
-import type { AccountData, IncompleteAccountData, UserProfileData } from '@repo/ts-types'
+import type {
+  AccountData,
+  IncompleteAccountData,
+  PothosOptionalObjectByKeys,
+  UserProfileData,
+} from '@repo/ts-types'
 
-export type UserProfileCardData = AccountData | IncompleteAccountData | UserProfileData
+export type UserProfileCardData = PothosOptionalObjectByKeys<
+  AccountData | IncompleteAccountData | UserProfileData,
+  'socials'
+>
 
 export type UserProfileMiniCardData = Pick<
   AccountData | IncompleteAccountData | UserProfileData,

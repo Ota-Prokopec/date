@@ -16,7 +16,7 @@ export const createInnerContext = (): CreateInnerContextOutput => {
   }
 }
 
-type Context = {
+export type Context = {
   request: Request
   session: Session | null
   cookies: NextCookiesReturnType
